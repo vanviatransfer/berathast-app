@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = 'c146b76a80'; window.__BUILT__ = '2026-10-09 15:19';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '2d4f9e8894'; window.__BUILT__ = '2026-10-09 18:31';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -2165,7 +2165,8 @@ const SP = (() => {
       for (const l of [1,2,3]) {
         const list = items.filter(s => s.lvl === l && isSel(s.id));
         if (!list.length) continue;
-        html += `<h2 class="lvl-h">${lvlName(l)} <small>${list.length}</small></h2><div class="list">${list.map(tile).join('')}</div>`;
+        const ex = list.filter(s => s.from).length;
+        html += `<h2 class="lvl-h">${lvlName(l)} <small>${list.length - ex}${ex ? ` + ${ex} her zaman bilinen` : ''}</small></h2><div class="list">${list.map(tile).join('')}</div>`;
       }
       C.prep.innerHTML = html;
     },
@@ -2331,6 +2332,7 @@ function renderInv() {
 function invAction(t) {
   const a = t.dataset.inv, kind = t.dataset.kind, id = t.dataset.id;
   const list = kind ? inv[kind] : null, e = list && list.find(x => x.id === id);
+  if ((a === 'add-item' || a === 'add-note') && invEdit) { toast('Önce açık düzenlemeyi kaydet ya da vazgeç.'); focusQuiet($('[data-edit-text]')); return; }
   if (a === 'add-item') {
     const el = $('#newItem'), v = el.value.trim(); if (!v) { focusQuiet(el); return; }
     inv.items.push({ id: newId(), t: v, q: 1 }); invEdit = invDel = null; renderInv(); saveInv('Eşya kaydedildi'); focusQuiet($('#newItem')); return;
@@ -2347,7 +2349,8 @@ function invAction(t) {
   if (a === 'edit') { invEdit = { kind, id }; invDel = null; renderInv(); const ta = $('[data-edit-text]'); focusQuiet(ta); if (ta) ta.setSelectionRange(ta.value.length, ta.value.length); return; }
   if (a === 'save-edit') {
     const v = $('[data-edit-text]').value.trim();
-    if (e && v) e.t = v;
+    if (!v) { toast('Boş bırakılamaz; silmek için Sil’i kullan.'); focusQuiet($('[data-edit-text]')); return; }
+    if (e) e.t = v;
     invEdit = null; renderInv(); saveInv('Değişiklik kaydedildi'); focusQuiet($(`[data-inv="edit"][data-id="${id}"]`)); return;
   }
   if (a === 'del') { invDel = { kind, id }; invEdit = null; renderInv(); focusQuiet($('[data-inv="cancel"]')); return; }
@@ -2376,7 +2379,9 @@ $('#importFile').addEventListener('change', async e => {
   try {
     const data = JSON.parse(await f.text());
     if (!data || data.app !== 'berathast' || !data.keys) throw new Error('format');
-    for (const k of BACKUP_KEYS) if (data.keys[k]) store(k, data.keys[k]);
+    let ok = true;
+    for (const k of BACKUP_KEYS) if (data.keys[k]) ok = store(k, data.keys[k]) && ok;
+    if (!ok) { toast('Kaydedilemedi: bu tarayıcı veri saklamaya izin vermiyor.'); return; }
     toast('Yedek yüklendi, yenileniyor…');
     setTimeout(() => location.reload(), 900);
   } catch (err) { toast('Bu dosya bir Berathast yedeği değil.'); }
@@ -2407,8 +2412,8 @@ addEventListener('appinstalled', () => { installEvt = null; renderInstall(); toa
 async function installAction(a) {
   if (a === 'hide') { store(INSTALL_KEY, true); renderInstall(); return; }
   if (!installEvt) return;
-  installEvt.prompt();
-  try { const r = await installEvt.userChoice; if (r && r.outcome === 'accepted') installEvt = null; } catch (e) {}
+  const ev = installEvt; installEvt = null; // one prompt per event; Chrome fires beforeinstallprompt again if it can be offered later
+  try { ev.prompt(); await ev.userChoice; } catch (e) {}
   renderInstall();
 }
 
@@ -2424,8 +2429,14 @@ async function liveBuild() {
   return ((await r.text()).match(/__BUILD__ = '([0-9a-f]+)'/) || [])[1] || '';
 }
 async function applyUpdate() {
-  try { const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration(); if (reg) await reg.update(); } catch (e) {}
-  try { for (const k of await caches.keys()) if (k.startsWith('berathast-') && k !== 'berathast-fonts') await caches.delete(k); } catch (e) {}
+  try {
+    const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration();
+    if (reg) {
+      const took = new Promise(r => { navigator.serviceWorker.addEventListener('controllerchange', r, { once: true }); setTimeout(r, 5000); });
+      await reg.update();
+      if (reg.installing || reg.waiting) await took; // new worker skips waiting and claims the page, then we reload onto it
+    }
+  } catch (e) {}
   location.reload();
 }
 async function updateAction(a) {
