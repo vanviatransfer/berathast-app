@@ -1,0 +1,2513 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b1612">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Berathast">
+<script>window.__PWA__ = true;</script>
+<style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
+</head>
+<body>
+<title>Berathast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+/* Same layout as the spell book app (sticky header, list, bottom tabs, bottom sheet). Always dark: deep bark browns with warm leather accents (user preferred the dark version over the light one). */
+:root{
+  --bg:#1b1612; --surface:#241d17; --ink:#ede5da; --muted:#a8998a; --line:#3a3029; --ctl:#7d6d5e;
+  --acc:#d9a877; --acc-ink:#21160c; --tag:#3b2e22; --tag-ink:#ecd2ae;
+  --warn:#f0997b; --warn-ink:#2a120a; --dmg:#f2a27f; --me:#8fc1e0; --scrim:rgba(0,0,0,.6);
+  --icS:26%; --icL:20%; --icFS:55%; --icFL:72%; --shadow:0 -10px 30px rgba(0,0,0,.5);
+  --display:"Alegreya SC", "Palatino Linotype", Georgia, serif;
+  --body:"Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme:dark;
+}
+
+*{ box-sizing:border-box; }
+[hidden]{ display:none !important; }
+body{ background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.45; overflow-x:clip; -webkit-tap-highlight-color:transparent; }
+html.sheet-open{ overflow:hidden; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+button:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outline-offset:2px; }
+.wrap{ max-width:640px; margin:0 auto; padding-inline:16px; }
+
+/* header */
+header{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); }
+.hd{ min-width:0; display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:10px 6px; }
+h1{ font-family:var(--display); font-weight:700; font-size:1.35rem; letter-spacing:.02em; margin:0; text-wrap:balance; min-width:0; }
+.stats{ display:flex; gap:6px; flex:0 0 auto; }
+.st{ display:grid; justify-items:center; min-width:64px; padding:4px 10px 5px; border:1px solid var(--line); border-radius:10px; background:var(--surface); }
+.st span{ font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+.st b{ font-family:var(--display); font-size:1.6rem; line-height:1.05; color:var(--acc); font-variant-numeric:tabular-nums; }
+.tools{ display:grid; grid-template-columns:minmax(0,1fr); gap:8px; padding-block:4px 10px; }
+.search{ width:100%; border:1px solid var(--ctl); background:var(--surface); border-radius:10px; padding:9px 12px; font:inherit; color:var(--ink); }
+.chips{ min-width:0; display:grid; grid-template-columns:auto repeat(4,minmax(0,1fr)); gap:6px; }
+.chips.mv{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+.chip{ min-height:40px; border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:6px 10px; font-size:.88rem; color:var(--muted); text-align:center; white-space:nowrap; }
+.chips.mv .chip{ min-height:36px; padding:4px 6px; font-size:.82rem; }
+.chip[aria-pressed="true"]{ background:var(--acc); border-color:var(--acc); color:var(--acc-ink); font-weight:700; }
+
+main{ padding-top:8px; padding-bottom:calc(90px + env(safe-area-inset-bottom,0px)); min-width:0; }
+.lvl-h{ font-family:var(--display); font-weight:700; font-size:1rem; letter-spacing:.06em; color:var(--acc); margin:18px 0 8px; display:flex; align-items:baseline; gap:10px; }
+.lvl-h small{ font-family:var(--body); font-weight:500; letter-spacing:0; color:var(--muted); font-size:.8rem; font-variant-numeric:tabular-nums; }
+.lvl-h::after{ content:""; flex:1; height:1px; background:var(--line); }
+.list{ display:grid; gap:6px; }
+
+/* beast tile */
+.tile{ display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:8px 8px 8px 10px; }
+.tile.on{ border-color:var(--acc); box-shadow:inset 3px 0 0 var(--acc); }
+.tile .open{ flex:1; min-width:0; display:flex; align-items:center; gap:10px; text-align:left; }
+.ic{ flex:0 0 auto; width:42px; height:42px; border-radius:10px; display:grid; place-items:center;
+  background:hsl(var(--h) var(--icS) var(--icL)); color:hsl(var(--h) var(--icFS) var(--icFL)); }
+.ic svg{ width:24px; height:24px; }
+.nm{ min-width:0; }
+.nm .en{ font-weight:700; font-size:1rem; line-height:1.2; display:block; overflow-wrap:anywhere; }
+.nm .tr{ font-size:.82rem; color:var(--muted); display:block; }
+.qs{ display:block; font-size:.8rem; color:var(--ink); font-variant-numeric:tabular-nums; margin-top:1px; }
+.qs b{ color:var(--acc); }
+.tags{ display:flex; flex-wrap:wrap; gap:4px; margin-top:3px; }
+.tg{ font-size:.68rem; letter-spacing:.03em; border-radius:5px; padding:1px 6px; background:var(--tag); color:var(--tag-ink); font-weight:700; }
+.tg.lv{ background:transparent; color:var(--muted); border:1px solid var(--line); font-weight:500; }
+.pick{ flex:0 0 auto; width:44px; height:44px; display:grid; place-items:center; border-radius:50%; }
+.pick span{ width:26px; height:26px; border-radius:50%; border:2px solid var(--ctl); display:grid; place-items:center; transition:background .15s, border-color .15s; }
+.pick svg{ width:16px; height:16px; opacity:0; }
+.tile.on .pick span{ background:var(--acc); border-color:var(--acc); color:var(--acc-ink); }
+.tile.on .pick svg{ opacity:1; }
+.empty{ color:var(--muted); text-align:center; padding:40px 8px; }
+
+/* selected page summary */
+.sum{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; display:grid; gap:8px; margin-top:12px; }
+.sum-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.big{ font-family:var(--display); font-size:1.6rem; font-weight:700; font-variant-numeric:tabular-nums; }
+.big small{ font-family:var(--body); font-size:.85rem; font-weight:500; color:var(--muted); }
+.rules{ margin:0; padding-left:18px; font-size:.86rem; color:var(--muted); display:grid; gap:2px; }
+.rules b{ color:var(--ink); }
+.clear{ font-size:.88rem; color:var(--warn); text-decoration:underline; justify-self:start; padding:10px 0; }
+.confirm{ display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:.88rem; }
+.confirm span{ grid-column:1/-1; }
+.confirm button{ min-height:44px; border:1px solid var(--ctl); border-radius:10px; padding:6px 10px; }
+.confirm .yes{ background:var(--warn); border-color:var(--warn); color:var(--warn-ink); font-weight:700; }
+
+/* bottom tab bar */
+nav{ position:fixed; left:0; right:0; bottom:0; z-index:6; background:var(--surface); border-top:1px solid var(--line); padding-bottom:env(safe-area-inset-bottom,0px); }
+nav .wrap{ display:grid; grid-template-columns:1fr 1fr; }
+nav button{ min-height:56px; padding:8px 4px 10px; display:grid; justify-items:center; gap:2px; font-size:.8rem; color:var(--muted); }
+nav button svg{ width:22px; height:22px; }
+nav button[aria-current="page"]{ color:var(--acc); font-weight:700; }
+.badge{ font-variant-numeric:tabular-nums; }
+
+/* bottom sheet */
+.scrim{ position:fixed; inset:0; background:var(--scrim); z-index:20; opacity:0; transition:opacity .2s; }
+.scrim.show{ opacity:1; }
+.sheet{ position:fixed; left:0; right:0; bottom:0; z-index:21; max-height:90%; display:flex; flex-direction:column;
+  background:var(--surface); border-radius:18px 18px 0 0; box-shadow:var(--shadow); transform:translateY(100%); transition:transform .22s ease-out;
+  padding-bottom:env(safe-area-inset-bottom,0px); }
+.sheet.show{ transform:none; }
+.sheet.drag{ transition:none; }
+.grab-zone{ flex:0 0 auto; height:22px; display:grid; place-items:center; touch-action:none; cursor:grab; }
+.grab-zone span{ width:40px; height:4px; border-radius:4px; background:var(--ctl); }
+.sheet .in{ overflow-y:auto; overscroll-behavior:contain; padding:2px 16px 16px; max-width:640px; width:100%; margin:0 auto; }
+.sh-top{ display:flex; gap:12px; align-items:center; }
+.sh-top .ic{ width:54px; height:54px; border-radius:14px; } .sh-top .ic svg{ width:30px; height:30px; }
+.sh-top h2{ font-family:var(--display); font-size:1.35rem; margin:0; line-height:1.15; }
+.sh-top p{ margin:2px 0 0; color:var(--muted); font-size:.88rem; }
+.x{ margin-left:auto; width:44px; height:44px; flex:0 0 auto; border-radius:50%; display:grid; place-items:center; color:var(--muted); align-self:flex-start; }
+.x svg{ width:20px; height:20px; }
+.facts{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:12px 0 10px; }
+.fact{ background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:7px 10px; min-width:0; }
+.fact dt{ font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+.fact dd{ margin:0; font-weight:700; font-size:.92rem; overflow-wrap:anywhere; }
+.fact dd small{ display:block; font-weight:400; color:var(--muted); font-size:.78rem; }
+.fact.key{ background:var(--surface); border-color:var(--acc); }
+.fact.key dt{ color:var(--acc); font-weight:700; }
+.fact.key dd{ font-size:1.15rem; }
+.fact.k-dmg{ border-color:var(--dmg); } .fact.k-dmg dt{ color:var(--dmg); }
+.blk{ margin:12px 0 0; }
+.blk h3{ font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--acc); margin:0 0 4px; }
+.atk{ background:var(--bg); border:1px solid var(--acc); border-radius:10px; padding:8px 10px; display:grid; gap:6px; }
+.atk p, .trt p{ margin:0; line-height:1.45; }
+.atk .mu{ font-weight:700; }
+.trt{ display:grid; gap:6px; }
+.trt b:first-child{ color:var(--ink); }
+.abil{ display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:4px; text-align:center; font-variant-numeric:tabular-nums; }
+.abil div{ background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:4px 0; min-width:0; }
+.abil span{ display:block; font-size:.66rem; letter-spacing:.06em; color:var(--muted); }
+.abil b{ font-size:.95rem; }
+.abil small{ display:block; font-size:.74rem; color:var(--muted); }
+.abil .me b, .abil .me span{ color:var(--me); }
+.kv{ display:flex; flex-wrap:wrap; gap:4px 12px; font-size:.9rem; font-variant-numeric:tabular-nums; }
+.kv b{ font-weight:700; }
+.note{ font-size:.85rem; color:var(--muted); margin:6px 0 0; }
+.tip{ background:var(--tag); color:var(--tag-ink); border-radius:10px; padding:8px 10px; font-size:.92rem; margin-top:12px; }
+.src{ font-size:.78rem; color:var(--muted); margin-top:10px; }
+.act{ position:sticky; bottom:0; padding-top:12px; background:linear-gradient(to bottom, transparent, var(--surface) 30%); }
+.act button{ width:100%; min-height:48px; border-radius:12px; padding:12px; font-weight:700; background:var(--acc); color:var(--acc-ink); }
+.act button.rm{ background:transparent; color:var(--warn); border:1px solid var(--warn); }
+
+.toast{ position:fixed; left:50%; bottom:calc(76px + env(safe-area-inset-bottom,0px)); transform:translate(-50%,20px); z-index:30;
+  background:var(--ink); color:var(--bg); padding:9px 14px; border-radius:10px; font-size:.88rem; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; max-width:calc(100% - 32px); text-align:center; }
+.toast.show{ opacity:1; transform:translate(-50%,0); }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* Character sheet page 1: one scrolling page, built on the Wild Shape app's tokens and base styles (head.html). */
+.who{ min-width:0; }
+.who p{ margin:0; font-size:.82rem; color:var(--muted); }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+.build{ margin:0 0 8px; font-weight:700; }
+.quick{ display:grid; gap:6px; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:10px; }
+.quick dt{ font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+.quick dd{ margin:0; font-weight:700; }
+.quick div{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:7px 10px; min-width:0; }
+.quick dd{ font-size:1.2rem; color:var(--acc); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.sub{ font-size:.85rem; color:var(--muted); margin:8px 0 0; }
+.sub b{ color:var(--ink); }
+.abl{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+.abl div{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:8px 4px; display:grid; justify-items:center; min-width:0; }
+.abl span{ font-size:.72rem; font-weight:700; letter-spacing:.1em; color:var(--muted); }
+.abl b{ font-family:var(--display); font-size:1.9rem; line-height:1.05; color:var(--acc); }
+.abl i{ font-style:normal; font-weight:700; font-size:.95rem; }
+.abl em{ font-style:normal; font-size:.78rem; color:var(--muted); margin-top:2px; white-space:nowrap; }
+.abl .pr{ border-color:var(--acc); }
+.abl .pr em{ color:var(--acc); font-weight:700; }
+.skills{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 6px; }
+.skills li{ display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:5px 8px; min-width:0; }
+.skills i{ font-style:normal; color:var(--ctl); font-size:.8rem; }
+.skills span{ flex:1; min-width:0; line-height:1.15; }
+.skills b{ display:block; font-size:.86rem; font-weight:500; overflow-wrap:anywhere; }
+.skills small{ display:block; font-size:.7rem; color:var(--muted); }
+.skills em{ font-style:normal; font-weight:700; font-variant-numeric:tabular-nums; }
+.skills .pr{ border-color:var(--acc); }
+.skills .pr i, .skills .pr em{ color:var(--acc); }
+.skills .pr b{ font-weight:700; }
+.atkc{ border-color:var(--acc); display:grid; gap:6px; }
+.atkc p{ margin:0; font-size:.92rem; }
+.arow{ display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:4px 10px; align-items:baseline; }
+.arow .hit{ font-family:var(--display); font-size:1.3rem; color:var(--acc); }
+.arow .dmg{ grid-column:1/-1; font-weight:700; color:var(--dmg); }
+.feats{ display:grid; gap:6px; }
+.feat h3{ margin:0 0 4px; font-size:1rem; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+.feat h3 span:first-child{ margin-right:2px; }
+.feat p{ margin:0; font-size:.94rem; line-height:1.5; }
+.prof p{ margin:0 0 6px; font-size:.92rem; } .prof p:last-child{ margin:0; }
+.src{ font-size:.78rem; color:var(--muted); margin-top:14px; }
+
+/* ---- combined app ---- */
+/* Büyüler sekmesi: aynı koyu kahve zemin, büyü defterinin yosun yeşili vurgusu */
+html[data-tab="sp"]{ --acc:#7fb89c; --acc-ink:#0f1b14; --tag:#2e3a22; --tag-ink:#d6e5a8; }
+:root{ --heal:#f09ab8; }
+.seg{ flex:1; min-width:0; display:grid; grid-template-columns:1fr 1fr; gap:4px; padding:3px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+.seg button{ min-height:48px; border-radius:9px; display:grid; align-content:center; justify-items:center; line-height:1.15; color:var(--muted); font-size:.9rem; }
+.seg button small{ font-size:.75rem; font-variant-numeric:tabular-nums; }
+.seg button[aria-pressed="true"]{ background:var(--acc); color:var(--acc-ink); font-weight:700; }
+.seg button small.over{ color:var(--warn); font-weight:700; }
+.seg button[aria-pressed="true"] small.over{ color:var(--acc-ink); }
+.chips.lv{ grid-template-columns:auto auto repeat(5,minmax(0,1fr)); }
+nav .wrap{ grid-template-columns:repeat(2,1fr); }
+#spChips{ grid-template-columns:auto repeat(3,minmax(0,1fr)); }
+.view{ min-width:0; }
+
+/* spells */
+.always{ flex:0 0 auto; font-size:.7rem; color:var(--muted); text-align:right; line-height:1.15; padding-right:6px; }
+.over .big, .over .big small{ color:var(--warn); }
+.overmsg{ font-size:.85rem; color:var(--warn); margin:0; }
+.meter{ height:8px; background:var(--line); border-radius:99px; overflow:hidden; }
+.meter i{ display:block; height:100%; background:var(--acc); border-radius:99px; transition:width .2s; }
+.over .meter i{ background:var(--warn); }
+.step{ display:flex; align-items:center; gap:6px; font-size:.85rem; color:var(--muted); }
+.step button{ width:40px; height:40px; border-radius:10px; border:1px solid var(--ctl); background:var(--bg); font-weight:700; font-size:1.1rem; }
+.step output{ min-width:2ch; text-align:center; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
+.fact.k-heal{ border-color:var(--heal); } .fact.k-heal dt{ color:var(--heal); }
+.desc{ font-size:1rem; line-height:1.55; max-width:65ch; margin-top:4px; }
+.desc i{ color:var(--muted); }
+.act button[disabled]{ background:var(--line); color:var(--muted); }
+
+/* character */
+.install{ margin-top:12px; border-color:var(--acc); display:grid; gap:8px; }
+.install p{ margin:0; font-size:.92rem; }
+.install .row{ display:flex; gap:8px; }
+.install .pri{ min-height:44px; padding:6px 16px; }
+.build-card{ margin-top:12px; font-weight:700; }
+.inv{ display:grid; gap:8px; }
+.inv h3{ margin:0; font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--acc); }
+.entries{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.entry{ background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:8px 10px; display:grid; gap:6px; }
+.entry .txt{ white-space:pre-wrap; overflow-wrap:anywhere; }
+.entry .row{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.entry .row .sp{ flex:1; }
+.mini{ min-height:36px; min-width:36px; padding:4px 10px; border:1px solid var(--ctl); border-radius:9px; font-size:.86rem; background:var(--surface); }
+.mini.danger{ color:var(--warn); border-color:var(--warn); }
+.mini.pri{ background:var(--acc); border-color:var(--acc); color:var(--acc-ink); font-weight:700; }
+.qty{ display:flex; align-items:center; gap:4px; }
+.qty output{ min-width:2.5ch; text-align:center; font-weight:700; font-variant-numeric:tabular-nums; }
+.addf{ display:grid; gap:6px; }
+.addf textarea, .addf input, .entry textarea{ width:100%; border:1px solid var(--ctl); background:var(--bg); color:var(--ink); border-radius:10px; padding:8px 10px; font:inherit; resize:vertical; }
+.addf .row{ display:flex; gap:6px; }
+.addf .row input{ flex:1; min-width:0; }
+.addf button.pri{ min-height:44px; }
+.data{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.data p{ margin:0; font-size:.82rem; color:var(--muted); flex-basis:100%; }
+textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outline-offset:1px; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-fire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.2 1.2-3.6 2.4-4.6.2 1.6 1 2.6 2.1 3C11 9 11.2 5.6 12 3z"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5 12 6l2.5-1.5M9.5 19.5 12 18l2.5 1.5"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 19c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2 5 14h6l-1 8 8-12h-6z"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h8"/></symbol>
+  <symbol id="i-mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M2 20 9 7l4 7 2-3 7 9z"/><path d="M7.5 10.5 9 12l1.5-1.5"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10 10 5 20 4c-1 10-6 15-15 15z"/><path d="M5 19 14 10"/></symbol>
+  <symbol id="i-paw" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="7" cy="9" rx="2" ry="2.6"/><ellipse cx="12" cy="6.5" rx="2" ry="2.6"/><ellipse cx="17" cy="9" rx="2" ry="2.6"/><path d="M12 11.5c-3 0-6 4-6 6.3 0 1.6 1.3 2.2 2.6 2.2 1.4 0 2.2-.8 3.4-.8s2 .8 3.4.8c1.3 0 2.6-.6 2.6-2.2 0-2.3-3-6.3-6-6.3z"/></symbol>
+  <symbol id="i-bug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="14" rx="4.5" ry="6"/><path d="M12 8V20M9 6l-2-2M15 6l2-2M7.5 12H4M7.5 16H4.5M16.5 12H20M16.5 16h3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M12 10v5M9.5 12.5h5" stroke-linecap="round"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M19 15.5A8 8 0 0 1 8.5 5 8 8 0 1 0 19 15.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8 7.5 9.5 4.3-1.5 7.5-4.9 7.5-9.5V6z"/></symbol>
+  <symbol id="i-skull" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 11a7 7 0 1 1 14 0c0 2.4-1.2 3.9-2.5 4.8V19h-9v-3.2C6.2 14.9 5 13.4 5 11z"/><circle cx="9.3" cy="11.5" r="1.4" fill="currentColor"/><circle cx="14.7" cy="11.5" r="1.4" fill="currentColor"/><path d="M10.5 19v-2M13.5 19v-2" stroke-linecap="round"/></symbol>
+  <symbol id="i-spiral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 12a1.5 1.5 0 1 1 1.5 1.5A3 3 0 0 1 10.5 10.5 4.5 4.5 0 0 1 15 6a6 6 0 0 1 6 6 7.5 7.5 0 0 1-7.5 7.5A9 9 0 0 1 4.5 10.5"/></symbol>
+  <symbol id="i-portal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="12" rx="8" ry="9"/><ellipse cx="12" cy="12" rx="4" ry="5"/><path d="M12 9.5v5M9.5 12h5" stroke-linecap="round"/></symbol>
+  <symbol id="i-move" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c3-1 5-3 6-6s3-5 7-6"/><path d="M14 4h4v4"/><circle cx="5" cy="19" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3c.8 4.5 2.5 6.2 7 7-4.5.8-6.2 2.5-7 7-.8-4.5-2.5-6.2-7-7 4.5-.8 6.2-2.5 7-7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5"/></symbol>
+  <symbol id="i-prep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/><path d="m9 9.5 2 2 4-4" stroke-linecap="round"/></symbol>
+  <symbol id="i-wing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15c4-1 6-4 7.5-8 1.5 3 1 6-1 8"/><path d="M21 15c-4-1-6-4-7.5-8-1.5 3-1 6 1 8"/><path d="M9.5 15c1 2.5 4 2.5 5 0M12 17.5V20"/></symbol>
+  <symbol id="i-fish" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-5 9-6 13-3l5-3v12l-5-3c-4 3-10 2-13-3z"/><circle cx="7.5" cy="11" r=".9" fill="currentColor"/></symbol>
+  <symbol id="i-snake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 4.5h2.5M17 4.5c-2 0-3 1-3 2.5s1.5 2.5 0 4H8c-2.5 0-4 1.5-4 3.5S5.5 18 8 18h9c1.5 0 2.5.8 2.5 2"/><circle cx="16.3" cy="5.6" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-dino" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17c4 0 6-2 8-2h5c2 0 3-1.5 3-3.5V8h3V5h-5c-1 0-2 1-2 2v4h-5c-3 0-5 3-7 6z"/><path d="M10 15v4M14 15v4"/></symbol>
+  <symbol id="i-shell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 7 0 0 1 18 0z"/><path d="M8 15l1.5-5h5L16 15M9.5 10 12 8l2.5 2M6 15v3M18 15v3M21 13.5h1.5"/></symbol>
+  <symbol id="i-swarm" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="7" r="1.6"/><circle cx="12" cy="5" r="1.4"/><circle cx="17.5" cy="8" r="1.7"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="13" r="1.4"/><circle cx="5.5" cy="17" r="1.5"/><circle cx="11" cy="18.5" r="1.7"/><circle cx="18" cy="17.5" r="1.4"/></symbol>
+  <symbol id="i-horn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c-2 3-1 6 2 7M17 3c2 3 1 6-2 7"/><path d="M8 10c0 6 2 10 4 10s4-4 4-10c-1-.7-2.5-1-4-1s-3 .3-4 1z"/><circle cx="10.3" cy="13" r=".6" fill="currentColor"/><circle cx="13.7" cy="13" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20.5c.6-4 3.3-6.5 7-6.5s6.4 2.5 7 6.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+ </defs>
+</svg>
+
+<header id="hdr">
+ <div class="wrap">
+  <div class="hd">
+   <div class="who" id="hdChar"><h1 lang="en">Berathast</h1><p>Level 10 · Ranger 9 / Rogue 1</p></div>
+   <div class="seg" id="seg" role="group" aria-label="Görünüm" hidden>
+    <button data-sub="all"><span id="segA"></span><small id="segAc"></small></button>
+    <button data-sub="prep"><span id="segP"></span><small id="segPc"></small></button>
+   </div>
+   <div class="stats" id="stats"></div>
+  </div>
+  <div class="tools" id="spTools" hidden>
+   <input class="search" id="spQ" type="search" placeholder="Büyü ara (İngilizce ya da Türkçe)" aria-label="Büyü ara" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false">
+   <div class="chips" id="spChips" role="group" aria-label="Seviye filtresi"></div>
+  </div>
+ </div>
+</header>
+
+<main class="wrap" id="main">
+ <div class="view" id="charView">
+  <div class="card install" id="install" hidden></div>
+  <section class="card build-card"><span lang="en">Wood Elf Ranger (Gloom Stalker)</span> 9 / <span lang="en">Rogue</span> 1</section>
+
+  <dl class="quick">
+   <div><dt>Yeterlilik</dt><dd>+4</dd></div>
+   <div><dt>İnisiyatif</dt><dd>+8</dd></div>
+   <div><dt>Hız</dt><dd>35 ft</dd></div>
+   <div><dt>Pasif Algı</dt><dd>21</dd></div>
+   <div><dt>Can zarı</dt><dd>1d8 + 9d10</dd></div>
+   <div><dt>Büyü</dt><dd>+7 · DC 15</dd></div>
+  </dl>
+  <p class="sub">Zırh: <span lang="en">Studded Leather</span> (12 + DEX 5) + <span lang="en">Ring of Protection</span> +1 → AC 18. İnisiyatif: DEX 5 + WIS 3 (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>90 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 30). Uçma, tırmanma, yüzme hızı yok.</p>
+
+  <h2 class="lvl-h">Yetenekler <small>● = kurtarmada yeterli</small></h2>
+  <div class="abl">
+   <div><span>STR</span><b>12</b><i>+1</i><em>Kurtarma +2</em></div>
+   <div class="pr"><span>DEX</span><b>20</b><i>+5</i><em>● Kurtarma +10</em></div>
+   <div><span>CON</span><b>13</b><i>+1</i><em>Kurtarma +2</em></div>
+   <div class="pr"><span>INT</span><b>11</b><i>+0</i><em>● Kurtarma +5</em></div>
+   <div class="pr"><span>WIS</span><b>16</b><i>+3</i><em>● Kurtarma +8</em></div>
+   <div><span>CHA</span><b>14</b><i>+2</i><em>Kurtarma +3</em></div>
+  </div>
+  <p class="sub">Tüm kurtarmalara <span lang="en">Ring of Protection</span> +1 dahil. <span lang="en">Fey Ancestry</span>: büyülenmeye karşı kurtarmada <b>avantaj</b>, büyüyle uyutulamaz.</p>
+
+  <h2 class="lvl-h">Beceriler <small>● yeterli · ◆ uzmanlık</small></h2>
+  <ul class="skills" id="skills"></ul>
+
+  <h2 class="lvl-h">Saldırılar</h2>
+  <div class="card atkc">
+   <div class="arow"><b lang="en">Longbow +2</b><span>150/600 ft</span><span class="hit">+13</span><span class="dmg">1d8+7 delme + 1d6 gök gürültüsü</span></div>
+   <p>Saldırı aksiyonu başına <b>2 saldırı</b> (<span lang="en">Extra Attack</span>). Uzun menzilde dezavantaj yok; yarım ve dörtte üç siperi yok sayar (<span lang="en">Sharpshooter</span>).</p>
+   <p><span lang="en">Sharpshooter</span> −5/+10: saldırı <b>+8</b>, hasar <b>1d8+17</b> delme + 1d6 gök gürültüsü.</p>
+   <p><b>İlk tur</b> (<span lang="en">Dread Ambusher</span>): hız +10 ft, Saldırı aksiyonunda <b>+1 saldırı</b>; isabet ederse <b>+1d8</b>.</p>
+   <p><span lang="en">Sneak Attack</span>: turda bir kez <b>+1d6</b> (avantajın varsa ya da hedefin 5 ft yanında bir müttefikin varsa). <span lang="en">Hunter’s Mark</span>: her isabette <b>+1d6</b>.</p>
+   <p>Büyü saldırısı <b>+7</b> · büyü kurtarma <b>DC 15</b> (Bilgelik).</p>
+  </div>
+
+  <h2 class="lvl-h">Eşyalar ve notlar</h2>
+  <div class="inv" id="inv"></div>
+
+  <h2 class="lvl-h">Özellikler</h2>
+  <div class="feats" id="feats"></div>
+
+  <h2 class="lvl-h">Yeterlilikler ve diller</h2>
+  <div class="card prof">
+   <p><b>Zırh:</b> <span lang="en">Light Armor, Medium Armor, Shields</span></p>
+   <p><b>Silah:</b> <span lang="en">Simple Weapons, Martial Weapons, Longsword, Shortsword, Shortbow, Longbow, Hand Crossbow, Rapier</span></p>
+   <p><b>Araç:</b> <span lang="en">Disguise Kit, Thieves’ Tools</span></p>
+   <p><b>Diller:</b> <span lang="en">Common, Elvish, Orc, Goblin, Thieves’ Cant</span></p>
+  </div>
+
+  <h2 class="lvl-h">Veri</h2>
+  <div class="card data">
+   <p>Eşyalar, notlar ve bilinen büyüler bu telefonda saklanır. Telefon değiştirirken ya da uygulamayı silmeden önce yedek al.</p>
+   <button class="mini" data-backup="export">Yedeği indir</button>
+   <button class="mini" data-backup="import">Yedeği geri yükle</button>
+   <input type="file" id="importFile" accept="application/json,.json" hidden>
+   <p id="storeState"></p>
+  </div>
+  <p class="src">Kaynak: karakter sayfası (Aurora Builder).</p>
+ </div>
+ <div class="view" id="spAll" hidden></div>
+ <div class="view" id="spPrep" hidden></div>
+</main>
+
+<nav id="nav" aria-label="Bölümler">
+ <div class="wrap">
+  <button data-tab="char" aria-current="page"><svg aria-hidden="true"><use href="#i-person"/></svg>Karakter</button>
+  <button data-tab="sp" aria-current="false"><svg aria-hidden="true"><use href="#i-book"/></svg>Büyüler</button>
+ </div>
+</nav>
+
+<div class="scrim" id="scrim" hidden></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shName" hidden>
+ <div class="grab-zone" id="grab" aria-hidden="true"><span></span></div>
+ <div class="in" id="sheetIn"></div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="spData" type="application/json">[
+ {
+  "id": "absorb-elements",
+  "lvl": 1,
+  "en": "Absorb Elements",
+  "tr": "Elementleri Emme",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Reaksiyon",
+  "range": "Kendine",
+  "dur": "1 tur",
+  "comp": "S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Xanathar's Guide to Everything",
+  "d": "<b>Reaksiyon:<\/b> asit, soğuk, ateş, şimşek ya da gök gürültüsü hasarı aldığında. Sonraki turunun başına kadar o hasar türüne <b>direnç<\/b> kazanırsın; sonraki turunda ilk yakın dövüş isabetin hedefe o türde <b>+1d6<\/b> ekler. <i>Üst slot:<\/i> her seviye için +1d6.",
+  "fx": [
+   "Etki",
+   "Direnç · sonraki yakın vuruşa +1d6"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ]
+ },
+ {
+  "id": "alarm",
+  "lvl": 1,
+  "en": "Alarm",
+  "tr": "Alarm",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 dakika",
+  "range": "30 ft",
+  "dur": "8 saat",
+  "comp": "V, S, M",
+  "mat": "küçük bir çan ve bir parça ince gümüş tel",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Menzildeki bir kapıyı, pencereyi ya da <b>en fazla 20 ft küp<\/b> bir alanı korumaya alırsın. Büyü bitene kadar <b>Minik ya da daha büyük<\/b> bir yaratık alana dokunur ya da girerse alarm çalar. Alarmı tetiklemeyecek yaratıkları büyüyü yaparken belirlersin. Alarm <b>zihinsel<\/b> ya da <b>sesli<\/b> olur: zihinsel alarm, alana <b>1 mil<\/b> yakınındaysan zihninde çınlar ve uyuyorsan seni uyandırır; sesli alarm <b>60 ft<\/b> içinde 10 saniye boyunca el çanı sesi çıkarır.",
+  "fx": [
+   "Etki",
+   "İzinsiz girişte uyarı"
+  ],
+  "ar": [
+   "Alan",
+   "Kapı, pencere ya da 20 ft küp"
+  ]
+ },
+ {
+  "id": "animal-friendship",
+  "lvl": 1,
+  "en": "Animal Friendship",
+  "tr": "Hayvan Dostluğu",
+  "school": "Büyüleme",
+  "schoolEn": "Enchantment",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "24 saat",
+  "comp": "V, S, M",
+  "mat": "bir lokma yiyecek",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Görebildiğin, seni görüp duyan bir hayvanı ikna edersin. Zekâsı <b>4 veya üstüyse<\/b> büyü başarısız olur. Aksi hâlde <b>WIS DC 15<\/b> kurtarmasını geçemezse süre boyunca (24 saat) sana <b>büyülenmiş<\/b> olur. Sen ya da yoldaşların ona zarar verirse biter. <i>Üst slot:<\/i> her seviye için +1 hayvan.",
+  "fx": [
+   "Etki",
+   "Büyülenmiş (24 saat)"
+  ],
+  "ar": [
+   "Hedef",
+   "1 hayvan (Zekâ ≤ 3)"
+  ]
+ },
+ {
+  "id": "beast-bond",
+  "lvl": 1,
+  "en": "Beast Bond",
+  "tr": "Hayvan Bağı",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 10 dk",
+  "comp": "V, S, M",
+  "mat": "beze sarılı bir tutam kürk",
+  "conc": true,
+  "ritual": false,
+  "src": "Xanathar's Guide to Everything",
+  "d": "Dokunduğun, sana dost ya da büyülenmiş bir hayvanla (Zekâ 3 veya altı) telepatik bağ kurarsın. Birbirinizi gördüğünüz sürece mesajlarını anlar, sana basit duygu ve kavramlar iletir. Bağ açıkken hayvan, senin <b>5 ft<\/b> yakınında gördüğün yaratıklara karşı saldırılarında <b>avantajlı<\/b>dır.",
+  "fx": [
+   "Etki",
+   "Telepatik bağ · saldırıda avantaj"
+  ],
+  "ar": [
+   "Hedef",
+   "1 dost hayvan"
+  ]
+ },
+ {
+  "id": "cure-wounds",
+  "lvl": 1,
+  "en": "Cure Wounds",
+  "tr": "Yaraları İyileştir",
+  "school": "Yaratma",
+  "schoolEn": "Evocation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun yaratık <b>1d8+3<\/b> can kazanır. <b>Ölümsüz ve yapaylara etki etmez.<\/b> <i>Üst slot:<\/i> her seviye için +1d8.",
+  "fx": [
+   "İyileştirme",
+   "1d8+3 can"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (dokunma)"
+  ]
+ },
+ {
+  "id": "detect-magic",
+  "lvl": 1,
+  "en": "Detect Magic",
+  "tr": "Büyü Sezme",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 10 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Süre boyunca 30 ft içindeki büyüyü sezersin; aksiyonla alandaki büyü taşıyan görünür yaratık/nesnelerin aurasını ve <b>okulunu<\/b> görürsün. 1 ft taş, 1 inç sıradan metal, ince kurşun levha ya da 3 ft ahşap/toprak engeller.",
+  "fx": [
+   "Etki",
+   "Büyüyü ve okulunu sezer"
+  ],
+  "ar": [
+   "Alan",
+   "30 ft yarıçap (çevren)"
+  ]
+ },
+ {
+  "id": "detect-poison-and-disease",
+  "lvl": 1,
+  "en": "Detect Poison and Disease",
+  "tr": "Zehir ve Hastalık Sezme",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 10 dk",
+  "comp": "V, S, M",
+  "mat": "bir porsuk yaprağı",
+  "conc": true,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Süre boyunca 30 ft içindeki zehirlerin, zehirli yaratıkların ve hastalıkların <b>varlığını ve yerini<\/b> sezer, türlerini öğrenirsin. 1 ft taş, 1 inç metal, ince kurşun ya da 3 ft ahşap/toprak engeller.",
+  "fx": [
+   "Etki",
+   "Zehir ve hastalığı sezer"
+  ],
+  "ar": [
+   "Alan",
+   "30 ft yarıçap (çevren)"
+  ]
+ },
+ {
+  "id": "ensnaring-strike",
+  "lvl": 1,
+  "en": "Ensnaring Strike",
+  "tr": "Sarmaşık Vuruşu",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Büyü bitmeden bir yaratığa <b>silah saldırısıyla bir sonraki isabetinde<\/b> vuruş noktasında dikenli sarmaşıklar belirir: hedef <b>DC 15 STR<\/b> kurtarmasında başarısız olursa büyü bitene kadar <b>kısıtlanmış<\/b> olur. <b>Büyük ya da daha iri<\/b> yaratıklar avantajla atar. Başarılı olursa sarmaşıklar kurur. Kısıtlıyken hedef her turunun başında <b>1d6 delme<\/b> alır. Hedef ya da ona dokunabilen bir yaratık <b>aksiyonuyla DC 15 Kuvvet kontrolü<\/b> yapar; başarılıysa hedef kurtulur. <i>Üst slot:<\/i> her seviye için +1d6.",
+  "fx": [
+   "Hasar",
+   "1d6 delme/tur + kısıtlanmış"
+  ],
+  "ar": [
+   "Hedef",
+   "Vurduğun 1 yaratık"
+  ]
+ },
+ {
+  "id": "entangle",
+  "lvl": 1,
+  "en": "Entangle",
+  "tr": "Dolanma",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "90 ft",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki yaratıklar <b>STR DC 15<\/b> kurtarması yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'ye karşı STR kontrolü yapıp kurtulabilir.",
+  "fx": [
+   "Etki",
+   "Bağlanmış + zorlu arazi"
+  ],
+  "ar": [
+   "Alan",
+   "20 ft kare"
+  ]
+ },
+ {
+  "id": "fog-cloud",
+  "lvl": 1,
+  "en": "Fog Cloud",
+  "tr": "Sis Bulutu",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "120 ft",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> sis küresi; köşelerden dolanır, alan <b>tamamen kapalı görüşlü<\/b> (heavily obscured). Süre bitene ya da en az orta şiddette rüzgâr dağıtana dek sürer. <i>Üst slot:<\/i> her seviye için yarıçap +20 ft.",
+  "fx": [
+   "Etki",
+   "Görüşü tamamen kapatır"
+  ],
+  "ar": [
+   "Alan",
+   "20 ft yarıçap küre"
+  ]
+ },
+ {
+  "id": "goodberry",
+  "lvl": 1,
+  "en": "Goodberry",
+  "tr": "İyi Meyve",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Anında",
+  "comp": "V, S, M",
+  "mat": "bir ökseotu dalı",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Elinde <b>10'a kadar<\/b> büyülü meyve belirir. Bir yaratık aksiyonla bir meyve yer: <b>1 can<\/b> kazanır ve bir günlük beslenmesini karşılar. Meyveler 24 saat içinde yenmezse etkisini kaybeder.",
+  "fx": [
+   "İyileştirme",
+   "Meyve başına 1 can (10 meyve)"
+  ],
+  "ar": [
+   "Hedef",
+   "Meyveyi yiyen her yaratık"
+  ]
+ },
+ {
+  "id": "hail-of-thorns",
+  "lvl": 1,
+  "en": "Hail of Thorns",
+  "tr": "Diken Yağmuru",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Büyü bitmeden önce bir yaratığa <b>menzilli silah saldırısıyla bir sonraki isabetinde<\/b>, silahından ya da cephanenden fışkıran bir diken yağmuru oluşur. Saldırının normal etkisine ek olarak, hedef ve ona <b>5 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> kurtarması yapar: başarısız olan <b>1d10 delme<\/b> alır, başarılı olan bunun <b>yarısını<\/b> alır. <i>Üst slot:<\/i> her seviye için +1d10 (<b>en fazla 6d10<\/b>).",
+  "fx": [
+   "Hasar",
+   "1d10 delme"
+  ],
+  "ar": [
+   "Alan",
+   "Hedef + çevresi 5 ft"
+  ]
+ },
+ {
+  "id": "hunters-mark",
+  "lvl": 1,
+  "en": "Hunter's Mark",
+  "tr": "Avcı İşareti",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Bonus Aksiyon",
+  "range": "90 ft",
+  "dur": "Kons. · 1 saat",
+  "comp": "V",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzilde <b>görebildiğin bir yaratığı<\/b> avın olarak işaretlersin. Büyü sona erene kadar hedefe bir <b>silah saldırısıyla her isabet ettiğinde ek 1d6<\/b> hasar verirsin ve onu bulmak için yaptığın <b>Bilgelik (Algı)<\/b> ya da <b>Bilgelik (Hayatta Kalma)<\/b> kontrollerinde <b>avantajın<\/b> olur. Hedef büyü bitmeden <b>0 can puanına düşerse<\/b>, sonraki turlarından birinde <b>bonus aksiyonla<\/b> yeni bir yaratığı işaretleyebilirsin. <i>Üst slot:<\/i> <b>3. veya 4. seviye<\/b> slotla konsantrasyon <b>8 saate<\/b>, <b>5. seviye ve üstüyle 24 saate<\/b> kadar sürer.",
+  "fx": [
+   "Hasar",
+   "+1d6 her silah isabetinde"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık"
+  ]
+ },
+ {
+  "id": "jump",
+  "lvl": 1,
+  "en": "Jump",
+  "tr": "Sıçrama",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "1 dk",
+  "comp": "V, S, M",
+  "mat": "bir çekirgenin arka bacağı",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun yaratığın <b>sıçrama mesafesi<\/b> süre boyunca (1 dk) <b>üç katına<\/b> çıkar.",
+  "fx": [
+   "Etki",
+   "Sıçrama mesafesi ×3"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (dokunma)"
+  ]
+ },
+ {
+  "id": "longstrider",
+  "lvl": 1,
+  "en": "Longstrider",
+  "tr": "Uzun Adım",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "1 saat",
+  "comp": "V, S, M",
+  "mat": "bir tutam toprak",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun yaratığın hızı süre boyunca (1 saat) <b>+10 ft<\/b> artar. <i>Üst slot:<\/i> her seviye için +1 hedef.",
+  "fx": [
+   "Etki",
+   "Hız +10 ft"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (+1 / üst slot)"
+  ]
+ },
+ {
+  "id": "searing-smite",
+  "lvl": 1,
+  "en": "Searing Smite",
+  "tr": "Yakıcı Darbe",
+  "school": "Yaratma",
+  "schoolEn": "Evocation",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Süre içinde bir yaratığa <b>yakın dövüş silah saldırısıyla bir sonraki isabetinde<\/b> silahın akkor gibi parlar: saldırı <b>ek 1d6 ateş<\/b> hasarı verir ve hedef alev alır. Büyü bitene kadar hedef her turunun başında <b>DC 15 CON<\/b> kurtarması yapar: başarısızsa <b>1d6 ateş<\/b> alır, başarılıysa büyü biter. Hedef ya da ona 5 ft yakındaki bir yaratık <b>aksiyonla<\/b> alevleri söndürürse ya da başka bir etki söndürürse (ör. suya batmak) büyü biter. <i>Üst slot:<\/i> her seviye için ilk ek hasar +1d6.",
+  "fx": [
+   "Hasar",
+   "1d6 ateş + 1d6/tur yanma"
+  ],
+  "ar": [
+   "Hedef",
+   "Vurduğun 1 yaratık"
+  ]
+ },
+ {
+  "id": "snare",
+  "lvl": 1,
+  "en": "Snare",
+  "tr": "Tuzak",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 dk",
+  "range": "Dokunma",
+  "dur": "8 saat",
+  "comp": "S, M",
+  "mat": "25 ft ip — tüketilir",
+  "conc": false,
+  "ritual": false,
+  "src": "Xanathar's Guide to Everything",
+  "d": "İple 5 ft yarıçaplı görünmeze yakın bir büyülü tuzak kurarsın (fark etmek için DC 15 Zekâ (Araştırma)). Üstüne basan Küçük–Büyük yaratık <b>DEX DC 15<\/b>'de başarısızsa ters asılı, 3 ft havada <b>bağlanmış<\/b> kalır. Her turunun sonunda DEX ile tekrar dener; ya da biri aksiyonla DC 15 Zekâ (Arcana) ile kurtarır. Kimse asılı değilse büyü biter.",
+  "fx": [
+   "Etki",
+   "Ters asılı · bağlanmış"
+  ],
+  "ar": [
+   "Alan",
+   "5 ft yarıçap tuzak"
+  ]
+ },
+ {
+  "id": "speak-with-animals",
+  "lvl": 1,
+  "en": "Speak with Animals",
+  "tr": "Hayvanlarla Konuş",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "10 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Süre boyunca (10 dk) hayvanları anlar ve onlarla konuşursun. Bilgileri zekâlarıyla sınırlı, ama en azından yakındaki yerler ve canavarlar hakkında son bir günde algıladıklarını anlatırlar. OY'ye bağlı olarak küçük bir iyilik isteyebilirsin.",
+  "fx": [
+   "Etki",
+   "Hayvanlarla konuşursun"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ]
+ },
+ {
+  "id": "sudden-awakening",
+  "lvl": 1,
+  "en": "Sudden Awakening (UA)",
+  "tr": "Ani Uyanış",
+  "school": "Büyüleme",
+  "schoolEn": "Enchantment",
+  "time": "1 Bonus Aksiyon",
+  "range": "10 ft",
+  "dur": "Anında",
+  "comp": "V",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Unearthed Arcana 36 - Starter Spells",
+  "d": "Menzilde seçtiğin her <b>uyuyan<\/b> yaratık uyanır; ardından menzildeki her <b>yere serili<\/b> yaratık <b>hareket harcamadan<\/b> ayağa kalkabilir. <i>Resmî olmayan deneme içerik (Unearthed Arcana).<\/i>",
+  "fx": [
+   "Etki",
+   "Uyandırır, ayağa kaldırır"
+  ],
+  "ar": [
+   "Hedef",
+   "10 ft içinde seçtiklerin"
+  ]
+ },
+ {
+  "id": "wild-cunning",
+  "lvl": 1,
+  "en": "Wild Cunning (UA)",
+  "tr": "Vahşi Kurnazlık (UA)",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "120 ft",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": true,
+  "src": "Unearthed Arcana 36 - Starter Spells",
+  "d": "Doğa ruhlarından yardım istersin; birini seç: menzildeki izleri bilir, 1 saat izlerken <b>Hayatta Kalma avantajı<\/b> alırsın · yenebilir yiyecek, temiz su ya da uygun barınak varsa yerini öğrenirsin · ruhlar kampı kurar ya da anında toplar. <i>(Unearthed Arcana — resmî olmayan deneme içerik.)<\/i>",
+  "fx": [
+   "Etki",
+   "İz, yiyecek, su ya da barınak bulur"
+  ],
+  "ar": [
+   "Alan",
+   "120 ft çevren"
+  ]
+ },
+ {
+  "id": "zephyr-strike",
+  "lvl": 1,
+  "en": "Zephyr Strike",
+  "tr": "Rüzgâr Vuruşu",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Xanathar's Guide to Everything",
+  "d": "Rüzgâr gibi hareket edersin: süre boyunca hareketin <b>fırsat saldırısı tetiklemez<\/b>. Büyü bitmeden <b>bir kez<\/b>, kendi turunda bir silah saldırısına <b>avantaj<\/b> verebilirsin; isabet ederse <b>ek 1d8 kuvvet<\/b> hasarı verir. İsabet de ıska da olsa o turun sonuna kadar yürüme hızın <b>30 ft artar<\/b>.",
+  "fx": [
+   "Hasar",
+   "+1d8 kuvvet (bir kez)"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ]
+ },
+ {
+  "id": "aid",
+  "lvl": 2,
+  "en": "Aid",
+  "tr": "Yardım",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "8 saat",
+  "comp": "V, S, M",
+  "mat": "küçük bir şerit beyaz kumaş",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzildeki <b>en fazla 3 yaratığın<\/b> hem <b>azami<\/b> hem <b>mevcut<\/b> can puanı süre boyunca <b>5 artar<\/b>. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +5.",
+  "fx": [
+   "İyileştirme",
+   "+5 azami ve mevcut can"
+  ],
+  "ar": [
+   "Hedef",
+   "En fazla 3 yaratık"
+  ]
+ },
+ {
+  "id": "air-bubble",
+  "lvl": 2,
+  "en": "Air Bubble",
+  "tr": "Hava Kabarcığı",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "60 ft",
+  "dur": "24 saat",
+  "comp": "S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Spelljammer: Adventures in Space - Astral Adventurer's Guide",
+  "d": "Görebildiğin gönüllü bir yaratığın başının etrafında temiz hava dolu bir küre oluşur; süre boyunca boğulmaz. <i>Üst slot:<\/i> her seviye için +2 küre.",
+  "fx": [
+   "Etki",
+   "Hava kabarcığı · boğulmaz"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (+2 / üst slot)"
+  ]
+ },
+ {
+  "id": "animal-messenger",
+  "lvl": 2,
+  "en": "Animal Messenger",
+  "tr": "Hayvan Ulağı",
+  "school": "Büyüleme",
+  "schoolEn": "Enchantment",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "24 saat",
+  "comp": "V, S, M",
+  "mat": "bir lokma yiyecek",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Görebildiğin <b>Minik<\/b> bir hayvana en fazla <b>25 kelimelik<\/b> mesaj verir, daha önce gittiğin bir yeri ve genel tarifle bir alıcıyı söylersin. Hayvan süre boyunca (24 saat) oraya gider (uçan 50 mil/gün, diğerleri 25) ve mesajı senin sesinle iletir. Yetişemezse mesaj kaybolur. <i>Üst slot:<\/i> her seviye için süre +48 saat.",
+  "fx": [
+   "Etki",
+   "25 kelimelik mesaj taşır"
+  ],
+  "ar": [
+   "Hedef",
+   "1 Minik hayvan"
+  ]
+ },
+ {
+  "id": "barkskin",
+  "lvl": 2,
+  "en": "Barkskin",
+  "tr": "Ağaç Kabuğu Deri",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S, M",
+  "mat": "bir avuç meşe kabuğu",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun gönüllü yaratığın derisi kabuk gibi olur; süre boyunca (1 saat) zırhı ne olursa olsun <b>AC'si 16'nın altına düşmez<\/b>.",
+  "fx": [
+   "Etki",
+   "AC en az 16"
+  ],
+  "ar": [
+   "Hedef",
+   "1 gönüllü yaratık"
+  ]
+ },
+ {
+  "id": "beast-sense",
+  "lvl": 2,
+  "en": "Beast Sense",
+  "tr": "Hayvan Duyusu",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "S",
+  "mat": "",
+  "conc": true,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun gönüllü bir hayvanın gözünden görüp kulağından duyabilirsin; bunun için aksiyon harcarsın ve kendi duyularına dönmek için yine aksiyon gerekir. Süre: 1 saat.",
+  "fx": [
+   "Etki",
+   "Hayvanın gözüyle görür, kulağıyla duyarsın"
+  ],
+  "ar": [
+   "Hedef",
+   "1 gönüllü hayvan"
+  ]
+ },
+ {
+  "id": "cordon-of-arrows",
+  "lvl": 2,
+  "en": "Cordon of Arrows",
+  "tr": "Ok Çemberi",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "5 ft",
+  "dur": "8 saat",
+  "comp": "V, S, M",
+  "mat": "dört ya da daha fazla ok veya arbalet cıvatası",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzildeki yere <b>4 adet<\/b> büyüsüz ok ya da arbalet cıvatası dikersin. Büyü bitene kadar senden başka bir yaratık bir turda <b>ilk kez cephanenin 30 ft yakınına geldiğinde<\/b> ya da turunu orada bitirdiğinde bir cephane uçup ona saldırır: <b>DC 15 DEX<\/b> kurtarmasında başarısız olursa <b>1d6 delme<\/b> alır. O cephane yok olur; cephane kalmayınca büyü biter. Büyüyü yaparken etkilenmeyecek yaratıkları seçebilirsin. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +2 cephane.",
+  "fx": [
+   "Hasar",
+   "1d6 delme (her cephane)"
+  ],
+  "ar": [
+   "Alan",
+   "Cephanenin 30 ft çevresi"
+  ]
+ },
+ {
+  "id": "darkvision",
+  "lvl": 2,
+  "en": "Darkvision",
+  "tr": "Karanlık Görüş",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "8 saat",
+  "comp": "V, S, M",
+  "mat": "bir tutam kurutulmuş havuç ya da bir akik",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun gönüllü yaratık süre boyunca (8 saat) <b>60 ft karanlık görüş<\/b> kazanır.",
+  "fx": [
+   "Etki",
+   "60 ft karanlık görüş"
+  ],
+  "ar": [
+   "Hedef",
+   "1 gönüllü yaratık"
+  ]
+ },
+ {
+  "id": "enhance-ability",
+  "lvl": 2,
+  "en": "Enhance Ability",
+  "tr": "Yeteneği Güçlendir",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S, M",
+  "mat": "bir hayvandan kürk ya da tüy",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun yaratığa birini seç (1 saat): <b>Ayı<\/b> — CON kontrollerinde avantaj + <b>2d6 geçici can<\/b> · <b>Boğa<\/b> — STR kontrollerinde avantaj, taşıma kapasitesi iki katı · <b>Kedi<\/b> — DEX kontrollerinde avantaj, 20 ft'e kadar düşüşten hasar almaz · <b>Kartal<\/b> — CHA · <b>Tilki<\/b> — INT · <b>Baykuş<\/b> — WIS kontrollerinde avantaj. <i>Üst slot:<\/i> her seviye için +1 hedef.",
+  "fx": [
+   "Etki",
+   "Bir yetenek kontrolünde avantaj"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (+1 / üst slot)"
+  ]
+ },
+ {
+  "id": "find-traps",
+  "lvl": 2,
+  "en": "Find Traps",
+  "tr": "Tuzak Bul",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "120 ft",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzilde ve görüş hattındaki <b>tuzakların varlığını<\/b> sezersin (alarm, koruma glifi, mekanik çukur…; doğal tehlikeler değil). Tam yerlerini değil, tehlikenin genel türünü öğrenirsin.",
+  "fx": [
+   "Etki",
+   "Tuzakların varlığını sezer"
+  ],
+  "ar": [
+   "Alan",
+   "120 ft, görüş hattı"
+  ]
+ },
+ {
+  "id": "gust-of-wind",
+  "lvl": 2,
+  "en": "Gust of Wind",
+  "tr": "Rüzgâr Esintisi",
+  "school": "Yaratma",
+  "schoolEn": "Evocation",
+  "time": "1 Aksiyon",
+  "range": "Kendine (60 ft hat)",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S, M",
+  "mat": "bir baklagil tohumu",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Senden <b>60 ft uzunluk × 10 ft genişlikte<\/b> bir rüzgâr hattı. Turuna hatta başlayan yaratık <b>STR DC 15<\/b>'de başarısızsa <b>15 ft itilir<\/b>. Sana yaklaşmak iki kat hareket harcar. Gaz/sis dağılır, korumasız alevler söner. <b>Bonus aksiyonla<\/b> yönünü değiştirirsin.",
+  "fx": [
+   "Etki",
+   "15 ft itme · alevleri söndürür"
+  ],
+  "ar": [
+   "Alan",
+   "60 ft × 10 ft hat"
+  ]
+ },
+ {
+  "id": "healing-spirit",
+  "lvl": 2,
+  "en": "Healing Spirit",
+  "tr": "Şifa Ruhu",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Bonus Aksiyon",
+  "range": "60 ft",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Xanathar's Guide to Everything",
+  "d": "5 ft'lik küpte maddesiz bir doğa ruhu belirir. Sen ya da görebildiğin bir yaratık turda ilk kez oraya girdiğinde ya da turuna orada başladığında ruh ona <b>1d6 can<\/b> verebilir (aksiyon gerekmez; yapaylar ve ölümsüzler hariç). <b>Bonus aksiyonla<\/b> 30 ft taşırsın. Toplam <b>4 kez<\/b> (1 + WIS modifiyerin) iyileştirir, sonra kaybolur. <i>Üst slot:<\/i> her seviye için +1d6.",
+  "fx": [
+   "İyileştirme",
+   "1d6 can (4 kez)"
+  ],
+  "ar": [
+   "Alan",
+   "5 ft küp"
+  ]
+ },
+ {
+  "id": "lesser-restoration",
+  "lvl": 2,
+  "en": "Lesser Restoration",
+  "tr": "Küçük Restorasyon",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun yaratıktaki <b>bir hastalığı<\/b> ya da şu durumlardan <b>birini<\/b> sona erdirirsin: kör, sağır, felçli ya da zehirlenmiş.",
+  "fx": [
+   "Etki",
+   "1 hastalık ya da durum biter"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (dokunma)"
+  ]
+ },
+ {
+  "id": "locate-animals-or-plants",
+  "lvl": 2,
+  "en": "Locate Animals or Plants",
+  "tr": "Hayvan veya Bitki Bul",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "Anında",
+  "comp": "V, S, M",
+  "mat": "bir tazı köpeğinden biraz kürk",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Belirli bir hayvan ya da bitki türünü söylersin; <b>5 mil<\/b> içinde varsa en yakınının <b>yönünü ve uzaklığını<\/b> öğrenirsin.",
+  "fx": [
+   "Etki",
+   "En yakının yönü ve uzaklığı"
+  ],
+  "ar": [
+   "Alan",
+   "5 mil"
+  ]
+ },
+ {
+  "id": "locate-object",
+  "lvl": 2,
+  "en": "Locate Object",
+  "tr": "Nesne Bul",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 10 dk",
+  "comp": "V, S, M",
+  "mat": "çatallı bir dal",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Tanıdığın bir nesnenin <b>1.000 ft<\/b> içindeyse yönünü sezersin; hareket ediyorsa yönünü de. Belirli bir nesneyi bulmak için onu en az bir kez 30 ft yakından görmüş olmalısın; ya da bir türün en yakın örneğini bulabilirsin. Arada <b>kurşun<\/b> varsa bulamaz.",
+  "fx": [
+   "Etki",
+   "Nesnenin yönünü sezer"
+  ],
+  "ar": [
+   "Alan",
+   "1.000 ft"
+  ]
+ },
+ {
+  "id": "magic-weapon",
+  "lvl": 2,
+  "en": "Magic Weapon",
+  "tr": "Büyülü Silah",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Bonus Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun <b>büyüsüz bir silah<\/b> büyü bitene kadar büyülü sayılır ve <b>saldırı ve hasar zarlarına +1<\/b> alır. <i>Üst slot:<\/i> 4. seviye slotla <b>+2<\/b>, 6. seviye ve üstüyle <b>+3<\/b>.",
+  "fx": [
+   "Etki",
+   "Silaha +1 saldırı ve hasar"
+  ],
+  "ar": [
+   "Hedef",
+   "1 büyüsüz silah"
+  ]
+ },
+ {
+  "id": "pass-without-trace",
+  "lvl": 2,
+  "en": "Pass Without Trace",
+  "tr": "İz Bırakmadan Geç",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S, M",
+  "mat": "yanmış ökseotu yaprağı külü ve bir ladin dalı",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Süre boyunca (1 saat) senin ve seçtiğin, 30 ft içindeki yaratıkların <b>Çeviklik (Gizlilik)<\/b> kontrollerine <b>+10<\/b> gelir; büyü dışında <b>izlenemez<\/b>, iz bırakmazsınız.",
+  "fx": [
+   "Etki",
+   "Gizlilik +10 · iz bırakmaz"
+  ],
+  "ar": [
+   "Hedef",
+   "Seçtiğin, 30 ft içindekiler"
+  ]
+ },
+ {
+  "id": "protection-from-poison",
+  "lvl": 2,
+  "en": "Protection from Poison",
+  "tr": "Zehre Karşı Koruma",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun yaratıktaki bir zehri etkisiz kılarsın. Süre boyunca (1 saat) zehirlenmeye karşı kurtarmalarda <b>avantaj<\/b> ve zehir hasarına <b>direnç<\/b> kazanır.",
+  "fx": [
+   "Etki",
+   "Zehri temizler · zehre direnç"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık (dokunma)"
+  ]
+ },
+ {
+  "id": "silence",
+  "lvl": 2,
+  "en": "Silence",
+  "tr": "Sessizlik",
+  "school": "İllüzyon",
+  "schoolEn": "Illusion",
+  "time": "1 Aksiyon",
+  "range": "120 ft",
+  "dur": "Kons. · 10 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Menzildeki bir noktada ortalanmış <b>20 ft yarıçaplı küre<\/b> içinde süre boyunca hiç ses oluşmaz ve içinden ses geçmez. Tamamen içinde olan yaratık ve nesneler <b>gök gürültüsü hasarına bağışıktır<\/b>; yaratıklar içerideyken <b>sağır<\/b> olur. İçeride <b>sözlü (V) bileşenli büyü yapılamaz<\/b>.",
+  "fx": [
+   "Etki",
+   "Sessizlik, sağır, V'li büyü yok"
+  ],
+  "ar": [
+   "Alan",
+   "20 ft yarıçap küre"
+  ]
+ },
+ {
+  "id": "spike-growth",
+  "lvl": 2,
+  "en": "Spike Growth",
+  "tr": "Diken Tarlası",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "150 ft",
+  "dur": "Kons. · 10 dk",
+  "comp": "V, S, M",
+  "mat": "yedi sivri diken ya da sivriltilmiş yedi küçük dal",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (kurtarma yok). Doğal görünür: büyü yapılırken alanı göremeyen, tehlikeyi fark etmek için DC 15 <b>Bilgelik (Algı)<\/b> kontrolü yapmalıdır.",
+  "fx": [
+   "Hasar",
+   "Her 5 ft için 2d4 delme"
+  ],
+  "ar": [
+   "Alan",
+   "20 ft yarıçap"
+  ]
+ },
+ {
+  "id": "summon-beast",
+  "lvl": 2,
+  "en": "Summon Beast",
+  "tr": "Hayvan Ruhu Çağır",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "90 ft",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S, M",
+  "mat": "en az 200 gp değerinde yaldızlı bir meşe palamudu içinde tüy, kürk ve balık kuyruğu",
+  "conc": true,
+  "ritual": false,
+  "src": "Tasha's Cauldron of Everything",
+  "d": "Görebildiğin boş bir alanda bir <b>Hayvan Ruhu<\/b> belirir; <b>Hava, Kara ya da Su<\/b> seçersin (istatistik bloğu ve özellikleri buna göre). Senin inisiyatifini paylaşır, senden hemen sonra oynar; sözlü emirlerine uyar, emir vermezsen Kaçınma (Dodge) yapar. 0 canda ya da büyü bitince kaybolur. <i>Üst slot:<\/i> istatistik bloğundaki seviye değeri yükselir.",
+  "fx": [
+   "Etki",
+   "Hayvan ruhu müttefik çağırır"
+  ],
+  "ar": [
+   "Hedef",
+   "1 çağrılan yaratık"
+  ]
+ },
+ {
+  "id": "ashardalons-stride",
+  "lvl": 3,
+  "en": "Ashardalon's Stride",
+  "tr": "Ashardalon'un Adımı",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Fizban's Treasury of Dragons",
+  "d": "Ayaklarından ejderha alevleri fışkırır: süre boyunca <b>hızın 20 ft artar<\/b> ve hareketin <b>fırsat saldırısı tetiklemez<\/b>. Bir yaratığın ya da giyilmeyen/taşınmayan bir nesnenin <b>5 ft yakınından geçtiğinde<\/b> o, <b>1d6 ateş<\/b> hasarı alır; her yaratık ya da nesne bu hasarı turda <b>yalnızca bir kez<\/b> alır. <i>Üst slot:<\/i> 3. seviyenin üzerindeki her seviye için hız +5 ft ve hasar +1d6.",
+  "fx": [
+   "Hasar",
+   "1d6 ateş (yanından geçtiğin her biri)"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ]
+ },
+ {
+  "id": "conjure-animals",
+  "lvl": 3,
+  "en": "Conjure Animals",
+  "tr": "Hayvan Çağırma",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "60 ft",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Görebildiğin boş alanlarda hayvan biçimli fey ruhları belirir; birini seç: <b>CR 2<\/b>'den 1 · <b>CR 1<\/b>'den 2 · <b>CR 1/2<\/b>'den 4 · <b>CR 1/4<\/b>'ten 8 hayvan. Dosttur, grup olarak inisiyatif atar, sözlü emirlere uyar (aksiyon gerekmez); emir yoksa yalnızca kendini savunur. 0 canda ya da büyü bitince kaybolur. <i>Üst slot:<\/i> 5. seviyede 2 kat, 7.'de 3 kat, 9.'da 4 kat.",
+  "fx": [
+   "Etki",
+   "Fey hayvanlar çağırır"
+  ],
+  "ar": [
+   "Hedef",
+   "1–8 hayvan (CR'ye göre)"
+  ]
+ },
+ {
+  "id": "conjure-barrage",
+  "lvl": 3,
+  "en": "Conjure Barrage",
+  "tr": "Silah Yağmuru",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "Kendine (60 ft koni)",
+  "dur": "Anında",
+  "comp": "V, S, M",
+  "mat": "bir cephane ya da fırlatılabilir bir silah",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Büyüsüz bir silahı fırlatır ya da büyüsüz bir cephaneyi havaya atarsın; aynılarından oluşan bir koni ileri fırlar ve kaybolur. <b>60 ft koni<\/b> içindeki her yaratık <b>DC 15 DEX<\/b> kurtarması yapar: başarısızsa <b>3d8<\/b>, başarılıysa yarısı. Hasar türü, bileşen olarak kullanılan silah ya da cephaneninkiyle aynıdır (ok için <b>delme<\/b>).",
+  "fx": [
+   "Hasar",
+   "3d8 (silahın hasar türü)"
+  ],
+  "ar": [
+   "Alan",
+   "60 ft koni"
+  ]
+ },
+ {
+  "id": "daylight",
+  "lvl": 3,
+  "en": "Daylight",
+  "tr": "Gün Işığı",
+  "school": "Yaratma",
+  "schoolEn": "Evocation",
+  "time": "1 Aksiyon",
+  "range": "60 ft",
+  "dur": "1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Seçtiğin noktadan <b>60 ft yarıçaplı parlak<\/b> + 60 ft loş ışık yayılır (1 saat). Bir nesneye yaparsan ışık onunla taşınır; opak bir şeyle tamamen örtmek ışığı keser. 3. seviye veya altı bir büyünün yarattığı <b>karanlıkla<\/b> kesişirse o karanlığı dağıtır.",
+  "fx": [
+   "Etki",
+   "Parlak ışık · büyülü karanlığı dağıtır"
+  ],
+  "ar": [
+   "Alan",
+   "60 ft yarıçap + 60 ft loş"
+  ]
+ },
+ {
+  "id": "elemental-weapon",
+  "lvl": 3,
+  "en": "Elemental Weapon",
+  "tr": "Elemental Silah",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun büyülü olmayan silah büyülü olur; asit, soğuk, ateş, şimşek ya da gök gürültüsünden birini seç: süre boyunca (1 saat) saldırıya <b>+1<\/b> ve isabette <b>+1d4<\/b> o türden hasar. <i>Üst slot:<\/i> 5–6. seviyede +2 / 2d4; 7.+ seviyede +3 / 3d4.",
+  "fx": [
+   "Hasar",
+   "+1d4 element · saldırıya +1"
+  ],
+  "ar": [
+   "Hedef",
+   "1 büyülü olmayan silah"
+  ]
+ },
+ {
+  "id": "flame-arrows",
+  "lvl": 3,
+  "en": "Flame Arrows",
+  "tr": "Alevli Oklar",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Xanathar's Guide to Everything",
+  "d": "Dokunduğun ok/cıvata kılıfından çekilen cephaneyle yapılan menzilli silah isabetleri <b>+1d6 ateş<\/b> hasarı verir. Cephane isabet etse de etmese de büyüsünü kaybeder; kılıftan <b>12 adet<\/b> çekilince büyü biter. <i>Üst slot:<\/i> her seviye için +2 cephane.",
+  "fx": [
+   "Hasar",
+   "+1d6 ateş (12 mermi)"
+  ],
+  "ar": [
+   "Hedef",
+   "1 ok kılıfı"
+  ]
+ },
+ {
+  "id": "flame-stride",
+  "lvl": 3,
+  "en": "Flame Stride (UA)",
+  "tr": "Alev Adımı",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Unearthed Arcana 78 - Draconic Options",
+  "d": "Ayaklarını ejderha alevleri sarar: süre boyunca <b>hızın 20 ft artar<\/b> ve hareketin <b>fırsat saldırısı tetiklemez<\/b>. Bir yaratığın ya da giyilmeyen/taşınmayan bir nesnenin <b>5 ft yakınından geçtiğinde<\/b> o, <b>1d6 ateş<\/b> hasarı alır; her yaratık ya da nesne bu hasarı turda <b>yalnızca bir kez<\/b> alır. <i>Üst slot:<\/i> 3. seviyenin üzerindeki her seviye için hız +5 ft ve hasar +1d6. (Ashardalon's Stride'ın deneme sürümü.) <i>Resmî olmayan deneme içerik (Unearthed Arcana).<\/i>",
+  "fx": [
+   "Hasar",
+   "1d6 ateş (yanından geçtiğin her biri)"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ]
+ },
+ {
+  "id": "lightning-arrow",
+  "lvl": 3,
+  "en": "Lightning Arrow",
+  "tr": "Şimşek Oku",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Büyünün süresi içinde bir sonraki <b>menzilli silah saldırında<\/b>, cephane (fırlatılan bir silahsa silahın kendisi) bir şimşeğe dönüşür. Saldırı zarını normal atarsın. Hedef, silahın normal hasarı <b>yerine<\/b> isabette <b>4d8 şimşek<\/b>, ıskada bunun <b>yarısını<\/b> alır. <b>İsabet de ıska da olsa<\/b>, hedefe <b>10 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> kurtarması yapar: başarısız olan <b>2d8 şimşek<\/b>, başarılı olan yarısını alır. Ardından cephane ya da silah normal hâline döner. <i>Üst slot:<\/i> her seviye için <b>her iki etkinin<\/b> hasarı +1d8.",
+  "fx": [
+   "Hasar",
+   "4d8 şimşek + 2d8 alan"
+  ],
+  "ar": [
+   "Alan",
+   "Hedef + çevresi 10 ft"
+  ]
+ },
+ {
+  "id": "meld-into-stone",
+  "lvl": 3,
+  "en": "Meld into Stone",
+  "tr": "Taşa Karış",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "8 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Vücudunu tamamen alacak kadar büyük bir taşa, eşyalarınla birlikte girersin (8 saat); büyü dışı duyularla fark edilmezsin. İçerdeyken dışarıyı göremezsin, sesleri duymak için Algı kontrolün <b>dezavantajlı<\/b>dır; kendine büyü yapabilirsin. Girdiğin yerden çıkarsın. Taş kısmen yıkılırsa <b>6d6 ezme<\/b>, tamamen yıkılırsa <b>50 ezme<\/b> hasar alıp dışarı atılır, yere serilirsin.",
+  "fx": [
+   "Etki",
+   "Taşın içine gizlenirsin"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ]
+ },
+ {
+  "id": "nondetection",
+  "lvl": 3,
+  "en": "Nondetection",
+  "tr": "Tespit Edilmezlik",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "8 saat",
+  "comp": "V, S, M",
+  "mat": "hedefin üstüne serpilen 25 gp değerinde bir tutam elmas tozu — tüketilir",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Süre boyunca dokunduğun hedefi <b>kehanet büyülerinden<\/b> gizlersin. Hedef <b>istekli bir yaratık<\/b> ya da <b>hiçbir boyutu 10 ft'yi aşmayan<\/b> bir yer veya nesne olabilir. Hedef <b>hiçbir kehanet büyüsüyle hedeflenemez<\/b> ve <b>büyülü gözetleme sensörleriyle<\/b> algılanamaz.",
+  "fx": [
+   "Etki",
+   "Kehanet büyülerinden gizler"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık, yer ya da nesne"
+  ]
+ },
+ {
+  "id": "plant-growth",
+  "lvl": 3,
+  "en": "Plant Growth",
+  "tr": "Bitki Büyümesi",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon veya 8 saat",
+  "range": "150 ft",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "<b>1 aksiyonla:<\/b> seçtiğin noktada <b>100 ft yarıçaptaki<\/b> bitkiler sıklaşır; içinde hareket eden her 1 ft için <b>4 ft<\/b> hareket harcar (istediğin bölgeleri hariç tutabilirsin). <b>8 saatte:<\/b> yarım mil yarıçaptaki bitkiler 1 yıl boyunca <b>iki kat ürün<\/b> verir.",
+  "fx": [
+   "Etki",
+   "Hareket 4 kat zor · ya da 2 kat ürün"
+  ],
+  "ar": [
+   "Alan",
+   "100 ft yarıçap (ya da yarım mil)"
+  ]
+ },
+ {
+  "id": "protection-from-energy",
+  "lvl": 3,
+  "en": "Protection from Energy",
+  "tr": "Enerjiye Karşı Koruma",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Dokunduğun gönüllü yaratık süre boyunca (1 saat) seçtiğin bir hasar türüne <b>direnç<\/b> kazanır: asit, soğuk, ateş, şimşek ya da gök gürültüsü.",
+  "fx": [
+   "Etki",
+   "Bir hasar türüne direnç"
+  ],
+  "ar": [
+   "Hedef",
+   "1 gönüllü yaratık"
+  ]
+ },
+ {
+  "id": "revivify",
+  "lvl": 3,
+  "en": "Revivify",
+  "tr": "Yeniden Canlandırma",
+  "school": "Nekromansi",
+  "schoolEn": "Necromancy",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Anında",
+  "comp": "V, S, M",
+  "mat": "300 gp değerinde elmas — tüketilir",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "<b>Son 1 dakika içinde<\/b> ölmüş bir yaratığa dokunursun; <b>1 can<\/b> ile dirilir. Yaşlılıktan öleni diriltemez, eksik uzuvları geri getirmez. (Malzeme: <b>300 gp elmas<\/b>, tüketilir.)",
+  "fx": [
+   "Etki",
+   "1 can ile diriltir"
+  ],
+  "ar": [
+   "Hedef",
+   "1 ölü (son 1 dakikada)"
+  ]
+ },
+ {
+  "id": "speak-with-plants",
+  "lvl": 3,
+  "en": "Speak with Plants",
+  "tr": "Bitkilerle Konuş",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Kendine (30 ft yarıçap)",
+  "dur": "10 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "30 ft içindeki bitkiler süre boyunca (10 dk) sınırlı bilinç kazanır: son bir gündeki olayları sorarsın, basit emirlerine uyarlar. Bitki kaynaklı zorlu araziyi normale çevirebilir ya da normal araziyi zorlu yapabilirsin. Bitki yaratıklarıyla ortak dil konuşur gibi iletişim kurarsın. <i>Dolanma<\/i> büyüsünün bağladığı birini serbest bıraktırabilirsin.",
+  "fx": [
+   "Etki",
+   "Bitkilerle konuşur, araziyi değiştirirsin"
+  ],
+  "ar": [
+   "Alan",
+   "30 ft yarıçap (çevren)"
+  ]
+ },
+ {
+  "id": "summon-fey",
+  "lvl": 3,
+  "en": "Summon Fey",
+  "tr": "Fey Ruhu Çağır",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Aksiyon",
+  "range": "90 ft",
+  "dur": "Kons. · 1 saat",
+  "comp": "V, S, M",
+  "mat": "en az 300 gp değerinde yaldızlı bir çiçek",
+  "conc": true,
+  "ritual": false,
+  "src": "Tasha's Cauldron of Everything",
+  "d": "Görebildiğin boş bir alanda bir <b>Fey Ruhu<\/b> belirir; ruh hâlini seçersin: <b>Öfkeli, Neşeli ya da Hilekâr<\/b> (istatistik bloğundaki bir özelliği belirler). Senin inisiyatifini paylaşır, senden hemen sonra oynar; sözlü emirlerine uyar, emir yoksa Kaçınma yapar. 0 canda ya da büyü bitince kaybolur. <i>Üst slot:<\/i> istatistik bloğundaki seviye değeri yükselir.",
+  "fx": [
+   "Etki",
+   "Fey ruhu müttefik çağırır"
+  ],
+  "ar": [
+   "Hedef",
+   "1 çağrılan yaratık"
+  ]
+ },
+ {
+  "id": "water-breathing",
+  "lvl": 3,
+  "en": "Water Breathing",
+  "tr": "Su Solunumu",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "24 saat",
+  "comp": "V, S, M",
+  "mat": "kısa bir kamış ya da saman çöpü",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Görebildiğin <b>en fazla 10<\/b> gönüllü yaratık süre boyunca (24 saat) <b>su altında nefes alır<\/b>; normal solunumları da sürer.",
+  "fx": [
+   "Etki",
+   "Su altında nefes alır"
+  ],
+  "ar": [
+   "Hedef",
+   "En fazla 10 yaratık"
+  ]
+ },
+ {
+  "id": "water-walk",
+  "lvl": 3,
+  "en": "Water Walk",
+  "tr": "Su Üstünde Yürüme",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "1 saat",
+  "comp": "V, S, M",
+  "mat": "bir parça mantar",
+  "conc": false,
+  "ritual": true,
+  "src": "Player's Handbook",
+  "d": "Görebildiğin <b>en fazla 10<\/b> gönüllü yaratık süre boyunca (1 saat) her sıvı yüzeyde (su, asit, çamur, kar, bataklık, lav) katı zemin gibi yürür; lavın ısısı yine hasar verebilir. Sıvı içindeki hedef tur başına 60 ft hızla yüzeye çıkar.",
+  "fx": [
+   "Etki",
+   "Sıvı yüzeyinde yürür"
+  ],
+  "ar": [
+   "Hedef",
+   "En fazla 10 yaratık"
+  ]
+ },
+ {
+  "id": "wind-wall",
+  "lvl": 3,
+  "en": "Wind Wall",
+  "tr": "Rüzgâr Duvarı",
+  "school": "Yaratma",
+  "schoolEn": "Evocation",
+  "time": "1 Aksiyon",
+  "range": "120 ft",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S, M",
+  "mat": "küçük bir yelpaze ve egzotik bir tüy",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Zeminde <b>50 ft uzun, 15 ft yüksek, 1 ft kalın<\/b>, istediğin şekilde kesintisiz bir rüzgâr duvarı (1 dk). Oluştuğunda içindekiler <b>STR DC 15<\/b>: başarısızsa <b>3d8 ezme<\/b>, başarılıysa yarısı. Sis ve gazları uzak tutar; Küçük ve daha küçük uçanlar geçemez; arkasındaki hedeflere atılan <b>ok, cıvata ve sıradan mermiler otomatik ıskalar<\/b> (dev kayaları hariç).",
+  "fx": [
+   "Hasar",
+   "3d8 ezme · okları saptırır"
+  ],
+  "ar": [
+   "Alan",
+   "50 × 15 ft duvar"
+  ]
+ },
+ {
+  "id": "disguise-self",
+  "lvl": 1,
+  "en": "Disguise Self",
+  "tr": "Kılık Değiştirme",
+  "school": "İllüzyon",
+  "schoolEn": "Illusion",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene ya da <b>aksiyonunla<\/b> bitirene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, zayıf, şişman ya da arada görünebilirsin. <b>Vücut tipini değiştiremezsin<\/b>; uzuvlarının temel düzeni aynı kalmalıdır. Bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin eklediğin şapkaya dokunan biri bir şey hissetmez ya da başını hisseder; daha zayıf görünürsen sana uzanan el havadayken sana çarpar. Kılık değiştirdiğini anlamak için bir yaratık <b>aksiyonunu harcayıp<\/b> seni incelemeli ve <b>DC 15 Zekâ (Araştırma)<\/b> kontrolünde başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "fx": [
+   "Etki",
+   "Görünüş illüzyonu"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ],
+  "from": "GS"
+ },
+ {
+  "id": "rope-trick",
+  "lvl": 2,
+  "en": "Rope Trick",
+  "tr": "İp Numarası",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "1 saat",
+  "comp": "V, S, M",
+  "mat": "toz mısır özü ve bükülmüş bir parşömen halkası",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "<b>En fazla 60 ft<\/b> uzunluğunda bir ipe dokunursun. İpin bir ucu, ip zemine dik sarkana kadar havaya yükselir. Üst uçta, büyü sona erene kadar süren <b>boyutlar arası bir alana<\/b> açılan <b>görünmez bir giriş<\/b> belirir; alana ipin tepesine tırmanarak ulaşılır. Alan <b>en fazla sekiz Orta ya da daha küçük<\/b> yaratık alır. İp içeri çekilebilir; böylece dışarıdan görünmez. <b>Saldırılar ve büyüler<\/b> girişten içeri ya da dışarı <b>geçemez<\/b>; içerdekiler ipin hizasında ortalanmış <b>3 ft × 5 ft<\/b>'lik bir pencereden bakar gibi dışarıyı görür. Büyü sona erince içerideki <b>her şey dışarı düşer<\/b>. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "fx": [
+   "Etki",
+   "8 kişilik gizli sığınak"
+  ],
+  "ar": [
+   "Hedef",
+   "En fazla 60 ft ip"
+  ],
+  "from": "GS"
+ },
+ {
+  "id": "fear",
+  "lvl": 3,
+  "en": "Fear",
+  "tr": "Korku",
+  "school": "İllüzyon",
+  "schoolEn": "Illusion",
+  "time": "1 Aksiyon",
+  "range": "Kendine (30 ft koni)",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S, M",
+  "mat": "beyaz bir tüy ya da bir tavuğun kalbi",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Yaratıkların en büyük korkularının hayali görüntüsünü yansıtırsın. <b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> kurtarması yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>korkmuş<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Atılma (Dash)<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşmalıdır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS kurtarması yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "fx": [
+   "Etki",
+   "Elindekini bırakır + korkmuş"
+  ],
+  "ar": [
+   "Alan",
+   "30 ft koni"
+  ],
+  "from": "GS"
+ },
+ {
+  "id": "command",
+  "lvl": 1,
+  "en": "Command",
+  "tr": "Emir",
+  "school": "Büyüleme",
+  "schoolEn": "Enchantment",
+  "time": "1 Aksiyon",
+  "range": "60 ft",
+  "dur": "1 tur",
+  "comp": "V",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS<\/b> kurtarmasında başarısız olursa bir sonraki turunda emre uyar. Hedef <b>ölümsüzse<\/b>, dilini <b>anlamıyorsa<\/b> ya da emir ona <b>doğrudan zarar veriyorsa<\/b> etkisi olmaz. Başka bir emir de verebilirsin; o zaman hedefin davranışına OY karar verir. Hedef emre uyamıyorsa büyü sona erer. <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> hareket etmez, aksiyon almaz; uçan yaratık havada kalabiliyorsa kalır, gerekirse en kısa mesafeyi uçar. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>; hedefler birbirine <b>30 ft<\/b> içinde olmalı. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, yeteneğin Bilgelik olduğu varsayıldı.<\/i>",
+  "fx": [
+   "Etki",
+   "Tek kelimelik emir"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık"
+  ],
+  "from": "FT"
+ },
+ {
+  "id": "misty-step",
+  "lvl": 2,
+  "en": "Misty Step",
+  "tr": "Sisli Adım",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Anında",
+  "comp": "V",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Kısa bir an gümüşi bir sisle sarılırsın ve <b>görebildiğin boş bir alana<\/b> en fazla <b>30 ft<\/b> ışınlanırsın. <i>Fey Touched: uzun dinlenmede bir kez slotsuz.<\/i>",
+  "fx": [
+   "Etki",
+   "30 ft ışınlanma"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ],
+  "from": "FT"
+ }
+]</script>
+<script>
+(function(){
+document.documentElement.lang = 'tr';
+// The sheet adds a history entry for the back gesture; stop the browser from restoring an old scroll offset when it is popped.
+try { history.scrollRestoration = 'manual'; } catch (e) {}
+// Fonts are injected from script so a slow network never blocks the first paint; the fallback stack shows meanwhile.
+(function(){
+  const l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.href = 'https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap';
+  document.head.appendChild(l);
+})();
+// Installed (https) build: offline cache. Skipped for the single-file copy opened from disk.
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && window.__PWA__) { navigator.serviceWorker.register('sw.js').catch(() => {}); }
+
+/* ---------- shared helpers ---------- */
+// Every storage key starts with "berathast-": other characters' apps live on the same github.io origin and share its storage.
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+// Search key: Turkish-aware lowercase, then fold ı→i and strip diacritics so "ice", "İce", "sekil", "ok" all match.
+const fold = s => s.toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, '');
+const focusQuiet = el => { if (el) el.focus({ preventScroll: true }); };
+const load = (k, d) => { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : d; } catch (e) { return d; } };
+const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } };
+let persistAsked = false;
+// Ask the browser not to evict our data (granted for installed apps; harmless elsewhere).
+const askPersist = () => { if (persistAsked) return; persistAsked = true; try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (e) {} };
+let toastT;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200); }
+const sheet = $('#sheet'), scrim = $('#scrim');
+let openRef = null; // { c: catalog, id }
+
+/* =====================================================================
+   Büyüler: Ranger spells known (ranger list 1–3 + Gloom Stalker / Fey Touched spells, always known)
+   ===================================================================== */
+const SP = (() => {
+  const items = JSON.parse($('#spData').textContent);
+  items.forEach(s => { s.key = fold(s.en + ' ' + s.tr); });
+  const BY = Object.fromEntries(items.map(s => [s.id, s]));
+  const KEY = 'berathast-spells-known-v1';
+  // Karakter sayfasındaki 6 ranger büyüsü (Gloom Stalker ve Fey Touched büyüleri ayrıca her zaman bilinir)
+  const DEFAULT = ['absorb-elements','cure-wounds','hail-of-thorns','hunters-mark','conjure-animals','lightning-arrow'];
+  const FROM = { GS: 'Gloom Stalker', FT: 'Fey Touched' };
+  const always = s => !!s.from;
+  const state = { sel: DEFAULT.slice(), limit: 6 };
+  const saved = load(KEY, null);
+  if (saved) { if (Array.isArray(saved.sel)) state.sel = saved.sel.filter(id => BY[id] && !always(BY[id])); if (saved.limit > 0) state.limit = saved.limit; }
+  const save = () => store(KEY, state);
+  const ICON = (() => {
+    const m = {
+      fire: ['flame-arrows','searing-smite','ashardalons-stride','flame-stride'],
+      wave: ['water-breathing','water-walk','air-bubble'],
+      bolt: ['lightning-arrow'],
+      wind: ['gust-of-wind','wind-wall','fog-cloud','zephyr-strike'],
+      mountain: ['meld-into-stone'],
+      leaf: ['entangle','goodberry','barkskin','spike-growth','plant-growth','speak-with-plants','locate-animals-or-plants','wild-cunning','hail-of-thorns','ensnaring-strike'],
+      paw: ['animal-friendship','beast-bond','speak-with-animals','animal-messenger','beast-sense','conjure-animals','summon-beast'],
+      heart: ['cure-wounds','healing-spirit','revivify','lesser-restoration','protection-from-poison','aid'],
+      moon: ['darkvision','silence'],
+      sun: ['daylight','sudden-awakening'],
+      eye: ['detect-magic','detect-poison-and-disease','find-traps','locate-object','hunters-mark','alarm'],
+      shield: ['absorb-elements','protection-from-energy','nondetection'],
+      skull: ['fear'],
+      spiral: ['command','disguise-self'],
+      portal: ['summon-fey','misty-step','rope-trick'],
+      move: ['jump','longstrider'],
+      spark: ['cordon-of-arrows','conjure-barrage','magic-weapon','elemental-weapon','enhance-ability','snare'],
+    };
+    const hue = { fire:16, wave:212, bolt:46, wind:175, mountain:30, leaf:110, paw:36, heart:350, moon:250, sun:45, eye:275, shield:205, skull:290, spiral:320, portal:235, move:160, spark:140 };
+    const map = {}; for (const k in m) for (const id of m[k]) map[id] = k;
+    return id => { const k = map[id] || 'spark'; return { k, h: hue[k] }; };
+  })();
+  const lvlName = l => l + '. Seviye';
+  const isSel = id => always(BY[id]) || state.sel.includes(id);
+  const count = () => state.sel.length;
+  const icon = s => { const i = ICON(s.id); return `<span class="ic" style="--h:${i.h}" aria-hidden="true"><svg><use href="#i-${i.k}"/></svg></span>`; };
+  function tags(s, withLevel) {
+    let t = withLevel ? `<span class="tg lv">${s.lvl}. sv · ${esc(s.school)}</span>` : '';
+    if (s.from) t += `<span class="tg" lang="en">${FROM[s.from]}</span>`;
+    if (s.conc) t += '<span class="tg">Konsantrasyon</span>';
+    if (s.ritual) t += '<span class="tg">Ritüel</span>';
+    return t ? `<span class="tags">${t}</span>` : '';
+  }
+  function tile(s) {
+    const on = isSel(s.id);
+    const right = always(s)
+      ? `<span class="always">Her zaman<br>bilinir</span>`
+      : `<button class="pick" data-c="sp" data-pick="${s.id}" aria-pressed="${on}" aria-label="Bilinenlere ekle: ${esc(s.en)}"><span><svg aria-hidden="true"><use href="#i-check"/></svg></span></button>`;
+    return `<div class="tile${on ? ' on' : ''}" data-id="${s.id}">
+      <button class="open" data-c="sp" data-open="${s.id}">${icon(s)}<span class="nm"><span class="en" lang="en">${esc(s.en)}</span><span class="tr">${esc(s.tr)}</span>${tags(s, true)}</span></button>
+      ${right}</div>`;
+  }
+  const C = {
+    k: 'sp', all: $('#spAll'), prep: $('#spPrep'), tools: $('#spTools'), q: $('#spQ'),
+    sub: 'all', filter: 'all', query: '', qKey: '', confirming: false, BY,
+    stats: '<div class="st"><span>Saldırı</span><b>+7</b></div><div class="st"><span>DC</span><b>15</b></div>',
+    segLabels: () => ['Tümü', `${items.length} büyü`, 'Bilinen', `${count()}/${state.limit}`, count() > state.limit],
+    renderChips() {
+      const opts = [['all','Tümü','Tüm seviyeler'],['1','1. sv','1. seviye'],['2','2. sv','2. seviye'],['3','3. sv','3. seviye']];
+      $('#spChips').innerHTML = opts.map(([v, l, a]) => `<button class="chip" data-c="sp" data-f="${v}" aria-pressed="${C.filter === v}" aria-label="${a}">${l}</button>`).join('');
+    },
+    buildAll() {
+      let html = '';
+      for (const l of [1,2,3]) {
+        const list = items.filter(s => s.lvl === l);
+        html += `<section data-l="${l}"><h2 class="lvl-h">${lvlName(l)} <small data-cnt="${l}"></small></h2><div class="list">${list.map(tile).join('')}</div></section>`;
+      }
+      C.all.innerHTML = html + `<p class="empty" data-nohits hidden></p>`;
+      C.updateCounts();
+    },
+    updateCounts() {
+      for (const el of C.all.querySelectorAll('[data-cnt]')) {
+        const l = +el.dataset.cnt, all = items.filter(s => s.lvl === l);
+        el.textContent = `${all.filter(s => isSel(s.id)).length} bilinen / ${all.length}`;
+      }
+    },
+    match: (s, f) => f === 'all' || +f === s.lvl,
+    syncTile(id) {
+      const on = isSel(id);
+      for (const t of C.all.querySelectorAll(`.tile[data-id="${id}"]`)) {
+        t.classList.toggle('on', on);
+        const p = t.querySelector('.pick'); if (p) p.setAttribute('aria-pressed', String(on));
+      }
+    },
+    renderPrep() {
+      const n = count(), L = state.limit, over = n > L;
+      let html = `<div class="sum${over ? ' over' : ''}">
+        <div class="sum-top"><div class="big">${n} <small>/ ${L} ranger büyüsü</small></div>
+          <div class="step">Bilinen hak <button data-lim="-1" aria-label="Bilinen büyü hakkını azalt">−</button><output aria-live="polite">${L}</output><button data-lim="1" aria-label="Bilinen büyü hakkını artır">+</button></div></div>
+        <div class="meter" role="progressbar" aria-label="Bilinen büyüler" aria-valuemin="0" aria-valuemax="${L}" aria-valuenow="${Math.min(n, L)}" aria-valuetext="${n}/${L}"><i style="width:${Math.min(100, n / L * 100)}%"></i></div>
+        ${over ? `<p class="overmsg">Bilinen büyü hakkını ${n - L} büyü aşıyorsun. Birkaçını çıkar ya da hakkı artır.</p>` : ''}
+        <ul class="rules">
+          <li>Büyü slotları: <b>1. sv 4 · 2. sv 3 · 3. sv 2</b> (uzun dinlenmede yenilenir)</li>
+          <li><span lang="en">Gloom Stalker</span> ve <span lang="en">Fey Touched</span> büyüleri sayıya dahil değil, her zaman bilinir</li>
+          <li>Ranger büyü hazırlamaz; seviye atladığında bir büyüyü değiştirebilir</li>
+        </ul>
+        ${C.confirming
+          ? `<div class="confirm"><span>Bilinen tüm ranger büyüleri kaldırılsın mı?</span><button class="yes" data-c="sp" data-clear="yes">Evet, temizle</button><button data-c="sp" data-clear="no">Vazgeç</button></div>`
+          : (n ? `<button class="clear" data-c="sp" data-clear="ask">Seçimi temizle</button>` : '')}
+      </div>`;
+      for (const l of [1,2,3]) {
+        const list = items.filter(s => s.lvl === l && isSel(s.id));
+        if (!list.length) continue;
+        html += `<h2 class="lvl-h">${lvlName(l)} <small>${list.length}</small></h2><div class="list">${list.map(tile).join('')}</div>`;
+      }
+      C.prep.innerHTML = html;
+    },
+    // returns a toast message, or null when nothing changed
+    toggle(id) {
+      const s = BY[id]; if (!s || always(s)) return null;
+      const i = state.sel.indexOf(id);
+      if (i >= 0) { state.sel.splice(i, 1); save(); return `${s.en} bilinenlerden çıkarıldı`; }
+      if (count() >= state.limit) return { blocked: `Bilinen büyü hakkın dolu (${state.limit}/${state.limit}). Önce bir büyü çıkar.` };
+      state.sel.push(id); save(); return `${s.en} bilinenlere eklendi · ${count()}/${state.limit}`;
+    },
+    clear() { state.sel = []; save(); },
+    limit(d) { state.limit = Math.max(1, Math.min(20, state.limit + d)); save(); },
+    fill(id) {
+      const s = BY[id], on = isSel(id);
+      const comp = esc(s.comp) + (s.mat ? `<small>${esc(s.mat)}</small>` : '');
+      let btn;
+      if (always(s)) btn = `<button disabled><span lang="en">${FROM[s.from]}</span> — her zaman bilinir</button>`;
+      else if (on) btn = `<button class="rm" data-c="sp" data-pick="${id}">Bilinenlerden çıkar</button>`;
+      else btn = count() >= state.limit ? `<button disabled>Bilinen büyü hakkın dolu (${state.limit}/${state.limit})</button>` : `<button data-c="sp" data-pick="${id}">Bilinenlere ekle · ${count() + 1}/${state.limit}</button>`;
+      return `
+        <div class="sh-top">${icon(s)}<div><h2 id="shName" lang="en">${esc(s.en)}</h2><p>${esc(s.tr)} · ${lvlName(s.lvl)} · ${esc(s.school)}</p></div>
+          <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+        ${tags(s, false)}
+        <dl class="facts">
+          ${s.fx ? `<div class="fact key k-${s.fx[0] === 'Hasar' ? 'dmg' : s.fx[0] === 'İyileştirme' ? 'heal' : 'fx'}"><dt>${s.fx[0]}</dt><dd>${esc(s.fx[1])}</dd></div>` : ''}
+          ${s.ar ? `<div class="fact key"><dt>${s.ar[0]}</dt><dd>${esc(s.ar[1])}</dd></div>` : ''}
+          <div class="fact"><dt>Kullanım</dt><dd>${esc(s.time)}</dd></div>
+          <div class="fact"><dt>Menzil</dt><dd>${esc(s.range)}</dd></div>
+          <div class="fact"><dt>Süre</dt><dd>${esc(s.dur)}</dd></div>
+          <div class="fact"><dt>Bileşen</dt><dd>${comp}</dd></div>
+        </dl>
+        <div class="desc">${s.d}</div>
+        <div class="src">Kaynak: ${esc(s.src)}</div>
+        <div class="act">${btn}</div>`;
+    },
+  };
+  return C;
+})();
+const CATS = { sp: SP };
+
+/* ---------- catalog plumbing ---------- */
+function applyFilter(C) {
+  let any = false;
+  for (const sec of C.all.querySelectorAll('section[data-l]')) {
+    let shown = 0;
+    for (const t of sec.querySelectorAll('.tile')) {
+      const it = C.BY[t.dataset.id];
+      const vis = C.match(it, C.filter) && (!C.qKey || it.key.includes(C.qKey));
+      t.hidden = !vis; if (vis) shown++;
+    }
+    sec.hidden = !shown; if (shown) any = true;
+  }
+  const nh = C.all.querySelector('[data-nohits]'); nh.hidden = any;
+  if (!any) nh.textContent = C.query.trim() ? `“${C.query.trim()}” için sonuç bulunamadı.` : 'Bu filtreye uyan sonuç yok.';
+}
+function toggleIn(C, id) {
+  const r = C.toggle(id);
+  if (!r) return;
+  if (r.blocked) { if (!openRef) toast(r.blocked); return; }
+  C.syncTile(id); C.updateCounts(); syncChrome();
+  if (tab === C.k && C.sub === 'prep') {
+    // keep keyboard/screen-reader focus near where it was when the tile disappears
+    const picks = [...C.prep.querySelectorAll('[data-pick]')].map(b => b.dataset.pick);
+    const at = picks.indexOf(id);
+    C.renderPrep();
+    if (!openRef) {
+      const now = [...C.prep.querySelectorAll('[data-pick]')];
+      focusQuiet(C.prep.querySelector(`[data-pick="${id}"]`) || now[Math.min(at, now.length - 1)] || C.prep.querySelector('.sum button'));
+    }
+  }
+  // inside the sheet the button label already changes, so no toast over the description
+  if (openRef && openRef.c === C && openRef.id === id) { $('#sheetIn').innerHTML = C.fill(id); focusQuiet(sheet.querySelector('.act button')); }
+  else toast(r);
+}
+
+/* =====================================================================
+   Karakter: skills, features, items & notes
+   ===================================================================== */
+// Values read from the sheet's form fields (details_*_total / *_proficiency / *_expertise). 2 = expertise.
+const SKILLS = [
+  ['Acrobatics','Akrobasi','DEX',9,1], ['Animal Handling','Hayvan Eğitimi','WIS',3,0], ['Arcana','Arkana','INT',0,0],
+  ['Athletics','Atletizm','STR',5,1], ['Deception','Aldatma','CHA',2,0], ['History','Tarih','INT',0,0],
+  ['Insight','Sezgi','WIS',7,1], ['Intimidation','Gözdağı','CHA',2,0], ['Investigation','Araştırma','INT',4,1],
+  ['Medicine','Tıp','WIS',3,0], ['Nature','Doğa','INT',0,0], ['Perception','Algı','WIS',11,2],
+  ['Performance','Gösteri','CHA',2,0], ['Persuasion','İkna','CHA',2,0], ['Religion','Din','INT',0,0],
+  ['Sleight of Hand','El Çabukluğu','DEX',9,1], ['Stealth','Gizlilik','DEX',13,2], ['Survival','Hayatta Kalma','WIS',7,1],
+];
+$('#skills').innerHTML = SKILLS.map(([en, tr, ab, v, p]) =>
+  `<li class="${p ? 'pr' : ''}"><i aria-hidden="true">${p === 2 ? '◆' : p ? '●' : '○'}</i><span><b lang="en">${en}</b><small>${tr} · ${ab}${p === 2 ? ' · uzmanlık' : ''}</small></span><em>+${v}</em></li>`).join('');
+// Features & traits: short original Turkish summaries of the sheet's text. Feats first (user's request).
+const FEATS = [
+  ['Sharpshooter', 'Feat', '', 'Uzun menzilde saldırı <b>dezavantajsız</b>. Menzilli silah saldırıların <b>yarım ve dörtte üç siperi yok sayar</b>. Saldırıdan önce seçersen: saldırı zarına <b>−5</b>, isabet ederse hasara <b>+10</b>.'],
+  ['Fey Touched', 'Feat', '1 / uzun dinlenme', '<span lang="en">Misty Step</span> ve <span lang="en">Command</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b>. Uygun seviyedeki slotlarla da yapılabilir. Hangi yeteneği kullandığı sayfada yazmıyor; <b>DC 15 (Bilgelik)</b> varsayıldı, Karizma seçildiyse DC 14.'],
+  ['Dread Ambusher', 'Gloom Stalker', 'İlk tur', 'İnisiyatife <b>+3</b> (WIS). Her savaşın ilk turunun başında yürüme hızın <b>+10 ft</b>. O tur Saldırı aksiyonu alırsan <b>bir silah saldırısı daha</b>; isabet ederse <b>+1d8</b> silah türünde hasar.'],
+  ['Umbral Sight', 'Gloom Stalker', '', 'Karanlık görüşün <b>90 ft</b> (elf 60 + 30). Karanlıktayken, seni karanlık görüşle görmeye çalışan yaratıklara karşı <b>görünmezsin</b>.'],
+  ['Iron Mind', 'Gloom Stalker', '', 'Bilgelik kurtarmalarında yeterlilik (WIS kurtarma +8). <i>Sayfanın özellik listesinde yazmıyor; kurtarma alanında işaretli ve Gloom Stalker 7. seviye özelliği.</i>'],
+  ['Gloom Stalker Magic', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman bilinir, bilinen büyü sayısına dahil değil.'],
+  ['Extra Attack', 'Ranger', '', 'Saldırı aksiyonunda <b>iki saldırı</b>.'],
+  ['Fighting Style: Archery', 'Ranger', '', 'Menzilli silah saldırılarına <b>+2</b> (Longbow +13’e dahil).'],
+  ['Favored Enemy', 'Ranger', '', '<span lang="en">Beasts, Humans, Gnolls</span>: onları izlerken Hayatta Kalma kontrollerinde ve onlar hakkında bilgi hatırlarken INT kontrollerinde <b>avantaj</b>.'],
+  ['Natural Explorer', 'Ranger', '', '<span lang="en">Forest, Grassland</span>: bu arazilerle ilgili, yeterli olduğun becerilerle INT/WIS kontrollerinde yeterlilik <b>iki katı</b>. 1 saat+ yolculukta: zorlu arazi grubu yavaşlatmaz, büyü olmadan kaybolunmaz, başka işle uğraşırken bile tehlikeye karşı tetikte kalırsın, yalnızken normal hızda gizli ilerlersin, iki kat yiyecek bulursun, izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini öğrenirsin.'],
+  ['Primeval Awareness', 'Ranger', 'Aksiyon · 1 slot', 'Bir ranger slotu harcarsın; slot seviyesi başına <b>1 dakika</b> boyunca 1 mil (tercih ettiğin arazide 6 mil) içinde aberration, celestial, dragon, elemental, fey, fiend ve undead var mı sezersin. Yer ve sayı vermez.'],
+  ['Land’s Stride', 'Ranger', '', 'Büyüsüz zorlu arazi ek hareket harcatmaz; büyüsüz bitkilerden yavaşlamadan ve dikenlerinden hasar almadan geçersin. Hareketi engellemek için büyüyle yaratılmış bitkilere karşı kurtarmada <b>avantaj</b>.'],
+  ['Sneak Attack', 'Rogue', 'Turda 1', 'Saldırı zarında avantajın varsa ya da hedefin 5 ft yanında etkisiz kalmamış bir müttefikin varsa (ve dezavantajın yoksa), finesse ya da menzilli silahla isabette <b>+1d6</b>.'],
+  ['Expertise', 'Rogue', '', '<span lang="en">Perception</span> (+11) ve <span lang="en">Stealth</span> (+13) için yeterlilik iki katı.'],
+  ['Thieves’ Cant', 'Rogue', '', 'Hırsızların gizli dili: sıradan konuşmanın içine gizli mesaj saklarsın (dört kat uzun sürer); tehlike, ganimet, güvenli ev gibi kısa mesajlar veren gizli işaretleri tanırsın.'],
+  ['Fey Ancestry', 'Wood Elf', '', 'Büyülenmeye karşı kurtarmada <b>avantaj</b>; büyü seni uyutamaz.'],
+  ['Mask of the Wild', 'Wood Elf', '', 'Yalnızca hafif örtülüyken (yaprak, yağmur, kar, sis…) bile <b>saklanmayı deneyebilirsin</b>.'],
+  ['Trance', 'Wood Elf', '', 'Uyumazsın; günde <b>4 saat</b> yarı bilinçli meditasyon uzun dinlenme yerine geçer.'],
+  ['City Secrets', 'Urchin', '', 'Şehirlerin gizli geçitlerini bilirsin: savaş dışındayken sen ve yönettiğin arkadaşların şehirde iki nokta arasında <b>iki kat hızlı</b> yol alırsınız.'],
+];
+$('#feats').innerHTML = FEATS.map(([n, src, use, d]) =>
+  `<article class="card feat"><h3><span lang="en">${n}</span><span class="tg" lang="en">${src}</span>${use ? `<span class="tg lv">${use}</span>` : ''}</h3><p>${d}</p></article>`).join('');
+
+// Items & notes: typed by hand, kept in this browser/app's storage. First launch starts with the sheet's equipment.
+const INV_KEY = 'berathast-inventory-v1';
+const inv = load(INV_KEY, null) || { items: [
+  { id: 'eq1', t: 'Longbow +2 (saldırı ve hasara +2)', q: 1 },
+  { id: 'eq2', t: 'Studded Leather (AC 12 + DEX)', q: 1 },
+  { id: 'eq3', t: 'Ring of Protection (uyumlu: AC ve kurtarmalara +1)', q: 1 },
+  { id: 'eq4', t: 'Robe of Magic Resistance (DM: %10 büyü direnci)', q: 1 },
+], notes: [] };
+if (!Array.isArray(inv.items)) inv.items = [];
+if (!Array.isArray(inv.notes)) inv.notes = [];
+let invEdit = null, invDel = null; // { kind, id }
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+function saveInv(msg) {
+  const ok = store(INV_KEY, inv);
+  askPersist();
+  toast(ok ? msg : 'Kaydedilemedi: bu tarayıcı veri saklamaya izin vermiyor.');
+}
+function entryHTML(kind, e) {
+  const isItem = kind === 'items';
+  if (invEdit && invEdit.kind === kind && invEdit.id === e.id) {
+    return `<li class="entry"><textarea rows="${isItem ? 2 : 4}" data-edit-text aria-label="Düzenle">${esc(e.t)}</textarea>
+      <div class="row"><span class="sp"></span><button class="mini" data-inv="cancel">Vazgeç</button><button class="mini pri" data-inv="save-edit" data-kind="${kind}" data-id="${e.id}">Kaydet</button></div></li>`;
+  }
+  const del = invDel && invDel.kind === kind && invDel.id === e.id
+    ? `<span class="sp">Silinsin mi?</span><button class="mini" data-inv="cancel">Vazgeç</button><button class="mini danger" data-inv="del-yes" data-kind="${kind}" data-id="${e.id}">Evet, sil</button>`
+    : `${isItem ? `<span class="qty"><button class="mini" data-inv="qty" data-d="-1" data-id="${e.id}" aria-label="Azalt: ${esc(e.t)}">−</button><output>${e.q}</output><button class="mini" data-inv="qty" data-d="1" data-id="${e.id}" aria-label="Artır: ${esc(e.t)}">+</button></span>` : ''}
+       <span class="sp"></span><button class="mini" data-inv="edit" data-kind="${kind}" data-id="${e.id}">Düzenle</button><button class="mini danger" data-inv="del" data-kind="${kind}" data-id="${e.id}">Sil</button>`;
+  return `<li class="entry"><div class="txt">${esc(e.t)}</div><div class="row">${del}</div></li>`;
+}
+function renderInv() {
+  $('#inv').innerHTML = `
+    <div class="card inv">
+      <h3>Eşyalar <small>(${inv.items.length})</small></h3>
+      <ul class="entries">${inv.items.map(e => entryHTML('items', e)).join('')}</ul>
+      <div class="addf"><div class="row"><input id="newItem" type="text" placeholder="Yeni eşya (ör. Potion of Healing)" aria-label="Yeni eşya" autocapitalize="sentences">
+        <button class="mini pri" data-inv="add-item">Ekle</button></div></div>
+    </div>
+    <div class="card inv">
+      <h3>Notlar <small>(${inv.notes.length})</small></h3>
+      <ul class="entries">${inv.notes.map(e => entryHTML('notes', e)).join('')}</ul>
+      <div class="addf"><textarea id="newNote" rows="3" placeholder="Yeni not" aria-label="Yeni not" autocapitalize="sentences"></textarea>
+        <button class="mini pri" data-inv="add-note">Notu kaydet</button></div>
+    </div>`;
+}
+function invAction(t) {
+  const a = t.dataset.inv, kind = t.dataset.kind, id = t.dataset.id;
+  const list = kind ? inv[kind] : null, e = list && list.find(x => x.id === id);
+  if (a === 'add-item') {
+    const el = $('#newItem'), v = el.value.trim(); if (!v) { focusQuiet(el); return; }
+    inv.items.push({ id: newId(), t: v, q: 1 }); invEdit = invDel = null; renderInv(); saveInv('Eşya kaydedildi'); focusQuiet($('#newItem')); return;
+  }
+  if (a === 'add-note') {
+    const el = $('#newNote'), v = el.value.trim(); if (!v) { focusQuiet(el); return; }
+    inv.notes.push({ id: newId(), t: v }); invEdit = invDel = null; renderInv(); saveInv('Not kaydedildi'); focusQuiet($('#newNote')); return;
+  }
+  if (a === 'qty') {
+    const it = inv.items.find(x => x.id === id); if (!it) return;
+    it.q = Math.max(0, Math.min(999, it.q + +t.dataset.d)); renderInv(); store(INV_KEY, inv); askPersist();
+    focusQuiet($(`[data-inv="qty"][data-id="${id}"][data-d="${t.dataset.d}"]`)); return;
+  }
+  if (a === 'edit') { invEdit = { kind, id }; invDel = null; renderInv(); const ta = $('[data-edit-text]'); focusQuiet(ta); if (ta) ta.setSelectionRange(ta.value.length, ta.value.length); return; }
+  if (a === 'save-edit') {
+    const v = $('[data-edit-text]').value.trim();
+    if (e && v) e.t = v;
+    invEdit = null; renderInv(); saveInv('Değişiklik kaydedildi'); focusQuiet($(`[data-inv="edit"][data-id="${id}"]`)); return;
+  }
+  if (a === 'del') { invDel = { kind, id }; invEdit = null; renderInv(); focusQuiet($('[data-inv="cancel"]')); return; }
+  if (a === 'del-yes') { inv[kind] = list.filter(x => x.id !== id); invDel = null; renderInv(); saveInv(kind === 'items' ? 'Eşya silindi' : 'Not silindi'); return; }
+  if (a === 'cancel') { const ref = invEdit || invDel; invEdit = invDel = null; renderInv(); if (ref) focusQuiet($(`[data-inv="edit"][data-id="${ref.id}"]`)); return; }
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.id === 'newItem') { e.preventDefault(); invAction({ dataset: { inv: 'add-item' } }); }
+});
+
+// Backup: every key this app writes, as one JSON file.
+const BACKUP_KEYS = ['berathast-spells-known-v1', INV_KEY];
+function exportData() {
+  const data = { app: 'berathast', v: 1, at: new Date().toISOString(), keys: {} };
+  for (const k of BACKUP_KEYS) { try { const r = localStorage.getItem(k); if (r) data.keys[k] = JSON.parse(r); } catch (e) {} }
+  const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = `berathast-yedek-${data.at.slice(0, 10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  toast('Yedek indirildi');
+}
+$('#importFile').addEventListener('change', async e => {
+  const f = e.target.files && e.target.files[0]; e.target.value = '';
+  if (!f) return;
+  try {
+    const data = JSON.parse(await f.text());
+    if (!data || data.app !== 'berathast' || !data.keys) throw new Error('format');
+    for (const k of BACKUP_KEYS) if (data.keys[k]) store(k, data.keys[k]);
+    toast('Yedek yüklendi, yenileniyor…');
+    setTimeout(() => location.reload(), 900);
+  } catch (err) { toast('Bu dosya bir Berathast yedeği değil.'); }
+});
+
+/* ---------- install banner ----------
+   Android Chrome: keep its beforeinstallprompt event and show our own button that opens the real install dialog.
+   iPhone Safari has no such event, so show the Share → Add to Home Screen steps instead.
+   Hidden when already running as an installed app, in the single-file copy, or after "Gizle". */
+const INSTALL_KEY = 'berathast-install-hidden-v1';
+const standalone = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+let installEvt = null;
+function renderInstall() {
+  const box = $('#install');
+  if (standalone() || load(INSTALL_KEY, false) || !window.__PWA__) { box.hidden = true; return; }
+  if (installEvt) {
+    box.innerHTML = `<p><b>Uygulama olarak yükle</b>: ana ekranda simgesiyle tam ekran açılır, internetsiz çalışır, notların kalıcı olur.</p>
+      <div class="row"><button class="mini pri" data-install="go">Uygulamayı yükle</button><button class="mini" data-install="hide">Gizle</button></div>`;
+  } else if (isIOS) {
+    box.innerHTML = `<p><b>iPhone’a yükle</b>: Safari’de <b>Paylaş</b> düğmesine (kare ve yukarı ok) dokun → <b>Ana Ekrana Ekle</b> → <b>Ekle</b>. Sonra uygulamayı ana ekrandaki simgeden aç; notların orada kalıcı olur.</p>
+      <div class="row"><button class="mini" data-install="hide">Gizle</button></div>`;
+  } else { box.hidden = true; return; }
+  box.hidden = false;
+}
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; renderInstall(); });
+addEventListener('appinstalled', () => { installEvt = null; renderInstall(); toast('Uygulama yüklendi. Ana ekrandaki simgeden aç.'); });
+async function installAction(a) {
+  if (a === 'hide') { store(INSTALL_KEY, true); renderInstall(); return; }
+  if (!installEvt) return;
+  installEvt.prompt();
+  try { const r = await installEvt.userChoice; if (r && r.outcome === 'accepted') installEvt = null; } catch (e) {}
+  renderInstall();
+}
+
+/* =====================================================================
+   Tabs, header, sheet
+   ===================================================================== */
+const TAB_KEY = 'berathast-app-tab-v1';
+let tab = (load(TAB_KEY, 'char'));
+if (!['char','sp'].includes(tab)) tab = 'char';
+const scrollMem = {};
+const viewKey = () => tab === 'char' ? 'char' : tab + CATS[tab].sub;
+
+function syncChrome() {
+  document.documentElement.dataset.tab = tab;
+  const C = CATS[tab];
+  $('#hdChar').hidden = !!C;
+  $('#seg').hidden = !C;
+  $('#stats').innerHTML = C ? C.stats : '<div class="st"><span>AC</span><b>18</b></div><div class="st"><span>Can</span><b>62</b></div>';
+  if (C) {
+    const [a, ac, p, pc, over] = C.segLabels();
+    $('#segA').textContent = a; $('#segAc').textContent = ac; $('#segP').textContent = p; $('#segPc').textContent = pc;
+    $('#segPc').classList.toggle('over', !!over);
+    for (const b of $('#seg').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.sub === C.sub));
+  }
+  SP.tools.hidden = !(tab === 'sp' && SP.sub === 'all');
+  $('#charView').hidden = tab !== 'char';
+  for (const c of [SP]) { c.all.hidden = !(tab === c.k && c.sub === 'all'); c.prep.hidden = !(tab === c.k && c.sub === 'prep'); }
+  for (const b of $('#nav').querySelectorAll('button')) b.setAttribute('aria-current', b.dataset.tab === tab ? 'page' : 'false');
+}
+function go(nextTab, nextSub) {
+  const C = CATS[nextTab];
+  if (nextTab === tab && (!C || nextSub === undefined || nextSub === C.sub)) return;
+  scrollMem[viewKey()] = window.scrollY;
+  tab = nextTab; store(TAB_KEY, tab);
+  if (C && nextSub) C.sub = nextSub;
+  if (C) C.confirming = false;
+  if (C && C.sub === 'prep') C.renderPrep();
+  syncChrome();
+  // lists come back where you left them; the short "known" page always opens at the top
+  window.scrollTo(0, C && C.sub === 'prep' ? 0 : (scrollMem[viewKey()] || 0));
+}
+
+let hideT, skipPop = 0;
+const background = () => [$('#hdr'), $('#main'), $('#nav')];
+function openSheet(C, id) {
+  clearTimeout(hideT);
+  openRef = { c: C, id };
+  $('#sheetIn').innerHTML = C.fill(id);
+  scrim.hidden = false; sheet.hidden = false; sheet.style.transform = '';
+  document.documentElement.classList.add('sheet-open');
+  background().forEach(el => { el.inert = true; });
+  void sheet.offsetHeight; // commit the hidden→visible layout so the slide-in transition runs
+  scrim.classList.add('show'); sheet.classList.add('show');
+  $('#sheetIn').scrollTop = 0;
+  // Android back gesture closes the sheet instead of leaving the page (silently skipped where history is locked down)
+  try { if (!(history.state && history.state.sheet)) history.pushState({ sheet: 1 }, ''); } catch (e) {}
+  setTimeout(() => focusQuiet(sheet.querySelector('[data-close]')), 60);
+}
+function closeSheet(fromPop) {
+  if (!openRef) return;
+  const { c: C, id } = openRef; openRef = null;
+  scrim.classList.remove('show'); sheet.classList.remove('show'); sheet.style.transform = '';
+  document.documentElement.classList.remove('sheet-open');
+  background().forEach(el => { el.inert = false; });
+  clearTimeout(hideT); hideT = setTimeout(() => { scrim.hidden = true; sheet.hidden = true; }, 220);
+  if (fromPop !== true) { try { if (history.state && history.state.sheet) { skipPop++; history.back(); } } catch (e) {} }
+  focusQuiet((C.sub === 'all' ? C.all : C.prep).querySelector(`[data-open="${id}"]`));
+}
+addEventListener('popstate', () => { if (skipPop) { skipPop--; return; } closeSheet(true); });
+// drag the handle down to dismiss
+(function(){
+  const g = $('#grab'); let y0 = null, dy = 0;
+  g.addEventListener('pointerdown', e => { y0 = e.clientY; dy = 0; sheet.classList.add('drag'); g.setPointerCapture(e.pointerId); });
+  g.addEventListener('pointermove', e => { if (y0 === null) return; dy = Math.max(0, e.clientY - y0); sheet.style.transform = `translateY(${dy}px)`; });
+  const end = () => { if (y0 === null) return; y0 = null; sheet.classList.remove('drag'); if (dy > 80) closeSheet(); else sheet.style.transform = ''; };
+  g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
+})();
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-pick],[data-open],[data-f],[data-close],[data-lim],[data-clear],[data-tab],[data-sub],[data-inv],[data-backup],[data-install],#scrim');
+  if (!t) return;
+  const C = CATS[t.dataset.c];
+  if (t.dataset.pick) return toggleIn(C, t.dataset.pick);
+  if (t.dataset.open) return openSheet(C, t.dataset.open);
+  if (t.dataset.f) { C.filter = t.dataset.f; C.renderChips(); applyFilter(C); window.scrollTo(0, 0); focusQuiet($(`[data-c="${C.k}"][data-f="${C.filter}"]`)); return; }
+  if (t.hasAttribute('data-close') || t.id === 'scrim') return closeSheet();
+  if (t.dataset.lim) { SP.limit(+t.dataset.lim); SP.renderPrep(); syncChrome(); focusQuiet(SP.prep.querySelector(`[data-lim="${t.dataset.lim}"]`)); return; }
+  if (t.dataset.clear) {
+    const c = t.dataset.clear;
+    if (c === 'ask') C.confirming = true;
+    else { if (c === 'yes') { C.clear(); Object.keys(C.BY).forEach(id => C.syncTile(id)); C.updateCounts(); toast('Seçim temizlendi'); } C.confirming = false; }
+    C.renderPrep(); syncChrome();
+    focusQuiet(C.prep.querySelector(c === 'ask' ? '[data-clear="no"]' : '.sum button'));
+    return;
+  }
+  if (t.dataset.tab) return go(t.dataset.tab);
+  if (t.dataset.sub) return go(tab, t.dataset.sub);
+  if (t.dataset.inv) return invAction(t);
+  if (t.dataset.install) return installAction(t.dataset.install);
+  if (t.dataset.backup === 'export') return exportData();
+  if (t.dataset.backup === 'import') return $('#importFile').click();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+SP.q.addEventListener('input', e => {
+  SP.query = e.target.value;
+  const k = fold(SP.query.trim());
+  if (k === SP.qKey) return;
+  SP.qKey = k; applyFilter(SP);
+  if (window.scrollY > 0) window.scrollTo(0, 0);
+});
+
+SP.renderChips(); SP.buildAll(); applyFilter(SP);
+renderInv();
+renderInstall();
+// Storage check shown on the character page, so a phone test shows at once whether notes will be kept.
+(function(){
+  let ok = false;
+  try { localStorage.setItem('berathast-store-test', '1'); ok = localStorage.getItem('berathast-store-test') === '1'; localStorage.removeItem('berathast-store-test'); } catch (e) {}
+  const where = window.matchMedia && matchMedia('(display-mode: standalone)').matches ? 'kurulu uygulama' : location.protocol === 'https:' ? 'web sitesi' : 'dosyadan açıldı';
+  $('#storeState').innerHTML = ok ? `Kayıt: <b>çalışıyor</b> (${where}).` : `Kayıt: <b style="color:var(--warn)">çalışmıyor</b> (${where}). Notlar kaydedilmez.`;
+})();
+syncChrome();
+})();
+</script>
+
+</body>
+</html>
