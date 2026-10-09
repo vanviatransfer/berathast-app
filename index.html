@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '2d4f9e8894'; window.__BUILT__ = '2026-10-09 18:31';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = 'af7babede7'; window.__BUILT__ = '2026-10-09 19:28';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -235,6 +235,13 @@ nav .wrap{ grid-template-columns:repeat(2,1fr); }
 .upd.spin svg{ animation:spin 1s linear infinite; }
 @keyframes spin{ to{ transform:rotate(360deg); } }
 
+/* tappable skills + English names */
+.skills li{ padding:0; }
+.skb{ display:flex; align-items:center; gap:6px; width:100%; min-height:44px; padding:5px 8px; text-align:left; border-radius:10px; }
+.quick .en-name{ display:block; font-size:.68rem; color:var(--muted); line-height:1.2; margin-top:1px; }
+.ab-ic{ font-size:.95rem; letter-spacing:.04em; }
+.uses{ margin:0; padding-left:18px; display:grid; gap:4px; font-size:.95rem; }
+
 /* character */
 .rest{ display:grid; gap:6px; }
 .rest p{ margin:0; font-size:.92rem; line-height:1.5; }
@@ -327,12 +334,12 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
   <section class="card build-card"><span lang="en">Wood Elf Ranger (Gloom Stalker)</span> 9 / <span lang="en">Rogue</span> 1</section>
 
   <dl class="quick">
-   <div><dt>Yeterlilik</dt><dd>+4</dd></div>
-   <div><dt>İnisiyatif</dt><dd>+8</dd></div>
-   <div><dt>Hız</dt><dd>35 ft</dd></div>
-   <div><dt>Pasif Algı</dt><dd>21</dd></div>
-   <div><dt>Can zarı</dt><dd>1d8 + 9d10</dd></div>
-   <div><dt>Büyü</dt><dd>+7 · DC 15</dd></div>
+   <div><dt>Yeterlilik</dt><dd>+4</dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
+   <div><dt>İnisiyatif</dt><dd>+8</dd><span class="en-name" lang="en">Initiative</span></div>
+   <div><dt>Hız</dt><dd>35 ft</dd><span class="en-name" lang="en">Speed</span></div>
+   <div><dt>Pasif Algı</dt><dd>21</dd><span class="en-name" lang="en">Passive Perception</span></div>
+   <div><dt>Can zarı</dt><dd>1d8 + 9d10</dd><span class="en-name" lang="en">Hit Dice</span></div>
+   <div><dt>Büyü</dt><dd>+7 · DC 15</dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
   </dl>
   <p class="sub">Zırh: <span lang="en">Studded Leather</span> (12 + DEX 5) + <span lang="en">Ring of Protection</span> +1 → AC 18. İnisiyatif: DEX 5 + WIS 3 (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>90 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 30). Uçma, tırmanma, yüzme hızı yok.</p>
 
@@ -347,7 +354,7 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
   </div>
   <p class="sub">Tüm kurtarmalara <span lang="en">Ring of Protection</span> +1 dahil. <span lang="en">Fey Ancestry</span>: büyülenmeye karşı kurtarmada <b>avantaj</b>, büyüyle uyutulamaz.</p>
 
-  <h2 class="lvl-h">Beceriler <small>● yeterli · ◆ uzmanlık</small></h2>
+  <h2 class="lvl-h">Beceriler <small>● yeterli · ◆ uzmanlık · dokun: ayrıntı</small></h2>
   <ul class="skills" id="skills"></ul>
 
   <h2 class="lvl-h">Saldırılar</h2>
@@ -2019,6 +2026,99 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
   "from": "FT"
  }
 ]</script>
+<script id="skData" type="application/json">[
+ {
+  "id": "acrobatics", "en": "Acrobatics", "tr": "Akrobasi", "ab": "DEX",
+  "d": "Dengeni ve vücut kontrolünü ölçer. Zor bir zeminde ayakta kalmak, düşmeden takla atmak, dar bir kirişte yürümek ya da birinin elinden sıyrılmak gibi çevik hareketlerde kullanılır.",
+  "use": ["Buzlu, kaygan ya da sallanan zeminde ayakta kalmak (DM isterse)", "İp, kiriş ya da dar bir çıkıntı üzerinde dengede yürümek", "Takla, sıçrama, salto gibi akrobatik hareketler", "Kavranmaktan (grapple) kurtulmak: Atletizm ya da Akrobasi ile karşı kontrol", "Düşmeden ya da yere serilmeden bir etkiden kaçınmak (DM'nin kararıyla)"]
+ },
+ {
+  "id": "animal-handling", "en": "Animal Handling", "tr": "Hayvan Eğitimi", "ab": "WIS",
+  "d": "Bir hayvanın niyetini sezmeyi ve onu sakinleştirmeyi ölçer. Evcil ya da binek hayvanlarla iletişimde, korkmuş bir hayvanı yatıştırırken ya da zor bir manevra yaptırırken kullanılır.",
+  "use": ["Ürkmüş ya da huysuz bir bineği sakinleştirmek", "Bineğe zor bir manevra yaptırmak (atlama, dik yokuş)", "Bir hayvanın saldırgan mı, korkmuş mu olduğunu anlamak", "Evcil bir hayvanın tehlikeyi sezdiğini fark etmek"]
+ },
+ {
+  "id": "arcana", "en": "Arcana", "tr": "Arkana", "ab": "INT",
+  "d": "Büyü, büyülü eşyalar, sihirli semboller, büyü gelenekleri ve diğer planlar hakkındaki bilgini ölçer.",
+  "use": ["Bir büyüyü ya da büyülü etkiyi tanımak", "Rünleri, sihirli sembolleri ve büyü dairelerini yorumlamak", "Diğer varoluş planları ve oradaki yaratıklar hakkında bilgi hatırlamak", "Büyücü tarikatları ve büyü geleneklerini hatırlamak"]
+ },
+ {
+  "id": "athletics", "en": "Athletics", "tr": "Atletizm", "ab": "STR",
+  "d": "Tırmanma, sıçrama ve yüzme gibi kas gücü gerektiren zor durumlarda kullanılır. Savaşta kavrama (grapple) ve itme (shove) de Atletizm kontrolüyle yapılır.",
+  "use": ["Kaygan ya da tutunacak yeri az bir yüzeye tırmanmak", "Normalden uzağa sıçramak ya da sıçrarken bir engeli aşmak", "Akıntıya, dalgaya ya da derin suya karşı yüzmek", "Kavrama (grapple): hedefin Atletizm ya da Akrobasi kontrolüne karşı", "İtme (shove): hedefi 5 ft itmek ya da yere sermek", "Kavranmaktan kurtulmak"]
+ },
+ {
+  "id": "deception", "en": "Deception", "tr": "Aldatma", "ab": "CHA",
+  "d": "Gerçeği inandırıcı biçimde gizleyebilmeni ölçer: yalan söylemek, kılık değiştirmişken rol yapmak ya da birini yanlış yönlendirmek.",
+  "use": ["Bir muhafızı ya da tüccarı kandırmak", "Kılık değiştirmişken rolünü sürdürmek", "Belirsiz konuşarak birini yanlış yöne çekmek", "Yalan söylerken yüzünü belli etmemek (karşı taraf Sezgi ile kontrol eder)"]
+ },
+ {
+  "id": "history", "en": "History", "tr": "Tarih", "ab": "INT",
+  "d": "Tarihî olaylar, efsanevi kişiler, eski krallıklar, savaşlar, kayıp uygarlıklar ve hanedanlar hakkındaki bilgini ölçer.",
+  "use": ["Bir harabenin ya da eserin hangi uygarlığa ait olduğunu hatırlamak", "Soylu aileler, armalar ve hanedanlar hakkında bilgi", "Geçmiş savaşlar ve ünlü kişiler", "Eski bir efsanenin aslını hatırlamak"]
+ },
+ {
+  "id": "insight", "en": "Insight", "tr": "Sezgi", "ab": "WIS",
+  "d": "Bir yaratığın gerçek niyetini sezmeyi ölçer: yalan söyleyip söylemediğini anlamak, bir sonraki hamlesini tahmin etmek. Beden dili, konuşma alışkanlıkları ve tavırlardaki değişimleri okursun.",
+  "use": ["Birinin yalan söyleyip söylemediğini anlamak (Aldatma'ya karşı)", "Birinin gerçekte ne istediğini ya da korktuğunu sezmek", "Bir pazarlıkta karşı tarafın sınırını kestirmek", "Büyülenmiş ya da etki altında davranışları fark etmek (DM'nin kararıyla)"]
+ },
+ {
+  "id": "intimidation", "en": "Intimidation", "tr": "Gözdağı", "ab": "CHA",
+  "d": "Açık tehdit, düşmanca tavır ya da fiziksel şiddet ima ederek birini etkileme becerini ölçer.",
+  "use": ["Bir esiri konuşturmak", "Sokak serserilerini kavgadan vazgeçirmek", "Bir yetkiliyi korkutarak geri adım attırmak", "Kırık bir şişeyle bir vezirin fikrini değiştirmek gibi sert ikna"]
+ },
+ {
+  "id": "investigation", "en": "Investigation", "tr": "Araştırma", "ab": "INT",
+  "d": "İpuçlarını bir araya getirip sonuç çıkarmayı ölçer: gizli bir nesnenin yerini çıkarsamak, bir yaranın neyle açıldığını anlamak, bir tünelin çökme noktasını bulmak.",
+  "use": ["Gizli bölme, kapı ya da mekanizma aramak (mantık yürüterek)", "Bir tuzağın nasıl çalıştığını çözmek", "Bir olay yerinden ne olduğunu çıkarmak", "Eski belgelerde ya da yazılarda bilgi aramak", "Bir illüzyonu sorgulamak (bazı büyülerde, ör. Disguise Self)"]
+ },
+ {
+  "id": "medicine", "en": "Medicine", "tr": "Tıp", "ab": "WIS",
+  "d": "Ölmekte olan bir yoldaşı dengelemeyi ya da bir hastalığı teşhis etmeyi ölçer.",
+  "use": ["0 candaki birini dengelemek: aksiyonla <b>DC 10<\/b> Tıp kontrolü (healer's kit varsa kontrolsüz)", "Bir hastalığı ya da zehri teşhis etmek", "Bir cesedin ne zaman ve nasıl öldüğünü anlamak"]
+ },
+ {
+  "id": "nature", "en": "Nature", "tr": "Doğa", "ab": "INT",
+  "d": "Arazi, bitkiler, hayvanlar, hava durumu ve doğal döngüler hakkındaki bilgini ölçer.",
+  "use": ["Bir bitkinin yenebilir ya da zehirli olduğunu bilmek", "Bir hayvanın türünü ve davranışını hatırlamak", "Havanın nasıl değişeceğini tahmin etmek", "Doğal bir mağaranın ya da arazinin oluşumunu anlamak"]
+ },
+ {
+  "id": "perception", "en": "Perception", "tr": "Algı", "ab": "WIS",
+  "d": "Bir şeyi görmeyi, duymayı ya da başka bir duyuyla fark etmeyi ölçer. Çevrenin genel farkındalığı ve duyularının keskinliğidir. Oyunda en çok kullanılan beceridir; pasif Algı değerin, saklanan yaratıklara ve gizli tehlikelere karşı her zaman açıktır.",
+  "use": ["Kapının ardındaki konuşmayı duymak", "Pusuya yatmış düşmanı ya da saklanan yaratığı fark etmek (Gizlilik'e karşı; pasif Algı da sayılır)", "Uzaktaki bir işareti, dumanı ya da hareketi görmek", "Gizli bir kapıyı ya da tuzağı fark etmek (bakarak)", "Saklanan bir düşmanın yerini bulmak: savaşta Arama (Search) aksiyonu"]
+ },
+ {
+  "id": "performance", "en": "Performance", "tr": "Gösteri", "ab": "CHA",
+  "d": "Müzik, dans, oyunculuk, hikâye anlatma ya da başka bir gösteriyle seyirciyi ne kadar etkileyebildiğini ölçer.",
+  "use": ["Bir handa çalıp şarkı söyleyerek para kazanmak", "Kalabalığın dikkatini dağıtmak", "Bir rolü sahnede inandırıcı oynamak"]
+ },
+ {
+  "id": "persuasion", "en": "Persuasion", "tr": "İkna", "ab": "CHA",
+  "d": "İyi niyet, nezaket ve sağduyuyla birini etkilemeyi ölçer. Dürüst ve dostane yaklaşımlarda kullanılır.",
+  "use": ["Bir soyluyu kervanı geçirmeye ikna etmek", "Düşman kabileler arasında barış sağlamak", "Daha iyi bir fiyat ya da ödül için pazarlık", "Bir NPC'den yardım ya da bilgi istemek"]
+ },
+ {
+  "id": "religion", "en": "Religion", "tr": "Din", "ab": "INT",
+  "d": "Tanrılar, ayinler, dinî hiyerarşiler, kutsal semboller ve gizli tarikatlar hakkındaki bilgini ölçer.",
+  "use": ["Bir tanrının sembolünü ya da tapınağını tanımak", "Bir ayinin ya da duanın anlamını bilmek", "Ölümsüzler ve kutsal/şeytani güçler hakkında bilgi", "Gizli bir tarikatın işaretlerini tanımak"]
+ },
+ {
+  "id": "sleight-of-hand", "en": "Sleight of Hand", "tr": "El Çabukluğu", "ab": "DEX",
+  "d": "El becerisi gerektiren ve fark edilmemesi gereken işlerde kullanılır: bir eşyayı birine sezdirmeden yerleştirmek ya da almak, bir nesneyi üstünde gizlemek.",
+  "use": ["Cep kesmek ya da birine bir şey yerleştirmek", "Küçük bir nesneyi üstünde saklamak", "Hızlı bir el hilesi yapmak", "(Kilit açma ve tuzak sökme <b>Thieves' Tools<\/b> ile DEX kontrolüdür)"]
+ },
+ {
+  "id": "stealth", "en": "Stealth", "tr": "Gizlilik", "ab": "DEX",
+  "d": "Düşmandan saklanmayı, muhafızların yanından sezdirmeden geçmeyi, fark edilmeden sızmayı ölçer. Saklanmak için görülmüyor olman gerekir; sonucun, seni arayanların Algı'sına (pasif ya da aktif) karşı karşılaştırılır.",
+  "use": ["Saklanma (Hide) aksiyonu: görüş dışında ya da yeterince örtülüyken", "Muhafızların arasından sessizce geçmek", "Pusu kurmak: savaş başında düşmanlar seni fark etmezse ilk turda şaşkın kalırlar", "Saklıyken saldırırsan: saldırıda <b>avantaj<\/b>, sonra yerin belli olur"]
+ },
+ {
+  "id": "survival", "en": "Survival", "tr": "Hayatta Kalma", "ab": "WIS",
+  "d": "İz sürmeyi, avlanmayı, yolunu bulmayı ve doğadaki tehlikelerden kaçınmayı ölçer.",
+  "use": ["İz sürmek ve izin ne kadar eski olduğunu anlamak", "Avlanmak, yiyecek ve su bulmak", "Çorak arazide ya da ormanda yolunu bulmak", "Hava değişimini ve doğal tehlikeleri (bataklık, çığ) önceden sezmek", "Kamp için güvenli yer seçmek"]
+ }
+]
+</script>
 <script>
 (function(){
 document.documentElement.lang = 'tr';
@@ -2256,7 +2356,46 @@ const SKILLS = [
   ['Sleight of Hand','El Çabukluğu','DEX',9,1], ['Stealth','Gizlilik','DEX',13,2], ['Survival','Hayatta Kalma','WIS',7,1],
 ];
 $('#skills').innerHTML = SKILLS.map(([en, tr, ab, v, p]) =>
-  `<li class="${p ? 'pr' : ''}"><i aria-hidden="true">${p === 2 ? '◆' : p ? '●' : '○'}</i><span><b lang="en">${en}</b><small>${tr} · ${ab}${p === 2 ? ' · uzmanlık' : ''}</small></span><em>+${v}</em></li>`).join('');
+  `<li class="${p ? 'pr' : ''}"><button class="skb" data-c="sk" data-open="${en.toLowerCase().replace(/ /g, '-')}"><i aria-hidden="true">${p === 2 ? '◆' : p ? '●' : '○'}</i><span><b lang="en">${en}</b><small>${tr} · ${ab}${p === 2 ? ' · uzmanlık' : ''}</small></span><em>+${v}</em></button></li>`).join('');
+// Skills open the same bottom sheet: long description, uses, and notes that only apply to this character.
+const SKILL_NOTES = {
+ "perception": "<b>Uzmanlık</b> (yeterlilik ×2). Pasif Algı <b>21</b>. Karanlık görüş <b>90 ft</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulmak için avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili kontrollerde yeterlilik iki katı.",
+ "stealth": "<b>Uzmanlık</b> (yeterlilik ×2). <span lang=\"en\">Mask of the Wild</span>: yağmur, sis, yaprak gibi hafif örtüde bile saklanmayı deneyebilirsin. <span lang=\"en\">Umbral Sight</span>: karanlıkta, karanlık görüşle bakan düşmana görünmezsin. Saklıyken saldırı → <b>avantaj</b> → <span lang=\"en\">Sneak Attack</span>. <span lang=\"en\">Natural Explorer</span>: tercih ettiğin arazide yalnızken normal hızda gizli ilerlersin.",
+ "survival": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) izlerken <b>avantaj</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulurken avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'da yeterlilik iki katı (<b>+11</b>); izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini de öğrenirsin.",
+ "investigation": "<span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili INT kontrollerinde yeterlilik iki katı (<b>+8</b>).",
+ "nature": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) hakkında bilgi hatırlarken INT kontrolünde <b>avantaj</b>.",
+ "history": "<span lang=\"en\">Favored Enemy</span> (Humans, Gnolls) hakkında bilgi hatırlarken INT kontrolünde <b>avantaj</b>.",
+ "sleight-of-hand": "<span lang=\"en\">Thieves’ Tools</span> yeterliliğin var: kilit açma ve tuzak sökme DEX +5 +4.",
+ "deception": "<span lang=\"en\">Disguise Kit</span> yeterliliğin ve <span lang=\"en\">Disguise Self</span> büyün var: kılık değiştirmeyle birlikte kullan.",
+ "insight": "Yeterlisin (+7).",
+ "acrobatics": "Yeterlisin (+9). Kavranmaktan kurtulmak için Atletizm yerine bunu seçebilirsin."
+};
+const SK = (() => {
+  const INFO = Object.fromEntries(JSON.parse($('#skData').textContent).map(s => [s.id, s]));
+  const ROW = Object.fromEntries(SKILLS.map(([en, tr, ab, v, p]) => [en.toLowerCase().replace(/ /g, '-'), { v, p }]));
+  const AB = { STR: ['Güç', 'Strength', 10], DEX: ['Çeviklik', 'Dexterity', 200], CON: ['Dayanıklılık', 'Constitution', 350], INT: ['Zekâ', 'Intelligence', 275], WIS: ['Bilgelik', 'Wisdom', 140], CHA: ['Karizma', 'Charisma', 320] };
+  return {
+    k: 'sk', all: $('#skills'), sub: 'all',
+    fill(id) {
+      const s = INFO[id], r = ROW[id], ab = AB[s.ab];
+      const prof = r.p === 2 ? 'Uzmanlık (×2)' : r.p ? 'Yeterli' : 'Yok';
+      return `
+        <div class="sh-top"><span class="ic" style="--h:${ab[2]}" aria-hidden="true"><b class="ab-ic">${s.ab}</b></span><div><h2 id="shName" lang="en">${esc(s.en)}</h2><p>${esc(s.tr)} · ${ab[0]} (<span lang="en">${ab[1]}</span>)</p></div>
+          <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+        <dl class="facts">
+          <div class="fact key"><dt>Bonus</dt><dd>+${r.v}</dd></div>
+          <div class="fact key"><dt>Pasif</dt><dd>${10 + r.v}<small>10 + bonus</small></dd></div>
+          <div class="fact"><dt>Yetenek</dt><dd>${s.ab}</dd></div>
+          <div class="fact"><dt>Yeterlilik</dt><dd>${prof}</dd></div>
+        </dl>
+        <div class="desc">${s.d}</div>
+        <div class="blk"><h3>Kullanım alanları</h3><ul class="uses">${s.use.map(u => `<li>${u}</li>`).join('')}</ul></div>
+        ${SKILL_NOTES[id] ? `<div class="tip">${SKILL_NOTES[id]}</div>` : ''}
+        <div class="src">Becerinin zor olduğu durumlarda DM bir DC söyler (kolay 10 · orta 15 · zor 20 · çok zor 25); d20 + bonus ≥ DC başarılıdır.</div>`;
+    },
+  };
+})();
+
 // Features & traits: short original Turkish summaries of the sheet's text. Feats first (user's request).
 const FEATS = [
   ['Sharpshooter', 'Feat', '', 'Uzun menzilde saldırı <b>dezavantajsız</b>. Menzilli silah saldırıların <b>yarım ve dörtte üç siperi yok sayar</b>. Saldırıdan önce seçersen: saldırı zarına <b>−5</b>, isabet ederse hasara <b>+10</b>.'],
@@ -2539,7 +2678,7 @@ addEventListener('popstate', () => { if (skipPop) { skipPop--; return; } closeSh
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-pick],[data-open],[data-f],[data-close],[data-lim],[data-clear],[data-tab],[data-sub],[data-inv],[data-backup],[data-install],[data-update],#scrim');
   if (!t) return;
-  const C = CATS[t.dataset.c];
+  const C = t.dataset.c === 'sk' ? SK : CATS[t.dataset.c];
   if (t.dataset.pick) return toggleIn(C, t.dataset.pick);
   if (t.dataset.open) return openSheet(C, t.dataset.open);
   if (t.dataset.f) { C.filter = t.dataset.f; C.renderChips(); applyFilter(C); window.scrollTo(0, 0); focusQuiet($(`[data-c="${C.k}"][data-f="${C.filter}"]`)); return; }
