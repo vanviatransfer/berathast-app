@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '261f67e584'; window.__BUILT__ = '2026-10-09 15:09';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = 'c146b76a80'; window.__BUILT__ = '2026-10-09 15:19';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -236,6 +236,8 @@ nav .wrap{ grid-template-columns:repeat(2,1fr); }
 @keyframes spin{ to{ transform:rotate(360deg); } }
 
 /* character */
+.rest{ display:grid; gap:6px; }
+.rest p{ margin:0; font-size:.92rem; line-height:1.5; }
 .install{ margin-top:12px; border-color:var(--acc); display:grid; gap:8px; }
 .install p{ margin:0; font-size:.92rem; }
 .install .row{ display:flex; gap:8px; }
@@ -354,8 +356,16 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
    <p>Saldırı aksiyonu başına <b>2 saldırı</b> (<span lang="en">Extra Attack</span>). Uzun menzilde dezavantaj yok; yarım ve dörtte üç siperi yok sayar (<span lang="en">Sharpshooter</span>).</p>
    <p><span lang="en">Sharpshooter</span> −5/+10: saldırı <b>+8</b>, hasar <b>1d8+17</b> delme + 1d6 gök gürültüsü.</p>
    <p><b>İlk tur</b> (<span lang="en">Dread Ambusher</span>): hız +10 ft, Saldırı aksiyonunda <b>+1 saldırı</b>; isabet ederse <b>+1d8</b>.</p>
-   <p><span lang="en">Sneak Attack</span>: turda bir kez <b>+1d6</b> (avantajın varsa ya da hedefin 5 ft yanında bir müttefikin varsa). <span lang="en">Hunter’s Mark</span>: her isabette <b>+1d6</b>.</p>
+   <p><span lang="en">Sneak Attack</span>: turda bir kez <b>+1d6</b>: avantajın varsa ya da hedefin 5 ft yanında etkisiz olmayan bir müttefikin varsa <b>ve dezavantajın yoksa</b>. Karanlıkta <span lang="en">Umbral Sight</span> ile karanlık görüşlü düşmana görünmezsin → avantaj.</p>
+   <p><span lang="en">Hunter’s Mark</span>: her isabette <b>+1d6</b>. <span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> (ve <span lang="en">Ensnaring/Zephyr Strike</span>) hepsi <b>bonus aksiyon + konsantrasyon</b>: aynı anda yalnız biri. Konsantrasyon kurtarması CON <b>+2</b> (DC 10 ya da hasarın yarısı).</p>
    <p>Büyü saldırısı <b>+7</b> · büyü kurtarma <b>DC 15</b> (Bilgelik).</p>
+  </div>
+
+  <h2 class="lvl-h">Dinlenmeler</h2>
+  <div class="card rest">
+   <p><b>Kısa dinlenme</b> (1 saat): yenilenen özellik yok. Can zarı harcayabilirsin: <b>1d8+1</b> ya da <b>1d10+1</b> can (zar başına).</p>
+   <p><b>Uzun dinlenme</b> (8 saat): tüm can · büyü slotları <b>4/3/2</b> · <span lang="en">Fey Touched</span> (<span lang="en">Misty Step, Command</span> birer kez slotsuz) · en fazla <b>5 can zarı</b> (10'un yarısı; d8 ve d10 karışık seçilebilir) geri gelir. <span lang="en">Trance</span>: 4 saat trans 8 saat uykuya bedel, ama uzun dinlenme yine 8 saat sürer.</p>
+   <p><b>Her savaş</b>: <span lang="en">Dread Ambusher</span> yalnız ilk turunda. <b>Her tur</b>: <span lang="en">Sneak Attack</span> bir kez.</p>
   </div>
 
   <h2 class="lvl-h">Eşyalar ve notlar</h2>
@@ -618,7 +628,7 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki yaratıklar <b>STR DC 15<\/b> kurtarması yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'ye karşı STR kontrolü yapıp kurtulabilir.",
+  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki yaratıklar <b>STR DC 15<\/b> kurtarması yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'e karşı STR kontrolü yapıp kurtulabilir.",
   "fx": [
    "Etki",
    "Bağlanmış + zorlu arazi"
@@ -1393,7 +1403,7 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (kurtarma yok). Doğal görünür: büyü yapılırken alanı göremeyen, tehlikeyi fark etmek için DC 15 <b>Bilgelik (Algı)<\/b> kontrolü yapmalıdır.",
+  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (kurtarma yok). Doğal görünür: büyü yapılırken alanı göremeyen, tehlikeyi fark etmek için DC 15 <b>Bilgelik (Algı veya Hayatta Kalma)<\/b> kontrolü yapmalıdır; bu bir kurtarma atışı değildir.",
   "fx": [
    "Hasar",
    "Her 5 ft için 2d4 delme"
@@ -2090,7 +2100,8 @@ const SP = (() => {
     let t = withLevel ? `<span class="tg lv">${s.lvl}. sv · ${esc(s.school)}</span>` : '';
     if (s.from) t += `<span class="tg" lang="en">${FROM[s.from]}</span>`;
     if (s.conc) t += '<span class="tg">Konsantrasyon</span>';
-    if (s.ritual) t += '<span class="tg">Ritüel</span>';
+    // 2014 rangers have no ritual casting, so a ritual tag here only means the spell has one
+    if (s.ritual) t += '<span class="tg lv">Ritüel etiketli · Ranger ritüel yapamaz</span>';
     return t ? `<span class="tags">${t}</span>` : '';
   }
   function tile(s) {
@@ -2144,7 +2155,8 @@ const SP = (() => {
         <ul class="rules">
           <li>Büyü slotları: <b>1. sv 4 · 2. sv 3 · 3. sv 2</b> (uzun dinlenmede yenilenir)</li>
           <li><span lang="en">Gloom Stalker</span> ve <span lang="en">Fey Touched</span> büyüleri sayıya dahil değil, her zaman bilinir</li>
-          <li>Ranger büyü hazırlamaz; seviye atladığında bir büyüyü değiştirebilir</li>
+          <li>Ranger büyü hazırlamaz. <b>Ranger seviyesi</b> atladığında bildiğin bir ranger büyüsünü, slotun olan seviyedeki başka bir ranger büyüsüyle değiştirebilirsin; <span lang="en">Gloom Stalker</span> ve <span lang="en">Fey Touched</span> büyüleri değişmez</li>
+          <li>Ranger'ın ritüel yeteneği yok: Ritüel etiketli büyüleri de slotla yaparsın</li>
         </ul>
         ${C.confirming
           ? `<div class="confirm"><span>Bilinen tüm ranger büyüleri kaldırılsın mı?</span><button class="yes" data-c="sp" data-clear="yes">Evet, temizle</button><button data-c="sp" data-clear="no">Vazgeç</button></div>`
@@ -2263,7 +2275,10 @@ const FEATS = [
   ['Thieves’ Cant', 'Rogue', '', 'Hırsızların gizli dili: sıradan konuşmanın içine gizli mesaj saklarsın (dört kat uzun sürer); tehlike, ganimet, güvenli ev gibi kısa mesajlar veren gizli işaretleri tanırsın.'],
   ['Fey Ancestry', 'Wood Elf', '', 'Büyülenmeye karşı kurtarmada <b>avantaj</b>; büyü seni uyutamaz.'],
   ['Mask of the Wild', 'Wood Elf', '', 'Yalnızca hafif örtülüyken (yaprak, yağmur, kar, sis…) bile <b>saklanmayı deneyebilirsin</b>.'],
-  ['Trance', 'Wood Elf', '', 'Uyumazsın; günde <b>4 saat</b> yarı bilinçli meditasyon uzun dinlenme yerine geçer.'],
+  ['Trance', 'Wood Elf', '', 'Uyumazsın; <b>4 saat</b> yarı bilinçli trans, 8 saatlik uykunun yerini tutar. Uzun dinlenme yine 8 saat sürer (kalanı hafif etkinlik).'],
+  ['Keen Senses', 'Wood Elf', '', '<span lang="en">Perception</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor; Algı yeterliliği buradan.</i>'],
+  ['Fleet of Foot', 'Wood Elf', '', 'Yürüme hızın <b>35 ft</b>. <i>Sayfada özellik olarak yazmıyor.</i>'],
+  ['Elf Weapon Training', 'Wood Elf', '', '<span lang="en">Longsword, Shortsword, Shortbow, Longbow</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor.</i>'],
   ['City Secrets', 'Urchin', '', 'Şehirlerin gizli geçitlerini bilirsin: savaş dışındayken sen ve yönettiğin arkadaşların şehirde iki nokta arasında <b>iki kat hızlı</b> yol alırsınız.'],
 ];
 $('#feats').innerHTML = FEATS.map(([n, src, use, d]) =>
