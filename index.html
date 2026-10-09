@@ -299,8 +299,8 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
   <div class="hd">
    <div class="who" id="hdChar"><h1 lang="en">Berathast</h1><p>Level 10 · Ranger 9 / Rogue 1</p></div>
    <div class="seg" id="seg" role="group" aria-label="Görünüm" hidden>
-    <button data-sub="all"><span id="segA"></span><small id="segAc"></small></button>
     <button data-sub="prep"><span id="segP"></span><small id="segPc"></small></button>
+    <button data-sub="all"><span id="segA"></span><small id="segAc"></small></button>
    </div>
    <div class="stats" id="stats"></div>
   </div>
@@ -2039,7 +2039,8 @@ const SP = (() => {
   items.forEach(s => { s.key = fold(s.en + ' ' + s.tr); });
   const BY = Object.fromEntries(items.map(s => [s.id, s]));
   const KEY = 'berathast-spells-known-v1';
-  // Karakter sayfasındaki 6 ranger büyüsü (Gloom Stalker ve Fey Touched büyüleri ayrıca her zaman bilinir)
+  // Karakter sayfasında seçili 6 ranger büyüsü; hak (limit) da bu sayıdan gelir. Sayfada Ranger altında 9 büyü var, 3'ü Gloom Stalker.
+  // Gloom Stalker ve Fey Touched büyüleri ayrıca her zaman bilinir, sayıya girmez.
   const DEFAULT = ['absorb-elements','cure-wounds','hail-of-thorns','hunters-mark','conjure-animals','lightning-arrow'];
   const FROM = { GS: 'Gloom Stalker', FT: 'Fey Touched' };
   const always = s => !!s.from;
@@ -2093,7 +2094,7 @@ const SP = (() => {
   }
   const C = {
     k: 'sp', all: $('#spAll'), prep: $('#spPrep'), tools: $('#spTools'), q: $('#spQ'),
-    sub: 'all', filter: 'all', query: '', qKey: '', confirming: false, BY,
+    sub: 'prep', filter: 'all', query: '', qKey: '', confirming: false, BY,
     stats: '<div class="st"><span>Saldırı</span><b>+7</b></div><div class="st"><span>DC</span><b>15</b></div>',
     segLabels: () => ['Tümü', `${items.length} büyü`, 'Bilinen', `${count()}/${state.limit}`, count() > state.limit],
     renderChips() {
@@ -2416,6 +2417,8 @@ function go(nextTab, nextSub) {
   const C = CATS[nextTab];
   if (nextTab === tab && (!C || nextSub === undefined || nextSub === C.sub)) return;
   scrollMem[viewKey()] = window.scrollY;
+  // entering Büyüler / Wild Shape from another tab always opens the selected list first (user's request)
+  if (C && nextTab !== tab) C.sub = 'prep';
   tab = nextTab; store(TAB_KEY, tab);
   if (C && nextSub) C.sub = nextSub;
   if (C) C.confirming = false;
@@ -2498,6 +2501,7 @@ SP.q.addEventListener('input', e => {
 SP.renderChips(); SP.buildAll(); applyFilter(SP);
 renderInv();
 renderInstall();
+for (const C of Object.values(CATS)) C.renderPrep();
 // Storage check shown on the character page, so a phone test shows at once whether notes will be kept.
 (function(){
   let ok = false;
