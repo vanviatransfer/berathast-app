@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = 'f4c00f8f82'; window.__BUILT__ = '2026-10-12 11:55';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '9b1daaf16c'; window.__BUILT__ = '2026-10-12 12:08';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -452,6 +452,34 @@ nav button{ white-space:nowrap; }
 @media (prefers-reduced-motion: reduce){ .toast{ transition:opacity .25s, transform .25s !important; } }
 .acst{ border-color:color-mix(in oklab, hsl(205 45% 62%) 55%, var(--line)); }
 .ac-in{ grid-template-columns:minmax(0,1fr) auto; }
+/* portrait next to the name */
+.who{ display:flex; align-items:center; gap:10px; }
+.avatar{ width:48px; height:48px; border-radius:50%; object-fit:cover; flex:0 0 auto; border:2px solid color-mix(in oklab, var(--acc) 70%, transparent); box-shadow:0 0 0 3px color-mix(in oklab, var(--acc) 15%, transparent); }
+/* attacks: one box per topic, each with its own soft hue; chips: attack (blue) · damage (warm) · extra dice (gold) · save (violet) · plain */
+.atks{ display:grid; gap:8px; }
+.ab{ --ah:30; display:grid; gap:7px; padding:10px 12px; border-radius:12px; background:color-mix(in oklab, hsl(var(--ah) 40% 45%) 10%, var(--surface)); border:1px solid color-mix(in oklab, hsl(var(--ah) 35% 58%) 32%, var(--line)); border-left:3px solid hsl(var(--ah) 35% 56%); }
+.ab h3{ margin:0; font-size:1.02rem; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; color:hsl(var(--ah) 42% 80%); }
+.ab h3 small{ font-size:.78rem; font-weight:500; color:var(--muted); }
+.ab h3 small b{ color:var(--ink); }
+.ab p{ margin:0; font-size:.9rem; line-height:1.45; }
+.ab ul{ margin:0; padding-left:18px; display:grid; gap:3px; font-size:.9rem; line-height:1.45; }
+.chs{ display:flex; flex-wrap:wrap; gap:6px; }
+.ch{ display:grid; align-content:start; line-height:1.2; padding:4px 10px 5px; border-radius:9px; background:var(--bg); border:1px solid var(--line); min-width:0; font-variant-numeric:tabular-nums; }
+.ch small{ font-size:.62rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:700; }
+.ch b{ font-size:1.08rem; }
+.ch em{ font-style:normal; font-size:.78rem; color:var(--muted); }
+.ch.hit{ border-color:hsl(205 28% 40%); } .ch.hit b{ color:hsl(205 55% 76%); }
+.ch.dmg{ border-color:hsl(16 32% 42%); } .ch.dmg b{ color:hsl(16 68% 73%); }
+.ch.add{ border-color:hsl(45 28% 38%); } .ch.add b{ color:hsl(45 62% 70%); }
+.ch.save{ border-color:hsl(275 22% 42%); } .ch.save b{ color:hsl(275 45% 80%); }
+/* Wild Shape attack cards */
+.watk{ display:grid; gap:6px; padding:8px 0; border-top:1px solid var(--line); }
+.watk:first-child, .mu + .watk{ border-top:0; padding-top:2px; }
+.watk h4{ margin:0; font-size:1rem; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; }
+.watk h4 small{ font-size:.75rem; font-weight:500; color:var(--muted); }
+.watk p{ margin:0; font-size:.9rem; line-height:1.45; color:color-mix(in oklab, var(--ink) 85%, var(--muted)); }
+.atk .mu{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+.atk .mu b{ color:hsl(45 62% 72%); } .atk .mu small{ font-size:.75rem; color:var(--muted); font-weight:500; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -496,7 +524,7 @@ nav button{ white-space:nowrap; }
 <header id="hdr">
  <div class="wrap">
   <div class="hd">
-   <div class="who" id="hdChar"><h1 lang="en">Berathast</h1><p>Level 10 · Ranger 9 / Rogue 1</p></div>
+   <div class="who" id="hdChar"><img class="avatar" src="data:image/webp;base64,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" alt="" width="48" height="48"><div><h1 lang="en">Berathast</h1><p>Level 10 · Ranger 9 / Rogue 1</p></div></div>
    <div class="seg" id="seg" role="group" aria-label="Görünüm" hidden></div>
    <div class="stats" id="stats"></div>
   </div>
@@ -544,14 +572,35 @@ nav button{ white-space:nowrap; }
   </section>
   <section class="sec" style="--sh:8">
   <h2 class="lvl-h">Saldırılar</h2>
-  <div class="card atkc">
-   <div class="arow"><b lang="en">Longbow +2</b><span>150/600 ft</span><span class="hit">+13</span><span class="dmg">1d8+7 delme + 1d6 gök gürültüsü</span></div>
-   <p>Saldırı aksiyonu başına <b>2 saldırı</b> (<span lang="en">Extra Attack</span>). Uzun menzilde dezavantaj yok; yarım ve dörtte üç siperi yok sayar (<span lang="en">Sharpshooter</span>).</p>
-   <p><span lang="en">Sharpshooter</span> −5/+10: saldırı <b>+8</b>, hasar <b>1d8+17</b> delme + 1d6 gök gürültüsü.</p>
-   <p><b>İlk tur</b> (<span lang="en">Dread Ambusher</span>): hız +10 ft, Saldırı aksiyonunda <b>+1 saldırı</b>; isabet ederse <b>+1d8</b>.</p>
-   <p><span lang="en">Sneak Attack</span>: turda bir kez <b>+1d6</b>: avantajın varsa ya da hedefin 5 ft yanında etkisiz olmayan bir müttefikin varsa <b>ve dezavantajın yoksa</b>. Karanlıkta <span lang="en">Umbral Sight</span> ile karanlık görüşlü düşmana görünmezsin → avantaj.</p>
-   <p><span lang="en">Hunter’s Mark</span>: her isabette <b>+1d6</b>. <span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> (ve <span lang="en">Ensnaring/Zephyr Strike</span>) hepsi <b>bonus aksiyon + konsantrasyon</b>: aynı anda yalnız biri. Konsantrasyon kurtarması CON <b>+2</b> (DC 10 ya da hasarın yarısı).</p>
-   <p>Büyü saldırısı <b>+7</b> · büyü kurtarma <b>DC 15</b> (Bilgelik).</p>
+  <div class="atks">
+   <article class="ab" style="--ah:32">
+    <h3><span lang="en">Longbow +2</span><small>ana silah · Saldırı aksiyonunda <b>2 ok</b> (<span lang="en">Extra Attack</span>)</small></h3>
+    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+13</b></span><span class="ch dmg"><small>Hasar</small><b>1d8+7</b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span></div>
+   </article>
+   <article class="ab" style="--ah:5">
+    <h3><span lang="en">Sharpshooter</span><small>isteğe bağlı · atmadan önce söyle</small></h3>
+    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+8</b> <em>(−5)</em></span><span class="ch dmg"><small>Hasar</small><b>1d8+17</b> <em>delme (+10)</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span></div>
+    <p>Her zaman geçerli: uzun menzilde (600 ft'e kadar) <b>dezavantaj yok</b>; yarım ve ¾ siperi <b>yok sayar</b>.</p>
+   </article>
+   <article class="ab" style="--ah:265">
+    <h3>İlk tur<small lang="en">Dread Ambusher · her savaşın ilk turu</small></h3>
+    <div class="chs"><span class="ch"><small>Hız</small><b>+10 ft</b></span><span class="ch hit"><small>Ek saldırı</small><b>+1 ok</b></span><span class="ch add"><small>O ok isabet ederse</small><b>+1d8</b> <em>delme</em></span></div>
+    <p>Saldırı aksiyonunda <b>3. ok</b>; bu ok isabet ederse normal hasarına <b>+1d8</b> eklenir.</p>
+   </article>
+   <article class="ab" style="--ah:225">
+    <h3><span lang="en">Sneak Attack</span><small>turda bir kez</small></h3>
+    <div class="chs"><span class="ch add"><small>Ek hasar</small><b>+1d6</b></span></div>
+    <ul><li><b>Avantajın varsa</b>, ya da hedefin 5 ft yanında etkisiz olmayan bir müttefikin varsa <b>ve dezavantajın yoksa</b>.</li><li>Karanlıkta <span lang="en">Umbral Sight</span>: karanlık görüşlü düşmana <b>görünmezsin</b> → avantaj.</li></ul>
+   </article>
+   <article class="ab" style="--ah:130">
+    <h3><span lang="en">Hunter’s Mark</span><small>bonus aksiyon · konsantrasyon</small></h3>
+    <div class="chs"><span class="ch add"><small>Her isabette</small><b>+1d6</b> <em>işaretli hedefe</em></span></div>
+    <p><span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> (ve <span lang="en">Ensnaring / Zephyr Strike</span>) hepsi bonus aksiyon + konsantrasyon: <b>aynı anda yalnız biri</b>. Konsantrasyon kurtarması <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
+   </article>
+   <article class="ab" style="--ah:180">
+    <h3>Büyü<small>Bilgelik</small></h3>
+    <div class="chs"><span class="ch hit"><small>Büyü saldırısı</small><b>+7</b></span><span class="ch save"><small>Kurtarma</small><b>DC 15</b></span></div>
+   </article>
   </div>
 
   </section>
