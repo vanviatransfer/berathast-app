@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '35018af8ce'; window.__BUILT__ = '2026-10-12 11:46';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = 'f4c00f8f82'; window.__BUILT__ = '2026-10-12 11:55';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -2375,8 +2375,9 @@ const TOAST_HUES = [
   [/^AC \d/, 205],
 ];
 const toastHue = msg => { for (const [re, h] of TOAST_HUES) if (re.test(msg)) return h; return null; };
-// keyboard up = the visual viewport is much shorter than the window, or a text field has focus
-const typing = () => tab === 'inv' || /^(INPUT|TEXTAREA)$/.test((document.activeElement || {}).tagName || '') || (window.visualViewport && visualViewport.height < innerHeight * 0.75);
+// at the top while a sheet is open (it would cover the sheet's buttons), on Eşya & Not, or when the keyboard is up
+// (the visual viewport is much shorter than the window, or a text field has focus)
+const typing = () => tab === 'inv' || !!openRef || /^(INPUT|TEXTAREA)$/.test((document.activeElement || {}).tagName || '') || (window.visualViewport && visualViewport.height < innerHeight * 0.75);
 function toast(msg) {
   const t = $('#toast');
   t.classList.remove('show'); void t.offsetWidth;
@@ -2834,7 +2835,6 @@ $('#feats').innerHTML = FEATS.map(([n, src, use, d]) =>
 const INV_KEY = 'berathast-inventory-v1';
 const inv = load(INV_KEY, null) || { items: [
   { id: 'eq1', t: 'Longbow +2 (saldırı ve hasara +2)', q: 1 },
-  { id: 'eq2', t: 'Studded Leather (AC 12 + DEX)', q: 1 },
   { id: 'eq3', t: 'Ring of Protection (uyumlu: AC ve kurtarmalara +1)', q: 1 },
   { id: 'eq4', t: 'Robe of Magic Resistance (DM: %10 büyü direnci)', q: 1 },
   { id: 'eq5', t: 'Bear Hide Armor +2', q: 1 },
@@ -2844,6 +2844,8 @@ if (!Array.isArray(inv.notes)) inv.notes = [];
 if (!Number.isFinite(inv.gold)) inv.gold = 0;
 // 2026-10: Bear Hide Armor +2 added to Berathast's gear (user's request); add it once to a list saved before that
 if (!load('berathast-inv-migr-1', false)) { if (!inv.items.some(e => e.id === 'eq5' || /bear hide/i.test(e.t))) { inv.items.push({ id: 'eq5', t: 'Bear Hide Armor +2', q: 1 }); store(INV_KEY, inv); } store('berathast-inv-migr-1', true); }
+// 2026-10: Studded Leather replaced by the Bear Hide Armor (user's request); drop it once from a saved list
+if (!load('berathast-inv-migr-2', false)) { const n = inv.items.length; inv.items = inv.items.filter(e => !(e.id === 'eq2' || /studded leather/i.test(e.t))); if (inv.items.length !== n) store(INV_KEY, inv); store('berathast-inv-migr-2', true); }
 // gold: "12,5", "12.5" and "1.250" (Turkish thousands) all work; two decimals at most (5 sp = 0,5 gp)
 const parseG = v => { let t = String(v).trim().replace(/\s/g, ''); if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(t)) t = t.replace(/\./g, ''); const n = Number(t.replace(',', '.')); return Number.isFinite(n) && n >= 0 ? Math.round(n * 100) / 100 : null; };
 const gp = n => (Math.round(n * 100) / 100).toLocaleString('tr-TR', { maximumFractionDigits: 2 }) + ' gp';
