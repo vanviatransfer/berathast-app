@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '5cbdd07c56'; window.__BUILT__ = '2026-10-12 12:27';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '025c214b86'; window.__BUILT__ = '2026-10-13 12:07';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -491,6 +491,8 @@ nav button{ white-space:nowrap; }
   border:2px solid color-mix(in oklab, var(--acc) 70%, transparent); box-shadow:0 18px 50px rgba(0,0,0,.7), 0 0 30px color-mix(in oklab, var(--acc) 30%, transparent); background:var(--surface); }
 .lightbox figcaption{ font-family:var(--display); font-weight:700; font-size:1.3rem; letter-spacing:.04em; color:var(--acc); }
 .lightbox .x{ position:absolute; top:calc(env(safe-area-inset-top,0px) + 10px); right:10px; background:rgba(0,0,0,.45); color:var(--ink); }
+.rules-boxes{ margin-top:22px; }
+.rules-boxes > .lvl-h{ margin-top:0; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2723,11 +2725,34 @@ const SP = (() => {
           ? `<div class="confirm"><span>Bilinen tüm ranger büyüleri kaldırılsın mı?</span><button class="yes" data-c="sp" data-clear="yes">Evet, temizle</button><button data-c="sp" data-clear="no">Vazgeç</button></div>`
           : (n ? `<button class="clear" data-c="sp" data-clear="ask">Seçimi temizle</button>` : '')}
       </div>`;
-      const rules = `<section class="sum rules-card"><h3>Kurallar</h3><ul class="rules">
-          <li><span lang="en">Gloom Stalker</span> ve <span lang="en">Fey Touched</span> büyüleri sayıya dahil değil, her zaman bilinir</li>
-          <li>Ranger büyü hazırlamaz. <b>Ranger seviyesi</b> atladığında bildiğin bir ranger büyüsünü, slotun olan seviyedeki başka bir ranger büyüsüyle değiştirebilirsin; <span lang="en">Gloom Stalker</span> ve <span lang="en">Fey Touched</span> büyüleri değişmez</li>
-          <li>Ranger'ın ritüel yeteneği yok: Ritüel etiketli büyüleri de slotla yaparsın</li>
-        </ul></section>`;
+      // spell rules as boxes with chips, like the attacks and the Wild Shape rules (user's request)
+      const rules = `<section class="rules-boxes"><h2 class="lvl-h">Kurallar</h2><div class="atks">
+        <article class="ab" style="--ah:150">
+          <h3>Bilinen büyüler<small>kaç büyü, ne zaman değişir</small></h3>
+          <div class="chs"><span class="ch"><small>Bilinen</small><b>6</b> <em>Ranger 9</em></span><span class="ch"><small>Değişir</small><b>seviye atlayınca</b> <em>1 büyü</em></span></div>
+          <p>Ranger büyü <b>hazırlamaz</b>, bilir. Ranger seviyesi atladığında bildiğin bir ranger büyüsünü, slotun olan seviyedeki başka bir ranger büyüsüyle değiştirebilirsin.</p>
+        </article>
+        <article class="ab" style="--ah:265">
+          <h3>Her zaman bilinen<small>sayıya girmez, değişmez</small></h3>
+          <div class="chs"><span class="ch"><small><span lang="en">Gloom Stalker</span></small><b>3</b> <em>alt sınıf</em></span><span class="ch"><small><span lang="en">Fey Touched</span></small><b>2</b> <em>feat</em></span></div>
+          <p><span lang="en">Gloom Stalker</span>: <span lang="en">Disguise Self, Rope Trick, Fear</span>. <span lang="en">Fey Touched</span>: <span lang="en">Command, Misty Step</span>.</p>
+        </article>
+        <article class="ab" style="--ah:300">
+          <h3><span lang="en">Fey Touched</span><small>slotsuz kullanım</small></h3>
+          <div class="chs"><span class="ch add"><small><span lang="en">Misty Step</span></small><b>1 kez</b> <em>slotsuz</em></span><span class="ch add"><small><span lang="en">Command</span></small><b>1 kez</b> <em>slotsuz · DC 15</em></span><span class="ch"><small>Yenilenir</small><b>uzun dinlenmede</b></span></div>
+          <p>Slotsuz hakkı bitince ikisini de uygun seviyedeki bir slotla yapabilirsin. Kutular üstteki slot kartında.</p>
+        </article>
+        <article class="ab" style="--ah:200">
+          <h3>Ritüel<small>Ranger 2014</small></h3>
+          <div class="chs"><span class="ch"><small>Ritüel olarak</small><b>yapamaz</b></span><span class="ch"><small>Ritüel etiketliler</small><b>slotla</b></span></div>
+          <p>Ranger'ın ritüel yeteneği yok; ritüel etiketli büyüleri de slot harcayarak yaparsın.</p>
+        </article>
+        <article class="ab" style="--ah:275">
+          <h3>Konsantrasyon<small>aynı anda tek büyü</small></h3>
+          <div class="chs"><span class="ch"><small>Aynı anda</small><b>1 büyü</b> <em>yenisi eskisini bitirir</em></span><span class="ch save"><small>Hasar alınca</small><b>CON +2</b> <em>Ring of Protection dahil</em></span><span class="ch"><small>DC</small><b>10 ya da hasarın yarısı</b> <em>hangisi büyükse</em></span></div>
+          <p><span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> hepsi konsantrasyon: aynı anda yalnız biri. Büyünün penceresinde <b>Konsantrasyon başlat</b>'a dokun.</p>
+        </article>
+      </div></section>`;
       for (const l of [1,2,3]) {
         const list = items.filter(s => s.lvl === l && isSel(s.id));
         if (!list.length) continue;
