@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '74b80f4d14'; window.__BUILT__ = '2026-10-15 16:52';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '532b032e7f'; window.__BUILT__ = '2026-10-15 17:09';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -582,27 +582,27 @@ nav button{ white-space:nowrap; }
    <div style="--qh:45"><dt>Yeterlilik</dt><dd>+4</dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
    <div style="--qh:205"><dt>İnisiyatif</dt><dd>+8</dd><span class="en-name" lang="en">Initiative</span></div>
    <div style="--qh:130"><dt>Hız</dt><dd>35 ft</dd><span class="en-name" lang="en">Speed</span></div>
-   <div style="--qh:270"><dt>Pasif Algı</dt><dd>21</dd><span class="en-name" lang="en">Passive Perception</span></div>
+   <div style="--qh:270"><dt lang="en">Passive Perception</dt><dd>21</dd><span class="en-name">10 + Perception</span></div>
    <div style="--qh:0"><dt>Can zarı</dt><dd>1d8 + 9d10</dd><span class="en-name" lang="en">Hit Dice</span></div>
    <div style="--qh:320"><dt>Büyü</dt><dd>+7 · DC 15</dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
   </dl>
   <p class="sub">Zırh: <span lang="en">Bear Hide Armor +2</span> + <span lang="en">Ring of Protection</span> +1 → AC <b id="acLine">20</b> (üstteki AC kutusuna dokunup elle değiştirebilirsin). İnisiyatif: DEX 5 + WIS 3 (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>90 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 30). Uçma, tırmanma, yüzme hızı yok.</p>
 
   <section class="sec" style="--sh:38">
-  <h2 class="lvl-h">Yetenekler <small>● = kurtarmada yeterli</small></h2>
+  <h2 class="lvl-h"><span lang="en">Abilities</span> <small>● = save’de yeterli</small></h2>
   <div class="abl">
-   <div class="ih" style="--ih:0"><span>STR</span><b>12</b><i>+1</i><em>Kurtarma +2</em></div>
-   <div class="ih pr" style="--ih:200"><span>DEX</span><b>20</b><i>+5</i><em>● Kurtarma +10</em></div>
-   <div class="ih" style="--ih:38"><span>CON</span><b>13</b><i>+1</i><em>Kurtarma +2</em></div>
-   <div class="ih pr" style="--ih:252"><span>INT</span><b>11</b><i>+0</i><em>● Kurtarma +5</em></div>
-   <div class="ih pr" style="--ih:120"><span>WIS</span><b>16</b><i>+3</i><em>● Kurtarma +8</em></div>
-   <div class="ih" style="--ih:315"><span>CHA</span><b>14</b><i>+2</i><em>Kurtarma +3</em></div>
+   <div class="ih" style="--ih:0"><span>STR</span><b>12</b><i>+1</i><em>Save +2</em></div>
+   <div class="ih pr" style="--ih:200"><span>DEX</span><b>20</b><i>+5</i><em>● Save +10</em></div>
+   <div class="ih" style="--ih:38"><span>CON</span><b>13</b><i>+1</i><em>Save +2</em></div>
+   <div class="ih pr" style="--ih:252"><span>INT</span><b>11</b><i>+0</i><em>● Save +5</em></div>
+   <div class="ih pr" style="--ih:120"><span>WIS</span><b>16</b><i>+3</i><em>● Save +8</em></div>
+   <div class="ih" style="--ih:315"><span>CHA</span><b>14</b><i>+2</i><em>Save +3</em></div>
   </div>
-  <p class="sub">Tüm kurtarmalara <span lang="en">Ring of Protection</span> +1 dahil. <span lang="en">Fey Ancestry</span>: büyülenmeye karşı kurtarmada <b>avantaj</b>, büyüyle uyutulamaz.</p>
+  <p class="sub">Tüm save’lere <span lang="en">Ring of Protection</span> +1 dahil. <span lang="en">Fey Ancestry</span>: büyülenmeye karşı save’de <b>avantaj</b>, büyüyle uyutulamaz.</p>
 
   </section>
   <section class="sec" style="--sh:150">
-  <h2 class="lvl-h">Beceriler <small>● yeterli · ◆ uzmanlık · dokun: ayrıntı</small></h2>
+  <h2 class="lvl-h"><span lang="en">Skills</span> <small>● yeterli · ◆ uzmanlık · dokun: ayrıntı</small></h2>
   <ul class="skills" id="skills"></ul>
 
   </section>
@@ -631,11 +631,11 @@ nav button{ white-space:nowrap; }
    <article class="ab" style="--ah:130">
     <h3><span lang="en">Hunter’s Mark</span><small>bonus aksiyon · konsantrasyon</small></h3>
     <div class="chs"><span class="ch add"><small>Her isabette</small><b>+1d6</b> <em>işaretli hedefe</em></span></div>
-    <p><span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> (ve <span lang="en">Ensnaring / Zephyr Strike</span>) hepsi bonus aksiyon + konsantrasyon: <b>aynı anda yalnız biri</b>. Konsantrasyon kurtarması <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
+    <p><span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> (ve <span lang="en">Ensnaring / Zephyr Strike</span>) hepsi bonus aksiyon + konsantrasyon: <b>aynı anda yalnız biri</b>. Konsantrasyon save <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
    </article>
    <article class="ab" style="--ah:180">
-    <h3>Büyü<small>Bilgelik</small></h3>
-    <div class="chs"><span class="ch hit"><small>Büyü saldırısı</small><b>+7</b></span><span class="ch save"><small>Kurtarma</small><b>DC 15</b></span></div>
+    <h3>Büyü<small>Wisdom</small></h3>
+    <div class="chs"><span class="ch hit"><small>Büyü saldırısı</small><b>+7</b></span><span class="ch save"><small>Save</small><b>DC 15</b></span></div>
    </article>
   </div>
 
@@ -782,14 +782,14 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Görebildiğin, seni görüp duyan bir hayvanı ikna edersin. Zekâsı <b>4 veya üstüyse<\/b> büyü başarısız olur. Aksi hâlde <b>WIS DC 15<\/b> kurtarmasını geçemezse süre boyunca (24 saat) sana <b>büyülenmiş<\/b> olur. Sen ya da yoldaşların ona zarar verirse biter. <i>Üst slot:<\/i> her seviye için +1 hayvan.",
+  "d": "Görebildiğin, seni görüp duyan bir hayvanı ikna edersin. Intelligence'ı <b>4 veya üstüyse<\/b> büyü başarısız olur. Aksi hâlde <b>WIS DC 15<\/b> save'ini geçemezse süre boyunca (24 saat) sana <b>büyülenmiş<\/b> olur. Sen ya da yoldaşların ona zarar verirse biter. <i>Üst slot:<\/i> her seviye için +1 hayvan.",
   "fx": [
    "Etki",
    "Büyülenmiş (24 saat)"
   ],
   "ar": [
    "Hedef",
-   "1 hayvan (Zekâ ≤ 3)"
+   "1 hayvan (Intelligence ≤ 3)"
   ]
  },
  {
@@ -807,7 +807,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Xanathar's Guide to Everything",
-  "d": "Dokunduğun, sana dost ya da büyülenmiş bir hayvanla (Zekâ 3 veya altı) telepatik bağ kurarsın. Birbirinizi gördüğünüz sürece mesajlarını anlar, sana basit duygu ve kavramlar iletir. Bağ açıkken hayvan, senin <b>5 ft<\/b> yakınında gördüğün yaratıklara karşı saldırılarında <b>avantajlı<\/b>dır.",
+  "d": "Dokunduğun, sana dost ya da büyülenmiş bir hayvanla (Intelligence 3 veya altı) telepatik bağ kurarsın. Birbirinizi gördüğünüz sürece mesajlarını anlar, sana basit duygu ve kavramlar iletir. Bağ açıkken hayvan, senin <b>5 ft<\/b> yakınında gördüğün yaratıklara karşı saldırılarında <b>avantajlı<\/b>dır.",
   "fx": [
    "Etki",
    "Telepatik bağ · saldırıda avantaj"
@@ -907,7 +907,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Büyü bitmeden bir yaratığa <b>silah saldırısıyla bir sonraki isabetinde<\/b> vuruş noktasında dikenli sarmaşıklar belirir: hedef <b>DC 15 STR<\/b> kurtarmasında başarısız olursa büyü bitene kadar <b>kısıtlanmış<\/b> olur. <b>Büyük ya da daha iri<\/b> yaratıklar avantajla atar. Başarılı olursa sarmaşıklar kurur. Kısıtlıyken hedef her turunun başında <b>1d6 delme<\/b> alır. Hedef ya da ona dokunabilen bir yaratık <b>aksiyonuyla DC 15 Kuvvet kontrolü<\/b> yapar; başarılıysa hedef kurtulur. <i>Üst slot:<\/i> her seviye için +1d6.",
+  "d": "Büyü bitmeden bir yaratığa <b>silah saldırısıyla bir sonraki isabetinde<\/b> vuruş noktasında dikenli sarmaşıklar belirir: hedef <b>DC 15 STR<\/b> save'inde başarısız olursa büyü bitene kadar <b>kısıtlanmış<\/b> olur. <b>Büyük ya da daha iri<\/b> yaratıklar avantajla atar. Başarılı olursa sarmaşıklar kurur. Kısıtlıyken hedef her turunun başında <b>1d6 delme<\/b> alır. Hedef ya da ona dokunabilen bir yaratık <b>aksiyonuyla DC 15 Strength check<\/b> yapar; başarılıysa hedef kurtulur. <i>Üst slot:<\/i> her seviye için +1d6.",
   "fx": [
    "Hasar",
    "1d6 delme/tur + kısıtlanmış"
@@ -932,7 +932,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki yaratıklar <b>STR DC 15<\/b> kurtarması yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'e karşı STR kontrolü yapıp kurtulabilir.",
+  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki yaratıklar <b>STR DC 15<\/b> save yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'e karşı STR check yapıp kurtulabilir.",
   "fx": [
    "Etki",
    "Bağlanmış + zorlu arazi"
@@ -1007,7 +1007,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Büyü bitmeden önce bir yaratığa <b>menzilli silah saldırısıyla bir sonraki isabetinde<\/b>, silahından ya da cephanenden fışkıran bir diken yağmuru oluşur. Saldırının normal etkisine ek olarak, hedef ve ona <b>5 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> kurtarması yapar: başarısız olan <b>1d10 delme<\/b> alır, başarılı olan bunun <b>yarısını<\/b> alır. <i>Üst slot:<\/i> her seviye için +1d10 (<b>en fazla 6d10<\/b>).",
+  "d": "Büyü bitmeden önce bir yaratığa <b>menzilli silah saldırısıyla bir sonraki isabetinde<\/b>, silahından ya da cephanenden fışkıran bir diken yağmuru oluşur. Saldırının normal etkisine ek olarak, hedef ve ona <b>5 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> save yapar: başarısız olan <b>1d10 delme<\/b> alır, başarılı olan bunun <b>yarısını<\/b> alır. <i>Üst slot:<\/i> her seviye için +1d10 (<b>en fazla 6d10<\/b>).",
   "fx": [
    "Hasar",
    "1d10 delme"
@@ -1032,7 +1032,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Menzilde <b>görebildiğin bir yaratığı<\/b> avın olarak işaretlersin. Büyü sona erene kadar hedefe bir <b>silah saldırısıyla her isabet ettiğinde ek 1d6<\/b> hasar verirsin ve onu bulmak için yaptığın <b>Bilgelik (Algı)<\/b> ya da <b>Bilgelik (Hayatta Kalma)<\/b> kontrollerinde <b>avantajın<\/b> olur. Hedef büyü bitmeden <b>0 can puanına düşerse<\/b>, sonraki turlarından birinde <b>bonus aksiyonla<\/b> yeni bir yaratığı işaretleyebilirsin. <i>Üst slot:<\/i> <b>3. veya 4. seviye<\/b> slotla konsantrasyon <b>8 saate<\/b>, <b>5. seviye ve üstüyle 24 saate<\/b> kadar sürer.",
+  "d": "Menzilde <b>görebildiğin bir yaratığı<\/b> avın olarak işaretlersin. Büyü sona erene kadar hedefe bir <b>silah saldırısıyla her isabet ettiğinde ek 1d6<\/b> hasar verirsin ve onu bulmak için yaptığın <b>Wisdom (Perception)<\/b> ya da <b>Wisdom (Survival)<\/b> check'lerinde <b>avantajın<\/b> olur. Hedef büyü bitmeden <b>0 can puanına düşerse<\/b>, sonraki turlarından birinde <b>bonus aksiyonla<\/b> yeni bir yaratığı işaretleyebilirsin. <i>Üst slot:<\/i> <b>3. veya 4. seviye<\/b> slotla konsantrasyon <b>8 saate<\/b>, <b>5. seviye ve üstüyle 24 saate<\/b> kadar sürer.",
   "fx": [
    "Hasar",
    "+1d6 her silah isabetinde"
@@ -1107,7 +1107,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Süre içinde bir yaratığa <b>yakın dövüş silah saldırısıyla bir sonraki isabetinde<\/b> silahın akkor gibi parlar: saldırı <b>ek 1d6 ateş<\/b> hasarı verir ve hedef alev alır. Büyü bitene kadar hedef her turunun başında <b>DC 15 CON<\/b> kurtarması yapar: başarısızsa <b>1d6 ateş<\/b> alır, başarılıysa büyü biter. Hedef ya da ona 5 ft yakındaki bir yaratık <b>aksiyonla<\/b> alevleri söndürürse ya da başka bir etki söndürürse (ör. suya batmak) büyü biter. <i>Üst slot:<\/i> her seviye için ilk ek hasar +1d6.",
+  "d": "Süre içinde bir yaratığa <b>yakın dövüş silah saldırısıyla bir sonraki isabetinde<\/b> silahın akkor gibi parlar: saldırı <b>ek 1d6 ateş<\/b> hasarı verir ve hedef alev alır. Büyü bitene kadar hedef her turunun başında <b>DC 15 CON<\/b> save yapar: başarısızsa <b>1d6 ateş<\/b> alır, başarılıysa büyü biter. Hedef ya da ona 5 ft yakındaki bir yaratık <b>aksiyonla<\/b> alevleri söndürürse ya da başka bir etki söndürürse (ör. suya batmak) büyü biter. <i>Üst slot:<\/i> her seviye için ilk ek hasar +1d6.",
   "fx": [
    "Hasar",
    "1d6 ateş + 1d6/tur yanma"
@@ -1132,7 +1132,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Xanathar's Guide to Everything",
-  "d": "İple 5 ft yarıçaplı görünmeze yakın bir büyülü tuzak kurarsın (fark etmek için DC 15 Zekâ (Araştırma)). Üstüne basan Küçük–Büyük yaratık <b>DEX DC 15<\/b>'de başarısızsa ters asılı, 3 ft havada <b>bağlanmış<\/b> kalır. Her turunun sonunda DEX ile tekrar dener; ya da biri aksiyonla DC 15 Zekâ (Arcana) ile kurtarır. Kimse asılı değilse büyü biter.",
+  "d": "İple 5 ft yarıçaplı görünmeze yakın bir büyülü tuzak kurarsın (fark etmek için DC 15 Intelligence (Investigation)). Üstüne basan Küçük–Büyük yaratık <b>DEX DC 15<\/b>'de başarısızsa ters asılı, 3 ft havada <b>bağlanmış<\/b> kalır. Her turunun sonunda DEX ile tekrar dener; ya da biri aksiyonla DC 15 Intelligence (Arcana) ile kurtarır. Kimse asılı değilse büyü biter.",
   "fx": [
    "Etki",
    "Ters asılı · bağlanmış"
@@ -1207,7 +1207,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": true,
   "src": "Unearthed Arcana 36 - Starter Spells",
-  "d": "Doğa ruhlarından yardım istersin; birini seç: menzildeki izleri bilir, 1 saat izlerken <b>Hayatta Kalma avantajı<\/b> alırsın · yenebilir yiyecek, temiz su ya da uygun barınak varsa yerini öğrenirsin · ruhlar kampı kurar ya da anında toplar. <i>(Unearthed Arcana — resmî olmayan deneme içerik.)<\/i>",
+  "d": "Doğa ruhlarından yardım istersin; birini seç: menzildeki izleri bilir, 1 saat izlerken <b>Survival avantajı<\/b> alırsın · yenebilir yiyecek, temiz su ya da uygun barınak varsa yerini öğrenirsin · ruhlar kampı kurar ya da anında toplar. <i>(Unearthed Arcana — resmî olmayan deneme içerik.)<\/i>",
   "fx": [
    "Etki",
    "İz, yiyecek, su ya da barınak bulur"
@@ -1382,7 +1382,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Menzildeki yere <b>4 adet<\/b> büyüsüz ok ya da arbalet cıvatası dikersin. Büyü bitene kadar senden başka bir yaratık bir turda <b>ilk kez cephanenin 30 ft yakınına geldiğinde<\/b> ya da turunu orada bitirdiğinde bir cephane uçup ona saldırır: <b>DC 15 DEX<\/b> kurtarmasında başarısız olursa <b>1d6 delme<\/b> alır. O cephane yok olur; cephane kalmayınca büyü biter. Büyüyü yaparken etkilenmeyecek yaratıkları seçebilirsin. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +2 cephane.",
+  "d": "Menzildeki yere <b>4 adet<\/b> büyüsüz ok ya da arbalet cıvatası dikersin. Büyü bitene kadar senden başka bir yaratık bir turda <b>ilk kez cephanenin 30 ft yakınına geldiğinde<\/b> ya da turunu orada bitirdiğinde bir cephane uçup ona saldırır: <b>DC 15 DEX<\/b> save'inde başarısız olursa <b>1d6 delme<\/b> alır. O cephane yok olur; cephane kalmayınca büyü biter. Büyüyü yaparken etkilenmeyecek yaratıkları seçebilirsin. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +2 cephane.",
   "fx": [
    "Hasar",
    "1d6 delme (her cephane)"
@@ -1432,10 +1432,10 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Dokunduğun yaratığa birini seç (1 saat): <b>Ayı<\/b> — CON kontrollerinde avantaj + <b>2d6 geçici can<\/b> · <b>Boğa<\/b> — STR kontrollerinde avantaj, taşıma kapasitesi iki katı · <b>Kedi<\/b> — DEX kontrollerinde avantaj, 20 ft'e kadar düşüşten hasar almaz · <b>Kartal<\/b> — CHA · <b>Tilki<\/b> — INT · <b>Baykuş<\/b> — WIS kontrollerinde avantaj. <i>Üst slot:<\/i> her seviye için +1 hedef.",
+  "d": "Dokunduğun yaratığa birini seç (1 saat): <b>Ayı<\/b> — CON check'lerinde avantaj + <b>2d6 geçici can<\/b> · <b>Boğa<\/b> — STR check'lerinde avantaj, taşıma kapasitesi iki katı · <b>Kedi<\/b> — DEX check'lerinde avantaj, 20 ft'e kadar düşüşten hasar almaz · <b>Kartal<\/b> — CHA · <b>Tilki<\/b> — INT · <b>Baykuş<\/b> — WIS check'lerinde avantaj. <i>Üst slot:<\/i> her seviye için +1 hedef.",
   "fx": [
    "Etki",
-   "Bir yetenek kontrolünde avantaj"
+   "Bir ability check'inde avantaj"
   ],
   "ar": [
    "Hedef",
@@ -1632,10 +1632,10 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Süre boyunca (1 saat) senin ve seçtiğin, 30 ft içindeki yaratıkların <b>Çeviklik (Gizlilik)<\/b> kontrollerine <b>+10<\/b> gelir; büyü dışında <b>izlenemez<\/b>, iz bırakmazsınız.",
+  "d": "Süre boyunca (1 saat) senin ve seçtiğin, 30 ft içindeki yaratıkların <b>Dexterity (Stealth)<\/b> check'lerine <b>+10<\/b> gelir; büyü dışında <b>izlenemez<\/b>, iz bırakmazsınız.",
   "fx": [
    "Etki",
-   "Gizlilik +10 · iz bırakmaz"
+   "Stealth +10 · iz bırakmaz"
   ],
   "ar": [
    "Hedef",
@@ -1657,7 +1657,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Dokunduğun yaratıktaki bir zehri etkisiz kılarsın. Süre boyunca (1 saat) zehirlenmeye karşı kurtarmalarda <b>avantaj<\/b> ve zehir hasarına <b>direnç<\/b> kazanır.",
+  "d": "Dokunduğun yaratıktaki bir zehri etkisiz kılarsın. Süre boyunca (1 saat) zehirlenmeye karşı save'lerde <b>avantaj<\/b> ve zehir hasarına <b>direnç<\/b> kazanır.",
   "fx": [
    "Etki",
    "Zehri temizler · zehre direnç"
@@ -1707,7 +1707,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (kurtarma yok). Doğal görünür: büyü yapılırken alanı göremeyen, tehlikeyi fark etmek için DC 15 <b>Bilgelik (Algı veya Hayatta Kalma)<\/b> kontrolü yapmalıdır; bu bir kurtarma atışı değildir.",
+  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (save yok). Doğal görünür: büyü yapılırken alanı göremeyen, tehlikeyi fark etmek için DC 15 <b>Wisdom (Perception veya Survival)<\/b> check yapmalıdır; bu bir save değildir.",
   "fx": [
    "Hasar",
    "Her 5 ft için 2d4 delme"
@@ -1807,7 +1807,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Büyüsüz bir silahı fırlatır ya da büyüsüz bir cephaneyi havaya atarsın; aynılarından oluşan bir koni ileri fırlar ve kaybolur. <b>60 ft koni<\/b> içindeki her yaratık <b>DC 15 DEX<\/b> kurtarması yapar: başarısızsa <b>3d8<\/b>, başarılıysa yarısı. Hasar türü, bileşen olarak kullanılan silah ya da cephaneninkiyle aynıdır (ok için <b>delme<\/b>).",
+  "d": "Büyüsüz bir silahı fırlatır ya da büyüsüz bir cephaneyi havaya atarsın; aynılarından oluşan bir koni ileri fırlar ve kaybolur. <b>60 ft koni<\/b> içindeki her yaratık <b>DC 15 DEX<\/b> save yapar: başarısızsa <b>3d8<\/b>, başarılıysa yarısı. Hasar türü, bileşen olarak kullanılan silah ya da cephaneninkiyle aynıdır (ok için <b>delme<\/b>).",
   "fx": [
    "Hasar",
    "3d8 (silahın hasar türü)"
@@ -1932,7 +1932,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Büyünün süresi içinde bir sonraki <b>menzilli silah saldırında<\/b>, cephane (fırlatılan bir silahsa silahın kendisi) bir şimşeğe dönüşür. Saldırı zarını normal atarsın. Hedef, silahın normal hasarı <b>yerine<\/b> isabette <b>4d8 şimşek<\/b>, ıskada bunun <b>yarısını<\/b> alır. <b>İsabet de ıska da olsa<\/b>, hedefe <b>10 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> kurtarması yapar: başarısız olan <b>2d8 şimşek<\/b>, başarılı olan yarısını alır. Ardından cephane ya da silah normal hâline döner. <i>Üst slot:<\/i> her seviye için <b>her iki etkinin<\/b> hasarı +1d8.",
+  "d": "Büyünün süresi içinde bir sonraki <b>menzilli silah saldırında<\/b>, cephane (fırlatılan bir silahsa silahın kendisi) bir şimşeğe dönüşür. Saldırı zarını normal atarsın. Hedef, silahın normal hasarı <b>yerine<\/b> isabette <b>4d8 şimşek<\/b>, ıskada bunun <b>yarısını<\/b> alır. <b>İsabet de ıska da olsa<\/b>, hedefe <b>10 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> save yapar: başarısız olan <b>2d8 şimşek<\/b>, başarılı olan yarısını alır. Ardından cephane ya da silah normal hâline döner. <i>Üst slot:<\/i> her seviye için <b>her iki etkinin<\/b> hasarı +1d8.",
   "fx": [
    "Hasar",
    "4d8 şimşek + 2d8 alan"
@@ -1957,7 +1957,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": true,
   "src": "Player's Handbook",
-  "d": "Vücudunu tamamen alacak kadar büyük bir taşa, eşyalarınla birlikte girersin (8 saat); büyü dışı duyularla fark edilmezsin. İçerdeyken dışarıyı göremezsin, sesleri duymak için Algı kontrolün <b>dezavantajlı<\/b>dır; kendine büyü yapabilirsin. Girdiğin yerden çıkarsın. Taş kısmen yıkılırsa <b>6d6 ezme<\/b>, tamamen yıkılırsa <b>50 ezme<\/b> hasar alıp dışarı atılır, yere serilirsin.",
+  "d": "Vücudunu tamamen alacak kadar büyük bir taşa, eşyalarınla birlikte girersin (8 saat); büyü dışı duyularla fark edilmezsin. İçerdeyken dışarıyı göremezsin, sesleri duymak için Perception check'in <b>dezavantajlı<\/b>dır; kendine büyü yapabilirsin. Girdiğin yerden çıkarsın. Taş kısmen yıkılırsa <b>6d6 ezme<\/b>, tamamen yıkılırsa <b>50 ezme<\/b> hasar alıp dışarı atılır, yere serilirsin.",
   "fx": [
    "Etki",
    "Taşın içine gizlenirsin"
@@ -2207,7 +2207,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene ya da <b>aksiyonunla<\/b> bitirene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, zayıf, şişman ya da arada görünebilirsin. <b>Vücut tipini değiştiremezsin<\/b>; uzuvlarının temel düzeni aynı kalmalıdır. Bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin eklediğin şapkaya dokunan biri bir şey hissetmez ya da başını hisseder; daha zayıf görünürsen sana uzanan el havadayken sana çarpar. Kılık değiştirdiğini anlamak için bir yaratık <b>aksiyonunu harcayıp<\/b> seni incelemeli ve <b>DC 15 Zekâ (Araştırma)<\/b> kontrolünde başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene ya da <b>aksiyonunla<\/b> bitirene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, zayıf, şişman ya da arada görünebilirsin. <b>Vücut tipini değiştiremezsin<\/b>; uzuvlarının temel düzeni aynı kalmalıdır. Bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin eklediğin şapkaya dokunan biri bir şey hissetmez ya da başını hisseder; daha zayıf görünürsen sana uzanan el havadayken sana çarpar. Kılık değiştirdiğini anlamak için bir yaratık <b>aksiyonunu harcayıp<\/b> seni incelemeli ve <b>DC 15 Intelligence (Investigation)<\/b> check'inde başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
   "fx": [
    "Etki",
    "Görünüş illüzyonu"
@@ -2259,7 +2259,7 @@ nav button{ white-space:nowrap; }
   "conc": true,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Yaratıkların en büyük korkularının hayali görüntüsünü yansıtırsın. <b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> kurtarması yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>korkmuş<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Atılma (Dash)<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşmalıdır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS kurtarması yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "d": "Yaratıkların en büyük korkularının hayali görüntüsünü yansıtırsın. <b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> save yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>korkmuş<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Atılma (Dash)<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşmalıdır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS save yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
   "fx": [
    "Etki",
    "Elindekini bırakır + korkmuş"
@@ -2285,7 +2285,7 @@ nav button{ white-space:nowrap; }
   "conc": false,
   "ritual": false,
   "src": "Player's Handbook",
-  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS<\/b> kurtarmasında başarısız olursa bir sonraki turunda emre uyar. Hedef <b>ölümsüzse<\/b>, dilini <b>anlamıyorsa<\/b> ya da emir ona <b>doğrudan zarar veriyorsa<\/b> etkisi olmaz. Başka bir emir de verebilirsin; o zaman hedefin davranışına OY karar verir. Hedef emre uyamıyorsa büyü sona erer. <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> hareket etmez, aksiyon almaz; uçan yaratık havada kalabiliyorsa kalır, gerekirse en kısa mesafeyi uçar. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>; hedefler birbirine <b>30 ft<\/b> içinde olmalı. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, yeteneğin Bilgelik olduğu varsayıldı.<\/i>",
+  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS<\/b> save'inde başarısız olursa bir sonraki turunda emre uyar. Hedef <b>ölümsüzse<\/b>, dilini <b>anlamıyorsa<\/b> ya da emir ona <b>doğrudan zarar veriyorsa<\/b> etkisi olmaz. Başka bir emir de verebilirsin; o zaman hedefin davranışına OY karar verir. Hedef emre uyamıyorsa büyü sona erer. <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> hareket etmez, aksiyon almaz; uçan yaratık havada kalabiliyorsa kalır, gerekirse en kısa mesafeyi uçar. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>; hedefler birbirine <b>30 ft<\/b> içinde olmalı. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, spellcasting ability'nin Wisdom olduğu varsayıldı.<\/i>",
   "fx": [
    "Etki",
    "Tek kelimelik emir"
@@ -2327,7 +2327,7 @@ nav button{ white-space:nowrap; }
  {
   "id": "acrobatics", "en": "Acrobatics", "tr": "Akrobasi", "ab": "DEX",
   "d": "Dengeni ve vücut kontrolünü ölçer. Zor bir zeminde ayakta kalmak, düşmeden takla atmak, dar bir kirişte yürümek ya da birinin elinden sıyrılmak gibi çevik hareketlerde kullanılır.",
-  "use": ["Buzlu, kaygan ya da sallanan zeminde ayakta kalmak (DM isterse)", "İp, kiriş ya da dar bir çıkıntı üzerinde dengede yürümek", "Takla, sıçrama, salto gibi akrobatik hareketler", "Kavranmaktan (grapple) kurtulmak: Atletizm ya da Akrobasi ile karşı kontrol", "Düşmeden ya da yere serilmeden bir etkiden kaçınmak (DM'nin kararıyla)"]
+  "use": ["Buzlu, kaygan ya da sallanan zeminde ayakta kalmak (DM isterse)", "İp, kiriş ya da dar bir çıkıntı üzerinde dengede yürümek", "Takla, sıçrama, salto gibi akrobatik hareketler", "Kavranmaktan (grapple) kurtulmak: Athletics ya da Acrobatics ile karşı check", "Düşmeden ya da yere serilmeden bir etkiden kaçınmak (DM'nin kararıyla)"]
  },
  {
   "id": "animal-handling", "en": "Animal Handling", "tr": "Hayvan Eğitimi", "ab": "WIS",
@@ -2341,13 +2341,13 @@ nav button{ white-space:nowrap; }
  },
  {
   "id": "athletics", "en": "Athletics", "tr": "Atletizm", "ab": "STR",
-  "d": "Tırmanma, sıçrama ve yüzme gibi kas gücü gerektiren zor durumlarda kullanılır. Savaşta kavrama (grapple) ve itme (shove) de Atletizm kontrolüyle yapılır.",
-  "use": ["Kaygan ya da tutunacak yeri az bir yüzeye tırmanmak", "Normalden uzağa sıçramak ya da sıçrarken bir engeli aşmak", "Akıntıya, dalgaya ya da derin suya karşı yüzmek", "Kavrama (grapple): hedefin Atletizm ya da Akrobasi kontrolüne karşı", "İtme (shove): hedefi 5 ft itmek ya da yere sermek", "Kavranmaktan kurtulmak"]
+  "d": "Tırmanma, sıçrama ve yüzme gibi kas gücü gerektiren zor durumlarda kullanılır. Savaşta kavrama (grapple) ve itme (shove) de Athletics check ile yapılır.",
+  "use": ["Kaygan ya da tutunacak yeri az bir yüzeye tırmanmak", "Normalden uzağa sıçramak ya da sıçrarken bir engeli aşmak", "Akıntıya, dalgaya ya da derin suya karşı yüzmek", "Kavrama (grapple): hedefin Athletics ya da Acrobatics check'ine karşı", "İtme (shove): hedefi 5 ft itmek ya da yere sermek", "Kavranmaktan kurtulmak"]
  },
  {
   "id": "deception", "en": "Deception", "tr": "Aldatma", "ab": "CHA",
   "d": "Gerçeği inandırıcı biçimde gizleyebilmeni ölçer: yalan söylemek, kılık değiştirmişken rol yapmak ya da birini yanlış yönlendirmek.",
-  "use": ["Bir muhafızı ya da tüccarı kandırmak", "Kılık değiştirmişken rolünü sürdürmek", "Belirsiz konuşarak birini yanlış yöne çekmek", "Yalan söylerken yüzünü belli etmemek (karşı taraf Sezgi ile kontrol eder)"]
+  "use": ["Bir muhafızı ya da tüccarı kandırmak", "Kılık değiştirmişken rolünü sürdürmek", "Belirsiz konuşarak birini yanlış yöne çekmek", "Yalan söylerken yüzünü belli etmemek (karşı taraf Insight check'i yapar)"]
  },
  {
   "id": "history", "en": "History", "tr": "Tarih", "ab": "INT",
@@ -2357,7 +2357,7 @@ nav button{ white-space:nowrap; }
  {
   "id": "insight", "en": "Insight", "tr": "Sezgi", "ab": "WIS",
   "d": "Bir yaratığın gerçek niyetini sezmeyi ölçer: yalan söyleyip söylemediğini anlamak, bir sonraki hamlesini tahmin etmek. Beden dili, konuşma alışkanlıkları ve tavırlardaki değişimleri okursun.",
-  "use": ["Birinin yalan söyleyip söylemediğini anlamak (Aldatma'ya karşı)", "Birinin gerçekte ne istediğini ya da korktuğunu sezmek", "Bir pazarlıkta karşı tarafın sınırını kestirmek", "Büyülenmiş ya da etki altında davranışları fark etmek (DM'nin kararıyla)"]
+  "use": ["Birinin yalan söyleyip söylemediğini anlamak (Deception'a karşı)", "Birinin gerçekte ne istediğini ya da korktuğunu sezmek", "Bir pazarlıkta karşı tarafın sınırını kestirmek", "Büyülenmiş ya da etki altında davranışları fark etmek (DM'nin kararıyla)"]
  },
  {
   "id": "intimidation", "en": "Intimidation", "tr": "Gözdağı", "ab": "CHA",
@@ -2372,7 +2372,7 @@ nav button{ white-space:nowrap; }
  {
   "id": "medicine", "en": "Medicine", "tr": "Tıp", "ab": "WIS",
   "d": "Ölmekte olan bir yoldaşı dengelemeyi ya da bir hastalığı teşhis etmeyi ölçer.",
-  "use": ["0 candaki birini dengelemek: aksiyonla <b>DC 10<\/b> Tıp kontrolü (healer's kit varsa kontrolsüz)", "Bir hastalığı ya da zehri teşhis etmek", "Bir cesedin ne zaman ve nasıl öldüğünü anlamak"]
+  "use": ["0 candaki birini dengelemek: aksiyonla <b>DC 10<\/b> Medicine check (healer's kit varsa check gerekmez)", "Bir hastalığı ya da zehri teşhis etmek", "Bir cesedin ne zaman ve nasıl öldüğünü anlamak"]
  },
  {
   "id": "nature", "en": "Nature", "tr": "Doğa", "ab": "INT",
@@ -2381,8 +2381,8 @@ nav button{ white-space:nowrap; }
  },
  {
   "id": "perception", "en": "Perception", "tr": "Algı", "ab": "WIS",
-  "d": "Bir şeyi görmeyi, duymayı ya da başka bir duyuyla fark etmeyi ölçer. Çevrenin genel farkındalığı ve duyularının keskinliğidir. Oyunda en çok kullanılan beceridir; pasif Algı değerin, saklanan yaratıklara ve gizli tehlikelere karşı her zaman açıktır.",
-  "use": ["Kapının ardındaki konuşmayı duymak", "Pusuya yatmış düşmanı ya da saklanan yaratığı fark etmek (Gizlilik'e karşı; pasif Algı da sayılır)", "Uzaktaki bir işareti, dumanı ya da hareketi görmek", "Gizli bir kapıyı ya da tuzağı fark etmek (bakarak)", "Saklanan bir düşmanın yerini bulmak: savaşta Arama (Search) aksiyonu"]
+  "d": "Bir şeyi görmeyi, duymayı ya da başka bir duyuyla fark etmeyi ölçer. Çevrenin genel farkındalığı ve duyularının keskinliğidir. Oyunda en çok kullanılan skill'dir; Passive Perception değerin, saklanan yaratıklara ve gizli tehlikelere karşı her zaman açıktır.",
+  "use": ["Kapının ardındaki konuşmayı duymak", "Pusuya yatmış düşmanı ya da saklanan yaratığı fark etmek (Stealth'e karşı; Passive Perception da sayılır)", "Uzaktaki bir işareti, dumanı ya da hareketi görmek", "Gizli bir kapıyı ya da tuzağı fark etmek (bakarak)", "Saklanan bir düşmanın yerini bulmak: savaşta Arama (Search) aksiyonu"]
  },
  {
   "id": "performance", "en": "Performance", "tr": "Gösteri", "ab": "CHA",
@@ -2402,11 +2402,11 @@ nav button{ white-space:nowrap; }
  {
   "id": "sleight-of-hand", "en": "Sleight of Hand", "tr": "El Çabukluğu", "ab": "DEX",
   "d": "El becerisi gerektiren ve fark edilmemesi gereken işlerde kullanılır: bir eşyayı birine sezdirmeden yerleştirmek ya da almak, bir nesneyi üstünde gizlemek.",
-  "use": ["Cep kesmek ya da birine bir şey yerleştirmek", "Küçük bir nesneyi üstünde saklamak", "Hızlı bir el hilesi yapmak", "(Kilit açma ve tuzak sökme <b>Thieves' Tools<\/b> ile DEX kontrolüdür)"]
+  "use": ["Cep kesmek ya da birine bir şey yerleştirmek", "Küçük bir nesneyi üstünde saklamak", "Hızlı bir el hilesi yapmak", "(Kilit açma ve tuzak sökme <b>Thieves' Tools<\/b> ile DEX check'tir)"]
  },
  {
   "id": "stealth", "en": "Stealth", "tr": "Gizlilik", "ab": "DEX",
-  "d": "Düşmandan saklanmayı, muhafızların yanından sezdirmeden geçmeyi, fark edilmeden sızmayı ölçer. Saklanmak için görülmüyor olman gerekir; sonucun, seni arayanların Algı'sına (pasif ya da aktif) karşı karşılaştırılır.",
+  "d": "Düşmandan saklanmayı, muhafızların yanından sezdirmeden geçmeyi, fark edilmeden sızmayı ölçer. Saklanmak için görülmüyor olman gerekir; sonucun, seni arayanların Perception'ına (passive ya da aktif) karşı karşılaştırılır.",
   "use": ["Saklanma (Hide) aksiyonu: görüş dışında ya da yeterince örtülüyken", "Muhafızların arasından sessizce geçmek", "Pusu kurmak: savaş başında düşmanlar seni fark etmezse ilk turda şaşkın kalırlar", "Saklıyken saldırırsan: saldırıda <b>avantaj<\/b>, sonra yerin belli olur"]
  },
  {
@@ -2533,7 +2533,7 @@ const HPS = {
       ${hpWidget('char', HP.cur, HP.max)}
       <div class="hp-more"><button class="mini" data-hp="full" data-w="char">Tam can (uzun dinlenme)</button>${HP.log.length ? '<button class="mini" data-hp="undo" data-w="char">Son işlemi geri al</button>' : ''}</div>
       ${HP.log.length ? `<div class="blk"><h3>Son işlemler</h3><ul class="hp-log">${HP.log.map(l => `<li><b class="${l.raw < 0 ? 'm' : 'p'}">${l.raw < 0 ? '−' + (-l.raw) : '+' + l.raw}</b><span>${esc(l.note || (l.raw < 0 ? 'hasar' : 'iyileşme'))}</span><span>→ ${l.to}/${HP.max}</span><small>${hhmm(l.at)}</small></li>`).join('')}</ul></div>` : ''}
-      <p class="note">Miktarı yaz, <b>Hasar</b> ya da <b>İyileş</b>’e dokun; kayıt bu telefonda kalır. 0 cana düşünce bilincini kaybedersin ve her tur ölüm kurtarması atarsın (DC 10).</p>`;
+      <p class="note">Miktarı yaz, <b>Hasar</b> ya da <b>İyileş</b>’e dokun; kayıt bu telefonda kalır. 0 cana düşünce bilincini kaybedersin ve her tur death save atarsın (DC 10).</p>`;
   },
 };
 function hpAction(kind, w) {
@@ -2566,7 +2566,7 @@ function syncConc() {
   for (const el of document.querySelectorAll('[data-concbar]')) el.innerHTML = concBar();
 }
 // after damage while concentrating: the saving throw to keep it
-const concSave = (n, save) => CONC.id && SP.BY[CONC.id] ? ` · Konsantrasyon kurtarması: DC ${Math.max(10, Math.floor(n / 2))} (${save})` : '';
+const concSave = (n, save) => CONC.id && SP.BY[CONC.id] ? ` · Konsantrasyon save: DC ${Math.max(10, Math.floor(n / 2))} (${save})` : '';
 // one button for a long rest: hit points, spell slots, Fey Touched; concentration ends
 const LONG_REST_Q = 'Uzun dinlenme: can dolsun, büyü slotları ve <span lang="en">Fey Touched</span> yenilensin, konsantrasyon bitsin mi?';
 let restAsk = false;
@@ -2910,16 +2910,16 @@ $('#skills').innerHTML = SKILLS.map(([en, tr, ab, v, p]) =>
   `<li class="ih${p ? ' pr' : ''}" style="--ih:${AB_HUE[ab]}"><button class="skb" data-c="sk" data-open="${en.toLowerCase().replace(/ /g, '-')}"><i aria-hidden="true">${p === 2 ? '◆' : p ? '●' : '○'}</i><span><b lang="en">${en}</b><small>${tr} · ${ab}${p === 2 ? ' · uzmanlık' : ''}</small></span><em>+${v}</em></button></li>`).join('');
 // Skills open the same bottom sheet: long description, uses, and notes that only apply to this character.
 const SKILL_NOTES = {
- "perception": "<b>Uzmanlık</b> (yeterlilik ×2). Pasif Algı <b>21</b>. Karanlık görüş <b>90 ft</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulmak için avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili kontrollerde yeterlilik iki katı.",
+ "perception": "<b>Uzmanlık</b> (yeterlilik ×2). Passive Perception <b>21</b>. Karanlık görüş <b>90 ft</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulmak için avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili check’lerde yeterlilik iki katı.",
  "stealth": "<b>Uzmanlık</b> (yeterlilik ×2). <span lang=\"en\">Mask of the Wild</span>: yağmur, sis, yaprak gibi hafif örtüde bile saklanmayı deneyebilirsin. <span lang=\"en\">Umbral Sight</span>: karanlıkta, karanlık görüşle bakan düşmana görünmezsin. Saklıyken saldırı → <b>avantaj</b> → <span lang=\"en\">Sneak Attack</span>. <span lang=\"en\">Natural Explorer</span>: tercih ettiğin arazide yalnızken normal hızda gizli ilerlersin.",
  "survival": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) izlerken <b>avantaj</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulurken avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'da yeterlilik iki katı (<b>+11</b>); izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini de öğrenirsin.",
- "investigation": "<span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili INT kontrollerinde yeterlilik iki katı (<b>+8</b>).",
- "nature": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) hakkında bilgi hatırlarken INT kontrolünde <b>avantaj</b>.",
- "history": "<span lang=\"en\">Favored Enemy</span> (Humans, Gnolls) hakkında bilgi hatırlarken INT kontrolünde <b>avantaj</b>.",
+ "investigation": "<span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili INT check’lerinde yeterlilik iki katı (<b>+8</b>).",
+ "nature": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) hakkında bilgi hatırlarken INT check’inde <b>avantaj</b>.",
+ "history": "<span lang=\"en\">Favored Enemy</span> (Humans, Gnolls) hakkında bilgi hatırlarken INT check’inde <b>avantaj</b>.",
  "sleight-of-hand": "<span lang=\"en\">Thieves’ Tools</span> yeterliliğin var: kilit açma ve tuzak sökme DEX +5 +4.",
  "deception": "<span lang=\"en\">Disguise Kit</span> yeterliliğin ve <span lang=\"en\">Disguise Self</span> büyün var: kılık değiştirmeyle birlikte kullan.",
  "insight": "Yeterlisin (+7).",
- "acrobatics": "Yeterlisin (+9). Kavranmaktan kurtulmak için Atletizm yerine bunu seçebilirsin."
+ "acrobatics": "Yeterlisin (+9). Kavranmaktan kurtulmak için Athletics yerine bunu seçebilirsin."
 };
 const SK = (() => {
   const INFO = Object.fromEntries(JSON.parse($('#skData').textContent).map(s => [s.id, s]));
@@ -2931,18 +2931,18 @@ const SK = (() => {
       const s = INFO[id], r = ROW[id], ab = AB[s.ab];
       const prof = r.p === 2 ? 'Uzmanlık (×2)' : r.p ? 'Yeterli' : 'Yok';
       return `
-        <div class="sh-top"><span class="ic" style="--h:${AB_HUE[s.ab]}" aria-hidden="true"><b class="ab-ic">${s.ab}</b></span><div><h2 id="shName" lang="en">${esc(s.en)}</h2><p>${esc(s.tr)} · ${ab[0]} (<span lang="en">${ab[1]}</span>)</p></div>
+        <div class="sh-top"><span class="ic" style="--h:${AB_HUE[s.ab]}" aria-hidden="true"><b class="ab-ic">${s.ab}</b></span><div><h2 id="shName" lang="en">${esc(s.en)}</h2><p>${esc(s.tr)} · <span lang="en">${ab[1]}</span></p></div>
           <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
         <dl class="facts">
           <div class="fact key"><dt>Bonus</dt><dd>+${r.v}</dd></div>
-          <div class="fact key"><dt>Pasif</dt><dd>${10 + r.v}<small>10 + bonus</small></dd></div>
-          <div class="fact"><dt>Yetenek</dt><dd>${s.ab}</dd></div>
+          <div class="fact key"><dt lang="en">Passive</dt><dd>${10 + r.v}<small>10 + bonus</small></dd></div>
+          <div class="fact"><dt lang="en">Ability</dt><dd>${s.ab}</dd></div>
           <div class="fact"><dt>Yeterlilik</dt><dd>${prof}</dd></div>
         </dl>
         <div class="desc">${s.d}</div>
         <div class="blk"><h3>Kullanım alanları</h3><ul class="uses">${s.use.map(u => `<li>${u}</li>`).join('')}</ul></div>
         ${SKILL_NOTES[id] ? `<div class="tip">${SKILL_NOTES[id]}</div>` : ''}
-        <div class="src">Becerinin zor olduğu durumlarda DM bir DC söyler (kolay 10 · orta 15 · zor 20 · çok zor 25); d20 + bonus ≥ DC başarılıdır.</div>`;
+        <div class="src">Check zor olduğunda DM bir DC söyler (kolay 10 · orta 15 · zor 20 · çok zor 25); d20 + bonus ≥ DC başarılıdır.</div>`;
     },
   };
 })();
@@ -2952,24 +2952,24 @@ const SK = (() => {
 const SRC_HUE = {"Feat":45,"Druid":115,"Moon":230,"Monk":18,"Outlander":30,"Ranger":140,"Gloom Stalker":265,"Rogue":350,"Wood Elf":95,"Urchin":30};
 const FEATS = [
   ['Sharpshooter', 'Feat', '', 'Uzun menzilde saldırı <b>dezavantajsız</b>. Menzilli silah saldırıların <b>yarım ve dörtte üç siperi yok sayar</b>. Saldırıdan önce seçersen: saldırı zarına <b>−5</b>, isabet ederse hasara <b>+10</b>.'],
-  ['Fey Touched', 'Feat', '1 / uzun dinlenme', '<span lang="en">Misty Step</span> ve <span lang="en">Command</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b>. Uygun seviyedeki slotlarla da yapılabilir. Hangi yeteneği kullandığı sayfada yazmıyor; <b>DC 15 (Bilgelik)</b> varsayıldı, Karizma seçildiyse DC 14.'],
+  ['Fey Touched', 'Feat', '1 / uzun dinlenme', '<span lang="en">Misty Step</span> ve <span lang="en">Command</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b>. Uygun seviyedeki slotlarla da yapılabilir. Hangi yeteneği kullandığı sayfada yazmıyor; <b>DC 15 (Wisdom)</b> varsayıldı, Charisma seçildiyse DC 14.'],
   ['Dread Ambusher', 'Gloom Stalker', 'İlk tur', 'İnisiyatife <b>+3</b> (WIS). Her savaşın ilk turunun başında yürüme hızın <b>+10 ft</b>. O tur Saldırı aksiyonu alırsan <b>bir silah saldırısı daha</b>; isabet ederse <b>+1d8</b> silah türünde hasar.'],
   ['Umbral Sight', 'Gloom Stalker', '', 'Karanlık görüşün <b>90 ft</b> (elf 60 + 30). Karanlıktayken, seni karanlık görüşle görmeye çalışan yaratıklara karşı <b>görünmezsin</b>.'],
-  ['Iron Mind', 'Gloom Stalker', '', 'Bilgelik kurtarmalarında yeterlilik (WIS kurtarma +8). <i>Sayfanın özellik listesinde yazmıyor; kurtarma alanında işaretli ve Gloom Stalker 7. seviye özelliği.</i>'],
+  ['Iron Mind', 'Gloom Stalker', '', 'Wisdom save’lerinde yeterlilik (WIS save +8). <i>Sayfanın özellik listesinde yazmıyor; save alanında işaretli ve Gloom Stalker 7. seviye özelliği.</i>'],
   ['Gloom Stalker Magic', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman bilinir, bilinen büyü sayısına dahil değil.'],
   ['Extra Attack', 'Ranger', '', 'Saldırı aksiyonunda <b>iki saldırı</b>.'],
   ['Fighting Style: Archery', 'Ranger', '', 'Menzilli silah saldırılarına <b>+2</b> (Longbow +13’e dahil).'],
-  ['Favored Enemy', 'Ranger', '', '<span lang="en">Beasts, Humans, Gnolls</span>: onları izlerken Hayatta Kalma kontrollerinde ve onlar hakkında bilgi hatırlarken INT kontrollerinde <b>avantaj</b>.'],
-  ['Natural Explorer', 'Ranger', '', '<span lang="en">Forest, Grassland</span>: bu arazilerle ilgili, yeterli olduğun becerilerle INT/WIS kontrollerinde yeterlilik <b>iki katı</b>. 1 saat+ yolculukta: zorlu arazi grubu yavaşlatmaz, büyü olmadan kaybolunmaz, başka işle uğraşırken bile tehlikeye karşı tetikte kalırsın, yalnızken normal hızda gizli ilerlersin, iki kat yiyecek bulursun, izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini öğrenirsin.'],
+  ['Favored Enemy', 'Ranger', '', '<span lang="en">Beasts, Humans, Gnolls</span>: onları izlerken Survival check’lerinde ve onlar hakkında bilgi hatırlarken INT check’lerinde <b>avantaj</b>.'],
+  ['Natural Explorer', 'Ranger', '', '<span lang="en">Forest, Grassland</span>: bu arazilerle ilgili, yeterli olduğun skill’lerle INT/WIS check’lerinde yeterlilik <b>iki katı</b>. 1 saat+ yolculukta: zorlu arazi grubu yavaşlatmaz, büyü olmadan kaybolunmaz, başka işle uğraşırken bile tehlikeye karşı tetikte kalırsın, yalnızken normal hızda gizli ilerlersin, iki kat yiyecek bulursun, izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini öğrenirsin.'],
   ['Primeval Awareness', 'Ranger', 'Aksiyon · 1 slot', 'Bir ranger slotu harcarsın; slot seviyesi başına <b>1 dakika</b> boyunca 1 mil (tercih ettiğin arazide 6 mil) içinde aberration, celestial, dragon, elemental, fey, fiend ve undead var mı sezersin. Yer ve sayı vermez.'],
-  ['Land’s Stride', 'Ranger', '', 'Büyüsüz zorlu arazi ek hareket harcatmaz; büyüsüz bitkilerden yavaşlamadan ve dikenlerinden hasar almadan geçersin. Hareketi engellemek için büyüyle yaratılmış bitkilere karşı kurtarmada <b>avantaj</b>.'],
+  ['Land’s Stride', 'Ranger', '', 'Büyüsüz zorlu arazi ek hareket harcatmaz; büyüsüz bitkilerden yavaşlamadan ve dikenlerinden hasar almadan geçersin. Hareketi engellemek için büyüyle yaratılmış bitkilere karşı save’de <b>avantaj</b>.'],
   ['Sneak Attack', 'Rogue', 'Turda 1', 'Saldırı zarında avantajın varsa ya da hedefin 5 ft yanında etkisiz kalmamış bir müttefikin varsa (ve dezavantajın yoksa), finesse ya da menzilli silahla isabette <b>+1d6</b>.'],
   ['Expertise', 'Rogue', '', '<span lang="en">Perception</span> (+11) ve <span lang="en">Stealth</span> (+13) için yeterlilik iki katı.'],
   ['Thieves’ Cant', 'Rogue', '', 'Hırsızların gizli dili: sıradan konuşmanın içine gizli mesaj saklarsın (dört kat uzun sürer); tehlike, ganimet, güvenli ev gibi kısa mesajlar veren gizli işaretleri tanırsın.'],
-  ['Fey Ancestry', 'Wood Elf', '', 'Büyülenmeye karşı kurtarmada <b>avantaj</b>; büyü seni uyutamaz.'],
+  ['Fey Ancestry', 'Wood Elf', '', 'Büyülenmeye karşı save’de <b>avantaj</b>; büyü seni uyutamaz.'],
   ['Mask of the Wild', 'Wood Elf', '', 'Yalnızca hafif örtülüyken (yaprak, yağmur, kar, sis…) bile <b>saklanmayı deneyebilirsin</b>.'],
   ['Trance', 'Wood Elf', '', 'Uyumazsın; <b>4 saat</b> yarı bilinçli trans, 8 saatlik uykunun yerini tutar. Uzun dinlenme yine 8 saat sürer (kalanı hafif etkinlik).'],
-  ['Keen Senses', 'Wood Elf', '', '<span lang="en">Perception</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor; Algı yeterliliği buradan.</i>'],
+  ['Keen Senses', 'Wood Elf', '', '<span lang="en">Perception</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor; Perception yeterliliği buradan.</i>'],
   ['Fleet of Foot', 'Wood Elf', '', 'Yürüme hızın <b>35 ft</b>. <i>Sayfada özellik olarak yazmıyor.</i>'],
   ['Elf Weapon Training', 'Wood Elf', '', '<span lang="en">Longsword, Shortsword, Shortbow, Longbow</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor.</i>'],
   ['City Secrets', 'Urchin', '', 'Şehirlerin gizli geçitlerini bilirsin: savaş dışındayken sen ve yönettiğin arkadaşların şehirde iki nokta arasında <b>iki kat hızlı</b> yol alırsınız.'],
@@ -2981,7 +2981,7 @@ $('#feats').innerHTML = FEATS.map(([n, src, use, d]) =>
 const INV_KEY = 'berathast-inventory-v1';
 const inv = load(INV_KEY, null) || { items: [
   { id: 'eq1', t: 'Longbow +2 (saldırı ve hasara +2)', q: 1 },
-  { id: 'eq3', t: 'Ring of Protection (uyumlu: AC ve kurtarmalara +1)', q: 1 },
+  { id: 'eq3', t: 'Ring of Protection (uyumlu: AC ve save’lere +1)', q: 1 },
   { id: 'eq4', t: 'Robe of Magic Resistance (DM: %10 büyü direnci)', q: 1 },
   { id: 'eq5', t: 'Bear Hide Armor +2', q: 1 },
 ], notes: [] };
