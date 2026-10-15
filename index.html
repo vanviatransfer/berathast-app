@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '025c214b86'; window.__BUILT__ = '2026-10-13 12:07';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '5fefa5b944'; window.__BUILT__ = '2026-10-15 16:47';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -279,8 +279,10 @@ textarea:focus-visible, input:focus-visible{ outline:2px solid var(--acc); outli
 .sec > .lvl-h::after{ background:hsl(var(--sh) 22% 30%); }
 .sec > .lvl-h small{ color:hsl(var(--sh) 14% 62%); }
 .sec .card, .sec .quick div{ background:color-mix(in oklab, hsl(var(--sh) 40% 45%) 8%, var(--surface)); border-color:color-mix(in oklab, hsl(var(--sh) 35% 55%) 26%, var(--line)); }
-.quick div{ background:color-mix(in oklab, hsl(32 40% 45%) 7%, var(--surface)); border-color:color-mix(in oklab, hsl(32 35% 55%) 22%, var(--line)); }
-.quick dd{ color:hsl(32 52% 72%); }
+/* quick values: one clear hue per box, so they read apart (user's request) */
+.quick div{ --qh:32; background:color-mix(in oklab, hsl(var(--qh) 40% 45%) 13%, var(--surface)); border-color:color-mix(in oklab, hsl(var(--qh) 35% 58%) 38%, var(--line)); border-left:3px solid hsl(var(--qh) 38% 56%); }
+.quick dt{ color:hsl(var(--qh) 30% 70%) !important; }
+.quick dd{ color:hsl(var(--qh) 48% 76%); }
 /* one item = one hue: abilities and skills by ability, features by source */
 .ih{ background:color-mix(in oklab, hsl(var(--ih) 36% 45%) 9%, var(--surface)) !important; border-color:color-mix(in oklab, hsl(var(--ih) 30% 58%) 28%, var(--line)) !important; }
 .abl .ih b, .abl .ih span{ color:hsl(var(--ih) 38% 74%); }
@@ -493,6 +495,21 @@ nav button{ white-space:nowrap; }
 .lightbox .x{ position:absolute; top:calc(env(safe-area-inset-top,0px) + 10px); right:10px; background:rgba(0,0,0,.45); color:var(--ink); }
 .rules-boxes{ margin-top:22px; }
 .rules-boxes > .lvl-h{ margin-top:0; }
+/* gold sub-boxes and every item / note entry in its own soft hue */
+.gsum div{ --qh:32; background:color-mix(in oklab, hsl(var(--qh) 40% 45%) 13%, var(--bg)); border-color:color-mix(in oklab, hsl(var(--qh) 35% 58%) 38%, var(--line)); border-left:3px solid hsl(var(--qh) 38% 56%); }
+.gsum small{ color:hsl(var(--qh) 30% 70%); }
+.gsum b{ color:hsl(var(--qh) 48% 76%); }
+.entry{ --eh:30; background:color-mix(in oklab, hsl(var(--eh) 40% 45%) 12%, var(--bg)); border-color:color-mix(in oklab, hsl(var(--eh) 35% 58%) 36%, var(--line)); border-left:3px solid hsl(var(--eh) 38% 56%); }
+.entry .gv b{ color:hsl(var(--eh) 45% 76%); }
+/* Wild Shape form facts: one hue per box */
+.fact.fq{ background:color-mix(in oklab, hsl(var(--fq) 40% 45%) 13%, var(--bg)) !important; border-color:color-mix(in oklab, hsl(var(--fq) 35% 58%) 38%, var(--line)); border-left:3px solid hsl(var(--fq) 38% 56%); }
+.fact.fq dt{ color:hsl(var(--fq) 40% 72%); }
+/* "are you sure?" before taking something off the list */
+.ask{ position:fixed; inset:0; z-index:35; display:grid; place-items:center; padding:16px; background:var(--scrim); }
+.ask[hidden]{ display:none; }
+.ask-box{ width:min(380px,100%); background:var(--surface); color:var(--ink); border:1px solid var(--ctl); border-radius:14px; padding:16px; box-shadow:0 10px 40px rgb(0 0 0 / .45); }
+.ask-box p{ margin:0 0 12px; font-size:1rem; line-height:1.4; }
+.ask-box .confirm{ font-size:.95rem; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -556,12 +573,12 @@ nav button{ white-space:nowrap; }
   <section class="card build-card"><span lang="en">Wood Elf Ranger (Gloom Stalker)</span> 9 / <span lang="en">Rogue</span> 1</section>
 
   <dl class="quick">
-   <div><dt>Yeterlilik</dt><dd>+4</dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
-   <div><dt>İnisiyatif</dt><dd>+8</dd><span class="en-name" lang="en">Initiative</span></div>
-   <div><dt>Hız</dt><dd>35 ft</dd><span class="en-name" lang="en">Speed</span></div>
-   <div><dt>Pasif Algı</dt><dd>21</dd><span class="en-name" lang="en">Passive Perception</span></div>
-   <div><dt>Can zarı</dt><dd>1d8 + 9d10</dd><span class="en-name" lang="en">Hit Dice</span></div>
-   <div><dt>Büyü</dt><dd>+7 · DC 15</dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
+   <div style="--qh:45"><dt>Yeterlilik</dt><dd>+4</dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
+   <div style="--qh:205"><dt>İnisiyatif</dt><dd>+8</dd><span class="en-name" lang="en">Initiative</span></div>
+   <div style="--qh:130"><dt>Hız</dt><dd>35 ft</dd><span class="en-name" lang="en">Speed</span></div>
+   <div style="--qh:270"><dt>Pasif Algı</dt><dd>21</dd><span class="en-name" lang="en">Passive Perception</span></div>
+   <div style="--qh:0"><dt>Can zarı</dt><dd>1d8 + 9d10</dd><span class="en-name" lang="en">Hit Dice</span></div>
+   <div style="--qh:320"><dt>Büyü</dt><dd>+7 · DC 15</dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
   </dl>
   <p class="sub">Zırh: <span lang="en">Bear Hide Armor +2</span> + <span lang="en">Ring of Protection</span> +1 → AC <b id="acLine">20</b> (üstteki AC kutusuna dokunup elle değiştirebilirsin). İnisiyatif: DEX 5 + WIS 3 (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>90 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 30). Uçma, tırmanma, yüzme hızı yok.</p>
 
@@ -691,6 +708,7 @@ nav button{ white-space:nowrap; }
  <button class="x" data-lbclose aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="ask" id="ask" role="alertdialog" aria-modal="true" aria-labelledby="askT" hidden><div class="ask-box"><p id="askT"></p><div class="confirm"><button class="yes" data-ask="yes">Evet, çıkar</button><button data-ask="no">Vazgeç</button></div></div></div>
 
 <script id="spData" type="application/json">[
  {
@@ -2415,7 +2433,25 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>'
 const fold = s => s.toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, '');
 const focusQuiet = el => { if (el) el.focus({ preventScroll: true }); };
 const load = (k, d) => { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : d; } catch (e) { return d; } };
-const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } };
+// Second copy of everything in IndexedDB. Updates never touch localStorage, but if it ever comes back empty
+// (browser clean-up, storage pressure) the app restores notes, items and selections from this copy at start.
+const MIRROR = (() => {
+  let dbp = null;
+  const db = () => dbp || (dbp = new Promise((ok, no) => { const r = indexedDB.open('berathast-mirror', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); }));
+  const run = (mode, fn) => db().then(d => new Promise((ok, no) => { const tx = d.transaction('kv', mode), st = tx.objectStore('kv'), out = fn(st); tx.oncomplete = () => ok(out && out.result); tx.onerror = () => no(tx.error); }));
+  // keys that were in localStorage before this page wrote anything (first-run defaults and migrations write at start)
+  const had = new Set(); try { for (let i = 0; i < localStorage.length; i++) had.add(localStorage.key(i)); } catch (e) {}
+  // writes made before the start-up check are held back, so defaults never overwrite the saved copy
+  let held = new Map();
+  const write = (k, raw) => { try { run('readwrite', st => st.put(raw, k)).catch(() => {}); } catch (e) {} };
+  return {
+    had,
+    put(k, raw) { if (held) held.set(k, raw); else write(k, raw); },
+    release() { const h = held; held = null; if (h) for (const [k, raw] of h) write(k, raw); },
+    all() { try { return run('readonly', st => { const res = {}; const c = st.openCursor(); c.onsuccess = () => { const cur = c.result; if (cur) { res[cur.key] = cur.value; cur.continue(); } }; return { get result() { return res; } }; }); } catch (e) { return Promise.resolve({}); } },
+  };
+})();
+const store = (k, v) => { try { const raw = JSON.stringify(v); localStorage.setItem(k, raw); MIRROR.put(k, raw); return true; } catch (e) { return false; } };
 let persistAsked = false;
 // Ask the browser not to evict our data (granted for installed apps; harmless elsewhere).
 const askPersist = () => { if (persistAsked) return; persistAsked = true; try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (e) {} };
@@ -2762,6 +2798,8 @@ const SP = (() => {
       C.prep.innerHTML = html + rules;
     },
     // returns a toast message, or null when nothing changed
+    // removing needs a yes first (user's request)
+    rmAsk(id) { const s = BY[id]; return s && !always(s) && isSel(id) ? `<b lang="en">${esc(s.en)}</b> bilinen büyülerden çıkarılsın mı?` : null; },
     toggle(id) {
       const s = BY[id]; if (!s || always(s)) return null;
       const i = state.sel.indexOf(id);
@@ -2814,7 +2852,20 @@ function applyFilter(C) {
   const nh = C.all.querySelector('[data-nohits]'); nh.hidden = any;
   if (!any) nh.textContent = C.query.trim() ? `“${C.query.trim()}” için sonuç bulunamadı.` : 'Bu filtreye uyan sonuç yok.';
 }
-function toggleIn(C, id) {
+let askCb = null, askBack = null;
+function ask(q, cb) {
+  askCb = cb; askBack = document.activeElement;
+  $('#askT').innerHTML = q; $('#ask').hidden = false;
+  focusQuiet($('#ask [data-ask="no"]'));
+}
+function closeAsk(ok) {
+  if ($('#ask').hidden) return false;
+  const cb = askCb; askCb = null; $('#ask').hidden = true;
+  if (ok && cb) cb(); else if (askBack && askBack.isConnected) focusQuiet(askBack);
+  return true;
+}
+function toggleIn(C, id, sure) {
+  if (!sure && C.rmAsk) { const q = C.rmAsk(id); if (q) return ask(q, () => toggleIn(C, id, true)); }
   const r = C.toggle(id);
   if (!r) return;
   if (r.blocked) { if (!openRef) toast(r.blocked); return; }
@@ -2946,10 +2997,13 @@ function saveInv(msg) {
   askPersist();
   toast(ok ? msg : 'Kaydedilemedi: bu tarayıcı veri saklamaya izin vermiyor.');
 }
+// every entry gets its own soft hue, in turn, so neighbouring items/notes read apart (user's request)
+const ENTRY_HUES = [205, 130, 275, 18, 175, 320, 85, 245, 45, 350];
+const entryHue = (kind, e) => ENTRY_HUES[Math.max(0, inv[kind].indexOf(e)) % ENTRY_HUES.length];
 function entryHTML(kind, e) {
-  const isItem = kind === 'items';
+  const isItem = kind === 'items', eh = `style="--eh:${entryHue(kind, e)}"`;
   if (invEdit && invEdit.kind === kind && invEdit.id === e.id) {
-    return `<li class="entry"><textarea rows="${isItem ? 2 : 4}" data-edit-text aria-label="Düzenle">${esc(e.t)}</textarea>
+    return `<li class="entry" ${eh}><textarea rows="${isItem ? 2 : 4}" data-edit-text aria-label="Düzenle">${esc(e.t)}</textarea>
       ${isItem ? `<label class="gfield">Değeri (tanesi) <input data-edit-g type="text" inputmode="decimal" value="${e.g ? String(e.g).replace('.', ',') : ''}" placeholder="0" aria-label="Değeri, gp"><span>gp</span></label>` : ''}
       <div class="row"><span class="sp"></span><button class="mini" data-inv="cancel">Vazgeç</button><button class="mini pri" data-inv="save-edit" data-kind="${kind}" data-id="${e.id}">Kaydet</button></div></li>`;
   }
@@ -2958,7 +3012,7 @@ function entryHTML(kind, e) {
     : `${isItem ? `<span class="qty"><button class="mini" data-inv="qty" data-d="-1" data-id="${e.id}" aria-label="Azalt: ${esc(e.t)}">−</button><output>${e.q}</output><button class="mini" data-inv="qty" data-d="1" data-id="${e.id}" aria-label="Artır: ${esc(e.t)}">+</button></span>` : ''}
        <span class="sp"></span><button class="mini" data-inv="edit" data-kind="${kind}" data-id="${e.id}">Düzenle</button><button class="mini danger" data-inv="del" data-kind="${kind}" data-id="${e.id}">Sil</button>`;
   const val = isItem && e.g ? `<div class="gv">${gp(e.g)} tanesi${e.q !== 1 ? ` · ${e.q} adet = <b>${gp(e.g * e.q)}</b>` : ''}</div>` : '';
-  return `<li class="entry"><div class="txt">${esc(e.t)}</div>${val}<div class="row">${del}</div></li>`;
+  return `<li class="entry" ${eh}><div class="txt">${esc(e.t)}</div>${val}<div class="row">${del}</div></li>`;
 }
 function renderInv() {
   // the box you type into stays on top; entries go below it, oldest first, newest at the bottom (user's request)
@@ -2966,7 +3020,7 @@ function renderInv() {
   $('#invItems').innerHTML = `
     <div class="card gold">
       <h3>Altın</h3>
-      <div class="gsum"><div class="me"><small>Kesende</small><b>${gp(inv.gold)}</b></div><div><small>Eşyaların değeri</small><b>${gp(iv)}</b></div><div><small>Toplam</small><b>${gp(inv.gold + iv)}</b></div></div>
+      <div class="gsum"><div class="me" style="--qh:45"><small>Kesende</small><b>${gp(inv.gold)}</b></div><div style="--qh:205"><small>Eşyaların değeri</small><b>${gp(iv)}</b></div><div style="--qh:130"><small>Toplam</small><b>${gp(inv.gold + iv)}</b></div></div>
       <div class="gin"><input id="goldIn" type="text" inputmode="decimal" placeholder="Miktar (gp)" aria-label="Altın miktarı, gp"><button class="mini pri" data-gold="add">+ Ekle</button><button class="mini" data-gold="spend">− Harca</button><button class="mini" data-gold="set">Ayarla</button></div>
     </div>
     <div class="card inv" style="--ih:42">
@@ -3201,7 +3255,7 @@ function swipe(dir) {
 (function(){
   let x0 = 0, y0 = 0, t0 = 0, on = false;
   document.addEventListener('touchstart', e => {
-    on = !openRef && !lbOpen && e.touches.length === 1 && !e.target.closest('input, textarea, nav, .sheet');
+    on = !openRef && !lbOpen && $('#ask').hidden && e.touches.length === 1 && !e.target.closest('input, textarea, nav, .sheet');
     if (!on) return;
     x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
   }, { passive: true });
@@ -3261,6 +3315,7 @@ function closeLightbox(fromPop) {
 lb.addEventListener('click', () => closeLightbox());
 addEventListener('popstate', e => {
   if (skipPop) { skipPop--; return; }
+  closeAsk(false);
   if (lbOpen) { closeLightbox(true); return; }
   if (openRef) { closeSheet(true); return; }
   const st = e.state;
@@ -3302,6 +3357,12 @@ try { history.replaceState({ nav: 1, tab: 'char', sub: null }, ''); } catch (e) 
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
+  if (!$('#ask').hidden) {
+    // the question is on top of everything: only its buttons (or a tap outside = no) count
+    const a = e.target.closest('[data-ask]');
+    if (a || !e.target.closest('.ask-box')) closeAsk(!!a && a.dataset.ask === 'yes');
+    return;
+  }
   const t = e.target.closest('[data-portrait],[data-pick],[data-open],[data-gold],[data-f],[data-close],[data-lim],[data-clear],[data-tab],[data-sub],[data-inv],[data-backup],[data-install],[data-update],[data-hpopen],[data-hp],[data-acopen],[data-ac],[data-slot],[data-conc],[data-rest],#scrim');
   if (!t) return;
   const C = t.dataset.c === 'sk' ? SK : CATS[t.dataset.c];
@@ -3341,7 +3402,7 @@ document.addEventListener('click', e => {
   if (t.dataset.backup === 'export') return exportData();
   if (t.dataset.backup === 'import') return $('#importFile').click();
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (lbOpen) closeLightbox(); else closeSheet(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (closeAsk(false)) return; if (lbOpen) closeLightbox(); else closeSheet(); } });
 SP.q.addEventListener('input', e => {
   SP.query = e.target.value;
   const k = fold(SP.query.trim());
@@ -3367,6 +3428,23 @@ for (const C of Object.values(CATS)) C.renderPrep();
 })();
 syncChrome();
 syncConc();
+// keep the IndexedDB copy in step; if localStorage lost a key the copy still has, put it back and reload once
+(function(){
+  if (!window.indexedDB) return;
+  MIRROR.all().then(saved => {
+    let restored = 0, again = false;
+    try { again = !!sessionStorage.getItem('berathast-restored'); } catch (e) {}
+    if (!again) for (const k of BACKUP_KEYS) {
+      if (MIRROR.had.has(k) || saved[k] == null) continue;
+      try { localStorage.setItem(k, saved[k]); restored++; } catch (e) {}
+    }
+    if (restored) { try { sessionStorage.setItem('berathast-restored', '1'); } catch (e) {} location.reload(); return; }
+    MIRROR.release();
+    try { sessionStorage.removeItem('berathast-restored'); } catch (e) {}
+    // bring the copy up to date with what is stored now
+    for (const k of BACKUP_KEYS) { let raw = null; try { raw = localStorage.getItem(k); } catch (e) {} if (raw && saved[k] !== raw) MIRROR.put(k, raw); }
+  }).catch(() => MIRROR.release());
+})();
 })();
 </script>
 
