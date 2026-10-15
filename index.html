@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '587d0c3398'; window.__BUILT__ = '2026-10-15 21:23';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '65489836da'; window.__BUILT__ = '2026-10-15 21:33';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -660,8 +660,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    </article>
    <article class="ab" style="--ah:130">
     <h3><span lang="en">Hunter’s Mark</span><small>bonus aksiyon · konsantrasyon</small></h3>
-    <div class="chs"><span class="ch add"><small>Her isabette</small><b>+1d6</b> <em>işaretli hedefe</em></span></div>
-    <p><span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> (ve <span lang="en">Ensnaring / Zephyr Strike</span>) hepsi bonus aksiyon + konsantrasyon: <b>aynı anda yalnız biri</b>. Konsantrasyon save <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
+    <div class="chs"><span class="ch add"><small>Her isabette</small><b>+1d6</b> <em>force · işaretli hedefe</em></span></div>
+    <p><span lang="en">Hunter’s Mark</span>, <span lang="en">Ensnaring Strike</span> ve <span lang="en">Zephyr Strike</span> konsantrasyon ister: <b>aynı anda yalnız biri</b>. <span lang="en">Hail of Thorns</span> ve <span lang="en">Lightning Arrow</span> konsantrasyon <b>istemez</b>, <span lang="en">Hunter’s Mark</span> sürerken de kullanılır (ikisi de bonus aksiyon, aynı tur yalnız biri). Konsantrasyon save <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
    </article>
    <article class="ab" style="--ah:180">
     <h3>Büyü<small>Wisdom</small></h3>
@@ -811,15 +811,15 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir lokma yiyecek",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Görebildiğin, seni görüp duyan bir hayvanı ikna edersin. Intelligence'ı <b>4 veya üstüyse<\/b> büyü başarısız olur. Aksi hâlde <b>WIS DC 15<\/b> save'ini geçemezse süre boyunca (24 saat) sana <b>büyülenmiş<\/b> olur. Sen ya da yoldaşların ona zarar verirse biter. <i>Üst slot:<\/i> her seviye için +1 hayvan.",
+  "src": "Player's Handbook (2024)",
+  "d": "Görebildiğin bir hayvan <b>DC 15 WIS save<\/b> yapar; save'inde başarısız olursa süre boyunca (24 saat) sana <b>büyülenmiş<\/b> olur. Hayvanın Intelligence'ı ne olursa olsun çalışır. Sen ya da müttefiklerin ona hasar verirse büyü biter. <i>Üst slot:<\/i> her seviye için +1 hayvan.",
   "fx": [
    "Etki",
    "Büyülenmiş (24 saat)"
   ],
   "ar": [
    "Hedef",
-   "1 hayvan (Intelligence ≤ 3)"
+   "1 hayvan"
   ]
  },
  {
@@ -861,11 +861,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun yaratık <b>1d8+3<\/b> can kazanır. <b>Ölümsüz ve yapaylara etki etmez.<\/b> <i>Üst slot:<\/i> her seviye için +1d8.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun yaratık <b>2d8+3<\/b> can kazanır. <i>Üst slot:<\/i> her seviye için +2d8.",
   "fx": [
    "İyileştirme",
-   "1d8+3 can"
+   "2d8+3 can"
   ],
   "ar": [
    "Hedef",
@@ -936,8 +936,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Büyü bitmeden bir yaratığa <b>silah saldırısıyla bir sonraki isabetinde<\/b> vuruş noktasında dikenli sarmaşıklar belirir: hedef <b>DC 15 STR<\/b> save'inde başarısız olursa büyü bitene kadar <b>kısıtlanmış<\/b> olur. <b>Büyük ya da daha iri<\/b> yaratıklar avantajla atar. Başarılı olursa sarmaşıklar kurur. Kısıtlıyken hedef her turunun başında <b>1d6 delme<\/b> alır. Hedef ya da ona dokunabilen bir yaratık <b>aksiyonuyla DC 15 Strength check<\/b> yapar; başarılıysa hedef kurtulur. <i>Üst slot:<\/i> her seviye için +1d6.",
+  "src": "Player's Handbook (2024)",
+  "d": "Bir yaratığa <b>silahla isabet ettiğin anda<\/b> bonus aksiyonla yaparsın; böylece ıskada slot harcanmaz. Hedefin üstünde sarmaşıklar belirir: <b>DC 15 STR save<\/b>'inde başarısız olursa büyü bitene kadar <b>kısıtlanmış<\/b> olur. <b>Büyük ya da daha iri<\/b> yaratıklar avantajla atar. Başarılı save'de sarmaşıklar kurur ve büyü biter. Kısıtlıyken hedef her turunun başında <b>1d6 delme<\/b> alır. Hedef ya da ona erişebilen bir yaratık <b>aksiyonla DC 15 Strength (Athletics) check<\/b> yapar; başarılıysa büyü biter. <i>Üst slot:<\/i> her seviye için +1d6.",
   "fx": [
    "Hasar",
    "1d6 delme/tur + kısıtlanmış"
@@ -986,8 +986,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> sis küresi; köşelerden dolanır, alan <b>tamamen kapalı görüşlü<\/b> (heavily obscured). Süre bitene ya da en az orta şiddette rüzgâr dağıtana dek sürer. <i>Üst slot:<\/i> her seviye için yarıçap +20 ft.",
+  "src": "Player's Handbook (2024)",
+  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> sis küresi; alan <b>tamamen kapalı görüşlü<\/b> (heavily obscured). Süre bitene ya da güçlü bir rüzgâr (ör. Gust of Wind) dağıtana dek sürer. <i>Üst slot:<\/i> her seviye için yarıçap +20 ft.",
   "fx": [
    "Etki",
    "Görüşü tamamen kapatır"
@@ -1006,13 +1006,13 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Transmutation",
   "time": "1 Aksiyon",
   "range": "Dokunma",
-  "dur": "Anında",
+  "dur": "24 saat",
   "comp": "V, S, M",
   "mat": "bir ökseotu dalı",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Elinde <b>10'a kadar<\/b> büyülü meyve belirir. Bir yaratık aksiyonla bir meyve yer: <b>1 can<\/b> kazanır ve bir günlük beslenmesini karşılar. Meyveler 24 saat içinde yenmezse etkisini kaybeder.",
+  "src": "Player's Handbook (2024)",
+  "d": "Elinde <b>10<\/b> büyülü meyve belirir ve süre boyunca (24 saat) büyülü kalır. Bir yaratık <b>bonus aksiyonla<\/b> bir meyve yer: <b>1 can<\/b> kazanır ve bir günlük beslenmesini karşılar. Süre bitince yenmemiş meyveler kaybolur.",
   "fx": [
    "İyileştirme",
    "Meyve başına 1 can (10 meyve)"
@@ -1031,13 +1031,13 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Conjuration",
   "time": "1 Bonus Aksiyon",
   "range": "Kendine",
-  "dur": "Kons. · 1 dk",
+  "dur": "Anında",
   "comp": "V",
   "mat": "",
-  "conc": true,
+  "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Büyü bitmeden önce bir yaratığa <b>menzilli silah saldırısıyla bir sonraki isabetinde<\/b>, silahından ya da cephanenden fışkıran bir diken yağmuru oluşur. Saldırının normal etkisine ek olarak, hedef ve ona <b>5 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> save yapar: başarısız olan <b>1d10 delme<\/b> alır, başarılı olan bunun <b>yarısını<\/b> alır. <i>Üst slot:<\/i> her seviye için +1d10 (<b>en fazla 6d10<\/b>).",
+  "src": "Player's Handbook (2024)",
+  "d": "Bir yaratığa <b>menzilli silahla isabet ettiğin anda<\/b> bonus aksiyonla yaparsın; <b>konsantrasyon gerekmez<\/b>. Silahından ya da cephanenden bir diken yağmuru fışkırır: hedef ve ona <b>5 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX save<\/b> yapar; başarısız olan <b>1d10 delme<\/b> alır, başarılı save'de yarısı. <i>Üst slot:<\/i> her seviye için +1d10.",
   "fx": [
    "Hasar",
    "1d10 delme"
@@ -1061,11 +1061,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Menzilde <b>görebildiğin bir yaratığı<\/b> avın olarak işaretlersin. Büyü sona erene kadar hedefe bir <b>silah saldırısıyla her isabet ettiğinde ek 1d6<\/b> hasar verirsin ve onu bulmak için yaptığın <b>Wisdom (Perception)<\/b> ya da <b>Wisdom (Survival)<\/b> check'lerinde <b>avantajın<\/b> olur. Hedef büyü bitmeden <b>0 can puanına düşerse<\/b>, sonraki turlarından birinde <b>bonus aksiyonla<\/b> yeni bir yaratığı işaretleyebilirsin. <i>Üst slot:<\/i> <b>3. veya 4. seviye<\/b> slotla konsantrasyon <b>8 saate<\/b>, <b>5. seviye ve üstüyle 24 saate<\/b> kadar sürer.",
+  "src": "Player's Handbook (2024)",
+  "d": "Menzilde <b>görebildiğin bir yaratığı<\/b> avın olarak işaretlersin. Büyü sona erene kadar hedefe <b>saldırı zarıyla her isabet ettiğinde ek 1d6 force<\/b> hasarı verirsin ve onu bulmak için yaptığın <b>Wisdom (Perception)<\/b> ya da <b>Wisdom (Survival)<\/b> check'lerinde <b>avantajın<\/b> olur. Hedef büyü bitmeden <b>0 can puanına düşerse<\/b>, <b>bonus aksiyonla<\/b> işareti menzilde görebildiğin yeni bir yaratığa taşıyabilirsin. <i>Üst slot:<\/i> <b>3. veya 4. seviye<\/b> slotla konsantrasyon <b>8 saate<\/b>, <b>5. seviye ve üstüyle 24 saate<\/b> kadar sürer.",
   "fx": [
    "Hasar",
-   "+1d6 her silah isabetinde"
+   "+1d6 force her isabette"
   ],
   "ar": [
    "Hedef",
@@ -1079,22 +1079,22 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "tr": "Sıçrama",
   "school": "Dönüşüm",
   "schoolEn": "Transmutation",
-  "time": "1 Aksiyon",
+  "time": "1 Bonus Aksiyon",
   "range": "Dokunma",
   "dur": "1 dk",
   "comp": "V, S, M",
   "mat": "bir çekirgenin arka bacağı",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun yaratığın <b>sıçrama mesafesi<\/b> süre boyunca (1 dk) <b>üç katına<\/b> çıkar.",
+  "src": "Player's Handbook (2024)",
+  "d": "<b>Bonus aksiyon.<\/b> Dokunduğun gönüllü yaratık süre boyunca (1 dk) kendi turlarının her birinde bir kez, <b>10 ft hareket harcayarak 30 ft'ye kadar sıçrayabilir<\/b>. <i>Üst slot:<\/i> her seviye için +1 hedef.",
   "fx": [
    "Etki",
-   "Sıçrama mesafesi ×3"
+   "10 ft harekete 30 ft sıçrama"
   ],
   "ar": [
    "Hedef",
-   "1 yaratık (dokunma)"
+   "1 gönüllü yaratık (+1 / üst slot)"
   ]
  },
  {
@@ -1131,13 +1131,13 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Evocation",
   "time": "1 Bonus Aksiyon",
   "range": "Kendine",
-  "dur": "Kons. · 1 dk",
+  "dur": "1 dk",
   "comp": "V",
   "mat": "",
-  "conc": true,
+  "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Süre içinde bir yaratığa <b>yakın dövüş silah saldırısıyla bir sonraki isabetinde<\/b> silahın akkor gibi parlar: saldırı <b>ek 1d6 ateş<\/b> hasarı verir ve hedef alev alır. Büyü bitene kadar hedef her turunun başında <b>DC 15 CON<\/b> save yapar: başarısızsa <b>1d6 ateş<\/b> alır, başarılıysa büyü biter. Hedef ya da ona 5 ft yakındaki bir yaratık <b>aksiyonla<\/b> alevleri söndürürse ya da başka bir etki söndürürse (ör. suya batmak) büyü biter. <i>Üst slot:<\/i> her seviye için ilk ek hasar +1d6.",
+  "src": "Player's Handbook (2024)",
+  "d": "Bir hedefe <b>yakın dövüş silahıyla ya da Unarmed Strike ile isabet ettiğin anda<\/b> bonus aksiyonla yaparsın; <b>konsantrasyon gerekmez<\/b>. Saldırı <b>ek 1d6 ateş<\/b> hasarı verir ve hedef alev alır. Büyü bitene kadar hedef her turunun başında önce <b>1d6 ateş<\/b> alır, sonra <b>DC 15 CON save<\/b> yapar: başarısızsa yanma sürer, başarılıysa büyü biter. <i>Üst slot:<\/i> her seviye için <b>tüm hasarlar<\/b> +1d6.",
   "fx": [
    "Hasar",
    "1d6 ateş + 1d6/tur yanma"
@@ -1354,18 +1354,18 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "tr": "Ağaç Kabuğu Deri",
   "school": "Dönüşüm",
   "schoolEn": "Transmutation",
-  "time": "1 Aksiyon",
+  "time": "1 Bonus Aksiyon",
   "range": "Dokunma",
-  "dur": "Kons. · 1 saat",
+  "dur": "1 saat",
   "comp": "V, S, M",
   "mat": "bir avuç meşe kabuğu",
-  "conc": true,
+  "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun gönüllü yaratığın derisi kabuk gibi olur; süre boyunca (1 saat) zırhı ne olursa olsun <b>AC'si 16'nın altına düşmez<\/b>.",
+  "src": "Player's Handbook (2024)",
+  "d": "<b>Bonus aksiyon, konsantrasyon gerekmez.<\/b> Dokunduğun gönüllü yaratığın derisi kabuk gibi olur; süre boyunca (1 saat) AC'si 17'den düşükse <b>AC'si 17<\/b> olur.",
   "fx": [
    "Etki",
-   "AC en az 16"
+   "AC en az 17"
   ],
   "ar": [
    "Hedef",
@@ -1386,11 +1386,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun gönüllü bir hayvanın gözünden görüp kulağından duyabilirsin; bunun için aksiyon harcarsın ve kendi duyularına dönmek için yine aksiyon gerekir. Süre: 1 saat.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun gönüllü bir hayvanın duyularıyla, kendi duyularına ek olarak <b>aynı anda<\/b> algılarsın; geçiş için aksiyon gerekmez. Onun duyularıyla algılarken hayvanın <b>özel duyularından<\/b> (darkvision, blindsight vb.) da yararlanırsın. Süre: 1 saat.",
   "fx": [
    "Etki",
-   "Hayvanın gözüyle görür, kulağıyla duyarsın"
+   "Hayvanın duyularıyla da algılarsın"
   ],
   "ar": [
    "Hedef",
@@ -1405,17 +1405,17 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "school": "Dönüşüm",
   "schoolEn": "Transmutation",
   "time": "1 Aksiyon",
-  "range": "5 ft",
+  "range": "Dokunma",
   "dur": "8 saat",
   "comp": "V, S, M",
   "mat": "dört ya da daha fazla ok veya arbalet cıvatası",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Menzildeki yere <b>4 adet<\/b> büyüsüz ok ya da arbalet cıvatası dikersin. Büyü bitene kadar senden başka bir yaratık bir turda <b>ilk kez cephanenin 30 ft yakınına geldiğinde<\/b> ya da turunu orada bitirdiğinde bir cephane uçup ona saldırır: <b>DC 15 DEX<\/b> save'inde başarısız olursa <b>1d6 delme<\/b> alır. O cephane yok olur; cephane kalmayınca büyü biter. Büyüyü yaparken etkilenmeyecek yaratıkları seçebilirsin. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +2 cephane.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun <b>en fazla 4<\/b> büyüsüz ok ya da cıvatayı bulunduğun yere dikersin; büyü bitene kadar <b>fiziksel olarak sökülemezler<\/b>. Senden başka bir yaratık bir turda <b>ilk kez cephanenin 30 ft yakınına girdiğinde<\/b> ya da turunu orada bitirdiğinde bir cephane uçup ona saldırır: <b>DC 15 DEX save<\/b>'inde başarısız olursa <b>2d4 delme<\/b> alır. O cephane yok olur; yerde cephane kalmayınca büyü biter. Büyüyü yaparken etkilenmeyecek yaratıkları seçebilirsin. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +2 cephane.",
   "fx": [
    "Hasar",
-   "1d6 delme (her cephane)"
+   "2d4 delme (her cephane)"
   ],
   "ar": [
    "Alan",
@@ -1433,14 +1433,14 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "range": "Dokunma",
   "dur": "8 saat",
   "comp": "V, S, M",
-  "mat": "bir tutam kurutulmuş havuç ya da bir akik",
+  "mat": "kurutulmuş bir havuç",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun gönüllü yaratık süre boyunca (8 saat) <b>60 ft karanlık görüş<\/b> kazanır.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun gönüllü bir yaratık süre boyunca (8 saat) <b>150 ft karanlık görüş<\/b> kazanır.",
   "fx": [
    "Etki",
-   "60 ft karanlık görüş"
+   "150 ft karanlık görüş"
   ],
   "ar": [
    "Hedef",
@@ -1511,8 +1511,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir baklagil tohumu",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Senden <b>60 ft uzunluk × 10 ft genişlikte<\/b> bir rüzgâr hattı. Turuna hatta başlayan yaratık <b>STR DC 15<\/b>'de başarısızsa <b>15 ft itilir<\/b>. Sana yaklaşmak iki kat hareket harcar. Gaz/sis dağılır, korumasız alevler söner. <b>Bonus aksiyonla<\/b> yönünü değiştirirsin.",
+  "src": "Player's Handbook (2024)",
+  "d": "Senden <b>60 ft uzunluk × 10 ft genişlikte<\/b> bir rüzgâr hattı. Hattaki her yaratık hemen <b>DC 15 STR save<\/b> yapar, başarısızsa <b>15 ft itilir<\/b>; turunu hatta bitiren de aynı save'i yapar. Sana yaklaşmak iki kat hareket harcar. Gaz/sis dağılır, mum gibi korumasız alevler söner, fenerler %50 ihtimalle söner. Sonraki turlarında <b>bonus aksiyonla<\/b> yönünü değiştirirsin.",
   "fx": [
    "Etki",
    "15 ft itme · alevleri söndürür"
@@ -1554,18 +1554,18 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "tr": "Küçük Restorasyon",
   "school": "Koruma",
   "schoolEn": "Abjuration",
-  "time": "1 Aksiyon",
+  "time": "1 Bonus Aksiyon",
   "range": "Dokunma",
   "dur": "Anında",
   "comp": "V, S",
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun yaratıktaki <b>bir hastalığı<\/b> ya da şu durumlardan <b>birini<\/b> sona erdirirsin: kör, sağır, felçli ya da zehirlenmiş.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun yaratıktaki şu durumlardan <b>birini<\/b> sona erdirirsin: <b>kör, sağır, felçli ya da zehirlenmiş<\/b>. <b>Bonus aksiyon<\/b> olduğu için aynı turda aksiyonunu da kullanabilirsin. Hastalığı kaldırmaz.",
   "fx": [
    "Etki",
-   "1 hastalık ya da durum biter"
+   "1 durum biter (bonus aksiyon)"
   ],
   "ar": [
    "Hedef",
@@ -1631,13 +1631,13 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Transmutation",
   "time": "1 Bonus Aksiyon",
   "range": "Dokunma",
-  "dur": "Kons. · 1 saat",
+  "dur": "1 saat",
   "comp": "V, S",
   "mat": "",
-  "conc": true,
+  "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun <b>büyüsüz bir silah<\/b> büyü bitene kadar büyülü sayılır ve <b>saldırı ve hasar zarlarına +1<\/b> alır. <i>Üst slot:<\/i> 4. seviye slotla <b>+2<\/b>, 6. seviye ve üstüyle <b>+3<\/b>.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun <b>büyüsüz bir silah<\/b> büyü bitene kadar büyülü sayılır ve <b>saldırı ve hasar zarlarına +1<\/b> alır. <b>Konsantrasyon gerekmez<\/b>; büyüyü yeniden yaparsan öncekisi biter. <i>Üst slot:<\/i> 3–5. seviye slotla <b>+2<\/b>, 6. seviye ve üstüyle <b>+3<\/b>.",
   "fx": [
    "Etki",
    "Silaha +1 saldırı ve hasar"
@@ -1733,11 +1733,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "range": "150 ft",
   "dur": "Kons. · 10 dk",
   "comp": "V, S, M",
-  "mat": "yedi sivri diken ya da sivriltilmiş yedi küçük dal",
+  "mat": "yedi diken",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (save yok). Doğal görünür: büyü yapılırken alanı göremeyen, tehlikeyi fark etmek için DC 15 <b>Wisdom (Perception veya Survival)<\/b> check yapmalıdır; bu bir save değildir.",
+  "src": "Player's Handbook (2024)",
+  "d": "Menzildeki bir noktada <b>20 ft yarıçaplı<\/b> alan dikenlenir ve <b>zorlu arazi<\/b> olur. Alana <b>giren ya da içinde hareket eden<\/b> yaratık her 5 ft için <b>2d4 delme<\/b> alır (save yok). Doğal görünür: büyü yapılırken alanı göremeyen yaratık, tehlikeyi fark etmek için girmeden önce <b>Search aksiyonu<\/b> harcayıp DC 15 <b>Wisdom (Perception veya Survival)<\/b> check'inde başarılı olmalıdır; bu bir save değildir.",
   "fx": [
    "Hasar",
    "Her 5 ft için 2d4 delme"
@@ -1806,20 +1806,20 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Conjuration",
   "time": "1 Aksiyon",
   "range": "60 ft",
-  "dur": "Kons. · 1 saat",
+  "dur": "Kons. · 10 dk",
   "comp": "V, S",
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Görebildiğin boş alanlarda hayvan biçimli fey ruhları belirir; birini seç: <b>CR 2<\/b>'den 1 · <b>CR 1<\/b>'den 2 · <b>CR 1/2<\/b>'den 4 · <b>CR 1/4<\/b>'ten 8 hayvan. Dosttur, grup olarak inisiyatif atar, sözlü emirlere uyar (aksiyon gerekmez); emir yoksa yalnızca kendini savunur. 0 canda ya da büyü bitince kaybolur. <i>Üst slot:<\/i> 5. seviyede 2 kat, 7.'de 3 kat, 9.'da 4 kat.",
+  "src": "Player's Handbook (2024)",
+  "d": "Görebildiğin boş bir alanda <b>Büyük<\/b> boyutta, dokunulmaz hayaletimsi bir hayvan sürüsü belirir (kurt, yılan, kuş… biçimini sen seçersin). Sürüye 5 ft yakınken <b>STR save<\/b>'lerinde avantajın olur; kendi turunda yürüdüğünde sürüyü de görebildiğin boş bir yere <b>30 ft<\/b> taşıyabilirsin. Sürü görebildiğin bir yaratığın <b>10 ft<\/b> yakınına geldiğinde, ya da yaratık sürünün 10 ft yakınına girdiğinde veya turunu orada bitirdiğinde, ona <b>DC 15 DEX save<\/b> yaptırabilirsin: başarısızsa <b>3d10 kesme<\/b> (turda en fazla bir kez). <i>Üst slot:<\/i> her seviye için +3d10.",
   "fx": [
-   "Etki",
-   "Fey hayvanlar çağırır"
+   "Hasar",
+   "3d10 kesme (sürünün 10 ft çevresi)"
   ],
   "ar": [
-   "Hedef",
-   "1–8 hayvan (CR'ye göre)"
+   "Alan",
+   "Sürünün 10 ft çevresi"
   ]
  },
  {
@@ -1833,18 +1833,18 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "range": "Kendine (60 ft koni)",
   "dur": "Anında",
   "comp": "V, S, M",
-  "mat": "bir cephane ya da fırlatılabilir bir silah",
+  "mat": "en az 1 cp değerinde bir yakın dövüş ya da menzilli silah",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Büyüsüz bir silahı fırlatır ya da büyüsüz bir cephaneyi havaya atarsın; aynılarından oluşan bir koni ileri fırlar ve kaybolur. <b>60 ft koni<\/b> içindeki her yaratık <b>DC 15 DEX<\/b> save yapar: başarısızsa <b>3d8<\/b>, başarılıysa yarısı. Hasar türü, bileşen olarak kullanılan silah ya da cephaneninkiyle aynıdır (ok için <b>delme<\/b>).",
+  "src": "Player's Handbook (2024)",
+  "d": "Bileşen olarak kullandığın silahı savurursun; ondan hayalet silahlar (ya da ona uygun cephane) ileri fırlayıp kaybolur. <b>60 ft koni<\/b> içinde <b>görebildiğin ve seçtiğin<\/b> her yaratık <b>DC 15 DEX save<\/b> yapar: başarısızsa <b>5d8 force<\/b>, başarılı save'de yarısı. Müttefiklerin etkilenmez. <i>Üst slot:<\/i> her seviye için +5d8.",
   "fx": [
    "Hasar",
-   "3d8 (silahın hasar türü)"
+   "5d8 force"
   ],
   "ar": [
    "Alan",
-   "60 ft koni"
+   "60 ft koni (seçtiğin yaratıklar)"
   ]
  },
  {
@@ -1861,11 +1861,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Seçtiğin noktadan <b>60 ft yarıçaplı parlak<\/b> + 60 ft loş ışık yayılır (1 saat). Bir nesneye yaparsan ışık onunla taşınır; opak bir şeyle tamamen örtmek ışığı keser. 3. seviye veya altı bir büyünün yarattığı <b>karanlıkla<\/b> kesişirse o karanlığı dağıtır.",
+  "src": "Player's Handbook (2024)",
+  "d": "Seçtiğin noktadan <b>60 ft yarıçaplı<\/b> alanı <b>güneş ışığı<\/b> doldurur: parlak ışık + 60 ft daha loş ışık (1 saat). Gerçek güneş ışığı sayıldığı için güneşe hassas yaratıkları etkiler. Giyilmeyen/taşınmayan bir nesneye yaparsan ışık o nesneden 60 ft yayılır ve onunla taşınır; opak bir şeyle örtmek ışığı keser. 3. seviye veya altı bir büyünün yarattığı <b>karanlıkla<\/b> kesişirse o büyüyü dağıtır.",
   "fx": [
    "Etki",
-   "Parlak ışık · büyülü karanlığı dağıtır"
+   "Güneş ışığı · büyülü karanlığı dağıtır"
   ],
   "ar": [
    "Alan",
@@ -1956,13 +1956,13 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Transmutation",
   "time": "1 Bonus Aksiyon",
   "range": "Kendine",
-  "dur": "Kons. · 1 dk",
+  "dur": "Anında",
   "comp": "V, S",
   "mat": "",
-  "conc": true,
+  "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Büyünün süresi içinde bir sonraki <b>menzilli silah saldırında<\/b>, cephane (fırlatılan bir silahsa silahın kendisi) bir şimşeğe dönüşür. Saldırı zarını normal atarsın. Hedef, silahın normal hasarı <b>yerine<\/b> isabette <b>4d8 şimşek<\/b>, ıskada bunun <b>yarısını<\/b> alır. <b>İsabet de ıska da olsa<\/b>, hedefe <b>10 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX<\/b> save yapar: başarısız olan <b>2d8 şimşek<\/b>, başarılı olan yarısını alır. Ardından cephane ya da silah normal hâline döner. <i>Üst slot:<\/i> her seviye için <b>her iki etkinin<\/b> hasarı +1d8.",
+  "src": "Player's Handbook (2024)",
+  "d": "Silahla bir <b>menzilli saldırı yaptıktan hemen sonra<\/b> (isabet de ıska da olsa) bonus aksiyonla yaparsın; <b>konsantrasyon gerekmez<\/b>. Silah ya da cephane bir şimşeğe dönüşür: hedef saldırının normal hasarı ve etkileri <b>yerine<\/b> isabette <b>4d8 şimşek<\/b>, ıskada bunun <b>yarısını<\/b> alır. Ardından hedefe <b>10 ft<\/b> mesafedeki her yaratık <b>DC 15 DEX save<\/b> yapar: başarısız olan <b>2d8 şimşek<\/b>, başarılı save'de yarısını alır. Sonra silah ya da cephane normal hâline döner. <i>Üst slot:<\/i> her seviye için <b>her iki etkinin<\/b> hasarı +1d8.",
   "fx": [
    "Hasar",
    "4d8 şimşek + 2d8 alan"
@@ -2208,14 +2208,14 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "range": "120 ft",
   "dur": "Kons. · 1 dk",
   "comp": "V, S, M",
-  "mat": "küçük bir yelpaze ve egzotik bir tüy",
+  "mat": "bir yelpaze ve bir tüy",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Zeminde <b>50 ft uzun, 15 ft yüksek, 1 ft kalın<\/b>, istediğin şekilde kesintisiz bir rüzgâr duvarı (1 dk). Oluştuğunda içindekiler <b>STR DC 15<\/b>: başarısızsa <b>3d8 ezme<\/b>, başarılıysa yarısı. Sis ve gazları uzak tutar; Küçük ve daha küçük uçanlar geçemez; arkasındaki hedeflere atılan <b>ok, cıvata ve sıradan mermiler otomatik ıskalar<\/b> (dev kayaları hariç).",
+  "src": "Player's Handbook (2024)",
+  "d": "Zeminde <b>50 ft uzun, 15 ft yüksek, 1 ft kalın<\/b>, istediğin şekilde kesintisiz bir rüzgâr duvarı yükselir (1 dk). Oluştuğu anda içindeki her yaratık <b>DC 15 STR save<\/b> yapar: başarısızsa <b>4d8 ezme<\/b>, başarılı save'de yarısı. Sis, duman ve gazları uzak tutar; Küçük ve daha küçük uçan yaratık ya da nesneler geçemez, gaz hâlindekiler de geçemez. Arkasındaki hedeflere atılan <b>ok, cıvata ve sıradan mermiler otomatik ıskalar<\/b> (dev kayaları ve kuşatma mermileri hariç).",
   "fx": [
    "Hasar",
-   "3d8 ezme · okları saptırır"
+   "4d8 ezme · okları saptırır"
   ],
   "ar": [
    "Alan",
@@ -2309,13 +2309,13 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "schoolEn": "Enchantment",
   "time": "1 Aksiyon",
   "range": "60 ft",
-  "dur": "1 tur",
+  "dur": "Anında",
   "comp": "V",
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS<\/b> save'inde başarısız olursa bir sonraki turunda emre uyar. Hedef <b>ölümsüzse<\/b>, dilini <b>anlamıyorsa<\/b> ya da emir ona <b>doğrudan zarar veriyorsa<\/b> etkisi olmaz. Başka bir emir de verebilirsin; o zaman hedefin davranışına OY karar verir. Hedef emre uyamıyorsa büyü sona erer. <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> hareket etmez, aksiyon almaz; uçan yaratık havada kalabiliyorsa kalır, gerekirse en kısa mesafeyi uçar. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>; hedefler birbirine <b>30 ft<\/b> içinde olmalı. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, spellcasting ability'nin Wisdom olduğu varsayıldı.<\/i>",
+  "src": "Player's Handbook (2024)",
+  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS save<\/b>'inde başarısız olursa bir sonraki turunda emre uyar. Emri şunlardan seçersin: <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> o turda hareket etmez, <b>aksiyon da bonus aksiyon da<\/b> alamaz. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, spellcasting ability'nin Wisdom olduğu varsayıldı.<\/i>",
   "fx": [
    "Etki",
    "Tek kelimelik emir"
@@ -2587,6 +2587,7 @@ const CONC = { id: (load(CONC_KEY, null) || {}).id || null };
 const CON_SAVE = 'CON +2';
 function setConc(id) { CONC.id = id || null; store(CONC_KEY, { id: CONC.id }); askPersist(); syncConc(); }
 // concentration floats at the top under the header on every page (user's request); the old in-page spots stay empty
+const noEd = t => String(t || '').replace(/ \((?:2014|2024|2025)\)/g, '');
 function concBar() { return ''; }
 function concFloat() {
   const sp = CONC.id && SP.BY[CONC.id];
@@ -2831,14 +2832,14 @@ const SP = (() => {
           <p>Slotsuz hakkı bitince ikisini de uygun seviyedeki bir slotla yapabilirsin. Kutular üstteki slot kartında.</p>
         </article>
         <article class="ab" style="--ah:200">
-          <h3>Ritüel<small>Ranger 2014</small></h3>
+          <h3>Ritüel<small>Ranger</small></h3>
           <div class="chs"><span class="ch"><small>Ritüel olarak</small><b>yapamaz</b></span><span class="ch"><small>Ritüel etiketliler</small><b>slotla</b></span></div>
           <p>Ranger'ın ritüel yeteneği yok; ritüel etiketli büyüleri de slot harcayarak yaparsın.</p>
         </article>
         <article class="ab" style="--ah:275">
           <h3>Konsantrasyon<small>aynı anda tek büyü</small></h3>
           <div class="chs"><span class="ch"><small>Aynı anda</small><b>1 büyü</b> <em>yenisi eskisini bitirir</em></span><span class="ch save"><small>Hasar alınca</small><b>CON +2</b> <em>Ring of Protection dahil</em></span><span class="ch"><small>DC</small><b>10 ya da hasarın yarısı</b> <em>hangisi büyükse</em></span></div>
-          <p><span lang="en">Hunter’s Mark, Hail of Thorns, Lightning Arrow</span> hepsi konsantrasyon: aynı anda yalnız biri. Büyünün penceresinde <b>Konsantrasyon başlat</b>'a dokun.</p>
+          <p><span lang="en">Hunter’s Mark</span> ve <span lang="en">Ensnaring / Zephyr Strike</span> konsantrasyon: aynı anda yalnız biri. <span lang="en">Hail of Thorns</span> ve <span lang="en">Lightning Arrow</span> konsantrasyon istemez. Büyünün penceresinde <b>Konsantrasyon başlat</b>'a dokun.</p>
         </article>
       </div></section>`;
       for (const l of [1,2,3]) {
@@ -2881,7 +2882,7 @@ const SP = (() => {
           <div class="fact fq" style="--fq:70"><dt>Bileşen</dt><dd>${comp}</dd></div>
         </dl>
         <div class="desc">${s.d}</div>
-        <div class="src">Kaynak: ${esc(s.src)}</div>
+        <div class="src">Kaynak: ${esc(noEd(s.src))}</div>
         <div class="act${s.conc ? ' two' : ''}">${btn}${s.conc ? (CONC.id === id ? `<button class="sec2 conc-b on" data-conc="end">Konsantrasyonu bitir</button>` : `<button class="sec2 conc-b" data-conc="${id}">Konsantrasyon başlat</button>`) : ''}</div>`;
     },
   };
