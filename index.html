@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = 'd056f0bc9c'; window.__BUILT__ = '2026-10-18 15:36';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = 'ace428ae22'; window.__BUILT__ = '2026-10-18 15:45';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -469,6 +469,7 @@ nav button{ white-space:nowrap; }
 .ab h3 small{ font-size:.78rem; font-weight:500; color:var(--muted); }
 .ab h3 small b{ color:var(--ink); }
 .ab p{ margin:0; font-size:.9rem; line-height:1.45; }
+.ab .rng-h{ margin:4px 0 0; font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:hsl(var(--ah) 30% 70%); }
 .ab ul{ margin:0; padding-left:18px; display:grid; gap:3px; font-size:.9rem; line-height:1.45; }
 .chs{ display:flex; flex-wrap:wrap; gap:6px; }
 .ch{ display:grid; align-content:start; line-height:1.2; padding:4px 10px 5px; border-radius:9px; background:var(--bg); border:1px solid var(--line); min-width:0; font-variant-numeric:tabular-nums; }
@@ -681,6 +682,9 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    <article class="ab" style="--ah:32">
     <h3><span lang="en">Longbow +2</span><small>ana silah · Saldırı aksiyonunda <b>2 ok</b> (<span lang="en">Extra Attack</span>)</small></h3>
     <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+13</b></span><span class="ch dmg"><small>Hasar</small><b>1d8+7</b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span></div>
+    <h4 class="rng-h">Mesafeye göre</h4>
+    <div class="chs rng"><span class="ch"><small>0–150 ft (45 m)</small><b>normal</b></span><span class="ch"><small>150–600 ft (180 m)</small><b>normal</b> <em>Sharpshooter (yoksa dezavantaj)</em></span><span class="ch"><small>600 ft+ (180 m+)</small><b>atılamaz</b></span><span class="ch"><small>Düşman 5 ft içinde</small><b>dezavantaj</b></span></div>
+    <p>5e'de mesafe saldırıya <b>sayı olarak eksi vermez</b>: normal menzilde (150 ft) ceza yok; uzun menzilde (600 ft'e kadar) <b>dezavantaj</b> olur, ama <span lang="en">Sharpshooter</span> bunu kaldırır, yani 600 ft'e kadar normal atarsın. 600 ft'ten öteye atamazsın. Yanında (5 ft) etkisiz olmayan bir düşman varsa menzilli saldırı <b>dezavantajlı</b> (Sharpshooter bunu kaldırmaz; önce uzaklaş). Siper hedefin AC'sine eklenir: yarım <b>+2</b>, ¾ <b>+5</b>; Sharpshooter ikisini de yok sayar, tam siperdeki hedefe atılamaz.</p>
    </article>
    <article class="ab" style="--ah:5">
     <h3><span lang="en">Sharpshooter</span><small>isteğe bağlı · atmadan önce söyle</small></h3>
