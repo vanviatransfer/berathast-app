@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = 'f6cf829668'; window.__BUILT__ = '2026-10-24 20:01';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '2db06606b6'; window.__BUILT__ = '2026-10-29 01:59';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -680,7 +680,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   <dl class="quick">
    <div style="--qh:45"><dt>Yeterlilik</dt><dd>+4</dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
    <div style="--qh:205"><dt>İnisiyatif</dt><dd>+8</dd><span class="en-name" lang="en">Initiative</span></div>
-   <div style="--qh:130"><dt>Hız</dt><dd>35 ft</dd><span class="en-name" lang="en">Speed</span></div>
+   <div style="--qh:130"><dt>Hız</dt><dd>45 ft</dd><span class="en-name" lang="en">Speed</span></div>
    <div style="--qh:270"><dt lang="en">Passive Perception</dt><dd>21</dd><span class="en-name">10 + Perception</span></div>
    <div style="--qh:0"><dt>Can zarı</dt><dd>1d8 + 9d10</dd><span class="en-name" lang="en">Hit Dice</span></div>
    <div style="--qh:320"><dt>Büyü</dt><dd>+7 · DC 15</dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
@@ -821,6 +821,32 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
 
 <script id="spData" type="application/json">[
  {
+  "id": "druidcraft",
+  "lvl": 0,
+  "en": "Druidcraft",
+  "tr": "Druid Sanatı",
+  "school": "Yaratma",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook (2024)",
+  "d": "Menzildeki bir noktada <b>küçük, zararsız bir doğa etkisi<\/b> yaratırsın: yaklaşan havayı sezdiren bir belirti, çiçeğin açması, küçük bir ses ya da koku, ya da <b>küçük bir alevi yakma ya da söndürme<\/b>. <i>Wood Elf soyunun cantrip’i: her zaman hazır, büyü sayısına girmez.<\/i>",
+  "fx": [
+   "Etki",
+   "küçük doğa etkisi (hava belirtisi, çiçek, ses/koku, alev)"
+  ],
+  "ar": [
+   "Hedef",
+   "Menzildeki bir nokta (30 ft)"
+  ],
+  "from": "WE"
+ },
+ {
   "id": "absorb-elements",
   "lvl": 1,
   "en": "Absorb Elements",
@@ -921,6 +947,32 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   ]
  },
  {
+  "id": "command",
+  "lvl": 1,
+  "en": "Command",
+  "tr": "Emir",
+  "school": "Büyüleme",
+  "schoolEn": "Enchantment",
+  "time": "1 Aksiyon",
+  "range": "60 ft",
+  "dur": "Anında",
+  "comp": "V",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook (2024)",
+  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS save<\/b>'inde başarısız olursa bir sonraki turunda emre uyar. Emri şunlardan seçersin: <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> o turda hareket etmez, <b>aksiyon da bonus aksiyon da<\/b> alamaz. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, spellcasting ability'nin Wisdom olduğu varsayıldı.<\/i>",
+  "fx": [
+   "Etki",
+   "Tek kelimelik emir"
+  ],
+  "ar": [
+   "Hedef",
+   "1 yaratık"
+  ],
+  "from": "FT"
+ },
+ {
   "id": "cure-wounds",
   "lvl": 1,
   "en": "Cure Wounds",
@@ -994,6 +1046,32 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    "Alan",
    "30 ft yarıçap (çevren)"
   ]
+ },
+ {
+  "id": "disguise-self",
+  "lvl": 1,
+  "en": "Disguise Self",
+  "tr": "Kılık Değiştirme",
+  "school": "İllüzyon",
+  "schoolEn": "Illusion",
+  "time": "1 Aksiyon",
+  "range": "Kendine",
+  "dur": "1 saat",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene ya da <b>aksiyonunla<\/b> bitirene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, zayıf, şişman ya da arada görünebilirsin. <b>Vücut tipini değiştiremezsin<\/b>; uzuvlarının temel düzeni aynı kalmalıdır. Bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin eklediğin şapkaya dokunan biri bir şey hissetmez ya da başını hisseder; daha zayıf görünürsen sana uzanan el havadayken sana çarpar. Kılık değiştirdiğini anlamak için bir yaratık <b>aksiyonunu harcayıp<\/b> seni incelemeli ve <b>DC 15 Intelligence (Investigation)<\/b> check'inde başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "fx": [
+   "Etki",
+   "Görünüş illüzyonu"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ],
+  "from": "GS"
  },
  {
   "id": "ensnaring-strike",
@@ -1143,7 +1221,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "ar": [
    "Hedef",
    "1 yaratık"
-  ]
+  ],
+  "from": "FE"
  },
  {
   "id": "jump",
@@ -1193,7 +1272,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "ar": [
    "Hedef",
    "1 yaratık (+1 / üst slot)"
-  ]
+  ],
+  "from": "WE"
  },
  {
   "id": "searing-smite",
@@ -1721,6 +1801,32 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   ]
  },
  {
+  "id": "misty-step",
+  "lvl": 2,
+  "en": "Misty Step",
+  "tr": "Sisli Adım",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
+  "time": "1 Bonus Aksiyon",
+  "range": "Kendine",
+  "dur": "Anında",
+  "comp": "V",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Kısa bir an gümüşi bir sisle sarılırsın ve <b>görebildiğin boş bir alana<\/b> en fazla <b>30 ft<\/b> ışınlanırsın. <i>Fey Touched: uzun dinlenmede bir kez slotsuz.<\/i>",
+  "fx": [
+   "Etki",
+   "30 ft ışınlanma"
+  ],
+  "ar": [
+   "Hedef",
+   "Kendin"
+  ],
+  "from": "FT"
+ },
+ {
   "id": "pass-without-trace",
   "lvl": 2,
   "en": "Pass Without Trace",
@@ -1743,7 +1849,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "ar": [
    "Hedef",
    "Seçtiğin, 30 ft içindekiler"
-  ]
+  ],
+  "from": "WE"
  },
  {
   "id": "protection-from-poison",
@@ -1769,6 +1876,32 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    "Hedef",
    "1 yaratık (dokunma)"
   ]
+ },
+ {
+  "id": "rope-trick",
+  "lvl": 2,
+  "en": "Rope Trick",
+  "tr": "İp Numarası",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "1 saat",
+  "comp": "V, S, M",
+  "mat": "toz mısır özü ve bükülmüş bir parşömen halkası",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "<b>En fazla 60 ft<\/b> uzunluğunda bir ipe dokunursun. İpin bir ucu, ip zemine dik sarkana kadar havaya yükselir. Üst uçta, büyü sona erene kadar süren <b>boyutlar arası bir alana<\/b> açılan <b>görünmez bir giriş<\/b> belirir; alana ipin tepesine tırmanarak ulaşılır. Alan <b>en fazla sekiz Orta ya da daha küçük<\/b> yaratık alır. İp içeri çekilebilir; böylece dışarıdan görünmez. <b>Saldırılar ve büyüler<\/b> girişten içeri ya da dışarı <b>geçemez<\/b>; içerdekiler ipin hizasında ortalanmış <b>3 ft × 5 ft<\/b>'lik bir pencereden bakar gibi dışarıyı görür. Büyü sona erince içerideki <b>her şey dışarı düşer<\/b>. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "fx": [
+   "Etki",
+   "8 kişilik gizli sığınak"
+  ],
+  "ar": [
+   "Hedef",
+   "En fazla 60 ft ip"
+  ],
+  "from": "GS"
  },
  {
   "id": "silence",
@@ -1969,6 +2102,32 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    "Hedef",
    "1 büyülü olmayan silah"
   ]
+ },
+ {
+  "id": "fear",
+  "lvl": 3,
+  "en": "Fear",
+  "tr": "Korku",
+  "school": "İllüzyon",
+  "schoolEn": "Illusion",
+  "time": "1 Aksiyon",
+  "range": "Kendine (30 ft koni)",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S, M",
+  "mat": "beyaz bir tüy ya da bir tavuğun kalbi",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook",
+  "d": "Yaratıkların en büyük korkularının hayali görüntüsünü yansıtırsın. <b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> save yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>korkmuş<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Atılma (Dash)<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşmalıdır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS save yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "fx": [
+   "Etki",
+   "Elindekini bırakır + korkmuş"
+  ],
+  "ar": [
+   "Alan",
+   "30 ft koni"
+  ],
+  "from": "GS"
  },
  {
   "id": "flame-arrows",
@@ -2294,136 +2453,6 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    "Alan",
    "50 × 15 ft duvar"
   ]
- },
- {
-  "id": "disguise-self",
-  "lvl": 1,
-  "en": "Disguise Self",
-  "tr": "Kılık Değiştirme",
-  "school": "İllüzyon",
-  "schoolEn": "Illusion",
-  "time": "1 Aksiyon",
-  "range": "Kendine",
-  "dur": "1 saat",
-  "comp": "V, S",
-  "mat": "",
-  "conc": false,
-  "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene ya da <b>aksiyonunla<\/b> bitirene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, zayıf, şişman ya da arada görünebilirsin. <b>Vücut tipini değiştiremezsin<\/b>; uzuvlarının temel düzeni aynı kalmalıdır. Bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin eklediğin şapkaya dokunan biri bir şey hissetmez ya da başını hisseder; daha zayıf görünürsen sana uzanan el havadayken sana çarpar. Kılık değiştirdiğini anlamak için bir yaratık <b>aksiyonunu harcayıp<\/b> seni incelemeli ve <b>DC 15 Intelligence (Investigation)<\/b> check'inde başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
-  "fx": [
-   "Etki",
-   "Görünüş illüzyonu"
-  ],
-  "ar": [
-   "Hedef",
-   "Kendin"
-  ],
-  "from": "GS"
- },
- {
-  "id": "rope-trick",
-  "lvl": 2,
-  "en": "Rope Trick",
-  "tr": "İp Numarası",
-  "school": "Dönüşüm",
-  "schoolEn": "Transmutation",
-  "time": "1 Aksiyon",
-  "range": "Dokunma",
-  "dur": "1 saat",
-  "comp": "V, S, M",
-  "mat": "toz mısır özü ve bükülmüş bir parşömen halkası",
-  "conc": false,
-  "ritual": false,
-  "src": "Player's Handbook",
-  "d": "<b>En fazla 60 ft<\/b> uzunluğunda bir ipe dokunursun. İpin bir ucu, ip zemine dik sarkana kadar havaya yükselir. Üst uçta, büyü sona erene kadar süren <b>boyutlar arası bir alana<\/b> açılan <b>görünmez bir giriş<\/b> belirir; alana ipin tepesine tırmanarak ulaşılır. Alan <b>en fazla sekiz Orta ya da daha küçük<\/b> yaratık alır. İp içeri çekilebilir; böylece dışarıdan görünmez. <b>Saldırılar ve büyüler<\/b> girişten içeri ya da dışarı <b>geçemez<\/b>; içerdekiler ipin hizasında ortalanmış <b>3 ft × 5 ft<\/b>'lik bir pencereden bakar gibi dışarıyı görür. Büyü sona erince içerideki <b>her şey dışarı düşer<\/b>. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
-  "fx": [
-   "Etki",
-   "8 kişilik gizli sığınak"
-  ],
-  "ar": [
-   "Hedef",
-   "En fazla 60 ft ip"
-  ],
-  "from": "GS"
- },
- {
-  "id": "fear",
-  "lvl": 3,
-  "en": "Fear",
-  "tr": "Korku",
-  "school": "İllüzyon",
-  "schoolEn": "Illusion",
-  "time": "1 Aksiyon",
-  "range": "Kendine (30 ft koni)",
-  "dur": "Kons. · 1 dk",
-  "comp": "V, S, M",
-  "mat": "beyaz bir tüy ya da bir tavuğun kalbi",
-  "conc": true,
-  "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Yaratıkların en büyük korkularının hayali görüntüsünü yansıtırsın. <b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> save yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>korkmuş<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Atılma (Dash)<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşmalıdır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS save yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
-  "fx": [
-   "Etki",
-   "Elindekini bırakır + korkmuş"
-  ],
-  "ar": [
-   "Alan",
-   "30 ft koni"
-  ],
-  "from": "GS"
- },
- {
-  "id": "command",
-  "lvl": 1,
-  "en": "Command",
-  "tr": "Emir",
-  "school": "Büyüleme",
-  "schoolEn": "Enchantment",
-  "time": "1 Aksiyon",
-  "range": "60 ft",
-  "dur": "Anında",
-  "comp": "V",
-  "mat": "",
-  "conc": false,
-  "ritual": false,
-  "src": "Player's Handbook (2024)",
-  "d": "Menzilde <b>görebildiğin bir yaratığa tek kelimelik<\/b> bir emir verirsin. Hedef <b>DC 15 WIS save<\/b>'inde başarısız olursa bir sonraki turunda emre uyar. Emri şunlardan seçersin: <b>• Yaklaş:<\/b> en kısa yoldan sana gelir, 5 ft yakınına girerse turunu bitirir. <b>• Bırak:<\/b> elindekini bırakır, turunu bitirir. <b>• Kaç:<\/b> turunu en hızlı yolla senden uzaklaşarak geçirir. <b>• Yerlere Kapan:<\/b> <b>yere serilir<\/b>, turunu bitirir. <b>• Dur:<\/b> o turda hareket etmez, <b>aksiyon da bonus aksiyon da<\/b> alamaz. <i>Üst slot:<\/i> her seviye için <b>+1 yaratık<\/b>. <i>Fey Touched: uzun dinlenmede bir kez slotsuz. DC 15, spellcasting ability'nin Wisdom olduğu varsayıldı.<\/i>",
-  "fx": [
-   "Etki",
-   "Tek kelimelik emir"
-  ],
-  "ar": [
-   "Hedef",
-   "1 yaratık"
-  ],
-  "from": "FT"
- },
- {
-  "id": "misty-step",
-  "lvl": 2,
-  "en": "Misty Step",
-  "tr": "Sisli Adım",
-  "school": "Çağrışım",
-  "schoolEn": "Conjuration",
-  "time": "1 Bonus Aksiyon",
-  "range": "Kendine",
-  "dur": "Anında",
-  "comp": "V",
-  "mat": "",
-  "conc": false,
-  "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Kısa bir an gümüşi bir sisle sarılırsın ve <b>görebildiğin boş bir alana<\/b> en fazla <b>30 ft<\/b> ışınlanırsın. <i>Fey Touched: uzun dinlenmede bir kez slotsuz.<\/i>",
-  "fx": [
-   "Etki",
-   "30 ft ışınlanma"
-  ],
-  "ar": [
-   "Hedef",
-   "Kendin"
-  ],
-  "from": "FT"
  }
 ]</script>
 <script id="skData" type="application/json">[
@@ -8827,7 +8856,7 @@ const slotBox = (used, key, label) => `<button class="box${used ? ' used' : ''}"
 const SLOTS = (() => {
   const KEY = 'berathast-slots-v1', MAX = [4, 3, 2];
   // feat spells cast once per long rest without a slot
-  const FREE = ['Misty Step', 'Command'];
+  const FREE = ['Misty Step', 'Command', 'Longstrider', 'Pass without Trace', 'Hunter’s Mark', 'Hunter’s Mark', 'Hunter’s Mark', 'Hunter’s Mark'];
   const st = { u: MAX.map(n => Array(n).fill(0)), f: FREE.map(() => 0), confirm: false };
   const v = load(KEY, null);
   if (v && Array.isArray(v.u)) MAX.forEach((n, i) => { if (Array.isArray(v.u[i])) st.u[i] = Array.from({ length: n }, (_, j) => v.u[i][j] ? 1 : 0); });
@@ -8837,7 +8866,7 @@ const SLOTS = (() => {
   return {
     html() {
       const rows = MAX.map((n, i) => `<div class="srow" data-l="${i + 1}"><span class="sl">${i + 1}. sv</span><span class="boxes">${st.u[i].map((u, j) => slotBox(u, `s:${i}:${j}`, `${i + 1}. seviye slot ${j + 1}`)).join('')}</span><span class="left"><b>${left(st.u[i])}</b>/${n}</span></div>`).join('');
-      const free = FREE.length ? `<div class="srow ft"><span class="sl"><span lang="en">Fey Touched</span><small>slotsuz, 1 kez</small></span><span class="boxes">${FREE.map((nm, i) => `<span class="fb">${slotBox(st.f[i], `f:${i}`, nm)}<small lang="en">${nm}</small></span>`).join('')}</span><span class="left"><b>${left(st.f)}</b>/${FREE.length}</span></div>` : '';
+      const free = FREE.length ? `<div class="srow ft"><span class="sl"><span>Slotsuz</span><small>uzun dinlenmede yenilenir</small></span><span class="boxes">${FREE.map((nm, i) => `<span class="fb">${slotBox(st.f[i], `f:${i}`, nm)}<small lang="en">${nm}</small></span>`).join('')}</span><span class="left"><b>${left(st.f)}</b>/${FREE.length}</span></div>` : '';
       const total = MAX.reduce((a, b) => a + b, 0), rest = st.u.reduce((a, r) => a + left(r), 0);
       return `<section class="card slots"><h3>Büyü slotları <small>${rest}/${total} kaldı · büyü yapınca boş kutuya dokun</small></h3>${rows}${free}
         ${st.confirm
@@ -8871,14 +8900,14 @@ const SP = (() => {
   items.forEach(s => { s.key = fold(s.en + ' ' + s.tr); });
   const BY = Object.fromEntries(items.map(s => [s.id, s]));
   const KEY = 'berathast-spells-known-v1';
-  // Karakter sayfasında seçili 6 ranger büyüsü; hak (limit) da bu sayıdan gelir. Sayfada Ranger altında 9 büyü var, 3'ü Gloom Stalker.
+  // 2024 Ranger: Ranger 9 = 9 hazırlanan büyü (sayfada 6 bilinen yazıyordu). Hunter's Mark (Favored Enemy), Wood Elf soyu (Druidcraft, Longstrider, Pass without Trace) ve Gloom Stalker büyüleri her zaman hazır, sayıya girmez.
   // Gloom Stalker ve Fey Touched büyüleri ayrıca her zaman bilinir, sayıya girmez.
-  const DEFAULT = ['absorb-elements','cure-wounds','hail-of-thorns','hunters-mark','conjure-animals','lightning-arrow'];
-  const FROM = { GS: 'Gloom Stalker', FT: 'Fey Touched' };
+  const DEFAULT = ['absorb-elements','cure-wounds','hail-of-thorns','conjure-animals','lightning-arrow'];
+  const FROM = { GS: 'Gloom Stalker', FT: 'Fey Touched', FE: 'Favored Enemy', WE: 'Wood Elf' };
   const always = s => !!s.from;
-  const state = { sel: DEFAULT.slice(), limit: 6 };
+  const state = { sel: DEFAULT.slice(), limit: 9 };
   const saved = load(KEY, null);
-  if (saved) { if (Array.isArray(saved.sel)) state.sel = saved.sel.filter(id => BY[id] && !always(BY[id])); if (saved.limit > 0) state.limit = saved.limit; }
+  if (saved) { if (Array.isArray(saved.sel)) state.sel = saved.sel.filter(id => BY[id] && !always(BY[id])); if (saved.limit > 0) state.limit = saved.limit === 6 ? 9 : saved.limit; }
   const save = () => store(KEY, state);
   const ICON = (() => {
     const m = {
@@ -8925,8 +8954,8 @@ const SP = (() => {
   function tile(s) {
     const on = isSel(s.id);
     const right = always(s)
-      ? `<span class="always">Her zaman<br>bilinir</span>`
-      : `<button class="pick" data-c="sp" data-pick="${s.id}" aria-pressed="${on}" aria-label="Bilinenlere ekle: ${esc(s.en)}"><span><svg aria-hidden="true"><use href="#i-check"/></svg></span></button>`;
+      ? `<span class="always">Her zaman<br>hazır</span>`
+      : `<button class="pick" data-c="sp" data-pick="${s.id}" aria-pressed="${on}" aria-label="Hazırla: ${esc(s.en)}"><span><svg aria-hidden="true"><use href="#i-check"/></svg></span></button>`;
     return `<div class="tile${on ? ' on' : ''}${CONC.id === s.id ? ' conc-on' : ''}" data-id="${s.id}" style="--h:${spellHue(s)}">
       <button class="open" data-c="sp" data-open="${s.id}">${icon(s)}<span class="nm"><span class="en" lang="en">${esc(s.en)}</span><span class="tr">${esc(s.tr)}</span>${tags(s, true)}</span></button>
       ${right}</div>`;
@@ -8935,7 +8964,7 @@ const SP = (() => {
     k: 'sp', hue: id => spellHue(BY[id]), all: $('#spAll'), prep: $('#spPrep'), tools: $('#spTools'), q: $('#spQ'),
     sub: 'prep', filter: 'all', query: '', qKey: '', confirming: false, BY,
     stats: '<div class="st"><span>Saldırı</span><b>+7</b></div><div class="st"><span>DC</span><b>15</b></div>',
-    segs: () => [['prep', 'Bilinen', `${count()}/${state.limit}`, count() > state.limit], ['all', 'Tümü', `${items.length} büyü`]],
+    segs: () => [['prep', 'Hazır', `${count()}/${state.limit}`, count() > state.limit], ['all', 'Tümü', `${items.length} büyü`]],
     renderChips() {
       const opts = [['all','Tümü','Tüm seviyeler'],['1','1. sv','1. seviye'],['2','2. sv','2. seviye'],['3','3. sv','3. seviye']];
       $('#spChips').innerHTML = opts.map(([v, l, a]) => `<button class="chip" data-c="sp" data-f="${v}" aria-pressed="${C.filter === v}" aria-label="${a}">${l}</button>`).join('');
@@ -8967,8 +8996,8 @@ const SP = (() => {
       const n = count(), L = state.limit, over = n > L;
       let html = `<div data-concbar>${concBar()}</div>` + SLOTS.html() + `<div class="sum${over ? ' over' : ''}">
         <div class="sum-top"><div class="big">${n} <small>/ ${L} ranger büyüsü</small></div>
-          <div class="step">Bilinen hak <button data-lim="-1" aria-label="Bilinen büyü hakkını azalt">−</button><output aria-live="polite">${L}</output><button data-lim="1" aria-label="Bilinen büyü hakkını artır">+</button></div></div>
-        <div class="meter" role="progressbar" aria-label="Bilinen büyüler" aria-valuemin="0" aria-valuemax="${L}" aria-valuenow="${Math.min(n, L)}" aria-valuetext="${n}/${L}"><i style="width:${Math.min(100, n / L * 100)}%"></i></div>
+          <div class="step">Hazırlama hakkı <button data-lim="-1" aria-label="Hazırlama hakkını azalt">−</button><output aria-live="polite">${L}</output><button data-lim="1" aria-label="Hazırlama hakkını artır">+</button></div></div>
+        <div class="meter" role="progressbar" aria-label="Hazırlanan büyüler" aria-valuemin="0" aria-valuemax="${L}" aria-valuenow="${Math.min(n, L)}" aria-valuetext="${n}/${L}"><i style="width:${Math.min(100, n / L * 100)}%"></i></div>
         ${over ? `<p class="overmsg">Bilinen büyü hakkını ${n - L} büyü aşıyorsun. Birkaçını çıkar ya da hakkı artır.</p>` : ''}
         ${C.confirming
           ? `<div class="confirm"><span>Bilinen tüm ranger büyüleri kaldırılsın mı?</span><button class="yes" data-c="sp" data-clear="yes">Evet, temizle</button><button data-c="sp" data-clear="no">Vazgeç</button></div>`
@@ -8977,12 +9006,12 @@ const SP = (() => {
       // spell rules as boxes with chips, like the attacks and the Wild Shape rules (user's request)
       const rules = `<section class="rules-boxes"><h2 class="lvl-h">Kurallar</h2><div class="atks">
         <article class="ab" style="--ah:150">
-          <h3>Bilinen büyüler<small>kaç büyü, ne zaman değişir</small></h3>
-          <div class="chs"><span class="ch"><small>Bilinen</small><b>6</b> <em>Ranger 9</em></span><span class="ch"><small>Değişir</small><b>seviye atlayınca</b> <em>1 büyü</em></span></div>
-          <p>Ranger büyü <b>hazırlamaz</b>, bilir. Ranger seviyesi atladığında bildiğin bir ranger büyüsünü, slotun olan seviyedeki başka bir ranger büyüsüyle değiştirebilirsin.</p>
+          <h3>Hazırlanan büyüler<small>kaç büyü, ne zaman değişir</small></h3>
+          <div class="chs"><span class="ch"><small>Hazırlanan</small><b>9</b> <em>Ranger 9 · 2024</em></span><span class="ch"><small>Değişir</small><b>seviye atlayınca</b> <em>1 büyü</em></span></div>
+          <p>Her uzun dinlenmenin sonunda ranger listesinden <b>9 büyü hazırlarsın</b> (Ranger 9); slotun olan seviyedeki büyüleri seçebilirsin. <span lang="en">Hunter’s Mark</span>, <span lang="en">Wood Elf</span> ve <span lang="en">Gloom Stalker</span> büyüleri her zaman hazırdır, sayıya girmez.</p>
         </article>
         <article class="ab" style="--ah:265">
-          <h3>Her zaman bilinen<small>sayıya girmez, değişmez</small></h3>
+          <h3>Her zaman hazır<small>sayıya girmez, değişmez</small></h3>
           <div class="chs"><span class="ch"><small><span lang="en">Gloom Stalker</span></small><b>3</b> <em>alt sınıf</em></span><span class="ch"><small><span lang="en">Fey Touched</span></small><b>2</b> <em>feat</em></span></div>
           <p><span lang="en">Gloom Stalker</span>: <span lang="en">Disguise Self, Rope Trick, Fear</span>. <span lang="en">Fey Touched</span>: <span lang="en">Command, Misty Step</span>.</p>
         </article>
@@ -9006,19 +9035,19 @@ const SP = (() => {
         const list = items.filter(s => s.lvl === l && isSel(s.id));
         if (!list.length) continue;
         const ex = list.filter(s => s.from).length;
-        html += `<h2 class="lvl-h" data-l="${l}">${lvlName(l)} <small>${list.length - ex}${ex ? ` + ${ex} her zaman bilinen` : ''}</small></h2><div class="list" data-l="${l}">${list.map(tile).join('')}</div>`;
+        html += `<h2 class="lvl-h" data-l="${l}">${lvlName(l)} <small>${list.length - ex}${ex ? ` + ${ex} her zaman hazır` : ''}</small></h2><div class="list" data-l="${l}">${list.map(tile).join('')}</div>`;
       }
       C.prep.innerHTML = html + rules;
     },
     // returns a toast message, or null when nothing changed
     // removing needs a yes first (user's request)
-    rmAsk(id) { const s = BY[id]; return s && !always(s) && isSel(id) ? `<b lang="en">${esc(s.en)}</b> bilinen büyülerden çıkarılsın mı?` : null; },
+    rmAsk(id) { const s = BY[id]; return s && !always(s) && isSel(id) ? `<b lang="en">${esc(s.en)}</b> hazırlanan büyülerden çıkarılsın mı?` : null; },
     toggle(id) {
       const s = BY[id]; if (!s || always(s)) return null;
       const i = state.sel.indexOf(id);
       if (i >= 0) { state.sel.splice(i, 1); save(); return `${s.en} bilinenlerden çıkarıldı`; }
-      if (count() >= state.limit) return { blocked: `Bilinen büyü hakkın dolu (${state.limit}/${state.limit}). Önce bir büyü çıkar.` };
-      state.sel.push(id); save(); return `${s.en} bilinenlere eklendi · ${count()}/${state.limit}`;
+      if (count() >= state.limit) return { blocked: `Hazırlama hakkın dolu (${state.limit}/${state.limit}). Önce bir büyü çıkar.` };
+      state.sel.push(id); save(); return `${s.en} hazırlandı · ${count()}/${state.limit}`;
     },
     clear() { state.sel = []; save(); },
     limit(d) { state.limit = Math.max(1, Math.min(20, state.limit + d)); save(); },
@@ -9026,9 +9055,9 @@ const SP = (() => {
       const s = BY[id], on = isSel(id);
       const comp = esc(s.comp) + (s.mat ? `<small>${esc(s.mat)}</small>` : '');
       let btn;
-      if (always(s)) btn = `<button disabled><span lang="en">${FROM[s.from]}</span> — her zaman bilinir</button>`;
+      if (always(s)) btn = `<button disabled><span lang="en">${FROM[s.from]}</span> — her zaman hazır</button>`;
       else if (on) btn = `<button class="rm" data-c="sp" data-pick="${id}">Bilinenlerden çıkar</button>`;
-      else btn = count() >= state.limit ? `<button disabled>Bilinen büyü hakkın dolu (${state.limit}/${state.limit})</button>` : `<button data-c="sp" data-pick="${id}">Bilinenlere ekle · ${count() + 1}/${state.limit}</button>`;
+      else btn = count() >= state.limit ? `<button disabled>Hazırlama hakkın dolu (${state.limit}/${state.limit})</button>` : `<button data-c="sp" data-pick="${id}">Hazırla · ${count() + 1}/${state.limit}</button>`;
       return `
         <div class="sh-top">${icon(s)}<div><h2 id="shName" lang="en">${esc(s.en)}</h2><p>${esc(s.tr)} · ${lvlName(s.lvl)} · ${esc(s.school)}</p></div>
           <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
@@ -9580,13 +9609,10 @@ const FEATS = [
   ['Dread Ambusher', 'Gloom Stalker', 'İlk tur', 'İnisiyatife <b>+3</b> (WIS). Her savaşın ilk turunun başında yürüme hızın <b>+10 ft</b>. O tur Saldırı aksiyonu alırsan <b>bir silah saldırısı daha</b>; isabet ederse <b>+1d8</b> silah türünde hasar.'],
   ['Umbral Sight', 'Gloom Stalker', '', 'Karanlık görüşün <b>90 ft</b> (elf 60 + 30). Karanlıktayken, seni karanlık görüşle görmeye çalışan yaratıklara karşı <b>görünmezsin</b>.'],
   ['Iron Mind', 'Gloom Stalker', '', 'Wisdom save’lerinde yeterlilik (WIS save +8). <i>Sayfanın özellik listesinde yazmıyor; save alanında işaretli ve Gloom Stalker 7. seviye özelliği.</i>'],
-  ['Gloom Stalker Magic', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman bilinir, bilinen büyü sayısına dahil değil.'],
+  ['Gloom Stalker Magic', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman hazır, hazırlanan büyü sayısına dahil değil.'],
   ['Extra Attack', 'Ranger', '', 'Saldırı aksiyonunda <b>iki saldırı</b>.'],
   ['Fighting Style: Archery', 'Ranger', '', 'Menzilli silah saldırılarına <b>+2</b> (Longbow +13’e dahil).'],
-  ['Favored Enemy', 'Ranger', '', '<span lang="en">Beasts, Humans, Gnolls</span>: onları izlerken Survival check’lerinde ve onlar hakkında bilgi hatırlarken INT check’lerinde <b>avantaj</b>.'],
-  ['Natural Explorer', 'Ranger', '', '<span lang="en">Forest, Grassland</span>: bu arazilerle ilgili, yeterli olduğun skill’lerle INT/WIS check’lerinde yeterlilik <b>iki katı</b>. 1 saat+ yolculukta: zorlu arazi grubu yavaşlatmaz, büyü olmadan kaybolunmaz, başka işle uğraşırken bile tehlikeye karşı tetikte kalırsın, yalnızken normal hızda gizli ilerlersin, iki kat yiyecek bulursun, izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini öğrenirsin.'],
-  ['Primeval Awareness', 'Ranger', 'Aksiyon · 1 slot', 'Bir ranger slotu harcarsın; slot seviyesi başına <b>1 dakika</b> boyunca 1 mil (tercih ettiğin arazide 6 mil) içinde aberration, celestial, dragon, elemental, fey, fiend ve undead var mı sezersin. Yer ve sayı vermez.'],
-  ['Land’s Stride', 'Ranger', '', 'Büyüsüz zorlu arazi ek hareket harcatmaz; büyüsüz bitkilerden yavaşlamadan ve dikenlerinden hasar almadan geçersin. Hareketi engellemek için büyüyle yaratılmış bitkilere karşı save’de <b>avantaj</b>.'],
+  ['Favored Enemy', 'Ranger', '4 / uzun dinlenme', '<span lang="en">Hunter’s Mark</span> her zaman hazır ve sayıya girmez; uzun dinlenmede <b>4 kez slotsuz</b> atabilirsin (Büyü slotları kartında kutular). Slotla da atılır.'],
   ['Sneak Attack', 'Rogue', 'Turda 1', 'Saldırı zarında avantajın varsa ya da hedefin 5 ft yanında etkisiz kalmamış bir müttefikin varsa (ve dezavantajın yoksa), finesse ya da menzilli silahla isabette <b>+1d6</b>.'],
   ['Expertise', 'Rogue', '', '<span lang="en">Perception</span> (+11) ve <span lang="en">Stealth</span> (+13) için yeterlilik iki katı.'],
   ['Thieves’ Cant', 'Rogue', '', 'Hırsızların gizli dili: sıradan konuşmanın içine gizli mesaj saklarsın (dört kat uzun sürer); tehlike, ganimet, güvenli ev gibi kısa mesajlar veren gizli işaretleri tanırsın.'],
@@ -9594,7 +9620,11 @@ const FEATS = [
   ['Mask of the Wild', 'Wood Elf', '', 'Yalnızca hafif örtülüyken (yaprak, yağmur, kar, sis…) bile <b>saklanmayı deneyebilirsin</b>.'],
   ['Trance', 'Wood Elf', '', 'Uyumazsın; <b>4 saat</b> yarı bilinçli trans, 8 saatlik uykunun yerini tutar. Uzun dinlenme yine 8 saat sürer (kalanı hafif etkinlik).'],
   ['Keen Senses', 'Wood Elf', '', '<span lang="en">Perception</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor; Perception yeterliliği buradan.</i>'],
-  ['Fleet of Foot', 'Wood Elf', '', 'Yürüme hızın <b>35 ft</b>. <i>Sayfada özellik olarak yazmıyor.</i>'],
+  ['Elven Lineage: Wood Elf', 'Wood Elf', '', 'Yürüme hızın <b>35 ft</b> (Roving ile 45). <span lang="en">Druidcraft</span> cantrip’i; 3. seviyeden <span lang="en">Longstrider</span>, 5. seviyeden <span lang="en">Pass without Trace</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b> (slotla da atılır). Büyü yeteneği: <b>WIS</b>.'],
+  ['Roving', 'Ranger', '', 'Ağır zırh giymezken yürüme hızın <b>+10 ft</b> (Wood Elf 35 → <b>45 ft</b>); ayrıca <b>tırmanma</b> ve <b>yüzme</b> hızın yürüme hızına eşit (45 ft).'],
+  ['Deft Explorer', 'Ranger', '', 'Yeterli olduğun <b>bir skill’de expertise</b> ve <b>iki dil</b>. <i>Skill seçimi Builder’da bekliyor; sayfadaki değerler değişmedi.</i>'],
+  ['Expertise', 'Ranger', '9. seviye', 'Yeterli olduğun <b>iki skill’de daha expertise</b>. <i>Seçim Builder’da bekliyor; sayfadaki değerler değişmedi.</i>'],
+  ['Weapon Mastery', 'Ranger', '', 'Seçtiğin silahların <b>mastery özelliği</b> (Rogue 2 + Ranger 2 silah). <i>Silah seçimi Builder’da bekliyor.</i>'],
   ['Elf Weapon Training', 'Wood Elf', '', '<span lang="en">Longsword, Shortsword, Shortbow, Longbow</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor.</i>'],
   ['City Secrets', 'Urchin', '', 'Şehirlerin gizli geçitlerini bilirsin: savaş dışındayken sen ve yönettiğin arkadaşların şehirde iki nokta arasında <b>iki kat hızlı</b> yol alırsınız.'],
 ];
