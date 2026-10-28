@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '2db06606b6'; window.__BUILT__ = '2026-10-29 01:59';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '172ce2c313'; window.__BUILT__ = '2026-10-29 02:16';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -479,6 +479,8 @@ nav button{ white-space:nowrap; }
 .ch.hit{ border-color:hsl(205 28% 40%); } .ch.hit b{ color:hsl(205 55% 76%); }
 .ch.dmg{ border-color:hsl(16 32% 42%); } .ch.dmg b{ color:hsl(16 68% 73%); }
 .ch.add{ border-color:hsl(45 28% 38%); } .ch.add b{ color:hsl(45 62% 70%); }
+button.ch{ font:inherit; color:inherit; text-align:left; cursor:pointer; } button.ch small{ display:block; }
+.ch.crit{ border-color:hsl(350 55% 52% / .55); } .ch.crit b{ color:hsl(350 70% 76%); }
 .ch.save{ border-color:hsl(275 22% 42%); } .ch.save b{ color:hsl(275 45% 80%); }
 /* Wild Shape attack cards */
 .watk{ display:grid; gap:6px; padding:8px 0; border-top:1px solid var(--line); }
@@ -711,14 +713,14 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   <div class="atks">
    <article class="ab" style="--ah:32">
     <h3><span lang="en">Longbow +2</span><small>ana silah · Saldırı aksiyonunda <b>2 ok</b> (<span lang="en">Extra Attack</span>)</small></h3>
-    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+13</b></span><span class="ch dmg"><small>Hasar</small><b>1d8+7</b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span></div>
+    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+13</b></span><span class="ch dmg"><small>Hasar</small><b>1d8+7</b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>2d8+7 + 2d6</b> <em>zarlar ×2 · bonus 1 kez</em></button><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span></div>
     <h4 class="rng-h">Mesafeye göre</h4>
     <div class="chs rng"><span class="ch"><small>0–150 ft (45 m)</small><b>normal</b></span><span class="ch"><small>150–600 ft (180 m)</small><b>normal</b> <em>Sharpshooter (yoksa dezavantaj)</em></span><span class="ch"><small>600 ft+ (180 m+)</small><b>atılamaz</b></span><span class="ch"><small>Düşman 5 ft içinde</small><b>dezavantaj</b></span></div>
     <p>5e'de mesafe saldırıya <b>sayı olarak eksi vermez</b>: normal menzilde (150 ft) ceza yok; uzun menzilde (600 ft'e kadar) <b>dezavantaj</b> olur, ama <span lang="en">Sharpshooter</span> bunu kaldırır, yani 600 ft'e kadar normal atarsın. 600 ft'ten öteye atamazsın. Yanında (5 ft) etkisiz olmayan bir düşman varsa menzilli saldırı <b>dezavantajlı</b> (Sharpshooter bunu kaldırmaz; önce uzaklaş). Siper hedefin AC'sine eklenir: yarım <b>+2</b>, ¾ <b>+5</b>; Sharpshooter ikisini de yok sayar, tam siperdeki hedefe atılamaz.</p>
    </article>
    <article class="ab" style="--ah:5">
     <h3><span lang="en">Sharpshooter</span><small>isteğe bağlı · atmadan önce söyle</small></h3>
-    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+8</b> <em>(−5)</em></span><span class="ch dmg"><small>Hasar</small><b>1d8+17</b> <em>delme (+10)</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span></div>
+    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+8</b> <em>(−5)</em></span><span class="ch dmg"><small>Hasar</small><b>1d8+17</b> <em>delme (+10)</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>2d8+17 + 2d6</b> <em>zarlar ×2 · +17 bir kez</em></button></div>
     <p>Her zaman geçerli: uzun menzilde (600 ft'e kadar) <b>dezavantaj yok</b>; yarım ve ¾ siperi <b>yok sayar</b>.</p>
    </article>
    <article class="ab" style="--ah:265">
@@ -728,12 +730,12 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    </article>
    <article class="ab" style="--ah:225">
     <h3><span lang="en">Sneak Attack</span><small>turda bir kez</small></h3>
-    <div class="chs"><span class="ch add"><small>Ek hasar</small><b>+1d6</b></span></div>
+    <div class="chs"><button class="ch add" data-c="gl" data-open="sneak-attack"><small>Ek hasar</small><b>+1d6</b> <em>açıklama</em></button><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>+2d6</b> <em>kritikte zarlar ×2</em></button></div>
     <ul><li><b>Avantajın varsa</b>, ya da hedefin 5 ft yanında etkisiz olmayan bir müttefikin varsa <b>ve dezavantajın yoksa</b>.</li><li>Karanlıkta <span lang="en">Umbral Sight</span>: karanlık görüşlü düşmana <b>görünmezsin</b> → avantaj.</li></ul>
    </article>
    <article class="ab" style="--ah:130">
     <h3><span lang="en">Hunter’s Mark</span><small>bonus aksiyon · konsantrasyon</small></h3>
-    <div class="chs"><span class="ch add"><small>Her isabette</small><b>+1d6</b> <em>force · işaretli hedefe</em></span></div>
+    <div class="chs"><button class="ch add" data-c="sp" data-open="hunters-mark"><small>Her isabette</small><b>+1d6</b> <em>force · işaretli hedefe · büyüyü aç</em></button><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>+2d6</b> <em>kritikte zar ×2</em></button></div>
     <p><span lang="en">Hunter’s Mark</span>, <span lang="en">Ensnaring Strike</span> ve <span lang="en">Zephyr Strike</span> konsantrasyon ister: <b>aynı anda yalnız biri</b>. <span lang="en">Hail of Thorns</span> ve <span lang="en">Lightning Arrow</span> konsantrasyon <b>istemez</b>, <span lang="en">Hunter’s Mark</span> sürerken de kullanılır (ikisi de bonus aksiyon, aynı tur yalnız biri). Konsantrasyon save <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
    </article>
    <article class="ab" style="--ah:180">
@@ -9294,6 +9296,9 @@ const GL = (() => {
     ['resistance', 'Resistance', 'Direnç', 'O türden hasarın <b>yarısını</b> alır (aşağı yuvarlanır). Aynı tür için birden çok direnç birikmez.', 'Direnç|dirençli'],
     ['immunity', 'Immunity', 'Bağışıklık', 'O türden hasar ya da o durum ona <b>hiç işlemez</b>.', 'Bağışıklık|bağışık'],
     ['escape', 'Escaping a grapple', 'Kavramadan kaçış', 'Kavranan yaratık <b>kendi aksiyonunu</b> harcayıp Athletics ya da Acrobatics check yapar; yazılı DC’yi tutturursa kurtulur.', 'kaçış'],
+    ['critical-hit', 'Critical Hit', 'Kritik vuruş', 'Doğal 20: otomatik isabet. Saldırının <b>bütün hasar zarlarını iki kez</b> atarsın; <b>ekstra hasar zarları da dahil</b> (Sneak Attack, Hunter’s Mark, Primal Strike, Fount of Moonlight). Sabit bonuslar (ability modifier) <b>bir kez</b> eklenir.', 'kritik vuruş'],
+    ['primal-strike', 'Primal Strike', 'Primal Strike', '<b>Druid 7 · Elemental Fury.</b> Turunda <b>bir kez</b>, silahla ya da <b>Wild Shape hayvan formunun saldırısıyla</b> isabet edince hedef fazladan <b>1d8 soğuk, ateş, şimşek ya da gök gürültüsü</b> hasarı alır (vururken seçersin). Kritikte <b>2d8</b>. Druid 15’te 2d8 (kritikte 4d8).', 'Primal Strike'],
+    ['sneak-attack', 'Sneak Attack', 'Sneak Attack', '<b>Rogue.</b> Turda <b>bir kez</b>: saldırı zarında avantajın varsa ya da hedefin 5 ft yanında etkisiz kalmamış bir müttefikin varsa (ve dezavantajın yoksa), finesse ya da menzili silahla isabet edince fazladan hasar zarları. <b>Kritikte zarlar iki kez atılır.</b>', 'Sneak Attack'],
     ['multiattack', 'Multiattack', 'Çoklu saldırı', 'Tek <b>Saldırı aksiyonunda</b> listelenen saldırıların hepsini yapar (ör. bir Isırık + bir Pençe).', 'Multiattack'],
   ];
   const BY = Object.fromEntries(T.map(t => [t[0], t]));
