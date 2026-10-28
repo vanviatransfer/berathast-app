@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '172ce2c313'; window.__BUILT__ = '2026-10-29 02:16';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '7489f0a613'; window.__BUILT__ = '2026-10-29 02:28';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -480,6 +480,7 @@ nav button{ white-space:nowrap; }
 .ch.dmg{ border-color:hsl(16 32% 42%); } .ch.dmg b{ color:hsl(16 68% 73%); }
 .ch.add{ border-color:hsl(45 28% 38%); } .ch.add b{ color:hsl(45 62% 70%); }
 button.ch{ font:inherit; color:inherit; text-align:left; cursor:pointer; } button.ch small{ display:block; }
+.ch i.cr{ display:block; font-style:normal; font-size:.74rem; color:hsl(350 70% 76%); margin-top:2px; } .dts{ display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 6px; } .mini.dt[aria-pressed="true"]{ background:hsl(45 40% 24%); border-color:hsl(45 55% 55%); color:hsl(45 70% 80%); } .mini.dt small{ opacity:.8; }
 .ch.crit{ border-color:hsl(350 55% 52% / .55); } .ch.crit b{ color:hsl(350 70% 76%); }
 .ch.save{ border-color:hsl(275 22% 42%); } .ch.save b{ color:hsl(275 45% 80%); }
 /* Wild Shape attack cards */
@@ -690,6 +691,27 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   <p class="sub">Zırh: <span lang="en">Bear Hide Armor +2</span> + <span lang="en">Ring of Protection</span> +1 → AC <b id="acLine">20</b> (üstteki AC kutusuna dokunup elle değiştirebilirsin). İnisiyatif: DEX 5 + WIS 3 (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>90 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 30). Uçma, tırmanma, yüzme hızı yok.</p>
   <p class="sub" id="eqLine"></p>
 
+  <section class="sec" style="--sh:205">
+  <h2 class="lvl-h">Dinlenmeler</h2>
+  <div class="card rest">
+   <div id="restAct"></div>
+   <h3>Kısa dinlenme <small>en az 1 saat</small></h3>
+   <ul>
+    <li>Yenilenen özelliğin yok.</li>
+    <li>İstersen <b>can zarı</b> harca: her zar için <b>zarı at, +1 ekle</b>, o kadar can kazan. 10 zarın var: 1 × d8 (<span lang="en">Rogue</span>), 9 × d10 (<span lang="en">Ranger</span>).</li>
+    <li>Harcanan zarlar kısa dinlenmede <b>geri gelmez</b>. Uzun dinlenmenin sonunda en fazla <b>toplam zarının yarısı</b> geri gelir (10 zar → en fazla 5, en az 1).</li>
+   </ul>
+   <h3>Uzun dinlenme <small>8 saat</small></h3>
+   <ul>
+    <li>Canın tamamen dolar; büyü slotları (4/3/2) ve <span lang="en">Fey Touched</span> büyüleri (<span lang="en">Misty Step, Command</span>) geri gelir.</li>
+    <li>Harcadığın can zarlarından <b>en fazla 5'i</b> geri gelir (toplamın yarısı).</li>
+    <li><span lang="en">Trance</span>: 4 saat trans uykuya yeter, ama dinlenme yine 8 saat sürer.</li>
+   </ul>
+   <h3>Savaşta</h3>
+   <ul><li><span lang="en">Dread Ambusher</span> her savaşın ilk turunda; <span lang="en">Sneak Attack</span> her turda bir kez.</li></ul>
+  </div>
+
+  </section>
   <section class="sec" style="--sh:38">
   <h2 class="lvl-h"><span lang="en">Abilities</span> <small>● = save’de yeterli</small></h2>
   <div class="abl">
@@ -711,6 +733,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   <section class="sec" style="--sh:8">
   <h2 class="lvl-h">Saldırılar</h2>
   <div class="atks">
+   <article class="ab" id="dmgAll" style="--ah:12"></article>
    <article class="ab" style="--ah:32">
     <h3><span lang="en">Longbow +2</span><small>ana silah · Saldırı aksiyonunda <b>2 ok</b> (<span lang="en">Extra Attack</span>)</small></h3>
     <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+13</b></span><span class="ch dmg"><small>Hasar</small><b>1d8+7</b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>2d8+7 + 2d6</b> <em>zarlar ×2 · bonus 1 kez</em></button><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span></div>
@@ -742,27 +765,6 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
     <h3>Büyü<small>Wisdom</small></h3>
     <div class="chs"><span class="ch hit"><small>Büyü saldırısı</small><b>+7</b></span><span class="ch save"><small>Save</small><b>DC 15</b></span></div>
    </article>
-  </div>
-
-  </section>
-  <section class="sec" style="--sh:205">
-  <h2 class="lvl-h">Dinlenmeler</h2>
-  <div class="card rest">
-   <div id="restAct"></div>
-   <h3>Kısa dinlenme <small>en az 1 saat</small></h3>
-   <ul>
-    <li>Yenilenen özelliğin yok.</li>
-    <li>İstersen <b>can zarı</b> harca: her zar için <b>zarı at, +1 ekle</b>, o kadar can kazan. 10 zarın var: 1 × d8 (<span lang="en">Rogue</span>), 9 × d10 (<span lang="en">Ranger</span>).</li>
-    <li>Harcanan zarlar kısa dinlenmede <b>geri gelmez</b>. Uzun dinlenmenin sonunda en fazla <b>toplam zarının yarısı</b> geri gelir (10 zar → en fazla 5, en az 1).</li>
-   </ul>
-   <h3>Uzun dinlenme <small>8 saat</small></h3>
-   <ul>
-    <li>Canın tamamen dolar; büyü slotları (4/3/2) ve <span lang="en">Fey Touched</span> büyüleri (<span lang="en">Misty Step, Command</span>) geri gelir.</li>
-    <li>Harcadığın can zarlarından <b>en fazla 5'i</b> geri gelir (toplamın yarısı).</li>
-    <li><span lang="en">Trance</span>: 4 saat trans uykuya yeter, ama dinlenme yine 8 saat sürer.</li>
-   </ul>
-   <h3>Savaşta</h3>
-   <ul><li><span lang="en">Dread Ambusher</span> her savaşın ilk turunda; <span lang="en">Sneak Attack</span> her turda bir kez.</li></ul>
   </div>
 
   </section>
@@ -8873,12 +8875,17 @@ const SLOTS = (() => {
       return `<section class="card slots"><h3>Büyü slotları <small>${rest}/${total} kaldı · büyü yapınca boş kutuya dokun</small></h3>${rows}${free}
         ${st.confirm
           ? `<div class="confirm"><span>${LONG_REST_Q}</span><button class="yes" data-slot="rest-yes">Evet, dinlendim</button><button data-slot="rest-no">Vazgeç</button></div>`
-          : `<button class="mini srest" data-slot="rest">Uzun dinlenme yaptım</button>`}</section>`;
+          : `<div class="restbs"><button class="mini srest" data-slot="srest">Kısa dinlenme yaptım</button><button class="mini srest" data-slot="rest">Uzun dinlenme yaptım</button></div>`}</section>`;
     },
     tap(key) {
       const [k, a, b] = key.split(':');
       if (k === 's') { st.u[+a][+b] ^= 1; save(); }
       else if (k === 'f') { st.f[+a] ^= 1; save(); }
+      else if (k === 'srest') { // short rest from the spell tab: the Karakter tab's short-rest flow (hit dice)
+        restAsk = false; restMode = 'short'; SR.pend = []; SR.ask = null; renderRest();
+        const ct = document.querySelector('[data-tab="char"]'); if (ct) ct.click();
+        setTimeout(() => { const r = $('#restAct'); if (r) r.scrollIntoView({ block: 'center' }); }, 250); return;
+      }
       else if (k === 'rest') st.confirm = true;
       else if (k === 'rest-no') st.confirm = false;
       else if (k === 'rest-yes') { st.confirm = false; return longRest('slots'); }
@@ -9633,6 +9640,33 @@ const FEATS = [
   ['Elf Weapon Training', 'Wood Elf', '', '<span lang="en">Longsword, Shortsword, Shortbow, Longbow</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor.</i>'],
   ['City Secrets', 'Urchin', '', 'Şehirlerin gizli geçitlerini bilirsin: savaş dışındayken sen ve yönettiğin arkadaşların şehirde iki nokta arasında <b>iki kat hızlı</b> yol alırsınız.'],
 ];
+// Karakter → Saldırılar: one box with every damage of a Longbow hit (weapon, thunder, Sharpshooter, Hunter's Mark, Sneak Attack)
+const DMG_KEY = 'berathast-dmg-v1';
+const DMG = Object.assign({ ss: false, hm: false, sn: false }, load(DMG_KEY, {}));
+function renderDmgAll() {
+  const box = $('#dmgAll'); if (!box) return;
+  const avg = { 6: 3.5, 8: 4.5 }, fmt = n => (Math.round(n * 10) / 10).toString().replace('.', ',');
+  // [label, dice count, die, flat, type, on]
+  const rows = [
+    ['Longbow +2', 1, 8, 7, 'delme', true],
+    ['Sharpshooter', 0, 0, 10, '(−5 saldırıya)', DMG.ss],
+    ['Ek hasar', 1, 6, 0, 'gök gürültüsü', true],
+    ['Hunter’s Mark', 1, 6, 0, 'force', DMG.hm],
+    ['Sneak Attack', 1, 6, 0, 'turda 1 kez', DMG.sn],
+  ];
+  const on = rows.filter(r => r[5]);
+  const dice = {}; let flat = 0, mean = 0;
+  for (const [, n, d, f] of on) { if (n) { dice[d] = (dice[d] || 0) + n; mean += n * avg[d]; } flat += f; }
+  const expr = (k) => Object.keys(dice).sort((a, b) => b - a).map(d => `${dice[d] * k}d${d}`).join(' + ') + (flat ? ` + ${flat}` : '');
+  const tog = (id, label, extra) => `<button class="mini dt" data-dt="${id}" aria-pressed="${DMG[id]}">${label}${extra ? ' <small>' + extra + '</small>' : ''}</button>`;
+  box.innerHTML = `<h3>Toplam hasar <small>bir isabet · aç / kapat</small></h3>
+    <div class="dts">${tog('ss', 'Sharpshooter', 'saldırı +8, hasar +10')}${tog('hm', 'Hunter’s Mark', '+1d6')}${tog('sn', 'Sneak Attack', '+1d6 · turda 1')}</div>
+    <div class="chs">${on.map(([l, n, d, f, t]) => `<span class="ch ${l === 'Longbow +2' ? 'dmg' : 'add'}"><small>${l}</small><b>${n ? n + 'd' + d : ''}${f ? '+' + f : ''}</b> <em>${t}</em><i class="cr">kritikte ${n ? 2 * n + 'd' + d : ''}${f ? '+' + f : ''}</i></span>`).join('')}</div>
+    <div class="chs"><span class="ch hit"><small>Toplam</small><b>${expr(1)}</b> <em>ort. ${fmt(mean + flat)}</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>${expr(2)}</b> <em>ort. ${fmt(mean * 2 + flat)} · zarlar ×2</em></button><span class="ch"><small>Saldırı</small><b>${DMG.ss ? '+8' : '+13'}</b></span></div>
+    <p class="note">Turda <b>2 ok</b> (<span lang="en">Extra Attack</span>): <span lang="en">Sneak Attack</span> yalnız bir isabette; diğerinde kapalı hesapla (ort. ${fmt(mean + flat - (DMG.sn ? 3.5 : 0))}).</p>`;
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-dt]'); if (!b) return; const k = b.dataset.dt; DMG[k] = !DMG[k]; store(DMG_KEY, DMG); renderDmgAll(); });
+renderDmgAll();
 $('#feats').innerHTML = FEATS.map(([n, src, use, d]) =>
   `<article class="card feat ih" style="--ih:${SRC_HUE[src] ?? 30}"><h3><span lang="en">${n}</span><span class="tg" lang="en">${src}</span>${use ? `<span class="tg lv">${use}</span>` : ''}</h3><p>${d}</p></article>`).join('');
 
@@ -9768,7 +9802,7 @@ document.addEventListener('keydown', e => {
 });
 
 // Backup: every key this app writes, as one JSON file.
-const BACKUP_KEYS = ['berathast-spells-known-v1', INV_KEY, HP_KEY, 'berathast-slots-v1', CONC_KEY, AC_KEY, HD_KEY];
+const BACKUP_KEYS = ['berathast-spells-known-v1', INV_KEY, HP_KEY, 'berathast-slots-v1', CONC_KEY, AC_KEY, HD_KEY, DMG_KEY];
 function exportData() {
   const data = { app: 'berathast', v: 1, at: new Date().toISOString(), keys: {} };
   for (const k of BACKUP_KEYS) { try { const r = localStorage.getItem(k); if (r) data.keys[k] = JSON.parse(r); } catch (e) {} }
