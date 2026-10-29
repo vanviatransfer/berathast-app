@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '6cc49b6c93'; window.__BUILT__ = '2026-10-29 02:49';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '0ed4d2c59c'; window.__BUILT__ = '2026-10-29 21:38';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -9621,6 +9621,7 @@ const FEATS = [
   ['Sharpshooter', 'Feat', '', 'Uzun menzilde saldırı <b>dezavantajsız</b>. Menzilli silah saldırıların <b>yarım ve dörtte üç siperi yok sayar</b>. Saldırıdan önce seçersen: saldırı zarına <b>−5</b>, isabet ederse hasara <b>+10</b>.'],
   ['Fey Touched', 'Feat', '1 / uzun dinlenme', '<span lang="en">Misty Step</span> ve <span lang="en">Command</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b>. Uygun seviyedeki slotlarla da yapılabilir. Hangi yeteneği kullandığı sayfada yazmıyor; <b>DC 15 (Wisdom)</b> varsayıldı, Charisma seçildiyse DC 14.'],
   ['Dread Ambusher', 'Gloom Stalker', 'İlk tur', 'İnisiyatife <b>+3</b> (WIS). Her savaşın ilk turunun başında yürüme hızın <b>+10 ft</b>. O tur Saldırı aksiyonu alırsan <b>bir silah saldırısı daha</b>; isabet ederse <b>+1d8</b> silah türünde hasar.'],
+  ['Dreadful Strike', 'Gloom Stalker', 'WIS mod. / uzun dinlenme', 'Silahla bir yaratığa <b>isabet ettirince</b> fazladan <b>2d6 psişik</b> hasar verebilirsin. <b>Turda bir kez</b>; kullanım sayısı <b>WIS modifier</b>’ın kadar (en az 1; WIS +3 → <b>3 kez</b>), uzun dinlenmede hepsi yenilenir. Kritikte zarlar iki kez atılır (4d6). Toplam hasar kutusunda aç / kapa.'],
   ['Umbral Sight', 'Gloom Stalker', '', 'Karanlık görüşün <b>90 ft</b> (elf 60 + 30). Karanlıktayken, seni karanlık görüşle görmeye çalışan yaratıklara karşı <b>görünmezsin</b>.'],
   ['Iron Mind', 'Gloom Stalker', '', 'Wisdom save’lerinde yeterlilik (WIS save +8). <i>Sayfanın özellik listesinde yazmıyor; save alanında işaretli ve Gloom Stalker 7. seviye özelliği.</i>'],
   ['Gloom Stalker Magic', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman hazır, hazırlanan büyü sayısına dahil değil.'],
@@ -9644,7 +9645,7 @@ const FEATS = [
 ];
 // Karakter → Saldırılar: one box with every damage of a Longbow hit (weapon, thunder, Sharpshooter, Hunter's Mark, Sneak Attack)
 const DMG_KEY = 'berathast-dmg-v1';
-const DMG = Object.assign({ ss: false, hm: false, sn: false, da: false }, load(DMG_KEY, {}));
+const DMG = Object.assign({ ss: false, hm: false, sn: false, da: false, ds: false }, load(DMG_KEY, {}));
 function renderDmgAll() {
   const box = $('#dmgAll'); if (!box) return;
   const avg = { 6: 3.5, 8: 4.5 }, fmt = n => (Math.round(n * 10) / 10).toString().replace('.', ',');
@@ -9656,6 +9657,7 @@ function renderDmgAll() {
     ['Hunter’s Mark', 1, 6, 0, 'force', DMG.hm],
     ['Sneak Attack', 1, 6, 0, 'turda 1 kez', DMG.sn],
     ['Dread Ambusher', 1, 8, 0, 'ilk tur · 1 kez · delme', DMG.da],
+    ['Dreadful Strike', 2, 6, 0, 'psişik · turda 1 kez', DMG.ds],
   ];
   const on = rows.filter(r => r[5]);
   const dice = {}; let flat = 0, mean = 0;
@@ -9663,7 +9665,7 @@ function renderDmgAll() {
   const expr = (k) => Object.keys(dice).sort((a, b) => b - a).map(d => `${dice[d] * k}d${d}`).join(' + ') + (flat ? ` + ${flat}` : '');
   const tog = (id, label, extra) => `<button class="mini dt" data-dt="${id}" aria-pressed="${DMG[id]}">${label}${extra ? ' <small>' + extra + '</small>' : ''}</button>`;
   box.innerHTML = `<h3>Toplam hasar <small>bir isabet · aç / kapat</small></h3>
-    <div class="dts">${tog('ss', 'Sharpshooter', 'saldırı +8, hasar +10')}${tog('hm', 'Hunter’s Mark', '+1d6')}${tog('sn', 'Sneak Attack', '+1d6 · turda 1')}${tog('da', 'İlk tur', 'Dread Ambusher +1d8')}</div>
+    <div class="dts">${tog('ss', 'Sharpshooter', 'saldırı +8, hasar +10')}${tog('hm', 'Hunter’s Mark', '+1d6')}${tog('sn', 'Sneak Attack', '+1d6 · turda 1')}${tog('da', 'İlk tur', 'Dread Ambusher +1d8')}${tog('ds', 'Dreadful Strike', '+2d6 psişik · turda 1')}</div>
     <div class="chs">${on.map(([l, n, d, f, t]) => `<span class="ch ${l === 'Longbow +2' ? 'dmg' : 'add'}"><small>${l}</small><b>${n ? n + 'd' + d : ''}${f ? '+' + f : ''}</b> <em>${t}</em><i class="cr">kritikte ${n ? 2 * n + 'd' + d : ''}${f ? '+' + f : ''}</i></span>`).join('')}</div>
     <div class="chs"><span class="ch hit"><small>Toplam</small><b>${expr(1)}</b> <em>ort. ${fmt(mean + flat)}</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>${expr(2)}</b> <em>ort. ${fmt(mean * 2 + flat)} · zarlar ×2</em></button><span class="ch"><small>Saldırı</small><b>${DMG.ss ? '+8' : '+13'}</b></span></div>
     <p class="note">Turda <b>2 ok</b> (<span lang="en">Extra Attack</span>): <span lang="en">Sneak Attack</span> yalnız bir isabette; diğerinde kapalı hesapla (ort. ${fmt(mean + flat - (DMG.sn ? 3.5 : 0))}).</p>`;
