@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Berathast">
-<script>window.__PWA__ = true; window.__BUILD__ = '8209d6c47b'; window.__BUILT__ = '2026-10-29 21:43';</script>
+<script>window.__PWA__ = true; window.__BUILD__ = '398a59ec16'; window.__BUILT__ = '2026-11-01 00:13';</script>
 <style>[hidden]{display:none!important} body{margin:0} header{top:0 !important; padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
@@ -210,7 +210,7 @@ html[data-tab="sp"]{ --acc:#7387b5; --acc-ink:#0b1020; --tag:#222a3e; --tag-ink:
 .seg button small.over{ color:var(--warn); font-weight:700; }
 .seg button[aria-pressed="true"] small.over{ color:var(--acc-ink); }
 .chips.lv{ grid-template-columns:auto auto repeat(5,minmax(0,1fr)); }
-nav .wrap{ grid-template-columns:repeat(3,1fr); }
+nav .wrap{ grid-template-columns:repeat(4,minmax(0,1fr)); }
 #spChips{ grid-template-columns:auto repeat(3,minmax(0,1fr)); }
 .view{ min-width:0; }
 
@@ -413,7 +413,7 @@ html, body{ overscroll-behavior:none; }
 .restb{ min-height:44px; width:100%; }
 .mini[disabled]{ opacity:.4; cursor:default; }
 /* Eşya & Not tab: input on top, entries below */
-#invItems .inv, #invNotes .inv{ margin-top:12px; }
+#notesView .inv{ margin-top:12px; }
 .inv .addf + .entries{ margin-top:2px; }
 nav button{ white-space:nowrap; }
 /* gold */
@@ -451,6 +451,8 @@ nav button{ white-space:nowrap; }
 .toast.show .spk:nth-of-type(2){ animation-delay:.12s; } .toast.show .spk:nth-of-type(3){ animation-delay:.24s; } .toast.show .spk:nth-of-type(4){ animation-delay:.06s; }
 /* while typing (Eşya & Not, or the keyboard is up) the notice shows at the top so the keyboard can't hide it */
 .toast.top{ top:calc(env(safe-area-inset-top,0px) + 10px); bottom:auto; --ty:-24px; }
+/* Eşyalar / Notlar: under the header and its sub-tab switch (it covered the switch at the very top) */
+.toast.top.under{ top:calc(var(--hdrH, 64px) + var(--floatH, 0px) + 8px); }
 @keyframes tpop{ from{ transform:translate(-50%,calc(var(--ty) * 1.1)) scale(.82); opacity:0; } }
 @keyframes tstar{ 0%{ transform:scale(.2) rotate(-120deg); opacity:0; } 45%{ transform:scale(1.5) rotate(15deg); opacity:1; } 100%{ transform:scale(1) rotate(0); } }
 @keyframes tsweep{ to{ transform:translateX(110%); } }
@@ -569,6 +571,15 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
 .sr-act .yes{ background:hsl(185 35% 45%); border-color:hsl(185 35% 45%); color:#0b1418; font-weight:700; }
 .wsuses b small{ font-size:.9rem; color:var(--muted); font-family:var(--body); font-weight:500; }
 .wsuses.none{ border-color:var(--warn); } .wsuses.none b{ color:var(--warn); }
+/* H4d (as Mathias H4b): rule basis (tap a value) */
+[data-basis]{ cursor:pointer; }
+.ab-tap span[data-rv]{ text-decoration:none; }
+.quick div[data-basis]{ -webkit-tap-highlight-color:transparent; }
+.rbl{ font:inherit; color:inherit; background:none; border:0; padding:0; text-decoration:underline dotted; text-underline-offset:3px; cursor:pointer; }
+.lvl-h small .rbl{ color:var(--muted); }
+button.tg.rbt{ font:inherit; font-size:.68rem; font-weight:700; letter-spacing:.03em; border:0; cursor:pointer; text-decoration:underline dotted; text-underline-offset:2px; }
+.rb-list{ margin:8px 0 6px; padding-left:18px; display:grid; gap:6px; line-height:1.45; }
+.note.rb{ color:var(--muted); font-size:.8rem; }
 /* ---- Conjure Animals list (shared/summon.css; the box styles repeat the Wild Shape ones so apps without Wild Shape get them too) ---- */
 .tg.role{ background:hsl(var(--h, 30) 26% 24%); color:hsl(var(--h, 30) 40% 80%); }
 .fact.wide{ grid-column:1/-1; }
@@ -617,6 +628,61 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
 .ab-list b:first-child{ color:var(--ink); }
 .tapnote{ display:block; color:var(--muted); }
 
+/* Custom items (PLAN H4c, shared by the character apps): item sections, effect chips, uses, the wizard */
+.isec{ margin-top:12px; }
+.isec .addf + .entries, .isec .wzb + .entries{ margin-top:2px; }
+.wzb{ min-height:44px; width:100%; border:1px dashed var(--ctl); border-radius:10px; background:var(--bg); color:var(--ink); font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px; }
+.wzb svg{ width:18px; height:18px; }
+.entry .inm{ font-weight:700; }
+.entry .inm small{ font-weight:400; color:var(--muted); margin-left:4px; }
+.entry .itx{ white-space:pre-wrap; overflow-wrap:anywhere; color:var(--muted); font-size:.88rem; }
+.fxs{ display:flex; flex-wrap:wrap; gap:4px; }
+.tg.fx{ background:hsl(var(--eh, 36) 30% 24%); color:hsl(var(--eh, 36) 50% 82%); }
+.tg.fx.dm{ background:hsl(275 26% 26%); color:hsl(275 45% 84%); }
+.tg.off{ background:transparent; border:1px dashed var(--ctl); color:var(--muted); font-weight:500; }
+.ibadge{ font-size:.68rem; font-weight:700; border-radius:5px; padding:1px 6px; margin-right:6px; background:hsl(140 30% 24%); color:hsl(140 45% 80%); }
+.ibadge.at{ background:hsl(275 26% 26%); color:hsl(275 45% 84%); }
+.ibadge.use{ background:hsl(200 40% 24%); color:hsl(200 60% 82%); }
+.iwhy{ font-size:.8rem; color:var(--warn); }
+.iuses{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:.86rem; }
+.iuses .boxes{ display:flex; gap:4px; }
+.iuses .ub{ width:22px; height:22px; border:1.5px solid var(--ctl); border-radius:6px; display:grid; place-items:center; }
+.iuses .ub.used{ background:var(--line); }
+.iuses .ub.used::after{ content:'✕'; font-size:.8rem; color:var(--muted); }
+.mini.use-on{ background:hsl(200 45% 40%); border-color:hsl(200 45% 55%); color:#fff; font-weight:700; }
+.ifx-card{ margin-top:8px; display:grid; gap:6px; border-color:color-mix(in oklab, hsl(200 45% 55%) 40%, var(--line)) !important; }
+.ifx-card h3{ margin:0; font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:hsl(200 50% 74%); }
+.ifx-card .iuse{ display:grid; gap:4px; background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:6px 8px; }
+.ifx-card .iuse.on{ border-color:hsl(200 45% 55%); }
+.ifx-card .iuse .row{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.ifx-card .iuse .row .sp{ flex:1; }
+.ifx-line{ font-size:.85rem; color:var(--muted); margin:0; }
+.ifx-line b{ color:var(--ink); }
+/* wizard */
+.wz{ display:grid; gap:10px; margin-top:10px; }
+.wz-f{ display:grid; gap:4px; font-size:.86rem; color:var(--muted); min-width:0; }
+.wz-f input, .wz-f textarea{ width:100%; min-height:44px; border:1px solid var(--ctl); background:var(--bg); color:var(--ink); border-radius:10px; padding:8px 10px; font:inherit; }
+.wz-row{ display:grid; gap:4px; font-size:.86rem; color:var(--muted); }
+.wz-row .chips{ display:flex; flex-wrap:wrap; gap:6px; }
+.wz-uses{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; }
+.wz-ck{ display:flex; gap:10px; align-items:flex-start; min-height:44px; padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:var(--bg); }
+.wz-ck input{ width:22px; height:22px; flex:0 0 auto; margin:0; accent-color:var(--acc); }
+.wz-ck small{ display:block; color:var(--muted); font-size:.78rem; }
+.wz-h{ margin:4px 0 0; font-weight:700; } .wz-h small{ font-weight:400; color:var(--muted); display:block; font-size:.78rem; }
+.wz-g{ border:1px solid var(--line); border-radius:10px; background:var(--bg); }
+.wz-g summary{ min-height:44px; display:flex; align-items:center; gap:8px; padding:0 12px; font-weight:700; cursor:pointer; }
+.wz-g summary small{ color:var(--acc); font-weight:500; }
+.wz-stats{ display:grid; gap:4px; padding:0 8px 8px; }
+.wz-st{ display:grid; grid-template-columns:24px minmax(0,1fr) 76px; gap:8px; align-items:center; min-height:44px; padding:0 4px; border-radius:8px; }
+.wz-st.on{ background:color-mix(in oklab, var(--acc) 10%, transparent); }
+.wz-st input[type="checkbox"]{ width:22px; height:22px; margin:0; accent-color:var(--acc); }
+.wz-n{ min-height:40px; min-width:0; border:1px solid var(--ctl); background:var(--surface); color:var(--ink); border-radius:8px; padding:4px 8px; font:inherit; text-align:right; }
+.wz-n:disabled{ opacity:.5; }
+.wz-dmg{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; padding:0 8px 8px; }
+.wz-dmg label{ display:grid; gap:2px; font-size:.82rem; color:var(--muted); min-width:0; }
+.wz-dmg select{ min-height:40px; min-width:0; border:1px solid var(--ctl); background:var(--surface); color:var(--ink); border-radius:8px; padding:4px 6px; font:inherit; }
+.wz .act{ position:sticky; bottom:0; }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -653,6 +719,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   <symbol id="i-horn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c-2 3-1 6 2 7M17 3c2 3 1 6-2 7"/><path d="M8 10c0 6 2 10 4 10s4-4 4-10c-1-.7-2.5-1-4-1s-3 .3-4 1z"/><circle cx="10.3" cy="13" r=".6" fill="currentColor"/><circle cx="13.7" cy="13" r=".6" fill="currentColor"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/><rect x="4.5" y="7" width="15" height="13.5" rx="3"/><path d="M4.5 12.5h15M10.5 12.5v2h3v-2"/></symbol>
   <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20.5c.6-4 3.3-6.5 7-6.5s6.4 2.5 7 6.5"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l4 4v13H6z"/><path d="M15 3.5v4h4M9 12h7M9 15.5h7M9 19h4"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
  </defs>
@@ -678,28 +745,30 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   <div class="card install" id="updBanner" hidden><p><b>Yeni sürüm hazır.</b> Güncellemek için dokun; notların ve seçimlerin silinmez.</p><div class="row"><button class="mini pri" data-update="apply">Güncelle</button></div></div>
   <div class="card install" id="install" hidden></div>
   <div data-concbar></div>
-  <section class="card build-card"><span lang="en">Wood Elf Ranger (Gloom Stalker)</span> 9 / <span lang="en">Rogue</span> 1</section>
+  <section class="card build-card"><span lang="en">Wood Elf Ranger (Gloom Stalker)</span> 9 / <span lang="en">Rogue</span> 1 · <span lang="en">Guide</span></section>
 
+  <!-- H4d (D37): the numbers come from rules.json (the rules engine, at build time); tap a box: its rule basis -->
   <dl class="quick">
-   <div style="--qh:45"><dt>Yeterlilik</dt><dd>+4</dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
-   <div style="--qh:205"><dt>İnisiyatif</dt><dd>+8</dd><span class="en-name" lang="en">Initiative</span></div>
-   <div style="--qh:130"><dt>Hız</dt><dd>45 ft</dd><span class="en-name" lang="en">Speed</span></div>
-   <div style="--qh:270"><dt lang="en">Passive Perception</dt><dd>21</dd><span class="en-name">10 + Perception</span></div>
-   <div style="--qh:0"><dt>Can zarı</dt><dd>1d8 + 9d10</dd><span class="en-name" lang="en">Hit Dice</span></div>
-   <div style="--qh:320"><dt>Büyü</dt><dd>+7 · DC 15</dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
+   <div style="--qh:45" data-basis="Yeterlilik|proficiencyBonus"><dt>Yeterlilik</dt><dd><span data-rv="proficiencyBonus.value" data-rf="s">+4</span></dd><span class="en-name" lang="en">Proficiency Bonus</span></div>
+   <div style="--qh:205" data-basis="İnisiyatif|initiative"><dt>İnisiyatif</dt><dd><span data-rv="initiative.value" data-rf="s">+8</span></dd><span class="en-name" lang="en">Initiative</span></div>
+   <div style="--qh:130" data-basis="Hız|speed"><dt>Hız</dt><dd><span data-rv="speed.walk" data-rf="v">45</span> ft</dd><span class="en-name" lang="en">Speed</span></div>
+   <div style="--qh:270" data-basis="Passive Perception|passives.Perception"><dt lang="en">Passive Perception</dt><dd><span data-rv="passives.Perception.value" data-rf="v">21</span></dd><span class="en-name">10 + Perception</span></div>
+   <div style="--qh:0" data-basis="Can zarı|hitDice"><dt>Can zarı</dt><dd><span data-rv="hitDice.pools" data-rf="hd">1d8 + 9d10</span></dd><span class="en-name" lang="en">Hit Dice</span></div>
+   <div style="--qh:320" data-basis="Büyü|spellcasting"><dt>Büyü</dt><dd><span data-rv="spellcasting.attackBonus" data-rf="s">+7</span> · DC <span data-rv="spellcasting.saveDc" data-rf="v">15</span></dd><span class="en-name" lang="en">Spell Attack · Save DC</span></div>
   </dl>
-  <p class="sub">Zırh: <span lang="en">Bear Hide Armor +2</span> + <span lang="en">Ring of Protection</span> +1 → AC <b id="acLine">20</b> (üstteki AC kutusuna dokunup elle değiştirebilirsin). İnisiyatif: DEX 5 + WIS 3 (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>90 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 30). Uçma, tırmanma, yüzme hızı yok.</p>
+  <p class="sub">Zırh: <span lang="en">Bear Hide Armor +2</span> + <span lang="en">Ring of Protection</span> +1 → AC <b id="acLine">20</b> (<button class="rbl" data-basis="Zırh Sınıfı|armorClass">zırh 12 + zırh büyüsü 2 + DEX 2 (en fazla 2, medium armor) + eşya 1 = 17; masada 20 (Bear Hide Armor +2, karakterin kendi değeri)</button><span id="acItems"></span>; üstteki AC kutusuna dokunup elle değiştirebilirsin). İnisiyatif: DEX + WIS (<span lang="en">Dread Ambusher</span>). Karanlık görüş <b>120 ft</b> (elf 60 + <span lang="en">Umbral Sight</span> 60). <button class="rbl" data-basis="Hız|speed;features.#Roving">Tırmanma <b><span data-rv="speed.climb" data-rf="v">45</span> ft</b>, yüzme <b><span data-rv="speed.swim" data-rf="v">45</span> ft</b></button> (<span lang="en">Roving</span>); uçma hızı yok.</p>
   <p class="sub" id="eqLine"></p>
+  <div id="itemFx"></div>
 
   <section class="sec" style="--sh:38">
-  <h2 class="lvl-h"><span lang="en">Abilities</span> <small>● = save’de yeterli</small></h2>
+  <h2 class="lvl-h"><span lang="en">Abilities</span> <small>● = save’de yeterli · dokun: ayrıntı ve dayanak</small></h2>
   <div class="abl">
-   <div class="ih" style="--ih:0"><span>STR</span><b>12</b><i>+1</i><em>Save +2</em></div>
-   <div class="ih pr" style="--ih:200"><span>DEX</span><b>20</b><i>+5</i><em>● Save +10</em></div>
-   <div class="ih" style="--ih:38"><span>CON</span><b>13</b><i>+1</i><em>Save +2</em></div>
-   <div class="ih pr" style="--ih:252"><span>INT</span><b>11</b><i>+0</i><em>● Save +5</em></div>
-   <div class="ih pr" style="--ih:120"><span>WIS</span><b>16</b><i>+3</i><em>● Save +8</em></div>
-   <div class="ih" style="--ih:315"><span>CHA</span><b>14</b><i>+2</i><em>Save +3</em></div>
+   <div class="ih" style="--ih:0"><span>STR</span><b><span data-rv="abilities.STR.score" data-rf="v">12</span></b><i><span data-rv="abilities.STR.modifier" data-rf="s">+1</span></i><em>Save <span data-rv="saves.STR.bonus" data-rf="s">+2</span></em></div>
+   <div class="ih pr" style="--ih:200"><span>DEX</span><b><span data-rv="abilities.DEX.score" data-rf="v">20</span></b><i><span data-rv="abilities.DEX.modifier" data-rf="s">+5</span></i><em>● Save <span data-rv="saves.DEX.bonus" data-rf="s">+10</span></em></div>
+   <div class="ih pr" style="--ih:38"><span>CON</span><b><span data-rv="abilities.CON.score" data-rf="v">14</span></b><i><span data-rv="abilities.CON.modifier" data-rf="s">+2</span></i><em>● Save <span data-rv="saves.CON.bonus" data-rf="s">+7</span></em></div>
+   <div class="ih pr" style="--ih:252"><span>INT</span><b><span data-rv="abilities.INT.score" data-rf="v">11</span></b><i><span data-rv="abilities.INT.modifier" data-rf="s">+0</span></i><em>● Save <span data-rv="saves.INT.bonus" data-rf="s">+5</span></em></div>
+   <div class="ih pr" style="--ih:120"><span>WIS</span><b><span data-rv="abilities.WIS.score" data-rf="v">16</span></b><i><span data-rv="abilities.WIS.modifier" data-rf="s">+3</span></i><em>● Save <span data-rv="saves.WIS.bonus" data-rf="s">+8</span></em></div>
+   <div class="ih" style="--ih:315"><span>CHA</span><b><span data-rv="abilities.CHA.score" data-rf="v">14</span></b><i><span data-rv="abilities.CHA.modifier" data-rf="s">+2</span></i><em>Save <span data-rv="saves.CHA.bonus" data-rf="s">+3</span></em></div>
   </div>
   <p class="sub">Tüm save’lere <span lang="en">Ring of Protection</span> +1 dahil. <span lang="en">Fey Ancestry</span>: büyülenmeye karşı save’de <b>avantaj</b>, büyüyle uyutulamaz.</p>
 
@@ -715,15 +784,20 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    <article class="ab" id="dmgAll" style="--ah:12"></article>
    <article class="ab" style="--ah:32">
     <h3><span lang="en">Longbow +2</span><small>ana silah · Saldırı aksiyonunda <b>2 ok</b> (<span lang="en">Extra Attack</span>)</small></h3>
-    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+13</b></span><span class="ch dmg"><small>Hasar</small><b>1d8+7</b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>2d8+7 + 2d6</b> <em>zarlar ×2 · bonus 1 kez</em></button><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span></div>
+    <div class="chs"><button class="ch hit" data-basis="Longbow +2|attacks.#Longbow"><small>Saldırı</small><b><span data-rv="attacks.#Longbow.attackBonus" data-rf="s">+13</span></b></button><span class="ch dmg"><small>Hasar</small><b><span data-rv="attacks.#Longbow.damage" data-rf="v">1d8+7</span></b> <em>delme</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü · DM eşyası</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b><span data-crit="Longbow">2d8+7</span> + 2d6</b> <em>zarlar ×2 · bonus 1 kez</em></button><span class="ch"><small>Menzil</small><b>150 / 600 ft</b></span><button class="ch" data-basis="Longbow (Slow)|features.#Longbow (Slow)"><small lang="en">Weapon Mastery</small><b lang="en">Slow</b> <em>isabette hız −10 ft</em></button></div>
     <h4 class="rng-h">Mesafeye göre</h4>
-    <div class="chs rng"><span class="ch"><small>0–150 ft (45 m)</small><b>normal</b></span><span class="ch"><small>150–600 ft (180 m)</small><b>normal</b> <em>Sharpshooter (yoksa dezavantaj)</em></span><span class="ch"><small>600 ft+ (180 m+)</small><b>atılamaz</b></span><span class="ch"><small>Düşman 5 ft içinde</small><b>dezavantaj</b></span></div>
-    <p>5e'de mesafe saldırıya <b>sayı olarak eksi vermez</b>: normal menzilde (150 ft) ceza yok; uzun menzilde (600 ft'e kadar) <b>dezavantaj</b> olur, ama <span lang="en">Sharpshooter</span> bunu kaldırır, yani 600 ft'e kadar normal atarsın. 600 ft'ten öteye atamazsın. Yanında (5 ft) etkisiz olmayan bir düşman varsa menzilli saldırı <b>dezavantajlı</b> (Sharpshooter bunu kaldırmaz; önce uzaklaş). Siper hedefin AC'sine eklenir: yarım <b>+2</b>, ¾ <b>+5</b>; Sharpshooter ikisini de yok sayar, tam siperdeki hedefe atılamaz.</p>
+    <div class="chs rng"><span class="ch"><small>0–150 ft (45 m)</small><b>normal</b></span><span class="ch"><small>150–600 ft (180 m)</small><b>normal</b> <em>Sharpshooter (yoksa dezavantaj)</em></span><span class="ch"><small>600 ft+ (180 m+)</small><b>atılamaz</b></span><span class="ch"><small>Düşman 5 ft içinde</small><b>normal</b> <em>Sharpshooter (yoksa dezavantaj)</em></span></div>
+    <p>5e'de mesafe saldırıya <b>sayı olarak eksi vermez</b>: normal menzilde (150 ft) ceza yok; uzun menzilde (600 ft'e kadar) <b>dezavantaj</b> olur, ama <span lang="en">Sharpshooter</span> bunu kaldırır, yani 600 ft'e kadar normal atarsın. 600 ft'ten öteye atamazsın. Yanında (5 ft) etkisiz olmayan bir düşman olması da <span lang="en">Sharpshooter</span> ile <b>dezavantaj vermez</b>. Siper hedefin AC'sine eklenir: yarım <b>+2</b>, ¾ <b>+5</b>; Sharpshooter ikisini de yok sayar, tam siperdeki hedefe atılamaz.</p>
    </article>
    <article class="ab" style="--ah:5">
-    <h3><span lang="en">Sharpshooter</span><small>isteğe bağlı · atmadan önce söyle</small></h3>
-    <div class="chs"><span class="ch hit"><small>Saldırı</small><b>+8</b> <em>(−5)</em></span><span class="ch dmg"><small>Hasar</small><b>1d8+17</b> <em>delme (+10)</em></span><span class="ch add"><small>Ek hasar</small><b>+1d6</b> <em>gök gürültüsü</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>2d8+17 + 2d6</b> <em>zarlar ×2 · +17 bir kez</em></button></div>
-    <p>Her zaman geçerli: uzun menzilde (600 ft'e kadar) <b>dezavantaj yok</b>; yarım ve ¾ siperi <b>yok sayar</b>.</p>
+    <h3><span lang="en">Sharpshooter</span><small>feat · her zaman geçerli</small></h3>
+    <div class="chs"><button class="ch" data-basis="Sharpshooter|features.#Sharpshooter"><small>Siper</small><b>yok sayar</b> <em>yarım ve ¾</em></button><span class="ch"><small>Uzun menzil</small><b>dezavantaj yok</b> <em>600 ft'e kadar</em></span><span class="ch"><small>Düşman 5 ft içinde</small><b>dezavantaj yok</b> <em>menzilli silahla</em></span></div>
+    <p>Menzilli silah saldırılarında hep geçerli; saldırıdan önce bir şey seçmezsin. Saldırıya −5 / hasara +10 seçeneği <b>yok</b>.</p>
+   </article>
+   <article class="ab" style="--ah:300">
+    <h3><span lang="en">Weapon Mastery</span><small>4 silah · <span lang="en">Ranger</span> 2 + <span lang="en">Rogue</span> 2</small></h3>
+    <div class="chs"><button class="ch" data-basis="Longbow (Slow)|features.#Longbow (Slow);features.#Weapon Mastery"><small lang="en">Longbow</small><b lang="en">Slow</b> <em>Ranger</em></button><button class="ch" data-basis="Heavy Crossbow (Push)|features.#Heavy Crossbow (Push)"><small lang="en">Heavy Crossbow</small><b lang="en">Push</b> <em>Ranger · envanterde yok</em></button><button class="ch" data-basis="Shortbow (Vex)|features.#Shortbow (Vex)"><small lang="en">Shortbow</small><b lang="en">Vex</b> <em>Rogue</em></button><button class="ch" data-basis="Dagger (Nick)|features.#Dagger (Nick)"><small lang="en">Dagger</small><b lang="en">Nick</b> <em>Rogue</em></button></div>
+    <ul><li><b lang="en">Slow</b> (<span lang="en">Longbow</span>): isabet edip hasar verince hedefin hızı bir sonraki turunun başına dek <b>10 ft</b> azalır (birkaç isabet 10 ft’ten fazla düşürmez).</li><li><b lang="en">Push</b> (<span lang="en">Heavy Crossbow</span>): isabette Large ya da daha küçük hedefi <b>10 ft</b> geri itersin. Silah envanterde yok; <span lang="en">Loading</span> yüzünden aksiyon başına tek atış.</li><li><b lang="en">Vex</b> (<span lang="en">Shortbow</span>): isabet edip hasar verince, bir sonraki turunun sonuna dek o hedefe ilk saldırında <b>avantaj</b>.</li><li><b lang="en">Nick</b> (<span lang="en">Dagger</span>): <span lang="en">Light</span> silahla yapılan ek saldırı bonus aksiyon yerine Saldırı aksiyonunun içinde (turda bir kez).</li></ul>
    </article>
    <article class="ab" style="--ah:265">
     <h3>İlk tur<small lang="en">Ambusher’s Leap · her savaşın ilk turu</small></h3>
@@ -738,11 +812,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    <article class="ab" style="--ah:130">
     <h3><span lang="en">Hunter’s Mark</span><small>bonus aksiyon · konsantrasyon</small></h3>
     <div class="chs"><button class="ch add" data-c="sp" data-open="hunters-mark"><small>Her isabette</small><b>+1d6</b> <em>force · işaretli hedefe · büyüyü aç</em></button><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>+2d6</b> <em>kritikte zar ×2</em></button></div>
-    <p><span lang="en">Hunter’s Mark</span>, <span lang="en">Ensnaring Strike</span> ve <span lang="en">Zephyr Strike</span> konsantrasyon ister: <b>aynı anda yalnız biri</b>. <span lang="en">Hail of Thorns</span> ve <span lang="en">Lightning Arrow</span> konsantrasyon <b>istemez</b>, <span lang="en">Hunter’s Mark</span> sürerken de kullanılır (ikisi de bonus aksiyon, aynı tur yalnız biri). Konsantrasyon save <b>CON +2</b> (DC 10 ya da hasarın yarısı).</p>
+    <p><span lang="en">Hunter’s Mark</span>, <span lang="en">Ensnaring Strike</span> ve <span lang="en">Zephyr Strike</span> konsantrasyon ister: <b>aynı anda yalnız biri</b>. <span lang="en">Hail of Thorns</span> ve <span lang="en">Lightning Arrow</span> konsantrasyon <b>istemez</b>, <span lang="en">Hunter’s Mark</span> sürerken de kullanılır (ikisi de bonus aksiyon, aynı tur yalnız biri). Konsantrasyon save <b>CON <span data-rv="saves.CON.bonus" data-rf="s">+7</span></b> (DC 10 ya da hasarın yarısı).</p>
    </article>
    <article class="ab" style="--ah:180">
     <h3>Büyü<small>Wisdom</small></h3>
-    <div class="chs"><span class="ch hit"><small>Büyü saldırısı</small><b>+7</b></span><span class="ch save"><small>Save</small><b>DC 15</b></span></div>
+    <div class="chs"><button class="ch hit" data-basis="Büyü|spellcasting"><small>Büyü saldırısı</small><b><span data-rv="spellcasting.attackBonus" data-rf="s">+7</span></b></button><button class="ch save" data-basis="Büyü|spellcasting"><small>Save</small><b>DC <span data-rv="spellcasting.saveDc" data-rf="v">15</span></b></button></div>
    </article>
   </div>
 
@@ -754,14 +828,14 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    <h3>Kısa dinlenme <small>en az 1 saat</small></h3>
    <ul>
     <li>Yenilenen özelliğin yok.</li>
-    <li>İstersen <b>can zarı</b> harca: her zar için <b>zarı at, +1 ekle</b>, o kadar can kazan. 10 zarın var: 1 × d8 (<span lang="en">Rogue</span>), 9 × d10 (<span lang="en">Ranger</span>).</li>
-    <li>Harcanan zarlar kısa dinlenmede <b>geri gelmez</b>. Uzun dinlenmenin sonunda en fazla <b>toplam zarının yarısı</b> geri gelir (10 zar → en fazla 5, en az 1).</li>
+    <li>İstersen <b>can zarı</b> harca: her zar için <b>zarı at, <span data-rv="hitDice.conModifier" data-rf="s">+2</span> ekle</b>, o kadar can kazan. <span data-rv="hitDice.pools" data-rf="hn">10</span> zarın var: <span data-rv="hitDice.pools" data-rf="hd">1d8 + 9d10</span>.</li>
+    <li>Harcanan zarlar kısa dinlenmede <b>geri gelmez</b>; uzun dinlenmede <b>hepsi</b> geri gelir.</li>
    </ul>
    <h3>Uzun dinlenme <small>8 saat</small></h3>
    <ul>
-    <li>Canın tamamen dolar; büyü slotları (4/3/2) ve <span lang="en">Fey Touched</span> büyüleri (<span lang="en">Misty Step, Command</span>) geri gelir.</li>
-    <li>Harcadığın can zarlarından <b>en fazla 5'i</b> geri gelir (toplamın yarısı).</li>
-    <li><span lang="en">Trance</span>: 4 saat trans uykuya yeter, ama dinlenme yine 8 saat sürer.</li>
+    <li>Canın tamamen dolar; büyü slotları (<span data-rv="spellSlots.slots" data-rf="/">4/3/2</span>), <span lang="en">Fey Touched</span> büyüleri (<span lang="en">Misty Step, Command</span>), <span lang="en">Magic Initiate</span>’in <span lang="en">Speak with Animals</span>’ı, slotsuz <span lang="en">Hunter’s Mark</span>, <span lang="en">Longstrider</span>, <span lang="en">Pass without Trace</span>, <span lang="en">Dreadful Strike</span> ve eşya kullanımları geri gelir.</li>
+    <li>Harcadığın <b>can zarlarının hepsi</b> geri gelir (<button class="rbl" data-basis="Can zarı|hitDice">dinlenme kuralı</button>).</li>
+    <li><span lang="en">Trance</span>: uzun dinlenmeyi <b>4 saatlik</b> transla bitirebilirsin.</li>
    </ul>
    <h3>Savaşta</h3>
    <ul><li><span lang="en">Ambusher’s Leap</span> her savaşın ilk turunda; <span lang="en">Sneak Attack</span> her turda bir kez.</li></ul>
@@ -774,12 +848,12 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
 
   </section>
   <section class="sec" style="--sh:85">
-  <h2 class="lvl-h">Yeterlilikler ve diller</h2>
+  <h2 class="lvl-h">Yeterlilikler ve diller <small><button class="rbl" data-basis="Yeterlilikler ve diller|proficiencies">dayanak</button></small></h2>
   <div class="card prof">
-   <p><b>Zırh:</b> <span lang="en">Light Armor, Medium Armor, Shields</span></p>
-   <p><b>Silah:</b> <span lang="en">Simple Weapons, Martial Weapons, Longsword, Shortsword, Shortbow, Longbow, Hand Crossbow, Rapier</span></p>
-   <p><b>Araç:</b> <span lang="en">Disguise Kit, Thieves’ Tools</span></p>
-   <p><b>Diller:</b> <span lang="en">Common, Elvish, Orc, Goblin, Thieves’ Cant</span></p>
+   <p><b>Zırh:</b> <span lang="en"><span data-rv="proficiencies.armor" data-rf="l">Light Armor, Medium Armor, Shields</span></span></p>
+   <p><b>Silah:</b> <span lang="en"><span data-rv="proficiencies.weapons" data-rf="l">Simple Weapons, Martial Weapons</span></span></p>
+   <p><b>Araç:</b> <span lang="en"><span data-rv="proficiencies.tools" data-rf="l">Cartographer’s tools, Thieves’ tools</span></span></p>
+   <p><b>Diller:</b> <span lang="en"><span data-rv="proficiencies.languages" data-rf="l">Common, Abyssal, Draconic, Elvish, Infernal, Thieves’ Cant</span></span></p>
   </div>
 
   </section>
@@ -795,10 +869,14 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    <p id="verLine"></p>
   </div>
   </section>
-  <p class="src">Kaynak: karakter sayfası (Aurora Builder).</p>
+  <p class="src">Kaynak: karakter sayfası.</p>
  </div>
- <div class="view" id="invItems" hidden></div>
- <div class="view" id="invNotes" hidden></div>
+ <!-- H4d (D40, D44, as Mathias H4c): Eşyalar has three sub-tabs (Silahlar · Giyilebilir · Diğer), the coin card above them; Notlar is its own tab -->
+ <div id="invGold" hidden></div>
+ <div class="view" id="invWpn" hidden></div>
+ <div class="view" id="invWear" hidden></div>
+ <div class="view" id="invOth" hidden></div>
+ <div class="view" id="notesView" hidden></div>
  <div class="view" id="spAll" hidden></div>
  <div class="view" id="spPrep" hidden></div>
 </main>
@@ -807,7 +885,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
  <div class="wrap">
   <button data-tab="char" aria-current="page"><svg aria-hidden="true"><use href="#i-person"/></svg>Karakter</button>
   <button data-tab="sp" aria-current="false"><svg aria-hidden="true"><use href="#i-book"/></svg>Büyüler</button>
-  <button data-tab="inv" aria-current="false"><svg aria-hidden="true"><use href="#i-bag"/></svg>Eşya & Not</button>
+  <button data-tab="inv" aria-current="false"><svg aria-hidden="true"><use href="#i-bag"/></svg>Eşyalar</button>
+  <button data-tab="notes" aria-current="false"><svg aria-hidden="true"><use href="#i-note"/></svg>Notlar</button>
  </div>
 </nav>
 
@@ -824,6 +903,58 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
 <div class="ask" id="ask" role="alertdialog" aria-modal="true" aria-labelledby="askT" hidden><div class="ask-box"><p id="askT"></p><div class="confirm"><button class="yes" data-ask="yes">Evet, çıkar</button><button data-ask="no">Vazgeç</button></div></div></div>
 
 <script id="spData" type="application/json">[
+ {
+  "id": "elementalism",
+  "lvl": 0,
+  "en": "Elementalism",
+  "tr": "Elementçilik",
+  "school": "Dönüşüm",
+  "schoolEn": "Transmutation",
+  "time": "1 Aksiyon",
+  "range": "30 ft",
+  "dur": "Anında",
+  "comp": "V, S",
+  "mat": "",
+  "conc": false,
+  "ritual": false,
+  "src": "Player's Handbook (2024)",
+  "d": "Menzilde elementlerle küçük bir etki yaratırsın: <b>Hava<\/b> — 5 ft küpte kumaşı dalgalandıran, tozu kaldıran, açık kapı ve kepenkleri kapatan bir esinti (tutulan kapılar etkilenmez); <b>Toprak<\/b> — 5 ft karede yüzeyleri ince toz ya da kumla örtersin ya da toprakta ya da kumda kendi el yazınla tek bir kelime belirir; <b>Ateş<\/b> — 5 ft küpte zararsız kıvılcım ve renkli, kokulu duman (rengini ve kokusunu seçersin; kıvılcımlar mum, meşale ya da lamba yakar; koku 1 dakika kalır); <b>Su<\/b> — 5 ft küpte serin bir sis ya da açık bir kapta ya da yüzeyde 1 bardak temiz su (1 dakikada buharlaşır); <b>Biçimlendir<\/b> — 1 ft küpe sığan toprak, kum, ateş, duman, sis ya da suya 1 saatliğine kaba bir biçim verirsin. <i>Magic Initiate (Druid): her zaman bilinir.<\/i>",
+  "fx": [
+   "Etki",
+   "Küçük element etkisi"
+  ],
+  "ar": [
+   "Alan",
+   "5 ft küp (30 ft içinde)"
+  ],
+  "from": "MI"
+ },
+ {
+  "id": "guidance",
+  "lvl": 0,
+  "en": "Guidance",
+  "tr": "Rehberlik",
+  "school": "Kehanet",
+  "schoolEn": "Divination",
+  "time": "1 Aksiyon",
+  "range": "Dokunma",
+  "dur": "Kons. · 1 dk",
+  "comp": "V, S",
+  "mat": "",
+  "conc": true,
+  "ritual": false,
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun gönüllü yaratık için bir skill seçersin: büyü bitene kadar o skill’le yaptığı <b>ability check’lere +1d4<\/b> ekler. <i>Magic Initiate (Druid): her zaman bilinir.<\/i>",
+  "fx": [
+   "Etki",
+   "+1d4 seçilen skill check’ine"
+  ],
+  "ar": [
+   "Hedef",
+   "1 gönüllü yaratık (dokunma)"
+  ],
+  "from": "MI"
+ },
  {
   "id": "druidcraft",
   "lvl": 0,
@@ -889,8 +1020,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "küçük bir çan ve bir parça ince gümüş tel",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Menzildeki bir kapıyı, pencereyi ya da <b>en fazla 20 ft küp<\/b> bir alanı korumaya alırsın. Büyü bitene kadar <b>Minik ya da daha büyük<\/b> bir yaratık alana dokunur ya da girerse alarm çalar. Alarmı tetiklemeyecek yaratıkları büyüyü yaparken belirlersin. Alarm <b>zihinsel<\/b> ya da <b>sesli<\/b> olur: zihinsel alarm, alana <b>1 mil<\/b> yakınındaysan zihninde çınlar ve uyuyorsan seni uyandırır; sesli alarm <b>60 ft<\/b> içinde 10 saniye boyunca el çanı sesi çıkarır.",
+  "src": "Player's Handbook (2024)",
+  "d": "Menzildeki bir kapıyı, pencereyi ya da <b>en fazla 20 ft küp<\/b> bir alanı izinsiz girişe karşı korumaya alırsın. Büyü bitene kadar bir yaratık korunan alana <b>dokunur ya da girerse<\/b> alarm seni uyarır. Alarmı tetiklemeyecek yaratıkları büyüyü yaparken belirlersin. Alarm <b>sesli<\/b> ya da <b>zihinsel<\/b> olur: sesli alarm korunan alanın <b>60 ft<\/b> çevresinde 10 saniye el çanı sesi çıkarır; zihinsel alarm, alana <b>1 mil<\/b> yakınındaysan zihninde çınlar ve uyuyorsan seni uyandırır.",
   "fx": [
    "Etki",
    "İzinsiz girişte uyarı"
@@ -981,8 +1112,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "lvl": 1,
   "en": "Cure Wounds",
   "tr": "Yaraları İyileştir",
-  "school": "Yaratma",
-  "schoolEn": "Evocation",
+  "school": "Koruma",
+  "schoolEn": "Abjuration",
   "time": "1 Aksiyon",
   "range": "Dokunma",
   "dur": "Anında",
@@ -1015,8 +1146,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Süre boyunca 30 ft içindeki büyüyü sezersin; aksiyonla alandaki büyü taşıyan görünür yaratık/nesnelerin aurasını ve <b>okulunu<\/b> görürsün. 1 ft taş, 1 inç sıradan metal, ince kurşun levha ya da 3 ft ahşap/toprak engeller.",
+  "src": "Player's Handbook (2024)",
+  "d": "Süre boyunca 30 ft içindeki büyülü etkileri sezersin; sezince <b>Magic aksiyonuyla<\/b> alandaki büyü taşıyan görünür yaratık/nesnelerin aurasını, etki bir büyüdense <b>okulunu<\/b> görürsün. 1 ft taş, toprak ya da ahşap, 1 inç metal ya da ince bir kurşun levha engeller.",
   "fx": [
    "Etki",
    "Büyüyü ve okulunu sezer"
@@ -1040,8 +1171,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir porsuk yaprağı",
   "conc": true,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Süre boyunca 30 ft içindeki zehirlerin, zehirli yaratıkların ve hastalıkların <b>varlığını ve yerini<\/b> sezer, türlerini öğrenirsin. 1 ft taş, 1 inç metal, ince kurşun ya da 3 ft ahşap/toprak engeller.",
+  "src": "Player's Handbook (2024)",
+  "d": "Süre boyunca 30 ft içindeki zehirlerin, zehirli yaratıkların ve büyülü salgınların <b>yerini<\/b> sezer, her birinin türünü öğrenirsin. 1 ft taş, toprak ya da ahşap, 1 inç metal ya da ince bir kurşun levha engeller.",
   "fx": [
    "Etki",
    "Zehir ve hastalığı sezer"
@@ -1065,8 +1196,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene ya da <b>aksiyonunla<\/b> bitirene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, zayıf, şişman ya da arada görünebilirsin. <b>Vücut tipini değiştiremezsin<\/b>; uzuvlarının temel düzeni aynı kalmalıdır. Bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin eklediğin şapkaya dokunan biri bir şey hissetmez ya da başını hisseder; daha zayıf görünürsen sana uzanan el havadayken sana çarpar. Kılık değiştirdiğini anlamak için bir yaratık <b>aksiyonunu harcayıp<\/b> seni incelemeli ve <b>DC 15 Intelligence (Investigation)<\/b> check'inde başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "src": "Player's Handbook (2024)",
+  "d": "Kendini — üzerindeki kıyafet, zırh, silah ve eşyalar dâhil — büyü sona erene kadar farklı gösterirsin. <b>1 ft daha kısa ya da uzun<\/b>, daha ağır ya da hafif görünebilirsin. Uzuvlarının temel düzeni aynı kalmalıdır; bunun dışında illüzyonun kapsamı sana kalmıştır. Değişiklikler <b>fiziksel incelemeye dayanmaz<\/b>: örneğin kıyafetine bir şapka eklersen nesneler şapkanın içinden geçer, dokunan biri bir şey hissetmez. Kılık değiştirdiğini anlamak için bir yaratık <b>Study<\/b> aksiyonuyla görünüşünü incelemeli ve <b>DC 15 Intelligence (Investigation)<\/b> check’inde (senin büyü save DC’n) başarılı olmalıdır. <i>Gloom Stalker büyüsü: her zaman hazır, hazırlanan büyü sayısına girmez.<\/i>",
   "fx": [
    "Etki",
    "Görünüş illüzyonu"
@@ -1116,8 +1247,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki yaratıklar <b>STR DC 15<\/b> save yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'e karşı STR check yapıp kurtulabilir.",
+  "src": "Player's Handbook (2024)",
+  "d": "20 ft karelik alanda sarmaşıklar çıkar; alan süre boyunca <b>zorlu arazi<\/b> olur. Büyü yapıldığında alandaki (sen hariç) yaratıklar <b>STR DC 15<\/b> save yapar; başarısız olan süre boyunca <b>bağlanmış<\/b> (restrained) olur. Bağlı yaratık aksiyonuyla DC 15'e karşı Strength (Athletics) check yapıp kurtulabilir.",
   "fx": [
    "Etki",
    "Bağlanmış + zorlu arazi"
@@ -1157,8 +1288,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "lvl": 1,
   "en": "Goodberry",
   "tr": "İyi Meyve",
-  "school": "Dönüşüm",
-  "schoolEn": "Transmutation",
+  "school": "Çağrışım",
+  "schoolEn": "Conjuration",
   "time": "1 Aksiyon",
   "range": "Dokunma",
   "dur": "24 saat",
@@ -1267,7 +1398,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir tutam toprak",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Dokunduğun yaratığın hızı süre boyunca (1 saat) <b>+10 ft<\/b> artar. <i>Üst slot:<\/i> her seviye için +1 hedef.",
   "fx": [
    "Etki",
@@ -1343,8 +1474,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Süre boyunca (10 dk) hayvanları anlar ve onlarla konuşursun. Bilgileri zekâlarıyla sınırlı, ama en azından yakındaki yerler ve canavarlar hakkında son bir günde algıladıklarını anlatırlar. OY'ye bağlı olarak küçük bir iyilik isteyebilirsin.",
+  "src": "Player's Handbook (2024)",
+  "d": "Süre boyunca (10 dk) hayvanları anlar ve onlarla konuşursun; Influence aksiyonunun skill seçeneklerini onlara karşı da kullanabilirsin. Çoğu hayvan hayatta kalma ve yoldaşlık dışında az şey bilir, ama en azından yakındaki yerler ve canavarlar hakkında son bir günde algıladıklarını anlatır. <i>Magic Initiate (Druid): her zaman hazır; uzun dinlenmede bir kez slotsuz, slotla ve ritüel olarak da (+10 dk, slotsuz).<\/i>",
   "fx": [
    "Etki",
    "Hayvanlarla konuşursun"
@@ -1352,57 +1483,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "ar": [
    "Hedef",
    "Kendin"
-  ]
- },
- {
-  "id": "sudden-awakening",
-  "lvl": 1,
-  "en": "Sudden Awakening (UA)",
-  "tr": "Ani Uyanış",
-  "school": "Büyüleme",
-  "schoolEn": "Enchantment",
-  "time": "1 Bonus Aksiyon",
-  "range": "10 ft",
-  "dur": "Anında",
-  "comp": "V",
-  "mat": "",
-  "conc": false,
-  "ritual": false,
-  "src": "Unearthed Arcana 36 - Starter Spells",
-  "d": "Menzilde seçtiğin her <b>uyuyan<\/b> yaratık uyanır; ardından menzildeki her <b>yere serili<\/b> yaratık <b>hareket harcamadan<\/b> ayağa kalkabilir. <i>Resmî olmayan deneme içerik (Unearthed Arcana).<\/i>",
-  "fx": [
-   "Etki",
-   "Uyandırır, ayağa kaldırır"
   ],
-  "ar": [
-   "Hedef",
-   "10 ft içinde seçtiklerin"
-  ]
- },
- {
-  "id": "wild-cunning",
-  "lvl": 1,
-  "en": "Wild Cunning (UA)",
-  "tr": "Vahşi Kurnazlık (UA)",
-  "school": "Dönüşüm",
-  "schoolEn": "Transmutation",
-  "time": "1 Aksiyon",
-  "range": "120 ft",
-  "dur": "Anında",
-  "comp": "V, S",
-  "mat": "",
-  "conc": false,
-  "ritual": true,
-  "src": "Unearthed Arcana 36 - Starter Spells",
-  "d": "Doğa ruhlarından yardım istersin; birini seç: menzildeki izleri bilir, 1 saat izlerken <b>Survival avantajı<\/b> alırsın · yenebilir yiyecek, temiz su ya da uygun barınak varsa yerini öğrenirsin · ruhlar kampı kurar ya da anında toplar. <i>(Unearthed Arcana — resmî olmayan deneme içerik.)<\/i>",
-  "fx": [
-   "Etki",
-   "İz, yiyecek, su ya da barınak bulur"
-  ],
-  "ar": [
-   "Alan",
-   "120 ft çevren"
-  ]
+  "from": "MI"
  },
  {
   "id": "zephyr-strike",
@@ -1443,7 +1525,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "küçük bir şerit beyaz kumaş",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Menzildeki <b>en fazla 3 yaratığın<\/b> hem <b>azami<\/b> hem <b>mevcut<\/b> can puanı süre boyunca <b>5 artar<\/b>. <i>Üst slot:<\/i> 2. seviyenin üzerindeki her seviye için +5.",
   "fx": [
    "İyileştirme",
@@ -1493,8 +1575,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir lokma yiyecek",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Görebildiğin <b>Minik<\/b> bir hayvana en fazla <b>25 kelimelik<\/b> mesaj verir, daha önce gittiğin bir yeri ve genel tarifle bir alıcıyı söylersin. Hayvan süre boyunca (24 saat) oraya gider (uçan 50 mil/gün, diğerleri 25) ve mesajı senin sesinle iletir. Yetişemezse mesaj kaybolur. <i>Üst slot:<\/i> her seviye için süre +48 saat.",
+  "src": "Player's Handbook (2024)",
+  "d": "Görebildiğin <b>Minik<\/b> bir hayvan <b>CHA DC 15<\/b> save yapar (CR'si 0 değilse kendiliğinden başarılı olur); başarısızsa mesajını taşır: en fazla <b>25 kelime<\/b>, daha önce gittiğin bir yer ve genel tarifle bir alıcı. Süre boyunca (24 saat) oraya gider (günde ~25 mil, uçabiliyorsa 50) ve mesajı senin gibi iletir. Yetişemezse mesaj kaybolur, hayvan büyüyü yaptığın yere döner. <i>Üst slot:<\/i> her seviye için süre +48 saat.",
   "fx": [
    "Etki",
    "25 kelimelik mesaj taşır"
@@ -1618,11 +1700,11 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir hayvandan kürk ya da tüy",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun yaratığa birini seç (1 saat): <b>Ayı<\/b> — CON check'lerinde avantaj + <b>2d6 geçici can<\/b> · <b>Boğa<\/b> — STR check'lerinde avantaj, taşıma kapasitesi iki katı · <b>Kedi<\/b> — DEX check'lerinde avantaj, 20 ft'e kadar düşüşten hasar almaz · <b>Kartal<\/b> — CHA · <b>Tilki<\/b> — INT · <b>Baykuş<\/b> — WIS check'lerinde avantaj. <i>Üst slot:<\/i> her seviye için +1 hedef.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun yaratık için <b>STR, DEX, INT, WIS ya da CHA<\/b>'dan birini seçersin: süre boyunca (1 saat) o ability ile yaptığı <b>check'lerde avantaj<\/b>. <i>Üst slot:<\/i> her seviye için +1 hedef; her hedefe başka ability seçebilirsin.",
   "fx": [
    "Etki",
-   "Bir ability check'inde avantaj"
+   "Seçilen ability check'lerinde avantaj"
   ],
   "ar": [
    "Hedef",
@@ -1643,7 +1725,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Menzilde ve görüş hattındaki <b>tuzakların varlığını<\/b> sezersin (alarm, koruma glifi, mekanik çukur…; doğal tehlikeler değil). Tam yerlerini değil, tehlikenin genel türünü öğrenirsin.",
   "fx": [
    "Etki",
@@ -1743,8 +1825,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir tazı köpeğinden biraz kürk",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Belirli bir hayvan ya da bitki türünü söylersin; <b>5 mil<\/b> içinde varsa en yakınının <b>yönünü ve uzaklığını<\/b> öğrenirsin.",
+  "src": "Player's Handbook (2024)",
+  "d": "Belirli bir hayvan, bitki yaratığı ya da büyülü olmayan bitki türünü söylersin; <b>5 mil<\/b> içinde varsa en yakınının <b>yönünü ve uzaklığını<\/b> öğrenirsin.",
   "fx": [
    "Etki",
    "En yakının yönü ve uzaklığı"
@@ -1768,7 +1850,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "çatallı bir dal",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Tanıdığın bir nesnenin <b>1.000 ft<\/b> içindeyse yönünü sezersin; hareket ediyorsa yönünü de. Belirli bir nesneyi bulmak için onu en az bir kez 30 ft yakından görmüş olmalısın; ya da bir türün en yakın örneğini bulabilirsin. Arada <b>kurşun<\/b> varsa bulamaz.",
   "fx": [
    "Etki",
@@ -1818,8 +1900,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Kısa bir an gümüşi bir sisle sarılırsın ve <b>görebildiğin boş bir alana<\/b> en fazla <b>30 ft<\/b> ışınlanırsın. <i>Fey Touched: uzun dinlenmede bir kez slotsuz.<\/i>",
+  "src": "Player's Handbook (2024)",
+  "d": "Kısa bir an gümüşi bir sisle sarılırsın ve <b>görebildiğin boş bir alana<\/b> en fazla <b>30 ft<\/b> ışınlanırsın. <i>Fey Touched: uzun dinlenmede bir kez slotsuz; istersen 2. seviye slotla da yaparsın.<\/i>",
   "fx": [
    "Etki",
    "30 ft ışınlanma"
@@ -1838,21 +1920,21 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "school": "Koruma",
   "schoolEn": "Abjuration",
   "time": "1 Aksiyon",
-  "range": "Kendine",
+  "range": "Kendine (30 ft)",
   "dur": "Kons. · 1 saat",
   "comp": "V, S, M",
   "mat": "yanmış ökseotu yaprağı külü ve bir ladin dalı",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Süre boyunca (1 saat) senin ve seçtiğin, 30 ft içindeki yaratıkların <b>Dexterity (Stealth)<\/b> check'lerine <b>+10<\/b> gelir; büyü dışında <b>izlenemez<\/b>, iz bırakmazsınız.",
+  "src": "Player's Handbook (2024)",
+  "d": "Süre boyunca (1 saat) senden <b>30 ft<\/b> yayılan gizleyici bir hale: içindeyken sen ve seçtiğin yaratıklar <b>Dexterity (Stealth)<\/b> check'lerine <b>+10<\/b> alır ve <b>iz bırakmazsınız<\/b>.",
   "fx": [
    "Etki",
    "Stealth +10 · iz bırakmaz"
   ],
   "ar": [
-   "Hedef",
-   "Seçtiğin, 30 ft içindekiler"
+   "Alan",
+   "30 ft hale (seninle)"
   ],
   "from": "WE"
  },
@@ -1870,8 +1952,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Dokunduğun yaratıktaki bir zehri etkisiz kılarsın. Süre boyunca (1 saat) zehirlenmeye karşı save'lerde <b>avantaj<\/b> ve zehir hasarına <b>direnç<\/b> kazanır.",
+  "src": "Player's Handbook (2024)",
+  "d": "Dokunduğun yaratığın <b>zehirli<\/b> (poisoned) durumunu bitirirsin. Süre boyunca (1 saat) zehirlenmemek ya da zehirlenmeyi bitirmek için save'lerde <b>avantaj<\/b> ve zehir hasarına <b>direnç<\/b> kazanır.",
   "fx": [
    "Etki",
    "Zehri temizler · zehre direnç"
@@ -1895,8 +1977,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "toz mısır özü ve bükülmüş bir parşömen halkası",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "<b>En fazla 60 ft<\/b> uzunluğunda bir ipe dokunursun. İpin bir ucu, ip zemine dik sarkana kadar havaya yükselir. Üst uçta, büyü sona erene kadar süren <b>boyutlar arası bir alana<\/b> açılan <b>görünmez bir giriş<\/b> belirir; alana ipin tepesine tırmanarak ulaşılır. Alan <b>en fazla sekiz Orta ya da daha küçük<\/b> yaratık alır. İp içeri çekilebilir; böylece dışarıdan görünmez. <b>Saldırılar ve büyüler<\/b> girişten içeri ya da dışarı <b>geçemez<\/b>; içerdekiler ipin hizasında ortalanmış <b>3 ft × 5 ft<\/b>'lik bir pencereden bakar gibi dışarıyı görür. Büyü sona erince içerideki <b>her şey dışarı düşer<\/b>. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "src": "Player's Handbook (2024)",
+  "d": "Bir ipe dokunursun. İpin bir ucu, ip zemine dik sarkana ya da tavana ulaşana kadar havaya yükselir. Üst uçta, büyü sona erene kadar süren <b>boyutlar arası bir alana<\/b> açılan <b>görünmez, 3 ft × 5 ft<\/b> bir giriş belirir; alana ipe tırmanarak ulaşılır, ip içeri çekilebilir ya da dışarı sarkıtılabilir. Alan <b>en fazla sekiz Orta ya da daha küçük<\/b> yaratık alır. <b>Saldırılar, büyüler ve başka etkiler<\/b> girişten içeri ya da dışarı <b>geçemez<\/b>; içerdekiler girişten dışarıyı görebilir. Büyü sona erince içerideki <b>her şey dışarı düşer<\/b>. <i>Gloom Stalker büyüsü: her zaman hazır, hazırlanan büyü sayısına girmez.<\/i>",
   "fx": [
    "Etki",
    "8 kişilik gizli sığınak"
@@ -1921,8 +2003,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Menzildeki bir noktada ortalanmış <b>20 ft yarıçaplı küre<\/b> içinde süre boyunca hiç ses oluşmaz ve içinden ses geçmez. Tamamen içinde olan yaratık ve nesneler <b>gök gürültüsü hasarına bağışıktır<\/b>; yaratıklar içerideyken <b>sağır<\/b> olur. İçeride <b>sözlü (V) bileşenli büyü yapılamaz<\/b>.",
+  "src": "Player's Handbook (2024)",
+  "d": "Menzildeki bir noktada ortalanmış <b>20 ft yarıçaplı küre<\/b> içinde süre boyunca hiç ses oluşmaz ve içinden ses geçmez. Tamamen içinde olan yaratık ve nesneler <b>thunder hasarına bağışıktır<\/b>; yaratıklar tamamen içerideyken <b>Deafened<\/b> olur. İçeride <b>sözlü (V) bileşenli büyü yapılamaz<\/b>.",
   "fx": [
    "Etki",
    "Sessizlik, sağır, V'li büyü yok"
@@ -1971,7 +2053,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "en az 200 gp değerinde yaldızlı bir meşe palamudu içinde tüy, kürk ve balık kuyruğu",
   "conc": true,
   "ritual": false,
-  "src": "Tasha's Cauldron of Everything",
+  "src": "Player's Handbook (2024)",
   "d": "Görebildiğin boş bir alanda bir <b>Hayvan Ruhu<\/b> belirir; <b>Hava, Kara ya da Su<\/b> seçersin (istatistik bloğu ve özellikleri buna göre). Senin inisiyatifini paylaşır, senden hemen sonra oynar; sözlü emirlerine uyar, emir vermezsen Kaçınma (Dodge) yapar. 0 canda ya da büyü bitince kaybolur. <i>Üst slot:<\/i> istatistik bloğundaki seviye değeri yükselir.",
   "fx": [
    "Etki",
@@ -2096,7 +2178,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Dokunduğun büyülü olmayan silah büyülü olur; asit, soğuk, ateş, şimşek ya da gök gürültüsünden birini seç: süre boyunca (1 saat) saldırıya <b>+1<\/b> ve isabette <b>+1d4<\/b> o türden hasar. <i>Üst slot:<\/i> 5–6. seviyede +2 / 2d4; 7.+ seviyede +3 / 3d4.",
   "fx": [
    "Hasar",
@@ -2121,8 +2203,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "beyaz bir tüy ya da bir tavuğun kalbi",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Yaratıkların en büyük korkularının hayali görüntüsünü yansıtırsın. <b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> save yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>korkmuş<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Atılma (Dash)<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşmalıdır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS save yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman bilinir, bilinen büyü sayısına dahil değil.<\/i>",
+  "src": "Player's Handbook (2024)",
+  "d": "<b>30 ft koni<\/b> içindeki her yaratık <b>DC 15 WIS<\/b> save yapar; başarısız olan <b>elinde tuttuğunu bırakır<\/b> ve süre boyunca <b>Frightened<\/b> olur. Bu büyüyle korkmuş yaratık her turunda <b>Dash<\/b> aksiyonunu kullanıp en güvenli yoldan <b>senden uzaklaşır<\/b>; gidecek yeri yoksa bunu yapmaz. Turunu seni <b>göremediği bir yerde bitirirse<\/b> yeni bir WIS save yapar; başarılıysa büyü onun için sona erer. <i>Gloom Stalker büyüsü: her zaman hazır, hazırlanan büyü sayısına girmez.<\/i>",
   "fx": [
    "Etki",
    "Elindekini bırakır + korkmuş"
@@ -2156,31 +2238,6 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "ar": [
    "Hedef",
    "1 ok kılıfı"
-  ]
- },
- {
-  "id": "flame-stride",
-  "lvl": 3,
-  "en": "Flame Stride (UA)",
-  "tr": "Alev Adımı",
-  "school": "Dönüşüm",
-  "schoolEn": "Transmutation",
-  "time": "1 Bonus Aksiyon",
-  "range": "Kendine",
-  "dur": "Kons. · 1 dk",
-  "comp": "V, S",
-  "mat": "",
-  "conc": true,
-  "ritual": false,
-  "src": "Unearthed Arcana 78 - Draconic Options",
-  "d": "Ayaklarını ejderha alevleri sarar: süre boyunca <b>hızın 20 ft artar<\/b> ve hareketin <b>fırsat saldırısı tetiklemez<\/b>. Bir yaratığın ya da giyilmeyen/taşınmayan bir nesnenin <b>5 ft yakınından geçtiğinde<\/b> o, <b>1d6 ateş<\/b> hasarı alır; her yaratık ya da nesne bu hasarı turda <b>yalnızca bir kez<\/b> alır. <i>Üst slot:<\/i> 3. seviyenin üzerindeki her seviye için hız +5 ft ve hasar +1d6. (Ashardalon's Stride'ın deneme sürümü.) <i>Resmî olmayan deneme içerik (Unearthed Arcana).<\/i>",
-  "fx": [
-   "Hasar",
-   "1d6 ateş (yanından geçtiğin her biri)"
-  ],
-  "ar": [
-   "Hedef",
-   "Kendin"
   ]
  },
  {
@@ -2222,8 +2279,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Vücudunu tamamen alacak kadar büyük bir taşa, eşyalarınla birlikte girersin (8 saat); büyü dışı duyularla fark edilmezsin. İçerdeyken dışarıyı göremezsin, sesleri duymak için Perception check'in <b>dezavantajlı<\/b>dır; kendine büyü yapabilirsin. Girdiğin yerden çıkarsın. Taş kısmen yıkılırsa <b>6d6 ezme<\/b>, tamamen yıkılırsa <b>50 ezme<\/b> hasar alıp dışarı atılır, yere serilirsin.",
+  "src": "Player's Handbook (2024)",
+  "d": "Vücudunu tamamen alacak kadar büyük bir taşa dokunup eşyalarınla birlikte içine girersin (8 saat); büyü dışı duyularla fark edilmezsin. İçerdeyken dışarıyı göremezsin, sesleri duymak için Perception check'in <b>dezavantajlı<\/b>dır; kendine büyü yapabilirsin. <b>5 ft hareketle<\/b> girdiğin yerden çıkarsın (büyü biter). Taş kısmen yıkılır ya da şekli değişirse <b>6d6 kuvvet<\/b>, tamamen yıkılırsa <b>50 kuvvet<\/b> hasar alıp dışarı atılır, <b>yere serilirsin<\/b>.",
   "fx": [
    "Etki",
    "Taşın içine gizlenirsin"
@@ -2247,8 +2304,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "hedefin üstüne serpilen 25 gp değerinde bir tutam elmas tozu — tüketilir",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "Süre boyunca dokunduğun hedefi <b>kehanet büyülerinden<\/b> gizlersin. Hedef <b>istekli bir yaratık<\/b> ya da <b>hiçbir boyutu 10 ft'yi aşmayan<\/b> bir yer veya nesne olabilir. Hedef <b>hiçbir kehanet büyüsüyle hedeflenemez<\/b> ve <b>büyülü gözetleme sensörleriyle<\/b> algılanamaz.",
+  "src": "Player's Handbook (2024)",
+  "d": "Süre boyunca dokunduğun hedefi <b>Divination büyülerinden<\/b> gizlersin. Hedef <b>istekli bir yaratık<\/b> ya da <b>hiçbir boyutu 10 ft’yi aşmayan<\/b> bir yer veya nesne olabilir. Hedef <b>hiçbir Divination büyüsüyle hedeflenemez<\/b> ve <b>büyülü gözetleme sensörleriyle<\/b> algılanamaz.",
   "fx": [
    "Etki",
    "Kehanet büyülerinden gizler"
@@ -2272,7 +2329,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "<b>1 aksiyonla:<\/b> seçtiğin noktada <b>100 ft yarıçaptaki<\/b> bitkiler sıklaşır; içinde hareket eden her 1 ft için <b>4 ft<\/b> hareket harcar (istediğin bölgeleri hariç tutabilirsin). <b>8 saatte:<\/b> yarım mil yarıçaptaki bitkiler 1 yıl boyunca <b>iki kat ürün<\/b> verir.",
   "fx": [
    "Etki",
@@ -2297,7 +2354,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": true,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Dokunduğun gönüllü yaratık süre boyunca (1 saat) seçtiğin bir hasar türüne <b>direnç<\/b> kazanır: asit, soğuk, ateş, şimşek ya da gök gürültüsü.",
   "fx": [
    "Etki",
@@ -2322,7 +2379,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "300 gp değerinde elmas — tüketilir",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "<b>Son 1 dakika içinde<\/b> ölmüş bir yaratığa dokunursun; <b>1 can<\/b> ile dirilir. Yaşlılıktan öleni diriltemez, eksik uzuvları geri getirmez. (Malzeme: <b>300 gp elmas<\/b>, tüketilir.)",
   "fx": [
    "Etki",
@@ -2347,8 +2404,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "",
   "conc": false,
   "ritual": false,
-  "src": "Player's Handbook",
-  "d": "30 ft içindeki bitkiler süre boyunca (10 dk) sınırlı bilinç kazanır: son bir gündeki olayları sorarsın, basit emirlerine uyarlar. Bitki kaynaklı zorlu araziyi normale çevirebilir ya da normal araziyi zorlu yapabilirsin. Bitki yaratıklarıyla ortak dil konuşur gibi iletişim kurarsın. <i>Dolanma<\/i> büyüsünün bağladığı birini serbest bıraktırabilirsin.",
+  "src": "Player's Handbook (2024)",
+  "d": "30 ft içindeki bitkiler süre boyunca (10 dk) sınırlı bilinç kazanır: son bir gündeki olayları sorarsın, basit emirlerine uyarlar. Bitki kaynaklı zorlu araziyi normale çevirebilir ya da bitkili normal araziyi zorlu yapabilirsin (süre boyunca). Bitkiler yerinden kalkamaz ama dallarını senin için oynatır. Bitki yaratıklarıyla ortak dil konuşur gibi iletişim kurarsın.",
   "fx": [
    "Etki",
    "Bitkilerle konuşur, araziyi değiştirirsin"
@@ -2372,7 +2429,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "en az 300 gp değerinde yaldızlı bir çiçek",
   "conc": true,
   "ritual": false,
-  "src": "Tasha's Cauldron of Everything",
+  "src": "Player's Handbook (2024)",
   "d": "Görebildiğin boş bir alanda bir <b>Fey Ruhu<\/b> belirir; ruh hâlini seçersin: <b>Öfkeli, Neşeli ya da Hilekâr<\/b> (istatistik bloğundaki bir özelliği belirler). Senin inisiyatifini paylaşır, senden hemen sonra oynar; sözlü emirlerine uyar, emir yoksa Kaçınma yapar. 0 canda ya da büyü bitince kaybolur. <i>Üst slot:<\/i> istatistik bloğundaki seviye değeri yükselir.",
   "fx": [
    "Etki",
@@ -2397,7 +2454,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "kısa bir kamış ya da saman çöpü",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
+  "src": "Player's Handbook (2024)",
   "d": "Görebildiğin <b>en fazla 10<\/b> gönüllü yaratık süre boyunca (24 saat) <b>su altında nefes alır<\/b>; normal solunumları da sürer.",
   "fx": [
    "Etki",
@@ -2422,8 +2479,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "mat": "bir parça mantar",
   "conc": false,
   "ritual": true,
-  "src": "Player's Handbook",
-  "d": "Görebildiğin <b>en fazla 10<\/b> gönüllü yaratık süre boyunca (1 saat) her sıvı yüzeyde (su, asit, çamur, kar, bataklık, lav) katı zemin gibi yürür; lavın ısısı yine hasar verebilir. Sıvı içindeki hedef tur başına 60 ft hızla yüzeye çıkar.",
+  "src": "Player's Handbook (2024)",
+  "d": "Görebildiğin <b>en fazla 10<\/b> gönüllü yaratık süre boyunca (1 saat) her sıvı yüzeyde (su, asit, çamur, kar, bataklık, lav) katı zemin gibi yürür; lavın ısısı yine hasar verebilir. Yüzeyden sıvının içine geçmek ya da geri çıkmak <b>bonus aksiyon<\/b> ister; sıvıya düşen hedef yüzeyden geçip içine batar.",
   "fx": [
    "Etki",
    "Sıvı yüzeyinde yürür"
@@ -2458,7 +2515,8 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
    "50 × 15 ft duvar"
   ]
  }
-]</script>
+]
+</script>
 <script id="skData" type="application/json">[
  {
   "id": "acrobatics", "en": "Acrobatics", "tr": "Akrobasi", "ab": "DEX",
@@ -8596,6 +8654,7 @@ html.has-conc main{ padding-top:calc(var(--floatH, 48px) + 8px); }
   "tip": "Whelm ile iki düşmanı içine alıp her tur 13 ezme verir ve kısıtlar; büyücüleri susturmak için iyi. Suda 90 ft yüzer. Asit ve büyüsüz silahların ezme/delme/kesme hasarına dirençli, kavranamaz, yere serilemez. Çağırmak için 10 ft küplük su gerekir."
  }
 ]</script>
+<script id="rbData" type="application/json">{"build":{"species":"Elf","background":"Guide","classes":[{"name":"Ranger","level":9,"subclass":"Gloom Stalker"},{"name":"Rogue","level":1,"subclass":null}],"characterLevel":10},"proficiencyBonus":{"value":4,"basis":"karakter seviyesi 10 (Ranger 9 + Rogue 1) → +4"},"abilities":{"STR":{"score":12,"modifier":1,"basis":"sayfa 12 = 12 → (12 − 10) ÷ 2, aşağı yuvarla = +1 · sayfanın puanları Guide’ın üç puanını (+2 DEX, +1 WIS) zaten taşıyor sayılır; ev kuralıyla ek General feat Resilient (Constitution) (D51, iki Human ile aynı kural)"},"DEX":{"score":20,"modifier":5,"basis":"sayfa 20 = 20 → (20 − 10) ÷ 2, aşağı yuvarla = +5 · sayfanın puanları Guide’ın üç puanını (+2 DEX, +1 WIS) zaten taşıyor sayılır; ev kuralıyla ek General feat Resilient (Constitution) (D51, iki Human ile aynı kural)"},"CON":{"score":14,"modifier":2,"basis":"sayfa 13 + Resilient +1 = 14 → (14 − 10) ÷ 2, aşağı yuvarla = +2 · sayfanın puanları Guide’ın üç puanını (+2 DEX, +1 WIS) zaten taşıyor sayılır; ev kuralıyla ek General feat Resilient (Constitution) (D51, iki Human ile aynı kural)"},"INT":{"score":11,"modifier":0,"basis":"sayfa 11 = 11 → (11 − 10) ÷ 2, aşağı yuvarla = +0 · sayfanın puanları Guide’ın üç puanını (+2 DEX, +1 WIS) zaten taşıyor sayılır; ev kuralıyla ek General feat Resilient (Constitution) (D51, iki Human ile aynı kural)"},"WIS":{"score":16,"modifier":3,"basis":"sayfa 16 = 16 → (16 − 10) ÷ 2, aşağı yuvarla = +3 · sayfanın puanları Guide’ın üç puanını (+2 DEX, +1 WIS) zaten taşıyor sayılır; ev kuralıyla ek General feat Resilient (Constitution) (D51, iki Human ile aynı kural)"},"CHA":{"score":14,"modifier":2,"basis":"sayfa 14 = 14 → (14 − 10) ÷ 2, aşağı yuvarla = +2 · sayfanın puanları Guide’ın üç puanını (+2 DEX, +1 WIS) zaten taşıyor sayılır; ev kuralıyla ek General feat Resilient (Constitution) (D51, iki Human ile aynı kural)"}},"saves":{"STR":{"bonus":2,"proficient":false,"basis":"STR +1 + eşya/özellik 1 = +2"},"DEX":{"bonus":10,"proficient":true,"basis":"DEX +5 + yeterlilik 4 + eşya/özellik 1 = +10"},"CON":{"bonus":7,"proficient":true,"basis":"CON +2 + yeterlilik 4 + eşya/özellik 1 = +7"},"INT":{"bonus":5,"proficient":true,"basis":"INT +0 + yeterlilik 4 + eşya/özellik 1 = +5"},"WIS":{"bonus":8,"proficient":true,"basis":"WIS +3 + yeterlilik 4 + eşya/özellik 1 = +8"},"CHA":{"bonus":3,"proficient":false,"basis":"CHA +2 + eşya/özellik 1 = +3"}},"skills":{"Acrobatics":{"ability":"DEX","bonus":13,"proficiency":2,"passive":23,"basis":"DEX +5 + yeterlilik 4 × 2 (expertise) = +13"},"Animal Handling":{"ability":"WIS","bonus":3,"proficiency":0,"passive":13,"basis":"WIS +3 = +3"},"Arcana":{"ability":"INT","bonus":0,"proficiency":0,"passive":10,"basis":"INT +0 = +0"},"Athletics":{"ability":"STR","bonus":9,"proficiency":2,"passive":19,"basis":"STR +1 + yeterlilik 4 × 2 (expertise) = +9"},"Deception":{"ability":"CHA","bonus":2,"proficiency":0,"passive":12,"basis":"CHA +2 = +2"},"History":{"ability":"INT","bonus":0,"proficiency":0,"passive":10,"basis":"INT +0 = +0"},"Insight":{"ability":"WIS","bonus":7,"proficiency":1,"passive":17,"basis":"WIS +3 + yeterlilik 4 = +7"},"Intimidation":{"ability":"CHA","bonus":2,"proficiency":0,"passive":12,"basis":"CHA +2 = +2"},"Investigation":{"ability":"INT","bonus":4,"proficiency":1,"passive":14,"basis":"INT +0 + yeterlilik 4 = +4"},"Medicine":{"ability":"WIS","bonus":3,"proficiency":0,"passive":13,"basis":"WIS +3 = +3"},"Nature":{"ability":"INT","bonus":0,"proficiency":0,"passive":10,"basis":"INT +0 = +0"},"Perception":{"ability":"WIS","bonus":11,"proficiency":2,"passive":21,"basis":"WIS +3 + yeterlilik 4 × 2 (expertise) = +11"},"Performance":{"ability":"CHA","bonus":2,"proficiency":0,"passive":12,"basis":"CHA +2 = +2"},"Persuasion":{"ability":"CHA","bonus":2,"proficiency":0,"passive":12,"basis":"CHA +2 = +2"},"Religion":{"ability":"INT","bonus":0,"proficiency":0,"passive":10,"basis":"INT +0 = +0"},"Sleight of Hand":{"ability":"DEX","bonus":9,"proficiency":1,"passive":19,"basis":"DEX +5 + yeterlilik 4 = +9"},"Stealth":{"ability":"DEX","bonus":13,"proficiency":2,"passive":23,"basis":"DEX +5 + yeterlilik 4 × 2 (expertise) = +13"},"Survival":{"ability":"WIS","bonus":11,"proficiency":2,"passive":21,"basis":"WIS +3 + yeterlilik 4 × 2 (expertise) = +11"}},"passives":{"Perception":{"value":21,"basis":"10 + Perception +11 = 21"},"Insight":{"value":17,"basis":"10 + Insight +7 = 17"},"Investigation":{"value":14,"basis":"10 + Investigation +4 = 14"}},"initiative":{"value":8,"basis":"DEX +5 + özellik 3 = +8"},"speed":{"walk":45,"swim":45,"climb":45,"basis":"yürüme 45 ft; yüzme 45 ft; tırmanma 45 ft"},"armorClass":{"value":20,"computed":17,"override":{"value":20,"label":"AC 20 (Bear Hide Armor +2)"},"armor":{"base":14,"armor":12,"enhancement":2,"dexterityCap":2,"type":"medium"},"basis":"zırh 12 + zırh büyüsü 2 + DEX 2 (en fazla 2, medium armor) + eşya 1 = 17; masada 20 (Bear Hide Armor +2, karakterin kendi değeri)"},"hitPoints":{"max":72,"basis":"Rogue 1: d8 en yüksek 8 + CON 2; sonraki 9 seviye atılan zar + CON 2 (toplam 52 + 10 × 2) = 72"},"hitDice":{"pools":[{"die":"d8","count":1,"classes":["Rogue"]},{"die":"d10","count":9,"classes":["Ranger"]}],"conModifier":2,"longRestRecovery":"all","basis":"her sınıf seviyesi için o sınıfın zarı (Rogue 1 × d8, Ranger 9 × d10); kısa dinlenmede harcanan her zar + CON 2; uzun dinlenmede harcanan zarların hepsi geri gelir (dinlenme kuralı)"},"spellcasting":{"ability":"WIS","saveDc":15,"attackBonus":7,"basis":"save DC 8 + yeterlilik 4 + WIS 3 = 15; büyü saldırısı yeterlilik 4 + WIS 3 = +7"},"spellSlots":{"slots":[4,3,2],"basis":"Ranger 9 büyü slotu tablosu (yarım büyücü): 4/3/2 (1.–3. seviye)"},"spells":{"class":"Ranger","preparation":"prepared","limit":9,"cantrips":0,"maxSpellLevel":3,"always":["Disguise Self","Hunter’s Mark","Rope Trick","Fear"],"freeCasts":[{"spell":"Command","uses":1,"recovery":"long","from":"Fey-Touched"},{"spell":"Misty Step","uses":1,"recovery":"long","from":"Fey-Touched"},{"spell":"Speak with Animals","uses":1,"recovery":"long","from":"Magic Initiate (Druid)"},{"spell":"Hunter’s Mark","uses":4,"recovery":"long","from":"Favored Enemy"},{"spell":"Longstrider","uses":1,"recovery":"long","from":"Elf"},{"spell":"Pass without Trace","uses":1,"recovery":"long","from":"Elf"}],"basis":"Ranger 9 tablosu: 9 hazır büyü; en yüksek slot 3. seviye; hazırlıklar uzun dinlenmede değişir (bir büyü); her zaman hazır olanlar (Disguise Self, Hunter’s Mark, Rope Trick, Fear) sayıya girmez"},"attacks":[{"name":"Longbow","attackBonus":13,"damage":"1d8+7","damageType":"Piercing","range":"150/600","basis":"saldırı DEX 5 + yeterlilik 4 + silah büyüsü 2 + 2 (Archery) = +13; hasar 1d8 + 7"},{"name":"Unarmed Strike","attackBonus":5,"damage":"1+1","damageType":"Bludgeoning","basis":"saldırı STR 1 + yeterlilik 4 = +5; hasar 1 + 1"}],"features":[{"name":"Ambusher's Leap","from":"Gloom Stalker","basis":"Gloom Stalker alt sınıf özelliği"},{"name":"Dreadful Strike","from":"Gloom Stalker","basis":"Gloom Stalker alt sınıf özelliği"},{"name":"Dread Ambusher","from":"Gloom Stalker","level":3,"basis":"Gloom Stalker 3. seviye alt sınıf özelliği"},{"name":"Gloom Stalker Spells","from":"Gloom Stalker","level":3,"basis":"Gloom Stalker 3. seviye alt sınıf özelliği"},{"name":"Iron Mind","from":"Gloom Stalker","level":7,"basis":"Gloom Stalker 7. seviye alt sınıf özelliği"},{"name":"Umbral Sight","from":"Gloom Stalker","level":3,"basis":"Gloom Stalker 3. seviye alt sınıf özelliği · Darkvision menziline +60 ft (elf 60 → 120 ft); karanlıkta Darkvision ile seni arayan yaratıklara görünmezsin; motor menzili hesaplamıyor, uygulama yazar"},{"name":"Heavy Crossbow (Push)","from":"Ranger","basis":"Ranger sınıf özelliği · mastery: isabette Large ya da daha küçük hedefi düz bir çizgide 10 ft geri itersin; silah envanterde yok (Loading: aksiyon başına tek atış)"},{"name":"Dagger (Nick)","from":"Rogue","basis":"Rogue sınıf özelliği · mastery: Light silahla ek saldırıyı bonus aksiyon yerine Saldırı aksiyonunun içinde yaparsın (turda bir kez)"},{"name":"Longbow (Slow)","from":"Ranger","basis":"Ranger sınıf özelliği · mastery: isabet edip hasar verdiğinde hedefin hızı bir sonraki turunun başına dek 10 ft azalır (birden çok isabet 10 ft’ten fazla düşürmez)"},{"name":"Shortbow (Vex)","from":"Rogue","basis":"Rogue sınıf özelliği · mastery: isabet edip hasar verdiğinde, bir sonraki turunun sonuna dek o hedefe yapacağın ilk saldırıda avantaj"},{"name":"Deft Explorer","from":"Ranger","level":2,"basis":"Ranger 2. seviye sınıf özelliği · seçim: Survival; Abyssal, Draconic"},{"name":"Expertise","from":"Ranger","level":9,"basis":"Ranger 9. seviye sınıf özelliği · seçim: Acrobatics, Athletics"},{"name":"Extra Attack","from":"Ranger","level":5,"basis":"Ranger 5. seviye sınıf özelliği · Saldırı aksiyonunda iki saldırı"},{"name":"Favored Enemy","from":"Ranger","level":1,"freeCasts":[{"spell":"Hunter’s Mark","uses":4,"recharge":"long"}],"basis":"Ranger 1. seviye sınıf özelliği · Hunter’s Mark 4 kez slotsuz / uzun dinlenme"},{"name":"Fighting Style","from":"Ranger","level":2,"basis":"Ranger 2. seviye sınıf özelliği"},{"name":"Roving","from":"Ranger","level":6,"basis":"Ranger 6. seviye sınıf özelliği"},{"name":"Spellcasting","from":"Ranger","level":1,"basis":"Ranger 1. seviye sınıf özelliği"},{"name":"Weapon Mastery","from":"Ranger","level":1,"basis":"Ranger 1. seviye sınıf özelliği · seçim: Longbow (Slow), Heavy Crossbow (Push)"},{"name":"Expertise","from":"Rogue","level":1,"basis":"Rogue 1. seviye sınıf özelliği · seçim: Perception, Stealth"},{"name":"Sneak Attack","from":"Rogue","level":1,"basis":"Rogue 1. seviye sınıf özelliği"},{"name":"Thieves’ Cant","from":"Rogue","level":1,"basis":"Rogue 1. seviye sınıf özelliği · seçim: Infernal"},{"name":"Weapon Mastery","from":"Rogue","level":1,"basis":"Rogue 1. seviye sınıf özelliği · seçim: Shortbow (Vex), Dagger (Nick)"},{"name":"Archery","from":"Feat","basis":"feat"},{"name":"Fey-Touched","from":"Feat","freeCasts":[{"spell":"Command","uses":1,"recharge":"long"},{"spell":"Misty Step","uses":1,"recharge":"long"}],"basis":"feat · Command 1 kez slotsuz / uzun dinlenme · Misty Step 1 kez slotsuz / uzun dinlenme"},{"name":"Magic Initiate","from":"Feat","freeCasts":[{"spell":"Speak with Animals","uses":1,"recharge":"long"}],"basis":"feat · Speak with Animals 1 kez slotsuz / uzun dinlenme · Guide’ın feat’i, Druid listesi, büyü ability’si WIS: cantrip Guidance ve Elementalism; 1. seviye Speak with Animals her zaman hazır, uzun dinlenmede bir kez slotsuz, slotla ve ritüel olarak da"},{"name":"Resilient","from":"Feat","basis":"feat · Constitution: CON +1 ve CON save yeterliliği; ev kuralıyla ek General feat (D51, iki Human ile aynı kural)"},{"name":"Sharpshooter","from":"Feat","basis":"feat · menzilli silah saldırısı yarım ve dörtte üç siperi yok sayar; uzun menzilde ve 5 ft içinde düşman varken dezavantaj yok; saldırıya −5 / hasara +10 seçeneği yok"},{"name":"Elven Lineage","from":"Elf","basis":"Elf species özelliği"},{"name":"Wood Elf","from":"Elf","basis":"Elf species özelliği"},{"name":"Fey Ancestry","from":"Elf","basis":"Elf species özelliği"},{"name":"Keen Senses","from":"Elf","basis":"Elf species özelliği"},{"name":"Trance","from":"Elf","basis":"Elf species özelliği"}],"featuresNotNamed":0,"proficiencies":{"armor":["Light Armor","Medium Armor","Shields"],"weapons":["Simple Weapons","Martial Weapons"],"tools":["Cartographer’s tools","Thieves’ tools"],"languages":["Common","Abyssal","Draconic","Elvish","Infernal","Thieves’ Cant"],"basis":"Ranger, Rogue, alt sınıf ve özellikler, species ve background yeterlilikleri (silah ve zırhta kategori olarak)"}}</script>
 <script>
 (function(){
 document.documentElement.lang = 'tr';
@@ -8663,15 +8722,17 @@ const TOAST_HUES = [
   [/^AC \d/, 205],
 ];
 const toastHue = msg => { for (const [re, h] of TOAST_HUES) if (re.test(msg)) return h; return null; };
-// at the top while a sheet is open (it would cover the sheet's buttons), on Eşya & Not, or when the keyboard is up
+// at the top while a sheet is open (it would cover the sheet's buttons), on Eşyalar / Notlar, or when the keyboard is up
 // (the visual viewport is much shorter than the window, or a text field has focus)
-const typing = () => tab === 'inv' || !!openRef || /^(INPUT|TEXTAREA)$/.test((document.activeElement || {}).tagName || '') || (window.visualViewport && visualViewport.height < innerHeight * 0.75);
+const typing = () => tab === 'inv' || tab === 'notes' || !!openRef || /^(INPUT|TEXTAREA)$/.test((document.activeElement || {}).tagName || '') || (window.visualViewport && visualViewport.height < innerHeight * 0.75);
 function toast(msg) {
   const t = $('#toast');
   t.classList.remove('show'); void t.offsetWidth;
   const hue = toastHue(msg);
   if (hue === null) t.style.removeProperty('--tc'); else t.style.setProperty('--tc', `hsl(${hue} 52% 64%)`);
   t.classList.toggle('top', typing());
+  // on Eşyalar / Notlar under the header and its sub-tab switch (at the very top it covered the switch)
+  t.classList.toggle('under', !openRef && (tab === 'inv' || tab === 'notes'));
   t.textContent = msg; t.insertAdjacentHTML('beforeend', SPARKS);
   t.classList.add('show');
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2800);
@@ -8682,9 +8743,38 @@ let openRef = null; // { c: catalog, id }
 /* ---------- can (hit points): character, and the active Wild Shape form ---------- */
 // Damage / healing is typed in and kept on this phone. The header shows remaining / full.
 const HP_KEY = 'berathast-hp-v1';
-const HP = { max: 62, cur: 62, log: [] };
-(function(){ const v = load(HP_KEY, null); if (v && Number.isFinite(v.cur)) HP.cur = Math.max(0, Math.min(HP.max, Math.round(v.cur))); if (v && Array.isArray(v.log)) HP.log = v.log.slice(0, 8); })();
-const saveHp = () => { store(HP_KEY, { cur: HP.cur, log: HP.log }); askPersist(); };
+// maximum from the rules engine (rules.json, H4d)
+const HP = { max: 72, cur: 72, log: [] };
+(function(){
+  const v = load(HP_KEY, null);
+  if (v && Number.isFinite(v.cur)) HP.cur = Math.max(0, Math.min(HP.max, Math.round(v.cur)));
+  // full stays full if the maximum changes (the save keeps the maximum it was made with; saves from before H4d: 62)
+  if (v && Number.isFinite(v.cur) && v.cur >= (Number.isFinite(v.max) ? v.max : 62)) HP.cur = HP.max;
+  if (v && Array.isArray(v.log)) HP.log = v.log.slice(0, 8);
+})();
+const saveHp = () => { store(HP_KEY, { cur: HP.cur, max: HP.max, log: HP.log }); askPersist(); };
+/* ---------- rule basis (H4d, D37, as Mathias H4b): the engine's values and their basis lines, tap a value to read it ---------- */
+const RULES = JSON.parse($('#rbData').textContent);
+// the sheet with the active custom items (ITEMRT.apply, set once the inventory is loaded); until then the engine's values
+let EFF = null;
+const sgn = n => n >= 0 ? `+${n}` : `−${-n}`;
+// "a.b.#Name.c": walk the values; "#Name" finds an array entry by its name
+const rStep = (o, k) => o == null ? o : Array.isArray(o) && k[0] === '#' ? o.find(x => x.name === k.slice(1)) : o[k];
+// the basis of a path: the deepest object on the way that carries one
+function rBasis(path) { let o = RULES, b = null; for (const k of path.split('.')) { o = rStep(o, k); if (o && typeof o === 'object' && o.basis) b = o.basis; } return b; }
+const rbLines = paths => paths.map(rBasis).filter(Boolean);
+// data-basis="Title|path;path"
+const RBS = {
+  k: 'rb', back: id => document.querySelector(`[data-basis="${CSS.escape(id)}"]`),
+  fill(id) {
+    const [title, paths] = id.split('|'), lines = rbLines((paths || '').split(';'));
+    return `
+      <div class="sh-top"><span class="ic" style="--h:45" aria-hidden="true"><svg><use href="#i-book"/></svg></span><div><h2 id="shName">${esc(title)}</h2><p>Kural dayanağı</p></div>
+        <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <ul class="rb-list">${lines.map(l => `<li>${esc(l)}</li>`).join('') || '<li>Dayanak satırı yok.</li>'}</ul>
+      <p class="note">Bu değerler uygulama derlenirken kural motorunun hesabından gelir; karakterin masa kuralları (ör. AC) dahil.</p>`;
+  },
+};
 const hpTone = (cur, max) => cur <= 0 ? 'down' : cur * 2 <= max ? 'low' : cur < max ? 'hurt' : 'full';
 // change the character's hit points by d (negative = damage); logged so a typo can be undone
 function changeHp(d, note) {
@@ -8713,6 +8803,7 @@ const HPS = {
       ${hpWidget('char', HP.cur, HP.max)}
       <div class="hp-more"><button class="mini" data-hp="full" data-w="char">Tam can (uzun dinlenme)</button>${HP.log.length ? '<button class="mini" data-hp="undo" data-w="char">Son işlemi geri al</button>' : ''}</div>
       ${HP.log.length ? `<div class="blk"><h3>Son işlemler</h3><ul class="hp-log">${HP.log.map(l => `<li><b class="${l.raw < 0 ? 'm' : 'p'}">${l.raw < 0 ? '−' + (-l.raw) : '+' + l.raw}</b><span>${esc(l.note || (l.raw < 0 ? 'hasar' : 'iyileşme'))}</span><span>→ ${l.to}/${HP.max}</span><small>${hhmm(l.at)}</small></li>`).join('')}</ul></div>` : ''}
+      <p class="note rb">Azami can <b>${HP.max}</b>: ${esc(rBasis('hitPoints'))}.</p>
       <p class="note">Miktarı yaz, <b>Hasar</b> ya da <b>İyileş</b>’e dokun; kayıt bu telefonda kalır. 0 cana düşünce bilincini kaybedersin ve her tur death save atarsın (DC 10).</p>`;
   },
 };
@@ -8723,7 +8814,7 @@ function hpAction(kind, w) {
   else {
     const n = Math.floor(+(inp && inp.value));
     if (!(n > 0)) { toast('Önce miktarı yaz.'); focusQuiet(inp); return; }
-    if (w === 'char') { changeHp(kind === 'dmg' ? -n : n); if (kind === 'dmg' && CONC.id) toast(`−${n} hasar${concSave(n, CON_SAVE)}`); }
+    if (w === 'char') { changeHp(kind === 'dmg' ? -n : n); if (kind === 'dmg' && CONC.id) toast(`−${n} hasar${concSave(n, conSaveText())}`); }
     else { const msg = ''; if (msg) toast(msg); }
   }
   syncChrome();
@@ -8734,7 +8825,9 @@ function hpAction(kind, w) {
 /* ---------- konsantrasyon: one spell at a time, shown on Karakter, Büyüler ---------- */
 const CONC_KEY = 'berathast-conc-v1';
 const CONC = { id: (load(CONC_KEY, null) || {}).id || null };
-const CON_SAVE = 'CON +2';
+const CON_SAVE = 'CON +7';
+// with a custom item that moves the CON save the text follows it
+const conSaveText = () => EFF && EFF.saves.CON.bonus !== RULES.saves.CON.bonus ? `CON ${sgn(EFF.saves.CON.bonus)}` : CON_SAVE;
 function setConc(id) { CONC.id = id || null; store(CONC_KEY, { id: CONC.id }); askPersist(); syncConc(); }
 // concentration floats at the top under the header on every page (user's request); the old in-page spots stay empty
 const noEd = t => String(t || '').replace(/ \((?:2014|2024|2025)\)/g, '');
@@ -8764,15 +8857,17 @@ function syncFloat() {
 })();
 // after damage while concentrating: the saving throw to keep it
 const concSave = (n, save) => CONC.id && SP.BY[CONC.id] ? ` · Konsantrasyon save: DC ${Math.max(10, Math.floor(n / 2))} (${save})` : '';
-// one button for a long rest: hit points, spell slots, Fey Touched; concentration ends
-const LONG_REST_Q = 'Uzun dinlenme: can dolsun, büyü slotları ve <span lang="en">Fey Touched</span> yenilensin, konsantrasyon bitsin mi?';
+// one button for a long rest: hit points, spell slots, hit dice, item uses, Fey Touched; concentration ends
+const LONG_REST_Q = 'Uzun dinlenme: can dolsun, büyü slotları, can zarları, eşya kullanımları, <span lang="en">Fey Touched</span> ve <span lang="en">Magic Initiate</span> yenilensin, konsantrasyon bitsin mi?';
 let restAsk = false;
-// Hit dice (2014 rules, user's request): on a short rest spend any number of your hit dice, one at a time; for each,
-// roll it (the player rolls, the app asks the result) and add the CON modifier: that many HP (at least 0). Spent dice
-// come back only on a long rest: up to half the total (at least 1), bigger dice first.
-const HD_KEY = 'berathast-hd-v1', HD_CON = 1;
-const HD_POOLS = [["d10", 9, "Ranger"], ["d8", 1, "Rogue"]]; // [die, total, class]
-const HD_TOTAL = HD_POOLS.reduce((n, p) => n + p[1], 0), HD_BACK = Math.max(1, Math.floor(HD_TOTAL / 2));
+// Hit dice: on a short rest spend any number of your hit dice, one at a time; for each, roll it (the player rolls, the
+// app asks the result) and add the CON modifier: that many HP (at least 0). Spent dice come back only on a long rest:
+// all of them (H4d: the rules engine's rest rule, rules.json hitDice.longRestRecovery; it was half before).
+const HD_KEY = 'berathast-hd-v1', HD_CON = 2;
+// the CON modifier with the active custom items
+const hdCon = () => EFF ? EFF.abilities.CON.modifier : HD_CON;
+const HD_POOLS = [["d8",1,"Rogue"],["d10",9,"Ranger"]]; // [die, total, class]
+const HD_TOTAL = HD_POOLS.reduce((n, p) => n + p[1], 0);
 const HD = (() => {
   const raw = load(HD_KEY, {}) || {}, used = {};
   for (const [d, n] of HD_POOLS) used[d] = Math.max(0, Math.min(n, Math.round(+((raw.used || {})[d])) || 0));
@@ -8800,38 +8895,46 @@ function longRest(from) {
   if (HP.cur < HP.max) changeHp(HP.max - HP.cur, 'uzun dinlenme');
   SLOTS.reset();
   setConc(null);
-  { let k = HD_BACK; for (const [d] of HD_POOLS) { const t = Math.min(HD.used[d], k); HD.used[d] -= t; k -= t; } store(HD_KEY, HD); }
+  { for (const [d] of HD_POOLS) HD.used[d] = 0; store(HD_KEY, HD); }
+  itemUsesRest();
   restAsk = false; restMode = null; renderRest();
   SLOTS.refresh();
   if (tab === 'sp' && SP.sub === 'prep') SP.renderPrep();
   syncChrome();
-  toast('Uzun dinlenme: can, slotlar yenilendi');
+  toast('Uzun dinlenme: can, slotlar, can zarları, eşya kullanımları yenilendi');
   focusQuiet(from === 'slots' ? $('[data-slot="rest"]') : $('[data-rest="ask"]'));
 }
 function renderRest() {
   const box = $('#restAct'); if (!box) return;
   if (restAsk) restMode = 'long';
   const left = HD_POOLS.length === 1 ? HD_POOLS[0][0] : HD_POOLS.map(([d, t, c]) => `${t - HD.used[d]}/${t} ${d}${c ? ' (' + c + ')' : ''}`).join(' · ');
-  const hd = `<p class="hdline">Can zarı: <b>${hdLeft()}/${HD_TOTAL}</b> kaldı <small>(${left}; her zar + CON ${HD_CON})</small></p>`;
+  const hd = `<p class="hdline">Can zarı: <b>${hdLeft()}/${HD_TOTAL}</b> kaldı <small>(${left}; her zar + CON ${hdCon()})</small></p>`;
   if (restMode === 'long') { box.innerHTML = `<div class="confirm"><span>${LONG_REST_Q}</span><button class="yes" data-rest="yes">Evet, dinlendim</button><button data-rest="no">Vazgeç</button></div>`; return; }
   if (restMode !== 'short') { box.innerHTML = `<div class="restbs"><button class="mini restb short" data-rest="short">Kısa dinlenme yaptım</button><button class="mini pri restb" data-rest="ask">Uzun dinlenme yaptım</button></div>${hd}`; return; }
   const room = HP.max - HP.cur - srGain();
   const pools = HD_POOLS.map(([d, t, c]) => {
     const n = hdLeftOf(d), max = +d.slice(1);
-    if (SR.ask === d) return `<div class="sr-pool ask"><label><span>Attığın <b>${d}</b> kaç geldi? (1–${max})</span><input id="srRoll" type="number" inputmode="numeric" min="1" max="${max}" placeholder="1–${max}"></label><button class="mini pri" data-rest="roll-ok">Ekle (+${HD_CON})</button><button class="mini" data-rest="roll-no">Vazgeç</button></div>`;
-    return `<div class="sr-pool"><span><b>${d}</b>${c ? ' <small>' + c + '</small>' : ''} · ${n} kaldı <small>ort. ${((max + 1) / 2 + HD_CON).toLocaleString('tr')}</small></span><button class="mini" data-rest="die:${d}"${n ? '' : ' disabled'}>1 zar harca</button></div>`;
+    if (SR.ask === d) return `<div class="sr-pool ask"><label><span>Attığın <b>${d}</b> kaç geldi? (1–${max})</span><input id="srRoll" type="number" inputmode="numeric" min="1" max="${max}" placeholder="1–${max}"></label><button class="mini pri" data-rest="roll-ok">Ekle (+${hdCon()})</button><button class="mini" data-rest="roll-no">Vazgeç</button></div>`;
+    return `<div class="sr-pool"><span><b>${d}</b>${c ? ' <small>' + c + '</small>' : ''} · ${n} kaldı <small>ort. ${((max + 1) / 2 + hdCon()).toLocaleString('tr')}</small></span><button class="mini" data-rest="die:${d}"${n ? '' : ' disabled'}>1 zar harca</button></div>`;
   }).join('');
-  const log = SR.pend.length ? `<p class="sr-log">${SR.pend.map(x => `${x.d}: ${x.roll} + ${HD_CON} = <b>${x.hp}</b>`).join(' · ')} → toplam <b>+${srGain()}</b> can${room <= 0 ? ' (can doldu)' : ''}</p>` : '';
+  const log = SR.pend.length ? `<p class="sr-log">${SR.pend.map(x => `${x.d}: ${x.roll} + ${hdCon()} = <b>${x.hp}</b>`).join(' · ')} → toplam <b>+${srGain()}</b> can${room <= 0 ? ' (can doldu)' : ''}</p>` : '';
   box.innerHTML = `<div class="shortrest">
-      <p><b>Kısa dinlenme</b> (en az 1 saat). İstersen can zarı harca: <b>zarı at, sonucu yaz</b>, CON (+${HD_CON}) eklenir. Birer birer harcarsın; her zardan sonra devam edip etmemeye karar verebilirsin. Canın şu an <b>${HP.cur}/${HP.max}</b>.</p>
+      <p><b>Kısa dinlenme</b> (en az 1 saat). İstersen can zarı harca: <b>zarı at, sonucu yaz</b>, CON (+${hdCon()}) eklenir. Birer birer harcarsın; her zardan sonra devam edip etmemeye karar verebilirsin. Canın şu an <b>${HP.cur}/${HP.max}</b>.</p>
       ${pools}${log}
       <div class="sr-act"><button class="yes" data-rest="short-yes">Dinlenmeyi bitir</button><button data-rest="no">Vazgeç</button></div></div>`;
 }
 
-/* ---------- AC: 20 by default (Bear Hide Armor +2 + Ring of Protection), editable by hand (user's request) ---------- */
+/* ---------- AC: the engine's value by default (the table's 20: Bear Hide Armor +2), editable by hand (user's request) ---------- */
 const AC_KEY = 'berathast-ac-v1', AC_DEFAULT = 20;
 const AC = { v: (load(AC_KEY, null) || {}).v || AC_DEFAULT };
-function syncAc() { const l = $('#acLine'); if (l) l.textContent = AC.v; }
+// the AC shown: the hand value (default: the engine's) plus what the active custom items change (H4d)
+const acDelta = () => EFF ? EFF.armorClass.computed - RULES.armorClass.computed : 0;
+const acNow = () => AC.v + acDelta();
+function syncAc() {
+  const l = $('#acLine'); if (l) l.textContent = acNow();
+  // the basis line gives the AC without custom items; what they add follows it
+  const x = $('#acItems'); if (x) x.textContent = acDelta() ? `; eşyalarla ${acItemsText()} → ${acNow()}` : '';
+}
 const ACS = {
   k: 'ac', back: () => $('#acBtn'),
   fill() {
@@ -8841,7 +8944,8 @@ const ACS = {
       <div class="hpw"><div class="hp-big"><b>${AC.v}</b><span>${AC.v === AC_DEFAULT ? 'varsayılan' : `varsayılan ${AC_DEFAULT}`}</span></div>
         <div class="hp-in ac-in"><input id="acIn" type="number" inputmode="numeric" min="1" max="40" value="${AC.v}" aria-label="Yeni AC" enterkeyhint="done"><button class="hb healb" data-ac="save">Kaydet</button></div></div>
       <div class="hp-more"><button class="mini" data-ac="-1" aria-label="AC'yi 1 azalt">− 1</button><button class="mini" data-ac="1" aria-label="AC'yi 1 artır">+ 1</button>${AC.v !== AC_DEFAULT ? `<button class="mini" data-ac="reset">Varsayılana dön (${AC_DEFAULT})</button>` : ''}</div>
-      <p class="note">Varsayılan: <span lang="en">Bear Hide Armor +2</span> ve <span lang="en">Ring of Protection</span> +1 ile <b>AC 20</b>. Kalkan, büyü (ör. <span lang="en">Shield of Faith</span>) ya da eşya değişince buradan ayarla; telefonda saklanır.</p>`;
+      ${acDelta() ? `<p class="note ifx-ac">Eşyalarla birlikte <b>AC ${acNow()}</b> (${esc(acItemsText())}). Buradaki değer özel eşyasız AC’dir; eşyanın etkisi üstüne eklenir.</p>` : ''}
+      <p class="note">Varsayılan: <span lang="en">Bear Hide Armor +2</span> ve <span lang="en">Ring of Protection</span> +1 ile <b>AC ${AC_DEFAULT}</b> (masa değeri; ${esc(rBasis('armorClass'))}). Kalkan, büyü (ör. <span lang="en">Shield of Faith</span>) ya da eşya değişince buradan ayarla; telefonda saklanır.</p>`;
   },
 };
 function acAction(a) {
@@ -8849,18 +8953,19 @@ function acAction(a) {
   if (a === 'save') { v = Math.round(+$('#acIn').value); if (!(v >= 1 && v <= 40)) { toast('AC 1 ile 40 arasında olmalı.'); return focusQuiet($('#acIn')); } }
   else if (a === 'reset') v = AC_DEFAULT;
   else v = Math.max(1, Math.min(40, v + +a));
-  AC.v = v; store(AC_KEY, { v }); askPersist(); syncAc(); syncChrome();
+  AC.v = v; store(AC_KEY, { v }); askPersist(); syncAc(); syncChrome(); renderItemFx();
   $('#sheetIn').innerHTML = ACS.fill();
   focusQuiet(sheet.querySelector(`[data-ac="${a}"]`) || sheet.querySelector('[data-ac="save"]'));
-  toast(`AC ${v}`);
+  toast(`AC ${acNow()}`);
 }
 
 /* ---------- büyü slotları: one box per slot, tap = spent (✕), saved on this phone ---------- */
 const slotBox = (used, key, label) => `<button class="box${used ? ' used' : ''}" data-slot="${key}" aria-pressed="${!!used}" aria-label="${label}: ${used ? 'harcandı' : 'boş'}"><svg aria-hidden="true"><use href="#i-x"/></svg></button>`;
 const SLOTS = (() => {
-  const KEY = 'berathast-slots-v1', MAX = [4, 3, 2];
+  const KEY = 'berathast-slots-v1', MAX = [4,3,2];
   // feat spells cast once per long rest without a slot
-  const FREE = ['Misty Step', 'Command', 'Longstrider', 'Pass without Trace', 'Hunter’s Mark', 'Hunter’s Mark', 'Hunter’s Mark', 'Hunter’s Mark'];
+  // H5 (D51): Speak with Animals (Magic Initiate) appended last, so the boxes saved before it keep their places
+  const FREE = ['Misty Step', 'Command', 'Longstrider', 'Pass without Trace', 'Hunter’s Mark', 'Hunter’s Mark', 'Hunter’s Mark', 'Hunter’s Mark', 'Speak with Animals'];
   const st = { u: MAX.map(n => Array(n).fill(0)), f: FREE.map(() => 0), confirm: false };
   const v = load(KEY, null);
   if (v && Array.isArray(v.u)) MAX.forEach((n, i) => { if (Array.isArray(v.u[i])) st.u[i] = Array.from({ length: n }, (_, j) => v.u[i][j] ? 1 : 0); });
@@ -8870,7 +8975,7 @@ const SLOTS = (() => {
   return {
     html() {
       const rows = MAX.map((n, i) => `<div class="srow" data-l="${i + 1}"><span class="sl">${i + 1}. sv</span><span class="boxes">${st.u[i].map((u, j) => slotBox(u, `s:${i}:${j}`, `${i + 1}. seviye slot ${j + 1}`)).join('')}</span><span class="left"><b>${left(st.u[i])}</b>/${n}</span></div>`).join('');
-      const FREE_SRC = { 'Misty Step': 'Fey Touched', 'Command': 'Fey Touched', 'Longstrider': 'Wood Elf', 'Pass without Trace': 'Wood Elf', 'Hunter’s Mark': 'Favored Enemy' };
+      const FREE_SRC = { 'Misty Step': 'Fey Touched', 'Command': 'Fey Touched', 'Longstrider': 'Wood Elf', 'Pass without Trace': 'Wood Elf', 'Hunter’s Mark': 'Favored Enemy', 'Speak with Animals': 'Magic Initiate' };
       const groups = []; FREE.forEach((nm, i) => { let g = groups.find(x => x.nm === nm); if (!g) groups.push(g = { nm, idx: [] }); g.idx.push(i); });
       const free = groups.map(g => `<div class="srow ft"><span class="sl"><span lang="en">${g.nm}</span><small>${FREE_SRC[g.nm] || 'slotsuz'}</small></span><span class="boxes">${g.idx.map(i => slotBox(st.f[i], `f:${i}`, g.nm)).join('')}</span><span class="left"><b>${left(g.idx.map(i => st.f[i]))}</b>/${g.idx.length}</span></div>`).join('');
       const total = MAX.reduce((a, b) => a + b, 0), rest = st.u.reduce((a, r) => a + left(r), 0);
@@ -8914,7 +9019,7 @@ const SP = (() => {
   // 2024 Ranger: Ranger 9 = 9 hazırlanan büyü (sayfada 6 bilinen yazıyordu). Hunter's Mark (Favored Enemy), Wood Elf soyu (Druidcraft, Longstrider, Pass without Trace) ve Gloom Stalker büyüleri her zaman hazır, sayıya girmez.
   // Gloom Stalker ve Fey Touched büyüleri ayrıca her zaman bilinir, sayıya girmez.
   const DEFAULT = ['absorb-elements','cure-wounds','hail-of-thorns','conjure-animals','lightning-arrow'];
-  const FROM = { GS: 'Gloom Stalker', FT: 'Fey Touched', FE: 'Favored Enemy', WE: 'Wood Elf' };
+  const FROM = { GS: 'Gloom Stalker', FT: 'Fey Touched', FE: 'Favored Enemy', WE: 'Wood Elf', MI: 'Magic Initiate' };
   const always = s => !!s.from;
   const state = { sel: DEFAULT.slice(), limit: 9 };
   const saved = load(KEY, null);
@@ -8922,16 +9027,16 @@ const SP = (() => {
   const save = () => store(KEY, state);
   const ICON = (() => {
     const m = {
-      fire: ['flame-arrows','searing-smite','ashardalons-stride','flame-stride'],
+      fire: ['flame-arrows','searing-smite','ashardalons-stride'],
       wave: ['water-breathing','water-walk','air-bubble'],
       bolt: ['lightning-arrow'],
       wind: ['gust-of-wind','wind-wall','fog-cloud','zephyr-strike'],
       mountain: ['meld-into-stone'],
-      leaf: ['entangle','goodberry','barkskin','spike-growth','plant-growth','speak-with-plants','locate-animals-or-plants','wild-cunning','hail-of-thorns','ensnaring-strike'],
+      leaf: ['entangle','goodberry','barkskin','spike-growth','plant-growth','speak-with-plants','locate-animals-or-plants','hail-of-thorns','ensnaring-strike'],
       paw: ['animal-friendship','beast-bond','speak-with-animals','animal-messenger','beast-sense','conjure-animals','summon-beast'],
       heart: ['cure-wounds','healing-spirit','revivify','lesser-restoration','protection-from-poison','aid'],
       moon: ['darkvision','silence'],
-      sun: ['daylight','sudden-awakening'],
+      sun: ['daylight'],
       eye: ['detect-magic','detect-poison-and-disease','find-traps','locate-object','hunters-mark','alarm'],
       shield: ['absorb-elements','protection-from-energy','nondetection'],
       skull: ['fear'],
@@ -8950,16 +9055,16 @@ const SP = (() => {
   const role = s => s.fx && s.fx[0] === 'İyileştirme' ? 'heal' : s.fx && s.fx[0] === 'Hasar' ? (s.ar && s.ar[0] === 'Alan' ? 'aoe' : 'dmg') : 'fx';
   const SCHOOL_HUE = {"Abjuration":225,"Conjuration":45,"Divination":175,"Enchantment":325,"Evocation":8,"Illusion":270,"Necromancy":80,"Transmutation":140};
   const spellHue = s => SPELL_COLOR === 'school' ? (SCHOOL_HUE[s.schoolEn] ?? 30) : ROLE_HUE[role(s)];
-  const lvlName = l => l + '. Seviye';
+  const lvlName = l => l ? l + '. Seviye' : 'Cantrip';
   const isSel = id => always(BY[id]) || state.sel.includes(id);
   const count = () => state.sel.length;
   const icon = s => { const i = ICON(s.id); return `<span class="ic" style="--h:${i.h}" aria-hidden="true"><svg><use href="#i-${i.k}"/></svg></span>`; };
   function tags(s, withLevel) {
-    let t = withLevel ? `<span class="tg lv">${s.lvl}. sv · ${esc(s.school)}</span>` : '';
+    let t = withLevel ? `<span class="tg lv">${s.lvl ? s.lvl + '. sv' : 'cantrip'} · ${esc(s.school)}</span>` : '';
     if (s.from) t += `<span class="tg" lang="en">${FROM[s.from]}</span>`;
     if (s.conc) t += '<span class="tg">Konsantrasyon</span>';
     // 2014 rangers have no ritual casting, so a ritual tag here only means the spell has one
-    if (s.ritual) t += '<span class="tg lv">Ritüel etiketli · Ranger ritüel yapamaz</span>';
+    if (s.ritual) t += s.from === 'MI' ? '<span class="tg lv">Ritüel · Magic Initiate ile</span>' : '<span class="tg lv">Ritüel etiketli · Ranger ritüel yapamaz</span>';
     return t ? `<span class="tags">${t}</span>` : '';
   }
   function tile(s) {
@@ -8974,15 +9079,15 @@ const SP = (() => {
   const C = {
     k: 'sp', hue: id => spellHue(BY[id]), all: $('#spAll'), prep: $('#spPrep'), tools: $('#spTools'), q: $('#spQ'),
     sub: 'prep', filter: 'all', query: '', qKey: '', confirming: false, BY,
-    stats: '<div class="st"><span>Saldırı</span><b>+7</b></div><div class="st"><span>DC</span><b>15</b></div>',
+    get stats() { const sc = EFF ? EFF.spellcasting : RULES.spellcasting; return `<div class="st"><span>Saldırı</span><b>${sgn(sc.attackBonus)}</b></div><div class="st"><span>DC</span><b>${sc.saveDc}</b></div>`; },
     segs: () => [['prep', 'Hazır', `${count()}/${state.limit}`, count() > state.limit], ['all', 'Tümü', `${items.length} büyü`]],
     renderChips() {
-      const opts = [['all','Tümü','Tüm seviyeler'],['1','1. sv','1. seviye'],['2','2. sv','2. seviye'],['3','3. sv','3. seviye']];
+      const opts = [['all','Tümü','Tüm seviyeler'],['0','Cantrip','Cantrip'],['1','1. sv','1. seviye'],['2','2. sv','2. seviye'],['3','3. sv','3. seviye']];
       $('#spChips').innerHTML = opts.map(([v, l, a]) => `<button class="chip" data-c="sp" data-f="${v}" aria-pressed="${C.filter === v}" aria-label="${a}">${l}</button>`).join('');
     },
     buildAll() {
       let html = '';
-      for (const l of [1,2,3]) {
+      for (const l of [0,1,2,3]) {
         const list = items.filter(s => s.lvl === l);
         html += `<section data-l="${l}"><h2 class="lvl-h" data-l="${l}">${lvlName(l)} <small data-cnt="${l}"></small></h2><div class="list" data-l="${l}">${list.map(tile).join('')}</div></section>`;
       }
@@ -9018,13 +9123,13 @@ const SP = (() => {
       const rules = `<section class="rules-boxes"><h2 class="lvl-h">Kurallar</h2><div class="atks">
         <article class="ab" style="--ah:150">
           <h3>Hazırlanan büyüler<small>kaç büyü, ne zaman değişir</small></h3>
-          <div class="chs"><span class="ch"><small>Hazırlanan</small><b>9</b> <em>Ranger 9 · 2024</em></span><span class="ch"><small>Değişir</small><b>seviye atlayınca</b> <em>1 büyü</em></span></div>
-          <p>Her uzun dinlenmenin sonunda ranger listesinden <b>9 büyü hazırlarsın</b> (Ranger 9); slotun olan seviyedeki büyüleri seçebilirsin. <span lang="en">Hunter’s Mark</span>, <span lang="en">Wood Elf</span> ve <span lang="en">Gloom Stalker</span> büyüleri her zaman hazırdır, sayıya girmez.</p>
+          <div class="chs"><button class="ch" data-basis="Hazırlık|spells"><small>Hazırlanan</small><b>9</b> <em>Ranger 9 tablosu</em></button><span class="ch"><small>Değişir</small><b>uzun dinlenmede</b> <em>1 büyü</em></span></div>
+          <p>Ranger listesinden <b>9 büyü hazırlarsın</b> (Ranger 9 tablosu); her uzun dinlenmenin sonunda birini değiştirebilirsin; slotun olan seviyedeki büyüleri seçebilirsin. <span lang="en">Hunter’s Mark</span>, <span lang="en">Wood Elf</span> ve <span lang="en">Gloom Stalker</span> büyüleri her zaman hazırdır, sayıya girmez.</p>
         </article>
         <article class="ab" style="--ah:265">
           <h3>Her zaman hazır<small>sayıya girmez, değişmez</small></h3>
-          <div class="chs"><span class="ch"><small><span lang="en">Gloom Stalker</span></small><b>3</b> <em>alt sınıf</em></span><span class="ch"><small><span lang="en">Fey Touched</span></small><b>2</b> <em>feat</em></span></div>
-          <p><span lang="en">Gloom Stalker</span>: <span lang="en">Disguise Self, Rope Trick, Fear</span>. <span lang="en">Fey Touched</span>: <span lang="en">Command, Misty Step</span>.</p>
+          <div class="chs"><span class="ch"><small><span lang="en">Gloom Stalker</span></small><b>3</b> <em>alt sınıf</em></span><span class="ch"><small><span lang="en">Fey Touched</span></small><b>2</b> <em>feat</em></span><span class="ch"><small><span lang="en">Magic Initiate</span></small><b>3</b> <em>Guide · WIS</em></span></div>
+          <p><span lang="en">Gloom Stalker</span>: <span lang="en">Disguise Self, Rope Trick, Fear</span>. <span lang="en">Fey Touched</span>: <span lang="en">Command, Misty Step</span>. <span lang="en">Magic Initiate (Druid)</span>: cantrip <span lang="en">Guidance, Elementalism</span>; <span lang="en">Speak with Animals</span> uzun dinlenmede bir kez slotsuz, slotla ve ritüel olarak da.</p>
         </article>
         <article class="ab" style="--ah:300">
           <h3><span lang="en">Fey Touched</span><small>slotsuz kullanım</small></h3>
@@ -9038,11 +9143,11 @@ const SP = (() => {
         </article>
         <article class="ab" style="--ah:275">
           <h3>Konsantrasyon<small>aynı anda tek büyü</small></h3>
-          <div class="chs"><span class="ch"><small>Aynı anda</small><b>1 büyü</b> <em>yenisi eskisini bitirir</em></span><span class="ch save"><small>Hasar alınca</small><b>CON +2</b> <em>Ring of Protection dahil</em></span><span class="ch"><small>DC</small><b>10 ya da hasarın yarısı</b> <em>hangisi büyükse</em></span></div>
+          <div class="chs"><span class="ch"><small>Aynı anda</small><b>1 büyü</b> <em>yenisi eskisini bitirir</em></span><span class="ch save"><small>Hasar alınca</small><b>CON +7</b> <em>Ring of Protection dahil</em></span><span class="ch"><small>DC</small><b>10 ya da hasarın yarısı</b> <em>hangisi büyükse</em></span></div>
           <p><span lang="en">Hunter’s Mark</span> ve <span lang="en">Ensnaring / Zephyr Strike</span> konsantrasyon: aynı anda yalnız biri. <span lang="en">Hail of Thorns</span> ve <span lang="en">Lightning Arrow</span> konsantrasyon istemez. Büyünün penceresinde <b>Konsantrasyon başlat</b>'a dokun.</p>
         </article>
       </div></section>`;
-      for (const l of [1,2,3]) {
+      for (const l of [0,1,2,3]) {
         const list = items.filter(s => s.lvl === l && isSel(s.id));
         if (!list.length) continue;
         const ex = list.filter(s => s.from).length;
@@ -9096,6 +9201,7 @@ const ATK_RE = /^<b>([^<]+)<\/b>( \([^)]*\))? <b>([+−-]\d+)<\/b>( \([^)]*\))?,
 const SAVE_RE = /^<b>([^<]+)<\/b>( \([^)]*\))? · <b>(DC \d+ [A-Z]{3})<\/b> save[,:]?\s*(.*)$/;
 const NOTE_RE = /^<b>([^<]+)<\/b>( \([^)]*\))? · (.*)$/;
 const tidy = t => (t || '').replace(/^[\s·,;:]+/, '').trim();
+function critDice(d) { return String(d).replace(/([0-9]+)d([0-9]+)/g, (m, n, k) => `${2 * n}d${k}`); } // critical hit: every damage die twice, flat bonus once
 const chip = (cls, label, val, extra) => `<span class="ch${cls ? ' ' + cls : ''}"><small>${label}</small><b>${val}</b>${extra ? ` <em>${extra}</em>` : ''}</span>`;
 function fmtAtk(a) {
   let m = a.match(ATK_RE);
@@ -9482,7 +9588,8 @@ function glCarry(str, size, bob) {
         <div class="sh-top"><span class="ic" style="--h:${AB_HUE[ab]}" aria-hidden="true"><b class="ab-ic">${ab}</b></span><div><h2 id="shName" lang="en">${NAME[ab][0]}</h2><p>${NAME[ab][1]} · <b>${s}</b> (${sgn(m)})${save != null ? ` · save ${sgn(save)}` : ''}</p></div>
           <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
         <div class="desc gl-desc">${html}</div>
-        <p class="note">Modifiyer = (değer − 10) ÷ 2, aşağı yuvarlanır; bu yeteneğe dayalı her check, save ve saldırıya eklenir.</p>`;
+        <p class="note">Modifiyer = (değer − 10) ÷ 2, aşağı yuvarlanır; bu yeteneğe dayalı her check, save ve saldırıya eklenir.</p>${ctx === 'char' && typeof rBasis === 'function' ? `
+        <p class="note rb">Dayanak: ${[rBasis(`abilities.${ab}`), rBasis(`saves.${ab}`) && `save ${rBasis(`saves.${ab}`)}`].filter(Boolean).map(esc).join(' · ')}.</p>` : ''}`;
   };
   const tag = (el, id) => { el.dataset.c = 'gl'; el.dataset.open = id; el.setAttribute('role', 'button'); el.tabIndex = 0; el.classList.add('ab-tap'); };
   // Karakter ability cards
@@ -9507,6 +9614,324 @@ function glCarry(str, size, bob) {
   // Enter / Space on a focused card
   document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('ab-tap')) { e.preventDefault(); e.target.click(); } });
   GL.dom(document.getElementById('wsAct'));
+})();
+
+// Custom items in the HTML apps (PLAN H4c; D37, D39, D40, D41, D44). Shared by every character app: the build inlines
+// this file into the page script. Two parts:
+//   ITEMRT — the rules: which saved inventory entries are active, and what their effects do to the sheet, with the
+//            rules engine's stacking (character-builder/src/custom-items.ts, src/engine/sheet.ts). A parity test
+//            (character-builder/test/html-items.integration.test.js) runs the same items through the engine.
+//   ITEMUI — small HTML pieces of the items view and of the wizard (Turkish text, game terms in English).
+// No module syntax: the page script and the Node test both evaluate the file as plain script text.
+// Inlined before the page's own constants: no declaration (nor comment) here may repeat a marker the checks look for in
+// the built page (the skill table, hit points, slot maximum … see appValues in character-builder/scripts/html-sheet.mjs).
+const ITEMRT = (() => {
+  const AB = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+  const ENG = { STR: 'strength', DEX: 'dexterity', CON: 'constitution', INT: 'intelligence', WIS: 'wisdom', CHA: 'charisma' };
+  const SKILL_AB = [['Acrobatics', 'DEX'], ['Animal Handling', 'WIS'], ['Arcana', 'INT'], ['Athletics', 'STR'], ['Deception', 'CHA'], ['History', 'INT'], ['Insight', 'WIS'], ['Intimidation', 'CHA'], ['Investigation', 'INT'], ['Medicine', 'WIS'], ['Nature', 'INT'], ['Perception', 'WIS'], ['Performance', 'CHA'], ['Persuasion', 'CHA'], ['Religion', 'INT'], ['Sleight of Hand', 'DEX'], ['Stealth', 'DEX'], ['Survival', 'WIS']];
+  const MODES = [['fly', 'Uçma hızı'], ['swim', 'Yüzme hızı'], ['climb', 'Tırmanma hızı'], ['burrow', 'Kazma hızı']];
+  // Every statistic a custom item can affect (the engine's CUSTOM_ITEM_STATS, D31), with its label and wizard group.
+  const STATS = [
+    ...AB.map((a) => [ENG[a], a, 'ab']),
+    ['ac:misc', 'AC', 'ac'], ['ac:armored:armor', 'Zırhın AC’si', 'ac'], ['ac:armored:enhancement', 'Zırh büyüsü (+1 armor …)', 'ac'], ['ac:shield', 'Kalkanın AC’si', 'ac'],
+    ...AB.map((a) => [`${ENG[a]}:save:misc`, `${a} save`, 'sv']),
+    ...SKILL_AB.map(([s]) => [`${s.toLowerCase()}:misc`, s, 'sk']),
+    ['initiative', 'İnisiyatif', 'mv'], ['speed:misc', 'Hız (yürüme)', 'mv'], ...MODES.map(([m, l]) => [`speed:${m}`, l, 'mv']),
+    ['hp', 'Azami can', 'mv'],
+    ['melee:attack', 'Yakın dövüş saldırısı', 'at'], ['melee:damage', 'Yakın dövüş hasarı', 'at'], ['ranged:attack', 'Menzilli saldırı', 'at'], ['ranged:damage', 'Menzilli hasar', 'at'],
+    ['attunement:max', 'Attunement sınırı', 'mv'],
+    ['spellcasting:dc', 'Büyü save DC', 'at'], ['spellcasting:attack', 'Büyü saldırısı', 'at'],
+  ].map(([stat, label, group]) => ({ stat, label, group }));
+  const LABEL = Object.fromEntries(STATS.map((s) => [s.stat, s.label]));
+  const DAMAGE_TYPES = ['acid', 'bludgeoning', 'cold', 'fire', 'force', 'lightning', 'necrotic', 'piercing', 'poison', 'psychic', 'radiant', 'slashing', 'thunder'];
+  const LISTS = ['resistances', 'vulnerabilities', 'immunities'];
+  const TYPES = ['weapon', 'armor', 'shield', 'worn'];
+  const ATTUNE_BASE = 3;
+  const mod = (s) => Math.floor((s - 10) / 2);
+  const sign = (n) => (n >= 0 ? `+${n}` : `−${-n}`);
+
+  // The item's section in the items view (D40): weapons; armour, shields and worn things; everything else (a plain
+  // text entry, also every entry saved before the wizard existed).
+  const section = (e) => (!e.c ? 'oth' : e.c.type === 'weapon' ? 'wpn' : 'wear');
+
+  // Where the worn / held entries go, as the engine's equipment slots: one body armor, one shield, weapons in the
+  // free hands (two, one with a shield), every other worn item. `why` names the entries that found no slot.
+  function slots(entries) {
+    const out = { armor: null, shield: null, hands: [], worn: [], why: {} };
+    for (const e of entries) {
+      if (!e.c || !e.eq) continue;
+      const t = e.c.type;
+      if (t === 'armor') { if (out.armor) out.why[e.id] = 'zaten bir zırh giyili'; else out.armor = e; }
+      else if (t === 'shield') { if (out.shield) out.why[e.id] = 'zaten bir kalkan tutuluyor'; else out.shield = e; }
+      else if (t === 'weapon') continue;
+      else out.worn.push(e);
+    }
+    for (const e of entries) {
+      if (!e.c || !e.eq || e.c.type !== 'weapon') continue;
+      if (out.hands.length < (out.shield ? 1 : 2)) out.hands.push(e); else out.why[e.id] = 'eller dolu';
+    }
+    return out;
+  }
+  // Effects count only while an effect with uses is turned on (Kullan … Bitir, D39); the item keeps its slot either way.
+  const effectsOn = (e) => !(e.c.uses > 0) || !!e.on;
+
+  // Within one statistic: untyped values add; within a bonus type only the highest counts (the engine's Q1 / P8).
+  function stack(effects) {
+    const plain = {}, typed = {};
+    for (const f of effects) {
+      if (!f.bonus || f.stat === 'attunement:max') plain[f.stat] = (plain[f.stat] || 0) + f.value;
+      else { const k = `${f.stat}\u0000${f.bonus}`; typed[k] = k in typed ? Math.max(typed[k], f.value) : f.value; }
+    }
+    for (const [k, v] of Object.entries(typed)) { const s = k.split('\u0000')[0]; plain[s] = (plain[s] || 0) + v; }
+    return plain;
+  }
+
+  // The active entries: in a slot, attuned when the item needs it (and the attuned ones within the limit), effect on.
+  // own: items the character already attunes in the engine's build (Berathast's Ring of Protection), on the same limit.
+  function active(entries, own = 0) {
+    const sl = slots(entries);
+    const placed = [sl.armor, sl.shield, ...sl.hands, ...sl.worn].filter(Boolean);
+    const why = { ...sl.why };
+    const free = placed.filter((e) => !e.c.requiresAttunement);
+    const tuned = placed.filter((e) => e.c.requiresAttunement && e.at);
+    for (const e of placed) if (e.c.requiresAttunement && !e.at) why[e.id] = 'attunement yok';
+    const max = ATTUNE_BASE + (stack(free.filter(effectsOn).flatMap((e) => e.c.effects))['attunement:max'] || 0);
+    const over = tuned.length + own > max;
+    if (over) for (const e of tuned) why[e.id] = `attunement sınırı aşıldı (${tuned.length + own}/${max})`;
+    const on = [...free, ...(over ? [] : tuned)];
+    return { slots: sl, items: on, effective: on.filter(effectsOn), why, attunement: { used: tuned.length + own, max } };
+  }
+
+  // The fixed parts of each value (proficiency, the engine's other bonuses) from the rules engine's values
+  // (rules.json, H4a) and the character's own formulas (`cfg`: AC formulas, the attacks the page shows).
+  // cfg (the app's ITEM_CFG): acFormulas — each { name, base, abilities, noArmor?, noShield?, armor?, max? }; `armor: true`
+  // is the body armour the character wears in the engine's build (e.g. Berathast's Hide +2), its `max` the ability caps
+  // ({ DEX: 2 } for medium armour): while it counts there is no "10 + DEX", and a custom armour takes its place.
+  // initAbilities — abilities the engine adds to initiative besides DEX (Berathast's Dread Ambusher: WIS).
+  // attunedOwn — how many items the character already attunes in the engine's build (they count against the limit).
+  // speedWithoutHeavyArmor — speed the engine gives only without heavy armour, per mode (Roving: { walk: 10, … }).
+  // attacks — the attacks the page shows that items can move.
+  const formulaAc = (f, m) => f.base + f.abilities.reduce((n, a) => n + (f.max && f.max[a] != null ? Math.min(m(a), f.max[a]) : m(a)), 0);
+  const initAbs = (cfg) => cfg.initAbilities || [];
+  function baseFrom(v, cfg) {
+    const m = (a) => v.abilities[a].modifier;
+    const acCandidates = [...(cfg.acFormulas.some((f) => f.armor) ? [] : [10 + m('DEX')]), ...cfg.acFormulas.map((f) => formulaAc(f, m))];
+    return {
+      level: v.build.characterLevel, prof: v.proficiencyBonus.value,
+      scores: Object.fromEntries(AB.map((a) => [a, v.abilities[a].score])),
+      saveFixed: Object.fromEntries(AB.map((a) => [a, v.saves[a].bonus - m(a)])),
+      skillFixed: Object.fromEntries(SKILL_AB.map(([s, a]) => [s, v.skills[s].bonus - m(a)])),
+      passiveFixed: Object.fromEntries(Object.entries(v.passives).map(([s, p]) => [s, p.value - 10 - v.skills[s].bonus])),
+      initFixed: v.initiative.value - m('DEX') - initAbs(cfg).reduce((n, a) => n + m(a), 0), initAbilities: initAbs(cfg), attunedOwn: cfg.attunedOwn || 0, noHeavy: cfg.speedWithoutHeavyArmor || {},
+      speed: Object.fromEntries(Object.entries(v.speed).filter(([k]) => k !== 'basis')),
+      hp: v.hitPoints.max,
+      ac: { computed: v.armorClass.computed, miscFixed: v.armorClass.computed - Math.max(...acCandidates), formulas: cfg.acFormulas },
+      spell: v.spellcasting ? { ab: v.spellcasting.ability, dcFixed: v.spellcasting.saveDc - m(v.spellcasting.ability), atkFixed: v.spellcasting.attackBonus - m(v.spellcasting.ability) } : null,
+      attacks: cfg.attacks.map((a) => {
+        const r = v.attacks.find((x) => x.name === a.name);
+        const ab = a.martialArts ? (m('DEX') >= m('STR') ? 'DEX' : 'STR') : a.ability;
+        const dmg = /^(\d+d\d+|\d+)([+−-]\d+)?$/.exec(r.damage);
+        return { ...a, atkFixed: r.attackBonus - m(ab), dmgFixed: (dmg && dmg[2] ? Number(dmg[2].replace('−', '-')) : 0) - m(ab) };
+      }),
+    };
+  }
+
+  // Damage types (U9d): immunity wins; resistance and vulnerability cancel; the same list twice adds nothing.
+  function damageModifiers(items) {
+    const out = { resistances: [], vulnerabilities: [], immunities: [], sources: {} };
+    const has = (l, t) => items.some((it) => (it[l] || []).includes(t));
+    for (const t of DAMAGE_TYPES) {
+      const names = [...new Set(items.filter((it) => LISTS.some((l) => (it[l] || []).includes(t))).map((it) => it.name))].sort();
+      if (names.length) out.sources[t] = names;
+      if (has('immunities', t)) out.immunities.push(t);
+      else { const r = has('resistances', t), w = has('vulnerabilities', t); if (r && !w) out.resistances.push(t); else if (w && !r) out.vulnerabilities.push(t); }
+    }
+    return out;
+  }
+
+  // The sheet with the active custom items, in the shape of the rules engine's values (rules.json `values`).
+  function apply(base, entries) {
+    const act = active(entries, base.attunedOwn), S = stack(act.effective.flatMap((e) => e.c.effects));
+    const g = (k) => S[k] || 0;
+    const scores = Object.fromEntries(AB.map((a) => [a, base.scores[a] + g(ENG[a])]));
+    const m = (a) => mod(scores[a]);
+    const abilities = Object.fromEntries(AB.map((a) => [a, { score: scores[a], modifier: m(a) }]));
+    const saves = Object.fromEntries(AB.map((a) => [a, { bonus: m(a) + base.saveFixed[a] + g(`${ENG[a]}:save:misc`) }]));
+    const skills = Object.fromEntries(SKILL_AB.map(([s, a]) => { const b = m(a) + base.skillFixed[s] + g(`${s.toLowerCase()}:misc`); return [s, { bonus: b, passive: 10 + b }]; }));
+    const passives = Object.fromEntries(Object.entries(base.passiveFixed).map(([s, f]) => [s, { value: 10 + skills[s].bonus + f }]));
+    const speed = { ...base.speed, walk: base.speed.walk + g('speed:misc') };
+    for (const [k] of MODES) { const n = (base.speed[k] || 0) + g(`speed:${k}`); if (n > 0) speed[k] = n; else delete speed[k]; }
+    const hp = base.hp + (m('CON') - mod(base.scores.CON)) * base.level + g('hp');
+    // AC (engine computeArmorClass): the best base formula, the shield, then the other bonuses.
+    const armor = act.slots.armor && act.items.includes(act.slots.armor) ? act.slots.armor : null;
+    const shield = act.slots.shield && act.items.includes(act.slots.shield) ? act.slots.shield : null;
+    const held = act.slots.hands.some((e) => act.items.includes(e));
+    // speed that only counts without heavy armour (Berathast's Roving: +10 ft to walking, climbing and swimming)
+    if (armor && armor.c.armorType === 'heavy') for (const [k, n] of Object.entries(base.noHeavy)) if (speed[k]) speed[k] -= n;
+    const cand = [];
+    const ownArmor = base.ac.formulas.some((f) => f.armor);
+    if (!armor) { if (!ownArmor) cand.push(['10 + DEX', 10 + m('DEX')]); }
+    else {
+      const t = armor.c.armorType, d = t === 'light' ? m('DEX') : t === 'medium' ? Math.min(m('DEX'), 2) : 0;
+      const baseAc = (armor.c.effects.find((f) => f.stat === 'ac:armored:armor') || { value: 10 }).value;
+      cand.push([`zırh ${baseAc} + DEX ${d}${g('ac:armored:enhancement') ? ` + zırh büyüsü ${g('ac:armored:enhancement')}` : ''}`, baseAc + d + g('ac:armored:enhancement')]);
+    }
+    for (const f of base.ac.formulas) if (!((f.noArmor || f.armor) && armor) && !(f.noShield && shield)) cand.push([f.name, formulaAc(f, m)]);
+    cand.sort((x, y) => y[1] - x[1]);
+    const shieldAc = shield ? g('ac:shield') : 0, misc = base.ac.miscFixed + g('ac:misc');
+    const ac = { computed: cand[0][1] + shieldAc + misc, formula: cand[0][0], shield: shieldAc, misc: g('ac:misc') };
+    const spellcasting = base.spell && { saveDc: m(base.spell.ab) + base.spell.dcFixed + g('spellcasting:dc'), attackBonus: m(base.spell.ab) + base.spell.atkFixed + g('spellcasting:attack') };
+    // Martial Arts (2024): unarmed or Monk weapons only, no armor, no shield (a custom weapon is no Monk weapon).
+    const ma = !armor && !shield && !held;
+    const attacks = base.attacks.map((a) => {
+      const useMa = a.martialArts && ma;
+      const ab = useMa ? (m('DEX') >= m('STR') ? 'DEX' : 'STR') : a.martialArts ? 'STR' : a.ability;
+      const atk = m(ab) + (useMa || !a.martialArts ? a.atkFixed : base.prof) + g(`${a.kind}:attack`);
+      const bonus = m(ab) + (useMa || !a.martialArts ? a.dmgFixed : 0) + g(`${a.kind}:damage`);
+      const dice = useMa ? a.martialArts : a.dice;
+      return { name: a.name, ability: ab, attackBonus: atk, damage: `${dice}${bonus ? sign(bonus) : ''}`, martialArts: useMa };
+    });
+    return { abilities, saves, skills, passives, initiative: { value: m('DEX') + base.initAbilities.reduce((n, a) => n + m(a), 0) + base.initFixed + g('initiative') }, speed, hitPoints: { max: hp },
+      armorClass: ac, spellcasting, attacks, attunement: act.attunement, damageModifiers: damageModifiers(act.effective.map((e) => e.c)), active: act, stats: S };
+  }
+
+  // In a Wild Shape form (D41): the plain bonuses of the active items marked "Wild Shape'te de", on top of the form's
+  // own total (AC, its saves and skills); ability scores, speed and the rest stay the form's.
+  function formBonus(entries) {
+    const S = stack(active(entries).effective.filter((e) => e.c.ws).flatMap((e) => e.c.effects));
+    return { ac: S['ac:misc'] || 0, saves: Object.fromEntries(AB.map((a) => [a, S[`${ENG[a]}:save:misc`] || 0])), skills: Object.fromEntries(SKILL_AB.map(([s]) => [s, S[`${s.toLowerCase()}:misc`] || 0])) };
+  }
+
+  // The engine's view of the same entries (the parity test builds this): custom items and equipment slots.
+  function engineView(entries) {
+    const sl = slots(entries);
+    const items = entries.filter((e) => e.c).map((e) => {
+      const { name, type, requiresAttunement, armorType, effects } = e.c;
+      const it = { id: e.id, name, type, requiresAttunement: !!requiresAttunement, ...(type === 'armor' ? { armorType } : {}), effects: effectsOn(e) ? effects : [] };
+      for (const l of LISTS) if (e.c[l] && e.c[l].length && effectsOn(e)) it[l] = e.c[l];
+      return it;
+    });
+    const equipment = { worn: sl.worn.map((e) => e.id), attuned: entries.filter((e) => e.c && e.c.requiresAttunement && e.at && e.eq && !sl.why[e.id]).map((e) => e.id) };
+    if (sl.armor) equipment.armor = sl.armor.id;
+    if (sl.shield) equipment.offHand = sl.shield.id;
+    if (sl.hands[0]) equipment.mainHand = sl.hands[0].id;
+    if (sl.hands[1]) equipment.offHand = sl.hands[1].id;
+    return { customItems: items, equipment };
+  }
+
+  // A wizard draft → the item fields kept on the inventory entry (`e.c`), or the problems to fix first (Turkish).
+  function fromDraft(d) {
+    const errs = [];
+    const name = String(d.name || '').trim();
+    if (!name) errs.push('Adı boş bırakılamaz.');
+    if (!TYPES.includes(d.type)) errs.push('Türünü seç.');
+    const effects = [];
+    for (const [stat, raw] of Object.entries(d.fx || {})) {
+      if (!LABEL[stat]) continue;
+      const n = Number(String(raw).replace('−', '-').replace('+', '').trim());
+      if (!Number.isInteger(n) || n === 0 || Math.abs(n) > 999) { errs.push(`${LABEL[stat]}: −999 ile 999 arasında, 0 olmayan bir tam sayı yaz.`); continue; }
+      if (stat === 'ac:armored:armor' && d.type !== 'armor') continue;
+      if (stat === 'ac:armored:enhancement' && d.type !== 'armor') continue;
+      if (stat === 'ac:shield' && d.type !== 'shield') continue;
+      effects.push({ stat, value: n });
+    }
+    if (effects.length > 40) errs.push('Bir eşyada en fazla 40 etki olabilir.');
+    if (d.type === 'armor') {
+      if (!['light', 'medium', 'heavy'].includes(d.armorType)) errs.push('Zırhın türünü seç (light, medium, heavy).');
+      const b = effects.find((f) => f.stat === 'ac:armored:armor');
+      if (!b || b.value < 1) errs.push('Zırhın AC’sini yaz (ör. 14).');
+    }
+    const uses = d.uses === '' || d.uses == null ? 0 : Number(d.uses);
+    if (!Number.isInteger(uses) || uses < 0 || uses > 99) errs.push('Kullanım sayısı 0 ile 99 arasında bir tam sayı olmalı.');
+    const c = { name, type: d.type, requiresAttunement: !!d.att, effects, ws: !!d.ws };
+    if (d.type === 'armor') c.armorType = d.armorType;
+    for (const l of LISTS) { const t = DAMAGE_TYPES.filter((x) => (d.dmg || {})[x] === l); if (t.length) c[l] = t; }
+    if (uses > 0) { c.uses = uses; const dur = String(d.dur || '').trim(); if (dur) c.dur = dur.slice(0, 60); }
+    return errs.length ? { errors: errs } : { c };
+  }
+  // The other way: the draft the wizard opens with for an entry (editing, or converting a plain entry).
+  function toDraft(e) {
+    const c = e.c, g = e.g ? String(e.g).replace('.', ',') : '';
+    if (!c) return { name: e.t.split('\n')[0].slice(0, 100), t: e.t, g, type: 'worn', att: false, ws: false, fx: {}, dmg: {}, uses: '', dur: '' };
+    const dmg = {}; for (const l of LISTS) for (const t of c[l] || []) dmg[t] = l;
+    return { name: c.name, t: e.t === c.name ? '' : e.t, g, type: c.type, armorType: c.armorType, att: c.requiresAttunement, ws: !!c.ws, fx: Object.fromEntries(c.effects.map((f) => [f.stat, String(f.value)])), dmg, uses: c.uses ? String(c.uses) : '', dur: c.dur || '' };
+  }
+  return { AB, ENG, SKILL_AB, STATS, LABEL, DAMAGE_TYPES, LISTS, TYPES, sign, mod, section, slots, stack, active, baseFrom, apply, formBonus, damageModifiers, engineView, fromDraft, toDraft };
+})();
+
+const ITEMUI = (() => {
+  const R = ITEMRT;
+  const TYPE_TR = { weapon: 'Silah', armor: 'Zırh', shield: 'Kalkan', worn: 'Giyilebilir' };
+  const ARMOR_TR = { light: 'Light', medium: 'Medium', heavy: 'Heavy' };
+  const LIST_TR = { resistances: 'Resistance', vulnerabilities: 'Vulnerability', immunities: 'Immunity' };
+  const GROUPS = [['ab', 'Ability score'], ['ac', 'AC'], ['sv', 'Save'], ['sk', 'Skill'], ['at', 'Saldırı ve büyü'], ['mv', 'Hız, can ve diğer']];
+  const cap = (s) => s[0].toUpperCase() + s.slice(1);
+  // the item's effect chips: "AC +3", "STR +2", "Resistance: fire"
+  function chips(c, esc) {
+    const fx = c.effects.map((f) => `<span class="tg fx">${esc(R.LABEL[f.stat])} ${f.stat.startsWith('speed:') && f.stat !== 'speed:misc' ? `${f.value} ft` : R.sign(f.value)}</span>`);
+    for (const l of R.LISTS) for (const t of c[l] || []) fx.push(`<span class="tg fx dm" lang="en">${LIST_TR[l]}: ${t}</span>`);
+    return fx.join('');
+  }
+  // an item's uses (D39): one box per use (✕ = spent), what is left, the duration as text (no clock is kept)
+  const uses = (e, esc) => `<div class="iuses"><span class="boxes" aria-hidden="true">${Array.from({ length: e.c.uses }, (_, i) => `<i class="ub${i < (e.used || 0) ? ' used' : ''}"></i>`).join('')}</span><span>${e.c.uses - (e.used || 0)}/${e.c.uses} kullanım kaldı · uzun dinlenmede yenilenir${e.c.dur ? ` · bir kullanım <b>${esc(e.c.dur)}</b>` : ''}</span></div>`;
+  const useBtn = (e) => (e.on ? `<button class="mini use-on" data-inv="end" data-id="${e.id}">Bitir</button>` : `<button class="mini" data-inv="use" data-id="${e.id}"${(e.used || 0) >= e.c.uses ? ' disabled' : ''}>Kullan</button>`);
+  // the "Kullanımlık eşyalar" card: worn items with uses, each with Kullan / Bitir (the sheet; a Wild Shape form)
+  const useCard = (list, ws, esc) => (!list.length ? '' : `<section class="card ifx-card"><h3>Kullanımlık eşyalar${ws ? ' <small>formda da geçerli</small>' : ''}</h3>${list.map((e) => `<div class="iuse${e.on ? ' on' : ''}">
+      <div class="row"><b>${esc(e.c.name)}</b>${e.on ? '<span class="ibadge use">kullanımda</span>' : ''}<span class="sp"></span>${useBtn(e)}</div>
+      <div class="fxs">${chips(e.c, esc)}</div>${uses(e, esc)}</div>`).join('')}</section>`);
+  // one inventory entry of the items view. o: esc, gp (money text), hue, why (no effect now: the reason), del (asking to delete)
+  function entry(e, o) {
+    const { esc, gp } = o, c = e.c, nm = esc(c ? c.name : e.t);
+    const btns = o.del
+      ? `<span class="sp">Silinsin mi?</span><button class="mini" data-inv="cancel">Vazgeç</button><button class="mini danger" data-inv="del-yes" data-kind="items" data-id="${e.id}">Evet, sil</button>`
+      : `<span class="qty"><button class="mini" data-inv="qty" data-d="-1" data-id="${e.id}" aria-label="Azalt: ${nm}">−</button><output>${e.q}</output><button class="mini" data-inv="qty" data-d="1" data-id="${e.id}" aria-label="Artır: ${nm}">+</button></span>
+       <span class="sp"></span><button class="mini${e.eq ? ' on' : ''}" data-inv="eq" data-id="${e.id}" aria-pressed="${!!e.eq}">${e.eq ? 'Çıkar' : 'Tak'}</button>${c && c.requiresAttunement && e.eq ? `<button class="mini${e.at ? ' on' : ''}" data-inv="att" data-id="${e.id}" aria-pressed="${!!e.at}" lang="en">${e.at ? 'Unattune' : 'Attune'}</button>` : ''}${c && c.uses && e.eq ? useBtn(e) : ''}
+       ${c ? `<button class="mini" data-inv="wiz-edit" data-id="${e.id}">Düzenle</button>` : `<button class="mini" data-inv="edit" data-kind="items" data-id="${e.id}">Düzenle</button><button class="mini" data-inv="wiz-conv" data-id="${e.id}">Sihirbaza uyarla</button>`}<button class="mini danger" data-inv="del" data-kind="items" data-id="${e.id}">Sil</button>`;
+    const eqb = e.eq ? '<span class="eqb">Takılı</span>' : '';
+    const val = e.g ? `<div class="gv">${gp(e.g)} tanesi${e.q !== 1 ? ` · ${e.q} adet = <b>${gp(e.g * e.q)}</b>` : ''}</div>` : '';
+    const head = !c ? `<div class="txt">${eqb}${esc(e.t)}</div>`
+      : `<div class="inm">${eqb}${c.requiresAttunement ? `<span class="ibadge at">${e.at ? 'attuned' : '<span lang="en">Attunement</span> gerekir'}</span>` : ''}${e.on ? '<span class="ibadge use">kullanımda</span>' : ''}${esc(c.name)}<small>${TYPE_TR[c.type]}${c.armorType ? ` · <span lang="en">${ARMOR_TR[c.armorType]}</span>` : ''}</small></div>
+       ${e.t && e.t !== c.name ? `<div class="itx">${esc(e.t)}</div>` : ''}
+       <div class="fxs">${chips(c, esc)}${c.ws ? '<span class="tg fx">Wild Shape’te de</span>' : ''}${c.effects.length || R.LISTS.some((l) => (c[l] || []).length) ? '' : '<span class="tg off">etkisi yok</span>'}</div>
+       ${c.uses ? uses(e, esc) : ''}${o.why && e.eq ? `<div class="iwhy">Etkisi şu an yok: ${esc(o.why)}</div>` : ''}`;
+    return `<li class="entry${e.eq ? ' eq' : ''}" style="--eh:${o.hue}">${head}${val}<div class="row">${btns}</div></li>`;
+  }
+  // the wizard (bottom sheet): name, type slot, attunement, Wild Shape, stats with amounts, damage types, uses
+  function wizard(d, opts, esc) {
+    const on = (x) => (x ? ' aria-pressed="true"' : ' aria-pressed="false"');
+    const typeB = R.TYPES.map((t) => `<button type="button" class="chip" data-wz="type:${t}"${on(d.type === t)}>${TYPE_TR[t]}</button>`).join('');
+    const armorB = d.type === 'armor' ? `<div class="wz-row"><span>Zırh türü</span><div class="chips">${['light', 'medium', 'heavy'].map((t) => `<button type="button" class="chip" data-wz="armor:${t}" lang="en"${on(d.armorType === t)}>${ARMOR_TR[t]}</button>`).join('')}</div></div>` : '';
+    const hide = (s) => (s === 'ac:armored:armor' || s === 'ac:armored:enhancement') && d.type !== 'armor' || s === 'ac:shield' && d.type !== 'shield';
+    const groups = GROUPS.map(([g, title]) => {
+      const rows = R.STATS.filter((s) => s.group === g && !hide(s.stat));
+      const n = rows.filter((s) => s.stat in d.fx).length;
+      const open = n || (g === 'ac' && d.type !== 'weapon') ? ' open' : '';
+      return `<details class="wz-g"${open}><summary>${title}${n ? ` <small>${n} seçili</small>` : ''}</summary><div class="wz-stats">${rows.map((s) => {
+        const tick = s.stat in d.fx;
+        return `<label class="wz-st${tick ? ' on' : ''}"><input type="checkbox" data-wzst="${s.stat}"${tick ? ' checked' : ''}><span lang="${g === 'sk' || g === 'ab' || g === 'sv' ? 'en' : 'tr'}">${esc(s.label)}</span><input type="text" inputmode="numeric" class="wz-n" data-wzn="${s.stat}" value="${tick ? esc(d.fx[s.stat]) : ''}" placeholder="${s.stat === 'ac:armored:armor' ? '14' : '+1'}" aria-label="${esc(s.label)}: miktar"${tick ? '' : ' disabled'}></label>`;
+      }).join('')}</div></details>`;
+    }).join('');
+    const nd = R.DAMAGE_TYPES.filter((t) => d.dmg[t]).length;
+    const dmg = `<details class="wz-g"${nd ? ' open' : ''}><summary>Hasar türleri${nd ? ` <small>${nd} seçili</small>` : ''}</summary><div class="wz-dmg">${R.DAMAGE_TYPES.map((t) => `<label><span lang="en">${cap(t)}</span><select data-wzd="${t}" aria-label="${cap(t)}"><option value="">—</option>${R.LISTS.map((l) => `<option value="${l}" lang="en"${d.dmg[t] === l ? ' selected' : ''}>${LIST_TR[l]}</option>`).join('')}</select></label>`).join('')}</div></details>`;
+    return `
+      <div class="sh-top"><span class="ic" style="--h:36" aria-hidden="true"><svg><use href="#i-bag"/></svg></span><div><h2 id="shName">${opts.title}</h2><p>${opts.sub}</p></div>
+        <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <div class="wz">
+        <label class="wz-f">Adı<input id="wzName" type="text" value="${esc(d.name)}" maxlength="100" autocomplete="off" placeholder="ör. Bracers of Warding"></label>
+        <label class="wz-f">Açıklama <small>isteğe bağlı; eşyanın kendi notu</small><textarea id="wzText" rows="2">${esc(d.t || '')}</textarea></label>
+        <label class="wz-f">Değeri (tanesi, gp)<input id="wzG" type="text" inputmode="decimal" value="${esc(d.g || '')}" placeholder="0"></label>
+        <div class="wz-row"><span>Türü</span><div class="chips">${typeB}</div></div>
+        ${armorB}
+        <label class="wz-ck"><input type="checkbox" id="wzAtt"${d.att ? ' checked' : ''}><span><span lang="en">Attunement</span> gerekir</span></label>
+        ${opts.ws ? `<label class="wz-ck"><input type="checkbox" id="wzWs"${d.ws ? ' checked' : ''}><span><span lang="en">Wild Shape</span> formlarında da geçerli <small>AC, save ve skill bonusları formun toplamına eklenir</small></span></label>` : ''}
+        <p class="wz-h">Etkiler <small>işaretle, miktarı yaz; takılıyken (gerekiyorsa <span lang="en">attunement</span> ile) sayfaya eklenir</small></p>
+        ${groups}${dmg}
+        <div class="wz-row wz-uses"><label class="wz-f">Uzun dinlenme başına kullanım<input id="wzUses" type="text" inputmode="numeric" value="${esc(d.uses)}" placeholder="0 = hep açık"></label><label class="wz-f">Bir kullanımın süresi<input id="wzDur" type="text" value="${esc(d.dur)}" maxlength="60" placeholder="ör. 5 saat"></label></div>
+        <p class="note">Kullanımı olan eşyada etkiler <b>Kullan</b> ile açılır, <b>Bitir</b> ile kapanır; uzun dinlenme kullanımları yeniler. Süre yalnız yazı olarak gösterilir.</p>
+        <div class="act two"><button data-wz="save">Kaydet</button><button class="sec2" data-close>Vazgeç</button></div>
+      </div>`;
+  }
+  return { TYPE_TR, ARMOR_TR, LIST_TR, chips, uses, useBtn, useCard, entry, wizard };
 })();
 
 
@@ -9562,31 +9987,32 @@ function toggleIn(C, id, sure) {
 /* =====================================================================
    Karakter: skills, features, items & notes
    ===================================================================== */
-// Values read from the sheet's form fields (details_*_total / *_proficiency / *_expertise). 2 = expertise.
+// Skill bonuses and proficiency from rules.json (the rules engine, H4d). 2 = expertise.
 // soft hue per ability (ability cards, skill rows, skill sheet icon)
 const AB_HUE = {"STR":0,"DEX":200,"CON":38,"INT":252,"WIS":120,"CHA":315};
 const SKILLS = [
-  ['Acrobatics','Akrobasi','DEX',9,1], ['Animal Handling','Hayvan Eğitimi','WIS',3,0], ['Arcana','Arkana','INT',0,0],
-  ['Athletics','Atletizm','STR',5,1], ['Deception','Aldatma','CHA',2,0], ['History','Tarih','INT',0,0],
+  ['Acrobatics','Akrobasi','DEX',13,2], ['Animal Handling','Hayvan Eğitimi','WIS',3,0], ['Arcana','Arkana','INT',0,0],
+  ['Athletics','Atletizm','STR',9,2], ['Deception','Aldatma','CHA',2,0], ['History','Tarih','INT',0,0],
   ['Insight','Sezgi','WIS',7,1], ['Intimidation','Gözdağı','CHA',2,0], ['Investigation','Araştırma','INT',4,1],
   ['Medicine','Tıp','WIS',3,0], ['Nature','Doğa','INT',0,0], ['Perception','Algı','WIS',11,2],
   ['Performance','Gösteri','CHA',2,0], ['Persuasion','İkna','CHA',2,0], ['Religion','Din','INT',0,0],
-  ['Sleight of Hand','El Çabukluğu','DEX',9,1], ['Stealth','Gizlilik','DEX',13,2], ['Survival','Hayatta Kalma','WIS',7,1],
+  ['Sleight of Hand','El Çabukluğu','DEX',9,1], ['Stealth','Gizlilik','DEX',13,2], ['Survival','Hayatta Kalma','WIS',11,2],
 ];
-$('#skills').innerHTML = SKILLS.map(([en, tr, ab, v, p]) =>
-  `<li class="ih${p ? ' pr' : ''}" style="--ih:${AB_HUE[ab]}"><button class="skb" data-c="sk" data-open="${en.toLowerCase().replace(/ /g, '-')}"><i aria-hidden="true">${p === 2 ? '◆' : p ? '●' : '○'}</i><span><b lang="en">${en}</b><small>${tr} · ${ab}${p === 2 ? ' · uzmanlık' : ''}</small></span><em>+${v}</em></button></li>`).join('');
+// the bonus follows the active custom items
+const skillBonus = (en, v) => EFF ? EFF.skills[en].bonus : v;
+const renderSkills = () => { $('#skills').innerHTML = SKILLS.map(([en, tr, ab, v, p]) =>
+  `<li class="ih${p ? ' pr' : ''}" style="--ih:${AB_HUE[ab]}"><button class="skb" data-c="sk" data-open="${en.toLowerCase().replace(/ /g, '-')}"><i aria-hidden="true">${p === 2 ? '◆' : p ? '●' : '○'}</i><span><b lang="en">${en}</b><small>${tr} · ${ab}${p === 2 ? ' · uzmanlık' : ''}</small></span><em>${sgn(skillBonus(en, v))}</em></button></li>`).join(''); };
+renderSkills();
 // Skills open the same bottom sheet: long description, uses, and notes that only apply to this character.
 const SKILL_NOTES = {
- "perception": "<b>Uzmanlık</b> (yeterlilik ×2). Passive Perception <b>21</b>. Karanlık görüş <b>90 ft</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulmak için avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili check’lerde yeterlilik iki katı.",
- "stealth": "<b>Uzmanlık</b> (yeterlilik ×2). <span lang=\"en\">Mask of the Wild</span>: yağmur, sis, yaprak gibi hafif örtüde bile saklanmayı deneyebilirsin. <span lang=\"en\">Umbral Sight</span>: karanlıkta, karanlık görüşle bakan düşmana görünmezsin. Saklıyken saldırı → <b>avantaj</b> → <span lang=\"en\">Sneak Attack</span>. <span lang=\"en\">Natural Explorer</span>: tercih ettiğin arazide yalnızken normal hızda gizli ilerlersin.",
- "survival": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) izlerken <b>avantaj</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulurken avantaj. <span lang=\"en\">Natural Explorer</span>: Forest/Grassland'da yeterlilik iki katı (<b>+11</b>); izlediğin yaratıkların sayısını, boyutunu ve ne zaman geçtiğini de öğrenirsin.",
- "investigation": "<span lang=\"en\">Natural Explorer</span>: Forest/Grassland'la ilgili INT check’lerinde yeterlilik iki katı (<b>+8</b>).",
- "nature": "<span lang=\"en\">Favored Enemy</span> (Beasts, Humans, Gnolls) hakkında bilgi hatırlarken INT check’inde <b>avantaj</b>.",
- "history": "<span lang=\"en\">Favored Enemy</span> (Humans, Gnolls) hakkında bilgi hatırlarken INT check’inde <b>avantaj</b>.",
- "sleight-of-hand": "<span lang=\"en\">Thieves’ Tools</span> yeterliliğin var: kilit açma ve tuzak sökme DEX +5 +4.",
- "deception": "<span lang=\"en\">Disguise Kit</span> yeterliliğin ve <span lang=\"en\">Disguise Self</span> büyün var: kılık değiştirmeyle birlikte kullan.",
- "insight": "Yeterlisin (+7).",
- "acrobatics": "Yeterlisin (+9). Kavranmaktan kurtulmak için Athletics yerine bunu seçebilirsin."
+ "perception": "<b>Uzmanlık</b> (yeterlilik ×2, <span lang=\"en\">Rogue</span> <span lang=\"en\">Expertise</span>). Passive Perception <b>21</b>. Karanlık görüş <b>120 ft</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulmak için avantaj.",
+ "stealth": "<b>Uzmanlık</b> (yeterlilik ×2, <span lang=\"en\">Rogue</span> <span lang=\"en\">Expertise</span>). <span lang=\"en\">Umbral Sight</span>: karanlıkta, karanlık görüşle bakan düşmana görünmezsin. Saklıyken saldırı → <b>avantaj</b> → <span lang=\"en\">Sneak Attack</span>.",
+ "survival": "<b>Uzmanlık</b> (yeterlilik ×2, <span lang=\"en\">Deft Explorer</span>): <b>+11</b>. <span lang=\"en\">Hunter’s Mark</span> hedefini bulurken avantaj.",
+ "acrobatics": "<b>Uzmanlık</b> (yeterlilik ×2, <span lang=\"en\">Ranger</span> 9 <span lang=\"en\">Expertise</span>): <b>+13</b>. Kavranmaktan kurtulmak için Athletics yerine bunu seçebilirsin.",
+ "athletics": "<b>Uzmanlık</b> (yeterlilik ×2, <span lang=\"en\">Ranger</span> 9 <span lang=\"en\">Expertise</span>): <b>+9</b>. Tırmanma ve yüzme hızın <b>45 ft</b> (<span lang=\"en\">Roving</span>).",
+ "sleight-of-hand": "<span lang=\"en\">Thieves’ Tools</span> yeterliliğin var: kilit açma ve tuzak sökme DEX +5 + yeterlilik 4.",
+ "deception": "<span lang=\"en\">Disguise Self</span> büyün var: kılık değiştirmeyle birlikte kullan.",
+ "insight": "Yeterlisin (+7)."
 };
 const SK = (() => {
   const INFO = Object.fromEntries(JSON.parse($('#skData').textContent).map(s => [s.id, s]));
@@ -9595,19 +10021,21 @@ const SK = (() => {
   return {
     k: 'sk', all: $('#skills'), sub: 'all',
     fill(id) {
-      const s = INFO[id], r = ROW[id], ab = AB[s.ab];
+      const s = INFO[id], r = { ...ROW[id] }, ab = AB[s.ab];
+      r.v = skillBonus(s.en, r.v);
       const prof = r.p === 2 ? 'Uzmanlık (×2)' : r.p ? 'Yeterli' : 'Yok';
       return `
         <div class="sh-top"><span class="ic" style="--h:${AB_HUE[s.ab]}" aria-hidden="true"><b class="ab-ic">${s.ab}</b></span><div><h2 id="shName" lang="en">${esc(s.en)}</h2><p>${esc(s.tr)} · <span lang="en">${ab[1]}</span></p></div>
           <button class="x" data-close aria-label="Kapat"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
         <dl class="facts">
-          <div class="fact key"><dt>Bonus</dt><dd>+${r.v}</dd></div>
+          <div class="fact key"><dt>Bonus</dt><dd>${sgn(r.v)}</dd></div>
           <div class="fact key"><dt lang="en">Passive</dt><dd>${10 + r.v}<small>10 + bonus</small></dd></div>
           <div class="fact"><dt lang="en">Ability</dt><dd>${s.ab}</dd></div>
           <div class="fact"><dt>Yeterlilik</dt><dd>${prof}</dd></div>
         </dl>
         <div class="desc">${s.d}</div>
         <div class="blk"><h3>Kullanım alanları</h3><ul class="uses">${s.use.map(u => `<li>${u}</li>`).join('')}</ul></div>
+        <p class="note rb">Dayanak: ${esc(rBasis('skills.' + s.en) || '')}.</p>
         ${SKILL_NOTES[id] ? `<div class="tip">${SKILL_NOTES[id]}</div>` : ''}
         <div class="src">Check zor olduğunda DM bir DC söyler (kolay 10 · orta 15 · zor 20 · çok zor 25); d20 + bonus ≥ DC başarılıdır.</div>`;
     },
@@ -9616,44 +10044,51 @@ const SK = (() => {
 
 // Features & traits: short original Turkish summaries of the sheet's text. Feats first (user's request).
 // soft hue per feature source
-const SRC_HUE = {"Feat":45,"Druid":115,"Moon":230,"Monk":18,"Outlander":30,"Ranger":140,"Gloom Stalker":265,"Rogue":350,"Wood Elf":95,"Urchin":30};
+const SRC_HUE = {"Feat":45,"Druid":115,"Moon":230,"Monk":18,"Outlander":30,"Ranger":140,"Gloom Stalker":265,"Rogue":350,"Wood Elf":95,"Guide":30};
 const FEATS = [
-  ['Sharpshooter', 'Feat', '', 'Uzun menzilde saldırı <b>dezavantajsız</b>. Menzilli silah saldırıların <b>yarım ve dörtte üç siperi yok sayar</b>. Saldırıdan önce seçersen: saldırı zarına <b>−5</b>, isabet ederse hasara <b>+10</b>.'],
-  ['Fey Touched', 'Feat', '1 / uzun dinlenme', '<span lang="en">Misty Step</span> ve <span lang="en">Command</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b>. Uygun seviyedeki slotlarla da yapılabilir. Hangi yeteneği kullandığı sayfada yazmıyor; <b>DC 15 (Wisdom)</b> varsayıldı, Charisma seçildiyse DC 14.'],
-  ['Dread Ambusher', 'Gloom Stalker', '', 'İnisiyatife <b>+3</b> (WIS modifier).'],
+  ['Magic Initiate', 'Feat · Guide', 'Wisdom', '<span lang="en">Guide</span> background’unun feat’i (eski <span lang="en">Urchin</span>’in yerine; Guide ayrıca <span lang="en">Stealth</span>, <span lang="en">Survival</span> ve <span lang="en">Cartographer’s Tools</span> verir), <span lang="en">Druid</span> listesinden: cantrip <span lang="en">Guidance</span> ve <span lang="en">Elementalism</span>, 1. seviye <span lang="en">Speak with Animals</span> (her zaman hazır; uzun dinlenmede <b>bir kez slotsuz</b>, slotla ve ritüel olarak da). Büyü ability’si WIS: DC 15, saldırı +7. Skill’lerin aynı kaldı (Rogue’dan Sleight of Hand, Ranger’dan Insight).'],
+  ['Resilient', 'Feat', 'ev kuralı', '<b>Constitution</b>: CON +1 (13 → 14) ve <b>CON save yeterliliği</b> (CON save +7; konsantrasyonda işe yarar). İki Human karakterin <span lang="en">Versatile</span> yerine aldığı General feat gibi, masanın ev kuralıyla ek General feat (D51). Azami can CON ile 72.'],
+  ['Sharpshooter', 'Feat', '', 'Menzilli silah saldırıların yarım ve dörtte üç siperi <b>yok sayar</b>; uzun menzilde ve yanında (5 ft) düşman varken <b>dezavantaj yok</b>. DEX +1 (DEX 20’e dahil). Saldırıya −5 / hasara +10 seçeneği <b>yok</b>.'],
+  ['Fey Touched', 'Feat', '1 / uzun dinlenme', '<span lang="en">Misty Step</span> ve <span lang="en">Command</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b>. Uygun seviyedeki slotlarla da yapılabilir. Büyü yeteneği <b>WIS</b> (DC 15); WIS +1 bu feat’ten.'],
+  ['Dread Ambusher', 'Gloom Stalker', '', 'İnisiyatife <b>WIS modifier</b>’ın eklenir (+3). <span lang="en">Ambusher’s Leap</span> ve <span lang="en">Dreadful Strike</span> de bu özellikten.'],
   ['Ambusher’s Leap', 'Gloom Stalker', 'İlk tur', 'Her savaşın ilk turunun başında yürüme hızın <b>+10 ft</b> artar (o turun sonuna kadar).'],
   ['Dreadful Strike', 'Gloom Stalker', 'WIS mod. / uzun dinlenme', 'Silahla bir yaratığa <b>isabet ettirince</b> fazladan <b>2d6 psişik</b> hasar verebilirsin. <b>Turda bir kez</b>; kullanım sayısı <b>WIS modifier</b>’ın kadar (en az 1; WIS +3 → <b>3 kez</b>), uzun dinlenmede hepsi yenilenir. Kritikte zarlar iki kez atılır (4d6). Toplam hasar kutusunda aç / kapa.'],
-  ['Umbral Sight', 'Gloom Stalker', '', 'Karanlık görüşün <b>90 ft</b> (elf 60 + 30). Karanlıktayken, seni karanlık görüşle görmeye çalışan yaratıklara karşı <b>görünmezsin</b>.'],
-  ['Iron Mind', 'Gloom Stalker', '', 'Wisdom save’lerinde yeterlilik (WIS save +8). <i>Sayfanın özellik listesinde yazmıyor; save alanında işaretli ve Gloom Stalker 7. seviye özelliği.</i>'],
-  ['Gloom Stalker Magic', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman hazır, hazırlanan büyü sayısına dahil değil.'],
+  ['Umbral Sight', 'Gloom Stalker', '', 'Karanlık görüşün <b>120 ft</b> (elf 60 + 60). Karanlıktayken, seni karanlık görüşle görmeye çalışan yaratıklara karşı <b>görünmezsin</b>.'],
+  ['Iron Mind', 'Gloom Stalker', '', 'Wisdom save’lerinde yeterlilik (WIS save +8).'],
+  ['Gloom Stalker Spells', 'Gloom Stalker', '', '<span lang="en">Disguise Self</span>, <span lang="en">Rope Trick</span> ve <span lang="en">Fear</span> her zaman hazır, hazırlanan büyü sayısına dahil değil.'],
+  ['Spellcasting', 'Ranger', 'Wisdom', 'Ranger listesinden <b>9 büyü</b> hazırlarsın (Ranger 9 tablosu); uzun dinlenmenin sonunda birini değiştirebilirsin. Slotlar (4/3/2) uzun dinlenmede yenilenir. Büyü saldırısı <b>+7</b>, DC <b>15</b>. Ritüel olarak yapamazsın.'],
   ['Extra Attack', 'Ranger', '', 'Saldırı aksiyonunda <b>iki saldırı</b>.'],
   ['Fighting Style: Archery', 'Ranger', '', 'Menzilli silah saldırılarına <b>+2</b> (Longbow +13’e dahil).'],
   ['Favored Enemy', 'Ranger', '4 / uzun dinlenme', '<span lang="en">Hunter’s Mark</span> her zaman hazır ve sayıya girmez; uzun dinlenmede <b>4 kez slotsuz</b> atabilirsin (Büyü slotları kartında kutular). Slotla da atılır.'],
+  ['Deft Explorer', 'Ranger', '', 'Yeterli olduğun bir skill’de expertise: <b>Survival</b> (+11). İki dil: <span lang="en">Abyssal, Draconic</span>.'],
+  ['Expertise', 'Ranger', '9. seviye', 'Yeterli olduğun iki skill’de daha expertise: <b>Acrobatics</b> (+13) ve <b>Athletics</b> (+9).'],
+  ['Roving', 'Ranger', '', 'Ağır zırh giymezken yürüme hızın <b>+10 ft</b> (Wood Elf 35 → <b>45 ft</b>); ayrıca <b>tırmanma</b> (45 ft) ve <b>yüzme</b> (45 ft) hızın yürüme hızına eşit.'],
+  ['Weapon Mastery', 'Ranger', '', 'İki silahın <b>mastery</b> özelliğini kullanırsın: <span lang="en">Longbow (Slow)</span> ve <span lang="en">Heavy Crossbow (Push)</span>. Uzun dinlenmeyi bitirince birini değiştirebilirsin. Saldırılar’daki <span lang="en">Weapon Mastery</span> kutusunda.'],
+  ['Longbow (Slow)', 'Ranger · Weapon Mastery', '', 'İsabet edip hasar verince hedefin hızı bir sonraki turunun başına dek <b>10 ft</b> azalır (birkaç isabet 10 ft’ten fazla düşürmez).'],
+  ['Heavy Crossbow (Push)', 'Ranger · Weapon Mastery', '', 'İsabette Large ya da daha küçük hedefi düz bir çizgide <b>10 ft</b> geri itersin. Silah envanterde yok; <span lang="en">Loading</span> yüzünden aksiyon başına tek atış.'],
   ['Sneak Attack', 'Rogue', 'Turda 1', 'Saldırı zarında avantajın varsa ya da hedefin 5 ft yanında etkisiz kalmamış bir müttefikin varsa (ve dezavantajın yoksa), finesse ya da menzilli silahla isabette <b>+1d6</b>.'],
   ['Expertise', 'Rogue', '', '<span lang="en">Perception</span> (+11) ve <span lang="en">Stealth</span> (+13) için yeterlilik iki katı.'],
-  ['Thieves’ Cant', 'Rogue', '', 'Hırsızların gizli dili: sıradan konuşmanın içine gizli mesaj saklarsın (dört kat uzun sürer); tehlike, ganimet, güvenli ev gibi kısa mesajlar veren gizli işaretleri tanırsın.'],
-  ['Fey Ancestry', 'Wood Elf', '', 'Büyülenmeye karşı save’de <b>avantaj</b>; büyü seni uyutamaz.'],
-  ['Mask of the Wild', 'Wood Elf', '', 'Yalnızca hafif örtülüyken (yaprak, yağmur, kar, sis…) bile <b>saklanmayı deneyebilirsin</b>.'],
-  ['Trance', 'Wood Elf', '', 'Uyumazsın; <b>4 saat</b> yarı bilinçli trans, 8 saatlik uykunun yerini tutar. Uzun dinlenme yine 8 saat sürer (kalanı hafif etkinlik).'],
-  ['Keen Senses', 'Wood Elf', '', '<span lang="en">Perception</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor; Perception yeterliliği buradan.</i>'],
+  ['Weapon Mastery', 'Rogue', '', 'İki silahın <b>mastery</b> özelliğini kullanırsın: <span lang="en">Shortbow (Vex)</span> ve <span lang="en">Dagger (Nick)</span>. Uzun dinlenmeyi bitirince birini değiştirebilirsin.'],
+  ['Shortbow (Vex)', 'Rogue · Weapon Mastery', '', 'İsabet edip hasar verince, bir sonraki turunun sonuna dek o hedefe yapacağın ilk saldırıda <b>avantaj</b>.'],
+  ['Dagger (Nick)', 'Rogue · Weapon Mastery', '', '<span lang="en">Light</span> silahla yapılan ek saldırıyı bonus aksiyon yerine Saldırı aksiyonunun içinde yaparsın (turda bir kez).'],
+  ['Thieves’ Cant', 'Rogue', '', 'Hırsızların gizli dilini bilirsin; ayrıca bir dil daha: <span lang="en">Infernal</span>.'],
+  ['Fey Ancestry', 'Wood Elf', '', 'Charmed olmamak ya da Charmed’dan kurtulmak için save’de <b>avantaj</b>.'],
+  ['Trance', 'Wood Elf', '', 'Uyumazsın; büyü seni uyutamaz. Uzun dinlenmeyi <b>4 saatlik</b> yarı bilinçli transla bitirebilirsin (bilincin yerinde kalır).'],
+  ['Keen Senses', 'Wood Elf', '', '<span lang="en">Insight</span>, <span lang="en">Perception</span> ya da <span lang="en">Survival</span>’dan birinde yeterlilik: seçilen <b>Perception</b>.'],
   ['Elven Lineage: Wood Elf', 'Wood Elf', '', 'Yürüme hızın <b>35 ft</b> (Roving ile 45). <span lang="en">Druidcraft</span> cantrip’i; 3. seviyeden <span lang="en">Longstrider</span>, 5. seviyeden <span lang="en">Pass without Trace</span>: her biri uzun dinlenmede <b>bir kez slotsuz</b> (slotla da atılır). Büyü yeteneği: <b>WIS</b>.'],
-  ['Roving', 'Ranger', '', 'Ağır zırh giymezken yürüme hızın <b>+10 ft</b> (Wood Elf 35 → <b>45 ft</b>); ayrıca <b>tırmanma</b> ve <b>yüzme</b> hızın yürüme hızına eşit (45 ft).'],
-  ['Deft Explorer', 'Ranger', '', 'Yeterli olduğun <b>bir skill’de expertise</b> ve <b>iki dil</b>. <i>Skill seçimi Builder’da bekliyor; sayfadaki değerler değişmedi.</i>'],
-  ['Expertise', 'Ranger', '9. seviye', 'Yeterli olduğun <b>iki skill’de daha expertise</b>. <i>Seçim Builder’da bekliyor; sayfadaki değerler değişmedi.</i>'],
-  ['Weapon Mastery', 'Ranger', '', 'Seçtiğin silahların <b>mastery özelliği</b> (Rogue 2 + Ranger 2 silah). <i>Silah seçimi Builder’da bekliyor.</i>'],
-  ['Elf Weapon Training', 'Wood Elf', '', '<span lang="en">Longsword, Shortsword, Shortbow, Longbow</span> yeterliliği. <i>Sayfada özellik olarak yazmıyor.</i>'],
-  ['City Secrets', 'Urchin', '', 'Şehirlerin gizli geçitlerini bilirsin: savaş dışındayken sen ve yönettiğin arkadaşların şehirde iki nokta arasında <b>iki kat hızlı</b> yol alırsınız.'],
 ];
-// Karakter → Saldırılar: one box with every damage of a Longbow hit (weapon, thunder, Sharpshooter, Hunter's Mark, Sneak Attack)
+// Karakter → Saldırılar: one box with every damage of a Longbow hit (weapon, thunder, Hunter's Mark, Sneak Attack, Dreadful Strike)
+// the Longbow's numbers: rules.json (the engine) with the active custom items; the 2024 Sharpshooter has no −5 / +10 (H4a §2)
 const DMG_KEY = 'berathast-dmg-v1';
-const DMG = Object.assign({ ss: false, hm: false, sn: false, ds: false }, load(DMG_KEY, {}));
+const DMG = Object.assign({ hm: false, sn: false, ds: false }, load(DMG_KEY, {}));
+const bow = () => { const a = (EFF ? EFF.attacks : RULES.attacks).find(x => x.name === 'Longbow'), m = /^(\d+)d(\d+)([+−-]\d+)?$/.exec(a.damage); return { atk: a.attackBonus, n: +m[1], d: +m[2], flat: m[3] ? +m[3].replace('−', '-') : 0 }; };
 function renderDmgAll() {
   const box = $('#dmgAll'); if (!box) return;
   const avg = { 6: 3.5, 8: 4.5 }, fmt = n => (Math.round(n * 10) / 10).toString().replace('.', ',');
   // [label, dice count, die, flat, type, on]
+  const B = bow();
   const rows = [
-    ['Longbow +2', 1, 8, 7, 'delme', true],
-    ['Sharpshooter', 0, 0, 10, '(−5 saldırıya)', DMG.ss],
+    ['Longbow +2', B.n, B.d, B.flat, 'delme', true],
     ['Ek hasar', 1, 6, 0, 'gök gürültüsü', true],
     ['Hunter’s Mark', 1, 6, 0, 'force', DMG.hm],
     ['Sneak Attack', 1, 6, 0, 'turda 1 kez', DMG.sn],
@@ -9665,17 +10100,27 @@ function renderDmgAll() {
   const expr = (k) => Object.keys(dice).sort((a, b) => b - a).map(d => `${dice[d] * k}d${d}`).join(' + ') + (flat ? ` + ${flat}` : '');
   const tog = (id, label, extra) => `<button class="mini dt" data-dt="${id}" aria-pressed="${DMG[id]}">${label}${extra ? ' <small>' + extra + '</small>' : ''}</button>`;
   box.innerHTML = `<h3>Toplam hasar <small>bir isabet · aç / kapat</small></h3>
-    <div class="dts">${tog('ss', 'Sharpshooter', 'saldırı +8, hasar +10')}${tog('hm', 'Hunter’s Mark', '+1d6')}${tog('sn', 'Sneak Attack', '+1d6 · turda 1')}${tog('ds', 'Dreadful Strike', '+2d6 psişik · turda 1')}</div>
+    <div class="dts">${tog('hm', 'Hunter’s Mark', '+1d6')}${tog('sn', 'Sneak Attack', '+1d6 · turda 1')}${tog('ds', 'Dreadful Strike', '+2d6 psişik · turda 1')}</div>
     <div class="chs">${on.map(([l, n, d, f, t]) => `<span class="ch ${l === 'Longbow +2' ? 'dmg' : 'add'}"><small>${l}</small><b>${n ? n + 'd' + d : ''}${f ? '+' + f : ''}</b> <em>${t}</em><i class="cr">kritikte ${n ? 2 * n + 'd' + d : ''}${f ? '+' + f : ''}</i></span>`).join('')}</div>
-    <div class="chs"><span class="ch hit"><small>Toplam</small><b>${expr(1)}</b> <em>ort. ${fmt(mean + flat)}</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>${expr(2)}</b> <em>ort. ${fmt(mean * 2 + flat)} · zarlar ×2</em></button><span class="ch"><small>Saldırı</small><b>${DMG.ss ? '+8' : '+13'}</b></span></div>
+    <div class="chs"><span class="ch hit"><small>Toplam</small><b>${expr(1)}</b> <em>ort. ${fmt(mean + flat)}</em></span><button class="ch crit" data-c="gl" data-open="critical-hit"><small>Kritik</small><b>${expr(2)}</b> <em>ort. ${fmt(mean * 2 + flat)} · zarlar ×2</em></button><span class="ch"><small>Saldırı</small><b>${sgn(B.atk)}</b></span></div>
     <p class="note">Turda <b>2 ok</b> (<span lang="en">Extra Attack</span>): <span lang="en">Sneak Attack</span> yalnız bir isabette; diğerinde kapalı hesapla (ort. ${fmt(mean + flat - (DMG.sn ? 3.5 : 0))}).</p>`;
 }
 document.addEventListener('click', e => { const b = e.target.closest('[data-dt]'); if (!b) return; const k = b.dataset.dt; DMG[k] = !DMG[k]; store(DMG_KEY, DMG); renderDmgAll(); });
 renderDmgAll();
-$('#feats').innerHTML = FEATS.map(([n, src, use, d]) =>
-  `<article class="card feat ih" style="--ih:${SRC_HUE[src] ?? 30}"><h3><span lang="en">${n}</span><span class="tg" lang="en">${src}</span>${use ? `<span class="tg lv">${use}</span>` : ''}</h3><p>${d}</p></article>`).join('');
+// the feature's rule basis (rules.json features, by name; the same name twice — Expertise, Weapon Mastery — by its source too): tap the source tag
+const featBasis = (n, src) => {
+  const k = s => s.toLowerCase().replace(/-/g, ' '), parts = n.split(': '), from = src.split(' · ')[0], hit = x => parts.some(p => k(x.name) === k(p));
+  const f = RULES.features.find(x => hit(x) && x.from === from) || RULES.features.find(hit);
+  return f ? `${n}|features.${RULES.features.indexOf(f)}` : null;
+};
+$('#feats').innerHTML = FEATS.map(([n, src, use, d]) => { const fb = featBasis(n, src);
+  return `<article class="card feat ih" style="--ih:${SRC_HUE[src] ?? SRC_HUE[src.split(' · ')[0]] ?? 30}"><h3><span lang="en">${n}</span>${fb ? `<button class="tg rbt" lang="en" data-basis="${esc(fb)}" aria-label="${esc(n)}: kural dayanağı">${src}</button>` : `<span class="tg" lang="en">${src}</span>`}${use ? `<span class="tg lv">${use}</span>` : ''}</h3><p>${d}</p></article>`; }).join('');
 
 // Items & notes: typed by hand, kept in this browser/app's storage. First launch starts with the sheet's equipment.
+// Custom items (H4d): Berathast's own formulas the item runtime (shared/items.js) needs beside rules.json — the armour he
+// wears in the engine's build (Hide 12 + 2, DEX at most 2; a custom armour takes its place), Dread Ambusher's WIS on
+// initiative, his attuned Ring of Protection (one of the three attunement slots), Roving (+10 ft only without heavy armour), the Longbow the page shows. One line of JSON: the parity test (character-builder/test/html-items.integration.test.js) reads it.
+const ITEM_CFG = {"acFormulas":[{"name":"Bear Hide Armor +2 (zırh 12 + zırh büyüsü 2 + DEX, en fazla 2)","base":14,"abilities":["DEX"],"max":{"DEX":2},"armor":true}],"initAbilities":["WIS"],"attunedOwn":1,"speedWithoutHeavyArmor":{"walk":10,"climb":10,"swim":10},"attacks":[{"name":"Longbow","kind":"ranged","ability":"DEX","dice":"1d8"}]};
 const INV_KEY = 'berathast-inventory-v1';
 const inv = load(INV_KEY, null) || { items: [
   { id: 'eq1', t: 'Longbow +2 (saldırı ve hasara +2)', q: 1, eq: true },
@@ -9706,6 +10151,58 @@ function saveInv(msg) {
 // every entry gets its own soft hue, in turn, so neighbouring items/notes read apart (user's request)
 const ENTRY_HUES = [205, 130, 275, 18, 175, 320, 85, 245, 45, 350];
 const entryHue = (kind, e) => ENTRY_HUES[Math.max(0, inv[kind].indexOf(e)) % ENTRY_HUES.length];
+/* ---------- custom items (H4d, as Mathias H4c; shared/items.js): their effects on the sheet ---------- */
+const IBASE = ITEMRT.baseFrom(RULES, ITEM_CFG);
+// the engine's values with the items applied; "a.b.#Name.c" as in rules.json
+function effAt(path) {
+  const [k, ...rest] = path.split('.');
+  // the CON modifier of the hit dice follows the items too (H4c review note 1)
+  if (EFF && path === 'hitDice.conModifier') return EFF.abilities.CON.modifier;
+  if (EFF && k === 'attacks') { const m = /^#(.+)$/.exec(rest[0] || ''), a = m && EFF.attacks.find(x => x.name === m[1]); if (a && a[rest[1]] !== undefined) return a[rest[1]]; }
+  const src = EFF && { abilities: EFF.abilities, saves: EFF.saves, skills: EFF.skills, passives: EFF.passives, initiative: EFF.initiative, hitPoints: EFF.hitPoints, speed: EFF.speed, spellcasting: EFF.spellcasting }[k];
+  if (src) { const v = rest.reduce((o, x) => o == null ? o : o[x], src); if (v !== undefined) return v; }
+  return path.split('.').reduce(rStep, RULES);
+}
+// names of the active items that move the AC, with their part
+const acItemsText = () => EFF.active.effective.filter(e => e.c.effects.some(f => f.stat.startsWith('ac:')) || e.c.type === 'armor' || e.c.type === 'shield').map(e => e.c.name).join(', ') + ` ${sgn(acDelta())}`;
+// recompute after any item change: every number on the page that the items can move
+function syncItems(start) {
+  EFF = ITEMRT.apply(IBASE, inv.items);
+  for (const el of document.querySelectorAll('[data-rv]')) {
+    const f = el.dataset.rf; if (f !== 'v' && f !== 's') continue;
+    const v = effAt(el.dataset.rv); if (typeof v === 'number') el.textContent = f === 's' ? sgn(v) : String(v); else if (typeof v === 'string') el.textContent = v;
+  }
+  // hit point maximum (CON, hp): full stays full; at start from the saved value, which may be above the engine's maximum
+  const max = EFF.hitPoints.max;
+  if (start) { if (max !== HP.max) { const v = load(HP_KEY, null), saved = v && Number.isFinite(v.cur); const full = !saved || v.cur >= (Number.isFinite(v.max) ? v.max : 62); HP.max = max; HP.cur = full ? max : Math.max(0, Math.min(max, Math.round(v.cur))); } }
+  else if (max !== HP.max) { const full = HP.cur >= HP.max; HP.max = max; HP.cur = full ? max : Math.min(HP.cur, max); saveHp(); }
+  GL_CHAR.dc = EFF.spellcasting.saveDc; GL_CHAR.atk = EFF.spellcasting.attackBonus; GL_CHAR.init = `${sgn(EFF.initiative.value)} (DEX ${EFF.abilities.DEX.modifier} + WIS ${EFF.abilities.WIS.modifier}, Dread Ambusher)`;
+  // the Longbow's critical line (dice twice, the bonus once)
+  for (const el of document.querySelectorAll('[data-crit]')) { const a = effAt(`attacks.#${el.dataset.crit}.damage`); if (typeof a === 'string') el.textContent = critDice(a); }
+  renderSkills();
+  if (!start) { syncAc(); renderDmgAll(); renderRest(); syncChrome(); }
+}
+// long rest (D39): every item's uses come back, and an effect still on ends (one use lasts less than the rest, e.g.
+// Bracers of Warding 5 hours; orchestrator ruling on the H4c review)
+function itemUsesRest() {
+  let n = 0; for (const e of inv.items) if (e.c && e.c.uses && (e.used || e.on)) { e.used = 0; e.on = false; n++; }
+  if (n) { store(INV_KEY, inv); syncItems(); renderInv(); }
+}
+// worn items with uses, each with Kullan / Bitir (ITEMUI.useCard): on the Karakter tab
+const itemUseCard = ws => ITEMUI.useCard(inv.items.filter(e => e.c && e.c.uses && e.eq && (!ws || e.c.ws) && !EFF.active.why[e.id]), ws, esc);
+// Karakter tab: what the items change (AC, damage types) and the items with uses
+function renderItemFx() {
+  const box = $('#itemFx'); if (!box || !EFF) return;
+  const dm = EFF.damageModifiers, lines = [];
+  if (acDelta()) lines.push(`<p class="ifx-line">Eşyalarla <b>AC ${acNow()}</b> (${esc(acItemsText())})</p>`);
+  for (const l of ITEMRT.LISTS) if (dm[l].length) lines.push(`<p class="ifx-line"><b lang="en">${ITEMUI.LIST_TR[l]}</b>: <span lang="en">${dm[l].map(t => `${t} (${esc(dm.sources[t].join(', '))})`).join(', ')}</span></p>`);
+  box.innerHTML = lines.join('') + itemUseCard(false);
+}
+// one item entry (ITEMUI.entry): a custom item shows its effect chips, attunement, uses; a plain entry its text (old saves land here)
+function itemHTML(e) {
+  if (!e.c && invEdit && invEdit.kind === 'items' && invEdit.id === e.id) return entryHTML('items', e);
+  return ITEMUI.entry(e, { esc, gp, hue: entryHue('items', e), why: e.c && EFF.active.why[e.id], del: !!(invDel && invDel.kind === 'items' && invDel.id === e.id) });
+}
 function entryHTML(kind, e) {
   const isItem = kind === 'items', eh = `style="--eh:${entryHue(kind, e)}"`;
   if (invEdit && invEdit.kind === kind && invEdit.id === e.id) {
@@ -9713,34 +10210,40 @@ function entryHTML(kind, e) {
       ${isItem ? `<label class="gfield">Değeri (tanesi) <input data-edit-g type="text" inputmode="decimal" value="${e.g ? String(e.g).replace('.', ',') : ''}" placeholder="0" aria-label="Değeri, gp"><span>gp</span></label>` : ''}
       <div class="row"><span class="sp"></span><button class="mini" data-inv="cancel">Vazgeç</button><button class="mini pri" data-inv="save-edit" data-kind="${kind}" data-id="${e.id}">Kaydet</button></div></li>`;
   }
+  if (isItem) return itemHTML(e);
   const del = invDel && invDel.kind === kind && invDel.id === e.id
     ? `<span class="sp">Silinsin mi?</span><button class="mini" data-inv="cancel">Vazgeç</button><button class="mini danger" data-inv="del-yes" data-kind="${kind}" data-id="${e.id}">Evet, sil</button>`
-    : `${isItem ? `<span class="qty"><button class="mini" data-inv="qty" data-d="-1" data-id="${e.id}" aria-label="Azalt: ${esc(e.t)}">−</button><output>${e.q}</output><button class="mini" data-inv="qty" data-d="1" data-id="${e.id}" aria-label="Artır: ${esc(e.t)}">+</button></span>` : ''}
-       <span class="sp"></span>${isItem ? `<button class="mini${e.eq ? ' on' : ''}" data-inv="eq" data-id="${e.id}" aria-pressed="${!!e.eq}">${e.eq ? 'Çıkar' : 'Tak'}</button>` : ''}<button class="mini" data-inv="edit" data-kind="${kind}" data-id="${e.id}">Düzenle</button><button class="mini danger" data-inv="del" data-kind="${kind}" data-id="${e.id}">Sil</button>`;
-  const val = isItem && e.g ? `<div class="gv">${gp(e.g)} tanesi${e.q !== 1 ? ` · ${e.q} adet = <b>${gp(e.g * e.q)}</b>` : ''}</div>` : '';
-  const eqb = isItem && e.eq ? '<span class="eqb">Takılı</span>' : '';
-  return `<li class="entry${isItem && e.eq ? ' eq' : ''}" ${eh}><div class="txt">${eqb}${esc(e.t)}</div>${val}<div class="row">${del}</div></li>`;
+    : `<span class="sp"></span><button class="mini" data-inv="edit" data-kind="${kind}" data-id="${e.id}">Düzenle</button><button class="mini danger" data-inv="del" data-kind="${kind}" data-id="${e.id}">Sil</button>`;
+  return `<li class="entry" ${eh}><div class="txt">${esc(e.t)}</div><div class="row">${del}</div></li>`;
 }
+// the three item sections (D40): Silahlar · Giyilebilir (armour, shield, bracers, rings, cloaks …) · Diğer eşyalar
+const ISEC = { wpn: ['Silahlar', '#invWpn', 18, 'weapon'], wear: ['Giyilebilir', '#invWear', 205, 'worn'], oth: ['Diğer eşyalar', '#invOth', 42, null] };
+const secItems = s => inv.items.filter(e => ITEMRT.section(e) === s);
 function renderInv() {
-  const eqs = inv.items.filter(e => e.eq), eqLine = $('#eqLine');
-  if (eqLine) eqLine.innerHTML = eqs.length ? `<b>Takılı:</b> ${eqs.map(e => esc(e.t)).join(' · ')}` : 'Takılı eşya yok.';
   // the box you type into stays on top; entries go below it, oldest first, newest at the bottom (user's request)
   const iv = itemsValue();
-  $('#invItems').innerHTML = `
+  $('#invGold').innerHTML = `
     <div class="card gold">
       <h3>Altın</h3>
       <div class="gsum"><div class="me" style="--qh:32;--ql:58%"><small>Kesende</small><b>${gp(inv.gold)}</b></div><div style="--qh:24;--ql:50%"><small>Eşyaların değeri</small><b>${gp(iv)}</b></div><div style="--qh:18;--ql:44%"><small>Toplam</small><b>${gp(inv.gold + iv)}</b></div></div>
       <div class="gin"><input id="goldIn" type="text" inputmode="decimal" placeholder="Miktar (gp)" aria-label="Altın miktarı, gp"><button class="mini pri" data-gold="add">+ Ekle</button><button class="mini" data-gold="spend">− Harca</button><button class="mini" data-gold="set">Ayarla</button></div>
-    </div>
-    <div class="card inv" style="--ih:42">
-      <h3>Eşyalar <small>(${inv.items.length})</small></h3>
-      <div class="addf"><textarea id="newItem" rows="2" placeholder="Yeni eşya (ör. Potion of Healing)" aria-label="Yeni eşya" autocapitalize="sentences"></textarea>
-        <div class="row"><label class="gfield">Değeri (tanesi) <input id="newItemG" type="text" inputmode="decimal" placeholder="0" aria-label="Yeni eşyanın değeri, gp"><span>gp</span></label>
-        <button class="mini pri" data-inv="add-item">Ekle</button></div></div>
-      <ul class="entries">${inv.items.map(e => entryHTML('items', e)).join('')}</ul>
-      ${inv.items.length ? '' : '<p class="note">Henüz eşya yok.</p>'}
     </div>`;
-  $('#invNotes').innerHTML = `
+  for (const [s, [title, sel, hue]] of Object.entries(ISEC)) {
+    const list = secItems(s);
+    const add = s === 'oth'
+      ? `<div class="addf"><textarea id="newItem" rows="2" placeholder="Yeni eşya (ör. Potion of Healing)" aria-label="Yeni eşya" autocapitalize="sentences"></textarea>
+          <div class="row"><label class="gfield">Değeri (tanesi) <input id="newItemG" type="text" inputmode="decimal" placeholder="0" aria-label="Yeni eşyanın değeri, gp"><span>gp</span></label>
+          <button class="mini pri" data-inv="add-item">Ekle</button></div></div>
+         <p class="note">Etkisi olan bir eşyayı (AC, ability, save …) <b>Sihirbaza uyarla</b> ile Silahlar ya da Giyilebilir bölümüne taşıyabilirsin; yazısı ve adedi kalır. Sayfadaki <span lang="en">Longbow +2</span>, <span lang="en">Ring of Protection</span> ve <span lang="en">Bear Hide Armor +2</span> değerlere zaten dahil: uyarlarsan etki ekleme (iki kez sayılır); <span lang="en">Ring of Protection</span>'ın attunement'ı da zaten sayılı (uyarlanınca ikinci kez sayılmaz).</p>`
+      : `<button class="wzb" data-inv="wiz-new" data-sec="${s}"><svg aria-hidden="true"><use href="#i-plus"/></svg>Yeni ${s === 'wpn' ? 'silah' : 'giyilebilir eşya'} (sihirbaz)</button>`;
+    $(sel).innerHTML = `<div class="card inv isec" style="--ih:${hue}">
+      <h3>${title} <small>(${list.length})</small></h3>
+      ${add}
+      <ul class="entries">${list.map(e => entryHTML('items', e)).join('')}</ul>
+      ${list.length ? '' : `<p class="note">${s === 'oth' ? 'Henüz eşya yok.' : 'Bu bölümde henüz eşya yok.'}</p>`}
+    </div>`;
+  }
+  $('#notesView').innerHTML = `
     <div class="card inv" style="--ih:200">
       <h3>Notlar <small>(${inv.notes.length})</small></h3>
       <div class="addf"><textarea id="newNote" rows="3" placeholder="Yeni not" aria-label="Yeni not" autocapitalize="sentences"></textarea>
@@ -9748,11 +10251,17 @@ function renderInv() {
       <ul class="entries">${inv.notes.map(e => entryHTML('notes', e)).join('')}</ul>
       ${inv.notes.length ? '' : '<p class="note">Henüz not yok.</p>'}
     </div>`;
-  if (tab === 'inv') syncChrome();
+  const eqs = inv.items.filter(e => e.eq);
+  $('#eqLine').innerHTML = eqs.length ? `<b>Takılı:</b> ${eqs.map(e => esc(e.c ? e.c.name : e.t)).join(' · ')}` : 'Takılı eşya yok.';
+  renderItemFx();
+  if (tab === 'inv' || tab === 'notes') syncChrome();
 }
-// "Eşya & Not" tab: a small catalog so the header switch, swipe and back gesture work as on Büyüler
-const INVC = { k: 'inv', prep: $('#invItems'), all: $('#invNotes'), sub: 'prep', confirming: false, stats: '',
-  segs: () => [['prep', 'Eşyalar', `${inv.items.length}`], ['all', 'Notlar', `${inv.notes.length}`]],
+// "Eşyalar" tab: a small catalog with three sub-tabs (D44), so the header switch, swipe and back gesture work as on Büyüler
+// the header keeps the AC box only (the three section names need the room; AC is what the items change)
+const INVC = { k: 'inv', views: { wpn: $('#invWpn'), wear: $('#invWear'), oth: $('#invOth') }, sub: 'wpn', confirming: false,
+  get stats() { return charStats().split('</button>')[0] + '</button>'; },
+  start: () => 'wpn',
+  segs: () => Object.entries(ISEC).map(([s, [t]]) => [s, t.split(' ')[0], `${secItems(s).length}`]),
   renderPrep() {} };
 CATS.inv = INVC;
 function goldAction(a) {
@@ -9763,10 +10272,73 @@ function goldAction(a) {
   renderInv(); saveInv(a === 'add' ? `+${gp(n)} · kesende ${gp(inv.gold)}` : a === 'spend' ? `−${gp(n)} · kesende ${gp(inv.gold)}` : `Kesende ${gp(inv.gold)}`);
   focusQuiet($(`[data-gold="${a}"]`));
 }
+// after a change of what is worn / attuned / used: the sheet follows, then the list
+function itemsChanged(msg, focus) { syncItems(); renderInv(); saveInv(msg); if (focus) focusQuiet($(focus)); }
+
+/* ---------- the custom item wizard (bottom sheet): add, edit, or convert a plain entry ---------- */
+const WZ = {
+  k: 'wz', key: '', draft: null, back: () => WZ.backEl,
+  open(key, from) {
+    const [mode, x] = key.split(':'), e = inv.items.find(i => i.id === x);
+    WZ.key = key; WZ.backEl = from;
+    WZ.draft = mode === 'new' ? { name: '', t: '', g: '', type: ISEC[x][3], att: false, ws: false, fx: {}, dmg: {}, uses: '', dur: '' } : ITEMRT.toDraft(e);
+    openSheet(WZ, key);
+  },
+  fill(key) {
+    const mode = key.split(':')[0];
+    return ITEMUI.wizard(WZ.draft, { title: mode === 'new' ? 'Yeni eşya' : mode === 'edit' ? 'Eşyayı düzenle' : 'Sihirbaza uyarla', sub: mode === 'conv' ? 'yazısı ve adedi kalır' : 'özel eşya sihirbazı', ws: false }, esc);
+  },
+  redraw(focus) { const inn = $('#sheetIn'), y = inn.scrollTop; inn.innerHTML = WZ.fill(WZ.key); inn.scrollTop = y; if (focus) focusQuiet(inn.querySelector(focus)); },
+  save() {
+    const d = WZ.draft, r = ITEMRT.fromDraft(d);
+    if (r.errors) { toast(`Önce düzelt: ${r.errors[0]}`); return; }
+    const g = String(d.g || '').trim() ? parseG(d.g) : 0;
+    if (g === null) { toast('Değer bir sayı olmalı (ör. 50 ya da 0,5).'); focusQuiet($('#wzG')); return; }
+    const [mode, x] = WZ.key.split(':'), text = String(d.t || '').trim();
+    let e = inv.items.find(i => i.id === x);
+    // the sheet's Ring of Protection is attuned in the engine's build already (ITEM_CFG attunedOwn): converting it never
+    // takes a second attunement slot (H4d review N3); only the sheet's own entry (by its id), not another ring of that name
+    const ownRing = e && e.id === 'eq3';
+    if (ownRing && r.c.requiresAttunement) r.c.requiresAttunement = false;
+    if (mode === 'new') { e = { id: newId(), t: text || r.c.name, q: 1, g, eq: false, used: 0, on: false, c: r.c }; inv.items.push(e); }
+    else if (e) {
+      e.c = r.c; e.g = g; e.t = text || (mode === 'conv' ? e.t : r.c.name);
+      if (r.c.uses) { e.used = Math.min(e.used || 0, r.c.uses); e.on = !!e.on; } else { delete e.used; delete e.on; }
+      if (!r.c.requiresAttunement) delete e.at;
+    }
+    invEdit = invDel = null;
+    closeSheet();
+    itemsChanged(`Eşya ${mode === 'new' ? 'kaydedildi' : mode === 'edit' ? 'güncellendi' : 'sihirbaza uyarlandı'} · ${ISEC[ITEMRT.section(e)][0]}${ownRing ? ' · attunement zaten sayılı' : ''}`);
+  },
+};
+// typing in the wizard: the draft follows; ticking a statistic opens its amount box
+$('#sheetIn').addEventListener('input', ev => {
+  if (!openRef || openRef.c !== WZ) return;
+  const t = ev.target, d = WZ.draft, f = { wzName: 'name', wzText: 't', wzG: 'g', wzUses: 'uses', wzDur: 'dur' }[t.id];
+  if (f) d[f] = t.value;
+  else if (t.dataset.wzn) d.fx[t.dataset.wzn] = t.value;
+});
+$('#sheetIn').addEventListener('change', ev => {
+  if (!openRef || openRef.c !== WZ) return;
+  const t = ev.target, d = WZ.draft;
+  if (t.id === 'wzAtt') d.att = t.checked;
+  else if (t.id === 'wzWs') d.ws = t.checked;
+  else if (t.dataset.wzst) { const s = t.dataset.wzst; if (t.checked) d.fx[s] = d.fx[s] || ''; else delete d.fx[s]; WZ.redraw(t.checked ? `[data-wzn="${s}"]` : `[data-wzst="${s}"]`); }
+  else if (t.dataset.wzd) { if (t.value) d.dmg[t.dataset.wzd] = t.value; else delete d.dmg[t.dataset.wzd]; }
+});
+function wizAction(a) {
+  const d = WZ.draft;
+  if (a === 'save') return WZ.save();
+  const [k, v] = a.split(':');
+  if (k === 'type') { d.type = v; if (v !== 'armor') delete d.armorType; WZ.redraw(`[data-wz="${a}"]`); }
+  if (k === 'armor') { d.armorType = v; WZ.redraw(`[data-wz="${a}"]`); }
+}
 function invAction(t) {
   const a = t.dataset.inv, kind = t.dataset.kind, id = t.dataset.id;
   const list = kind ? inv[kind] : null, e = list && list.find(x => x.id === id);
   if ((a === 'add-item' || a === 'add-note') && invEdit) { toast('Önce açık düzenlemeyi kaydet ya da vazgeç.'); focusQuiet($('[data-edit-text]')); return; }
+  if (a === 'wiz-new') return WZ.open('new:' + t.dataset.sec, t);
+  if (a === 'wiz-edit' || a === 'wiz-conv') { invEdit = invDel = null; return WZ.open((a === 'wiz-edit' ? 'edit:' : 'conv:') + id, t); }
   if (a === 'add-item') {
     const el = $('#newItem'), v = el.value.trim(); if (!v) { focusQuiet(el); return; }
     const gv = $('#newItemG').value.trim(), g = gv ? parseG(gv) : 0;
@@ -9777,13 +10349,23 @@ function invAction(t) {
     const el = $('#newNote'), v = el.value.trim(); if (!v) { focusQuiet(el); return; }
     inv.notes.push({ id: newId(), t: v }); invEdit = invDel = null; renderInv(); saveInv('Not kaydedildi'); focusQuiet($('#newNote')); return;
   }
+  const it = inv.items.find(x => x.id === id);
   if (a === 'eq') {
-    const it = inv.items.find(x => x.id === id); if (!it) return;
-    it.eq = !it.eq; renderInv(); saveInv(it.eq ? 'Eşya takıldı' : 'Eşya çıkarıldı');
-    focusQuiet($(`[data-inv="eq"][data-id="${id}"]`)); return;
+    if (!it) return;
+    // taking an item off ends its effect (Bitir) and its attunement stays as it was
+    it.eq = !it.eq; if (!it.eq && it.on) it.on = false;
+    return itemsChanged(it.eq ? 'Eşya takıldı' : 'Eşya çıkarıldı', `[data-inv="eq"][data-id="${id}"]`);
   }
+  if (a === 'att') { if (!it) return; it.at = !it.at; return itemsChanged(`Eşya: ${it.c.name} ${it.at ? 'attuned' : 'attunement bırakıldı'}`, `[data-inv="att"][data-id="${id}"]`); }
+  if (a === 'use') {
+    if (!it || !it.c || !it.c.uses) return;
+    if ((it.used || 0) >= it.c.uses) { toast(`${it.c.name}: kullanım kalmadı (uzun dinlenmede yenilenir)`); return; }
+    it.used = (it.used || 0) + 1; it.on = true;
+    return itemsChanged(`Eşya kullanıldı: ${it.c.name}${it.c.dur ? ` · ${it.c.dur}` : ''} · ${it.c.uses - it.used}/${it.c.uses} kaldı`, `[data-inv="end"][data-id="${id}"]`);
+  }
+  if (a === 'end') { if (!it) return; it.on = false; return itemsChanged(`Eşya etkisi bitti: ${it.c.name}`, `[data-inv="use"][data-id="${id}"]`); }
   if (a === 'qty') {
-    const it = inv.items.find(x => x.id === id); if (!it) return;
+    if (!it) return;
     it.q = Math.max(0, Math.min(999, it.q + +t.dataset.d)); renderInv(); store(INV_KEY, inv); askPersist();
     focusQuiet($(`[data-inv="qty"][data-id="${id}"][data-d="${t.dataset.d}"]`)); return;
   }
@@ -9797,8 +10379,8 @@ function invAction(t) {
     invEdit = null; renderInv(); saveInv('Değişiklik kaydedildi'); focusQuiet($(`[data-inv="edit"][data-id="${id}"]`)); return;
   }
   if (a === 'del') { invDel = { kind, id }; invEdit = null; renderInv(); focusQuiet($('[data-inv="cancel"]')); return; }
-  if (a === 'del-yes') { inv[kind] = list.filter(x => x.id !== id); invDel = null; renderInv(); saveInv(kind === 'items' ? 'Eşya silindi' : 'Not silindi'); return; }
-  if (a === 'cancel') { const ref = invEdit || invDel; invEdit = invDel = null; renderInv(); if (ref) focusQuiet($(`[data-inv="edit"][data-id="${ref.id}"]`)); return; }
+  if (a === 'del-yes') { inv[kind] = list.filter(x => x.id !== id); invDel = null; if (kind === 'items') syncItems(); renderInv(); saveInv(kind === 'items' ? 'Eşya silindi' : 'Not silindi'); return; }
+  if (a === 'cancel') { const ref = invEdit || invDel; invEdit = invDel = null; renderInv(); if (ref) focusQuiet($(`[data-inv="edit"][data-id="${ref.id}"]`) || $(`[data-inv="wiz-edit"][data-id="${ref.id}"]`)); return; }
 }
 document.addEventListener('keydown', e => {
   // Enter in the hit point box = damage (the usual case)
@@ -9910,9 +10492,9 @@ function initUpdate() {
 // The app always opens on the Karakter tab (user's request); the last tab is not remembered.
 let tab = 'char';
 const scrollMem = {};
-const viewKey = () => tab === 'char' ? 'char' : tab + CATS[tab].sub;
+const viewKey = () => !CATS[tab] ? tab : tab + CATS[tab].sub;
 
-const charStats = () => `<button class="st acst" id="acBtn" data-acopen aria-label="AC ${AC.v}. Dokun: elle değiştir"><span>AC</span><b>${AC.v}</b></button><button class="st hpst ${hpTone(HP.cur, HP.max)}" id="hpBtn" data-hpopen aria-label="Can ${HP.cur} / ${HP.max}. Dokun: hasar ya da iyileşme yaz"><span>Can</span><b>${HP.cur}<small>/${HP.max}</small></b></button>`;
+const charStats = () => `<button class="st acst" id="acBtn" data-acopen aria-label="AC ${acNow()}. Dokun: elle değiştir"><span>AC</span><b>${acNow()}</b></button><button class="st hpst ${hpTone(HP.cur, HP.max)}" id="hpBtn" data-hpopen aria-label="Can ${HP.cur} / ${HP.max}. Dokun: hasar ya da iyileşme yaz"><span>Can</span><b>${HP.cur}<small>/${HP.max}</small></b></button>`;
 function syncChrome() {
   document.documentElement.dataset.tab = tab;
   try { syncFloat(); } catch (e) {}
@@ -9929,7 +10511,9 @@ function syncChrome() {
   }
   SP.tools.hidden = !(tab === 'sp' && SP.sub === 'all');
   $('#charView').hidden = tab !== 'char';
-  for (const c of Object.values(CATS)) { c.all.hidden = !(tab === c.k && c.sub === 'all'); c.prep.hidden = !(tab === c.k && c.sub === 'prep'); if (c.act) c.act.hidden = !(tab === c.k && c.sub === 'act'); }
+  $('#notesView').hidden = tab !== 'notes';
+  $('#invGold').hidden = tab !== 'inv';
+  for (const c of Object.values(CATS)) { if (c.views) { for (const [s, el] of Object.entries(c.views)) el.hidden = !(tab === c.k && c.sub === s); continue; } c.all.hidden = !(tab === c.k && c.sub === 'all'); c.prep.hidden = !(tab === c.k && c.sub === 'prep'); if (c.act) c.act.hidden = !(tab === c.k && c.sub === 'act'); }
   for (const b of $('#nav').querySelectorAll('button')) b.setAttribute('aria-current', b.dataset.tab === tab ? 'page' : 'false');
 }
 // mode: 'pop' = coming from the back gesture (no new entry), 'replace' = take over the current entry
@@ -9953,7 +10537,7 @@ function go(nextTab, nextSub, mode) {
 // Swipe left / right walks one endless loop over every page: first the segments of the current tab's header switch,
 // then on to the next bottom-menu tab (its first segment going forward, its last going back); after the last tab it
 // wraps to the first. So Büyüler takes two swipes to pass, Wild Shape three (user's request).
-const curView = () => { const C = CATS[tab]; return !C ? $('#charView') : C.sub === 'all' ? C.all : C.sub === 'act' ? C.act : C.prep; };
+const curView = () => { const C = CATS[tab]; return !C ? $(tab === 'notes' ? '#notesView' : '#charView') : C.views ? C.views[C.sub] : C.sub === 'all' ? C.all : C.sub === 'act' ? C.act : C.prep; };
 function swipe(dir) {
   if (openRef) return;
   const C = CATS[tab], subs = C ? C.segs().map(x => x[0]) : [], i = subs.indexOf(C && C.sub) + dir;
@@ -9970,7 +10554,10 @@ function swipe(dir) {
 (function(){
   let x0 = 0, y0 = 0, t0 = 0, on = false;
   document.addEventListener('touchstart', e => {
-    on = !openRef && !lbOpen && $('#ask').hidden && e.touches.length === 1 && !e.target.closest('input, textarea, nav, .sheet');
+    // D44 (as Mathias H4c): touches on a text box used to be ignored, and the items page is mostly text boxes, so swipe did
+    // not work there; now only the box being typed in (focused) keeps the gesture for itself
+    const fld = e.target.closest('input, textarea, select');
+    on = !openRef && !lbOpen && $('#ask').hidden && e.touches.length === 1 && !e.target.closest('nav, .sheet') && !(fld && fld === document.activeElement);
     if (!on) return;
     x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
   }, { passive: true });
@@ -10106,7 +10693,9 @@ document.addEventListener('click', e => {
     if (a || !e.target.closest('.ask-box')) closeAsk(!!a && a.dataset.ask === 'yes');
     return;
   }
-  const t = e.target.closest('[data-portrait],[data-pick],[data-open],[data-gold],[data-f],[data-close],[data-lim],[data-clear],[data-tab],[data-sub],[data-inv],[data-backup],[data-install],[data-update],[data-hpopen],[data-hp],[data-acopen],[data-ac],[data-slot],[data-conc],[data-rest],[data-sum],[data-sumf],#scrim');
+  const t = e.target.closest('[data-portrait],[data-pick],[data-open],[data-gold],[data-f],[data-close],[data-lim],[data-clear],[data-tab],[data-sub],[data-inv],[data-backup],[data-install],[data-update],[data-hpopen],[data-hp],[data-acopen],[data-ac],[data-slot],[data-conc],[data-rest],[data-sum],[data-sumf],[data-basis],[data-wz],#scrim');
+  if (t && t.dataset.basis) return openSheet(RBS, t.dataset.basis);
+  if (t && t.dataset.wz) return wizAction(t.dataset.wz);
   if (t && t.dataset.sumf) { SUM.filter = t.dataset.sumf; SUM.apply(); return; }
   if (t && t.hasAttribute('data-sum')) return sumNav(t.dataset.sum);
   if (!t) return;
@@ -10124,7 +10713,7 @@ document.addEventListener('click', e => {
     if (r === 'roll-ok') {
       const d = SR.ask, max = +d.slice(1), v = Math.round(+$('#srRoll').value);
       if (!(v >= 1 && v <= max)) { toast(`Uyarı: ${d} sonucu 1 ile ${max} arasında olmalı`); return focusQuiet($('#srRoll')); }
-      SR.pend.push({ d, roll: v, hp: Math.max(0, v + HD_CON) }); SR.ask = null; renderRest(); return focusQuiet($(`[data-rest="die:${d}"]`) || $('[data-rest="short-yes"]'));
+      SR.pend.push({ d, roll: v, hp: Math.max(0, v + hdCon()) }); SR.ask = null; renderRest(); return focusQuiet($(`[data-rest="die:${d}"]`) || $('[data-rest="short-yes"]'));
     }
     restAsk = r === 'ask'; restMode = r === 'ask' ? 'long' : r === 'short' ? 'short' : null; SR.pend = []; SR.ask = null; renderRest();
     return focusQuiet($(restMode === 'long' ? '[data-rest="no"]' : restMode === 'short' ? '[data-rest^="die:"]' : '[data-rest="ask"]'));
@@ -10175,10 +10764,12 @@ SP.q.addEventListener('input', e => {
   if (window.scrollY > 0) window.scrollTo(0, 0);
 });
 
+syncItems(true);
 SP.renderChips(); SP.buildAll(); applyFilter(SP);
 if (CONC.id && !SP.BY[CONC.id]) setConc(null);
 renderRest();
 syncAc();
+renderDmgAll();
 renderInv();
 renderInstall();
 initUpdate();
